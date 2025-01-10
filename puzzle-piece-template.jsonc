@@ -1,0 +1,710 @@
+{
+  "$id": "https:raw.githubusercontent.com/a2g/puzzle-pieces/main/puzzle-piece-template.jsonc",
+  "$schema": "http:json-schema.org/draft-07/schema",
+  "description": "A puzzle dependency graph via json schema",
+  "type": "object",
+  "definitions": {
+    "piece_template": {
+      "properties": {
+        "piece": {
+          "$ref": "./puzzle-piece-enums.json#/definitions/piece_enum"
+        },
+        "count": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "piece"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    // e.g.  all the combining ones"
+                    "const": "INV1_OBTAINED_BY_COMBINING_INV2_WITH_INV3"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. FLAT BALL becomes INFLATED BALL via keeping PUMP"
+                    "const": "INV1_BECOMES_INV2_BY_KEEPING_INV3"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. broken amp becomes FIXED AMP via losing RADIO_TUBE"
+                    "const": "INV1_BECOMES_INV2_BY_LOSING_INV3"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    "const": "INV1_OBTAINED_BY_OPENING_INV2_WHICH_BECOMES_INV3"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "inv1",
+              "inv2",
+              "inv3"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. use inv with pumpkinmachine, and pickup result"
+                    "const": "OBJ1_APPEARS_BY_LOSING_INV1_WITH_OBJ2"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. use ball with backboard generate prop"
+                    "const": "OBJ1_APPEARS_BY_INV1_WITH_OBJ2"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. powerpoint -> plugged-in-amp via losing INV_FIXEDAMP"
+                    "const": "OBJ1_BECOMES_OBJ2_BY_LOSING_INV1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. RAISEDBACKBOARD becomes LOWEREDBACKBOARD vie keeping POLEHOOK",
+                    // e.g. CLOSED_RADIO becomes  OPENED_RADIO_WITH_TUBE via keeping SCREWDRIVER"
+                    "const": "OBJ1_BECOMES_OBJ2_BY_KEEPING_INV1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // eg By using the A with B you are able to obtain the INV",
+                    // eg powerpoint -> plugged-in-amp via losing INV_FIXEDAMP",
+                    // e.g. use radiation suit with the meteor"
+                    "const": "INV1_OBTAINED_BY_OBJ1_WITH_OBJ2_LOSE_OBJS"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. opened raio with radiotube becomes merely OPENED RADIO when you grab RADIOTUBE"
+                    "const": "OBJ1_BECOMES_OBJ2_WHEN_GRAB_INV1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // by using the A with B you are able to obtain the INV",
+                    // e.g. use radiation suit with the meteor"
+                    "const": "OBJ1_CHANGES_STATE_TO_OBJ2_BY_KEEPING_INV1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // eg grab sword-in-stone
+                    // sword obtained, as sword-in-stone becomes stone
+                    "const": "INV1_OBTAINED_AS_GRABBED_OBJ1_BECOMES_OBJ2"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "inv1",
+              "obj1",
+              "obj2"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. open fridge, open window, open blind, open window"
+                    "const": "TOGGLE_OBJ1_REVEALS_OBJ2_AS_IT_BECOMES_OBJ3"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. obj_crank appears when use use handle with well"
+                    "const": "OBJ1_APPEARS_WHEN_USE_INV1_WITH_OBJ2"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. none yet"
+                    "const": "OBJ1_BECOMES_OBJ2_BY_LOSING_OBJ3"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "obj1",
+              "obj2",
+              "obj3"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. grab coconut"
+                    "const": "OBJ1_GOES_WHEN_GRAB_INV1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. grab pile of coconuts"
+                    "const": "OBJ1_STAYS_WHEN_GRAB_INV1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. dialog to woman"
+                    "const": "CHAT_TO_OBJ1_GETS_INV1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. I thought this happened in DD but I read the solution wrong"
+                    "const": "EXAMINE_OBJ1_YIELDS_INV1"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "obj1",
+              "inv1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. toggle magged up vacuum tubes
+                    "const": "TOGGLE_OBJ1_BECOMES_OBJ2"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. toggle on to off",
+                    // e.g. activated to deactivated"
+                    "const": "TOGGLE_OBJ1_CHANGES_STATE_TO_OBJ2"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "obj1",
+              "obj2"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                // e.g. achievement_access_thru_fireplace set by obj_fireplace_ladder"
+                "const": "AUTO_AMENT1_MET_BY_OBJS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ament1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                // e.g. achievement_lit_torch set by inv_lit_torch"
+                "const": "AUTO_AMENT1_MET_BY_INVS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ament1",
+              "inv1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "AUTO_OBJ1_BECOMES_OBJ2_BY_OBJS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "obj1",
+              "obj2"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                // e.g. achievement_lit_torch set by inv_lit_torch"
+                "const": "AUTO_AMENT1_MET_BY_INVS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ament1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                // e.g. use two invs together wins game"
+                "const": "AMENT1_MET_BY_USING_INV1_WITH_INV2"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "inv1",
+              "inv2",
+              "ament1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                // e.g. win game using use silver with werewolf during lunar eclipse"
+                "const": "AMENT1_MET_BY_USING_INV1_WITH_OBJ1_NEED_AMENTS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "inv1",
+              "obj1",
+              "ament1",
+              "ament2"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. toggle on to off",
+                    // e.g. activated to deactivated"
+                    "const": "AMENT1_MET_BY_USING_INV1_WITH_OBJ1_LOSE_OBJS"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. dialog to woman after setting achievement"
+                    "const": "CHAT_TO_OBJ1_WITH_AMENT1_GETS_INV1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. achievement is set when use cogs to fix dumbwaiter"
+                    "const": "AMENT1_MET_BY_LOSING_INV1_WHEN_USED_WITH_OBJ1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. give gold to king completes game"
+                    "const": "AMENT1_MET_BY_GIVING_INV1_TO_OBJ1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. use sword with baddie wins game"
+                    "const": "AMENT1_MET_BY_USING_INV1_WITH_OBJ1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. grab pile of tyres, with achievement set"
+                    "const": "OBJ1_STAYS_WHEN_GRAB_INV1_WITH_AMENT1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. grab single tire, if achievement set"
+                    "const": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  // as part of generated type
+                  "piece": {
+                    "const": "AMENT1_MET_BY_GRABBING_OBJ_AND_GAINING_INV1"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "inv1",
+              "obj1",
+              "ament1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. achievement met by "
+                    "const": "AMENT1_MET_BY_USING_OBJ1_WITH_OBJ2"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. taxi appears when phone is used with electricity on"
+                    "const": "OBJ1_APPEARS_WHEN_GRAB_OBJ2_WITH_AMENT1"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "obj1",
+              "obj2",
+              "ament1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. key throw rock at apple in tree, obtains apple (lose rock and apple in tree)"
+                    "const": "THROW_INV1_AT_OBJ1_GETS_INV2_LOSE_BOTH"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. key throw rock at apple in tree, obtains apple (lose rock and apple in tree)"
+                    "const": "INV1_OBTAINED_BY_COMBINING_INV2_WITH_OBJ1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. no example, but might need it"
+                    "const": "INV1_OBTAINED_BY_INV2_WITH_OBJ1_LOSE_NONE"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. manuscript b edited via typewriter by keeping prop"
+                    "const": "INV1_BECOMES_INV2_BY_KEEPING_OBJ"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. manuscript b edited via typewriter by keeping prop"
+                    "const": "GIVE_INV1_TO_OBJ1_GETS_INV2"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. obtain cogs when losing key in clock"
+                    "const": "INV1_OBTAINED_BY_LOSING_INV2_KEEPING_OBJ1"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    // e.g. obtain crank when use hurl to knock it off the well"
+                    "const": "INV1_OBTAINED_BY_LOSING_OBJ1_KEEPING_INV2"
+                  }
+                }
+              }
+            ],
+            "then": {
+              "required": [
+                "inv1",
+                "inv2",
+                "obj1"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "AUTO_AMENT1_MET_BY_AMENTS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ament1"
+              //"ament2" some have only a single explicit because rely on box ament
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "AMENT1_MET_BY_LOSING_INV1_USED_WITH_OBJ1_AND_OBJS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ament1",
+              "inv1",
+              "obj1",
+              "obj2"
+            ]
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "piece": {
+                    "const": "INV1_OBTAINED_AS_OBJ1_BECOMES_OBJ2_KEEP_INV2"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    "const": "INV1_BECOMES_INV2_AS_OBJ1_BECOMES_OBJ2_GEN"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "piece": {
+                    "const": "INV1_OBTAINED_WHEN_LOSING_INV2_AND_OBJ1_BECOMES_OBJ2_GEN"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "obj1",
+              "obj2",
+              "inv1",
+              "inv2"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "AUTO_INV1_BECOMES_INV2_VIA_AMENT1"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ament1",
+              "inv1",
+              "inv2"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "AUTO_OBJ1_BECOMES_OBJ2_VIA_AMENT1"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ament1",
+              "obj1",
+              "obj2"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "AUTO_INV1_OBTAINED_VIA_AMENT1"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "inv1",
+              "ament1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "AUTO_OBJ1_APPEARS_VIA_AMENT1"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "obj1",
+              "ament1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "INV1_OBTAINED_AS_INV2_BECOMES_INV3_LOSING_INV4"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "inv1",
+              "inv2",
+              "inv3",
+              "inv4"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "INCLUDE_ALL_PIECES_IN_CHAT1"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "dialog1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "piece": {
+                "const": "INV1_OBTAINED_AS_OBJ1_GRABBED_AND_OBJ2_BECOMES_OBJ3_GEN"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "inv1",
+              "obj1",
+              "obj2",
+              "obj3"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

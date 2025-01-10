@@ -1,0 +1,30 @@
+{
+  "$schema": "./Test1Design.jsonc",
+  "startingThingsLinkedToPlayers": [ ],
+  "pieces": [
+    {
+      "piece": "INV1_OBTAINED_BY_LOSING_INV2_KEEPING_OBJ1",
+      "inv1": "inv_handle",
+      "inv2": "inv_vinegar",
+      "obj1": "obj_painting"
+    },
+    {
+      "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",
+      "obj1": "obj_vinegar",
+      "ament1": "achievement_03_access_thru_dumbwaiter",
+      "inv1": "inv_vinegar"
+    },
+    {
+      "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",
+      "obj1": "obj_sunstone",
+      "ament1": "achievement_03_access_thru_dumbwaiter",
+      "inv1": "inv_sunstone"
+    },
+    {
+      "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",
+      "obj1": "obj_rolling_pin",
+      "ament1": "achievement_03_access_thru_dumbwaiter",
+      "inv1": "inv_rolling_pin"
+    }
+  ]
+}

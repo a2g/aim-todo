@@ -1,0 +1,8 @@
+{
+  "$schema": "../oldCampaignFramework.json",
+  "areas": [
+    "./01 first.jsonc",
+    "./02 first.jsonc",
+    "./03 starter.jsonc"
+  ]
+}

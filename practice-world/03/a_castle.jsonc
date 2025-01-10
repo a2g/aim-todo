@@ -1,0 +1,71 @@
+{
+  "$schema": "./schema_for_achievements.jsonc",
+  "startingThingsLinkedToPlayers": [
+    {
+      "thing": "obj_vinegar"
+    },
+    {
+      "thing": "obj_painting"
+    },
+    {
+      "thing": "obj_rolling_pin"
+    },
+    {
+      "thing": "obj_fireplace(lit)"
+    },
+    {
+      "thing": "obj_grandfather_clock"
+    },
+    {
+      "thing": "obj_dumbwaiter"
+    },
+    {
+      "thing": "obj_vent"
+    },
+    {
+      "thing": "obj_sunstone"
+    },
+    {
+      "thing": "obj_cooking_lard"
+    }
+  ],
+  "pieces": [
+    {
+      "piece": "AUTO_AMENT1_MET_BY_OBJS",
+      "ament1": "a_fireplace",
+      "obj1": "obj_fireplace_ladder"
+    },
+    {
+      "piece": "INV1_BECOMES_INV2_AS_OBJ1_BECOMES_OBJ2_GEN",
+      "isNoFile": true,
+      "inv1": "inv_bucket_of_water",
+      "inv2": "inv_empty_bucket_after_water",
+      "obj1": "obj_fireplace(lit)",
+      "obj2": "obj_fireplace_ladder"
+    },
+    {
+      "piece": "INV1_OBTAINED_BY_LOSING_INV2_KEEPING_OBJ1",
+      "inv1": "inv_cogs",
+      "inv2": "inv_windup_key",
+      "obj1": "obj_grandfather_clock"
+    },
+    {
+      "piece": "AMENT1_MET_BY_LOSING_INV1_WHEN_USED_WITH_OBJ1",
+      "ament1": "a_dumbwaiter",
+      "inv1": "inv_cogs",
+      "obj1": "obj_dumbwaiter"
+    },
+    {
+      "piece": "AMENT1_MET_BY_USING_INV1_WITH_OBJ1",
+      "ament1": "a_hideout",
+      "inv1": "inv_burning_herbs",
+      "obj1": "obj_vent"
+    },
+    {
+      "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",
+      "obj1": "obj_cooking_lard",
+      "ament1": "a_castle",
+      "inv1": "inv_cooking_lard"
+    }
+  ]
+}

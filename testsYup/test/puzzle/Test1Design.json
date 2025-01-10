@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "This is the schema for the main Scenario file for the game. It basically a skeleton, pulling in other more substantial types from other files. It could be split up, but for now its easier managing three files Scenario, Schema and Objects",
+  "type": "object",
+  "definitions": {
+    "pieces_type": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../puzzle-pieces/puzzle-piece-template.jsonc#/definitions/piece_template"
+        }
+      ],
+      "properties": {
+        "inv1": {
+          "$ref": "Test1 enums.jsonc#/definitions/inventory_enum"
+        },
+        "inv2": {
+          "$ref": "Test1 enums.jsonc#/definitions/inventory_enum"
+        },
+        "inv3": {
+          "$ref": "Test1 enums.jsonc#/definitions/inventory_enum"
+        },
+        "obj1": {
+          "$ref": "Test1 enums.jsonc#/definitions/object_enum"
+        },
+        "obj2": {
+          "$ref": "Test1 enums.jsonc#/definitions/object_enum"
+        },
+        "obj3": {
+          "$ref": "Test1 enums.jsonc#/definitions/object_enum"
+        },
+        "obj4": {
+          "$ref": "Test1 enums.jsonc#/definitions/object_enum"
+        },
+        "obj5": {
+          "$ref": "Test1 enums.jsonc#/definitions/object_enum"
+        },
+        "obj6": {
+          "$ref": "Test1 enums.jsonc#/definitions/object_enum"
+        },
+        "ament1": {
+          "$ref": "Test1 enums.jsonc#/definitions/achievement_enum"
+        },
+        "ament2": {
+          "$ref": "Test1 enums.jsonc#/definitions/achievement_enum"
+        },
+        "ament3": {
+          "$ref": "Test1 enums.jsonc#/definitions/achievement_enum"
+        },
+        "ament4": {
+          "$ref": "Test1 enums.jsonc#/definitions/achievement_enum"
+        },
+        "ament5": {
+          "$ref": "Test1 enums.jsonc#/definitions/achievement_enum"
+        },
+        "ament6": {
+          "$ref": "Test1 enums.jsonc#/definitions/achievement_enum"
+        },
+        "isNoFile": {
+          "type": "boolean"
+        },
+        "prerequisites": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/definitions/player_wrapper_type"
+          }
+        }
+      }
+    },
+    "player_wrapper_type": {
+      "type": "object",
+      "required": [
+        "player"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "Test1 enums.jsonc#/definitions/player_enum"
+        }
+      }
+    },
+    "obj_wrapper_type": {
+      "type": "object",
+      "required": [
+        "prop"
+      ],
+      "properties": {
+        "prop": {
+          "$ref": "Test1 enums.jsonc#/definitions/object_enum"
+        }
+      }
+    }
+  },
+  "properties": {
+    "startingThingsLinkedToPlayers": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "properties": {
+          "player": {
+            "$ref": "Test1 enums.jsonc#/definitions/player_enum"
+          },
+          "thing": {
+            "oneOf": [
+              {
+                "$ref": "Test1 enums.jsonc#/definitions/inventory_enum"
+              },
+              {
+                "$ref": "Test1 enums.jsonc#/definitions/achievement_enum"
+              },
+              {
+                "$ref": "Test1 enums.jsonc#/definitions/object_enum"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "pieces": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/pieces_type"
+      }
+    }
+  }
+}

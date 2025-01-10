@@ -1,0 +1,15 @@
+export enum Mix {
+  ErrorVerbNotIdentified,
+  ErrorGrabButNoProp,
+  ErrorToggleButNoInvOrProp,
+  ErrorUseButNoInvOrProp,
+  ErrorWithHighestValue,
+  Prop,
+  Inv,
+  InvVsInv,
+  InvVsObject,
+  VerbVsObject,
+  VerbVsInv,
+  ObjVsObj,
+  AutoNeedsNothing,
+}

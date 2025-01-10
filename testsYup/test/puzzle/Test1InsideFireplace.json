@@ -1,0 +1,58 @@
+{
+  "$schema": "./Test1Design.jsonc",
+  "startingThingsLinkedToPlayers": [
+    {
+      "thing": "obj_button(unpressed)"
+    },
+    {
+      "thing": "obj_rocket"
+    },
+    {
+      "thing": "obj_furnace"
+    }
+  ],
+  "pieces": [
+    {
+      "piece": "AMENT1_MET_BY_USING_INV1_WITH_OBJ1",
+      "text": "use bucket of coal on furnace",
+      "ament1": "achievement_used_bucket_of_coal_with_furnace",
+      "inv1": "inv_bucket_of_coal",
+      "obj1": "obj_furnace"
+    },
+    {
+      "piece": "AUTO_INV1_BECOMES_INV2_VIA_AMENT1",
+      "ament1": "achievement_used_bucket_of_coal_with_furnace",
+      "inv1": "inv_bucket_of_coal",
+      "inv2": "inv_empty_bucket_after_coal"
+    },
+    {
+      "piece": "AUTO_OBJ1_BECOMES_OBJ2_VIA_AMENT1",
+      "ament1": "achievement_used_bucket_of_coal_with_furnace",
+      "obj1": "obj_furnace",
+      "obj2": "obj_furnace_with_coal"
+    },
+    {
+      "piece": "AMENT1_MET_BY_USING_INV1_WITH_OBJ1",
+      "ament1": "achievement_03_sunstone_is_in_rocket",
+      "inv1": "inv_sunstone",
+      "obj1": "obj_rocket"
+    },
+    {
+      "piece": "TOGGLE_OBJ1_BECOMES_OBJ2",
+      "obj1": "obj_button(unpressed)",
+      "obj2": "obj_button(pressed)"
+    },
+    {
+      "piece": "AUTO_AMENT1_MET_BY_OBJS",
+      "ament1": "achievement_03_button_pressed",
+      "obj1": "obj_button(pressed)",
+      "obj2": "obj_furnace_lit"
+    },
+    {
+      "piece": "OBJ1_BECOMES_OBJ2_BY_KEEPING_INV1",
+      "obj1": "obj_furnace_with_coal",
+      "obj2": "obj_furnace_lit",
+      "inv1": "inv_torch_lit"
+    }
+  ]
+}

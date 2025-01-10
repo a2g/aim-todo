@@ -1,0 +1,68 @@
+{
+  "$schema": "./02 defs.jsonc",
+  "startingThingsLinkedToPlayers": [
+    {
+      "thing": "inv_bottle_top"
+    },
+    {
+      "thing": "obj_limestone"
+    },
+    {
+      "thing": "obj_teenager"
+    },
+    {
+      "thing": "obj_arch-druid"
+    },
+    {
+      "thing": "obj_officer_dooley"
+    },
+    {
+      "thing": "obj_officer_dooley"
+    }
+  ],
+  "pieces": [
+    {
+      "piece": "OBJ1_STAYS_WHEN_GRAB_INV1",
+      "obj1": "obj_officer_dooley",
+      "inv1": "inv_piece_of_robe"
+    },
+    {
+      "piece": "OBJ1_STAYS_WHEN_GRAB_INV1",
+      "obj1": "obj_limestone",
+      "inv1": "inv_flint"
+    },
+    {
+      "piece": "OBJ1_STAYS_WHEN_GRAB_INV1",
+      "obj1": "obj_teenager",
+      "inv1": "inv_poitan"
+    },
+    {
+      "piece": "OBJ1_GOES_WHEN_GRAB_INV1",
+      "obj1": "obj_arch-druid",
+      "inv1": "inv_shillelagh"
+    },
+    {
+      "piece": "INV1_BECOMES_INV2_BY_LOSING_INV3",
+      "inv1": "inv_shillelagh",
+      "inv2": "inv_torch_unlit",
+      "inv3": "inv_piece_of_robe"
+    },
+    {
+      "piece": "INV1_BECOMES_INV2_BY_LOSING_INV3",
+      "inv1": "inv_flint",
+      "inv2": "inv_tinder_kit",
+      "inv3": "inv_bottle_top"
+    },
+    {
+      "piece": "INV1_BECOMES_INV2_BY_LOSING_INV3",
+      "inv1": "inv_torch_unlit",
+      "inv2": "inv_torch_lit",
+      "inv3": "inv_tinder_kit"
+    },
+    {
+      "piece": "AUTO_AMENT1_MET_BY_INVS",
+      "ament1": "a_win",
+      "inv1": "inv_torch_lit"
+    }
+  ]
+}

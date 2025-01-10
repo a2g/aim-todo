@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "definitions": {
+    "player_enum": {
+      "enum": [
+        "player_main"
+      ]
+    },
+    "inventory_enum": {
+      "enum": [
+        "inv_flint",
+        "inv_poitan",
+        "inv_shillelagh",
+        "inv_bottle_top",
+        "inv_piece_of_robe",
+        "inv_torch_unlit",
+        "inv_torch_lit",
+        "inv_tinder_kit"
+      ]
+    },
+    "object_enum": {
+      "enum": [
+        "obj_limestone",
+        "obj_teenager",
+        "obj_arch-druid",
+        "obj_officer_dooley"
+      ]
+    },
+    "achievement_enum": {
+      "enum": [
+        "a_win"
+      ]
+    }
+  }
+}

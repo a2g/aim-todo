@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "definitions": {
+    "player_enum": {
+      "enum": [
+        "player_main"
+      ]
+    },
+    "inventory_enum": {
+      "enum": [
+        "inv_rock",
+        "inv_apple",
+        "inv_knife",
+        "inv_apple_slices",
+        "inv_greenhouse_key",
+        "inv_torch_lit",
+        "inv_soil_thermometer",
+        "inv_hurl",
+        "inv_crank",
+        "inv_crank2",
+        "inv_cooking_lard",
+        "inv_bucket_of_coal",
+        "inv_sunstone",
+        "inv_button",
+        "inv_three_punctuated_circles",
+        "inv_cogs",
+        "inv_herbs",
+        "inv_burning_herbs",
+        "inv_windup_key",
+        "inv_vinegar",
+        "inv_rolling_pin",
+        "inv_handle",
+        "inv_bucket_of_water",
+        "inv_empty_bucket_after_water",
+        "inv_empty_bucket_after_coal"
+      ]
+    },
+    "object_enum": {
+      "enum": [
+        "obj_druid_wielding_knife",
+        "obj_dog",
+        "obj_icehouse",
+        "obj_well",
+        "obj_loose_brick",
+        "obj_greenhouse",
+        "obj_greenhouse_door",
+        "obj_apples",
+        "obj_butler",
+        "obj_soil_thermometer",
+        "obj_hurl",
+        "obj_furnace",
+        "obj_furnace_with_coal",
+        "obj_rocket",
+        "obj_control_panel",
+        "obj_hole_in_wall",
+        "obj_crank_in_wall",
+        "obj_crank_attached_to_well",
+        "obj_three_punctuated_circles",
+        "obj_arch_druid",
+        "obj_grandfather_clock",
+        "obj_cooking_lard",
+        "obj_herbs",
+        "obj_vent",
+        "obj_windup_key",
+        "obj_dumbwaiter",
+        "obj_vinegar",
+        "obj_rolling_pin",
+        "obj_sunstone",
+        "obj_painting",
+        "obj_fireplace(lit)",
+        "obj_fireplace_ladder",
+        "obj_coal_bunker",
+        "obj_button(unpressed)",
+        "obj_button(pressed)",
+        "obj_rocket_gate",
+        "obj_rocket_gate_buttered",
+        "obj_furnace_lit"
+      ]
+    },
+    "achievement_enum": {
+      "enum": [
+        "a_win",
+        "a03_access_to_greenhouse",
+        "a03_access_to_icehouse",
+        "a03_access_to_castle",
+        "a03_access_to_hideout",
+        "a03_access_thru_dumbwaiter",
+        "a03_access_thru_fireplace",
+        "a03_button_pressed"
+      ]
+    },
+    "area_type": {
+      "enum": [
+        "rocket_turret",
+        "attic",
+        "inside_cubby",
+        "bathroom_vent",
+        "furnace_room",
+        "empty_bedroom",
+        "canvas_bedroom",
+        "fireplace_room",
+        "five_statues_room",
+        "upstairs_landing",
+        "entry",
+        "sunstone_altar",
+        "hallway",
+        "downstairs_kitchen",
+        "larder",
+        "inside_icehouse",
+        "ceremonial_circle",
+        "inside_greenhouse",
+        "outside_icehouse",
+        "grove",
+        "outside_greenhouse",
+        "front_door"
+      ]
+    }
+  }
+}

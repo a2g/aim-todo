@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "definitions": {
+    "player_enum": {
+      "enum": [
+        "player_main"
+      ]
+    },
+    "inventory_enum": {
+      "enum": [
+        "inv_spirits",
+        "inv_picture_frame",
+        "inv_american_dollars",
+        "inv_framed_money",
+        "inv_one_irish_punt",
+        "inv_unguent",
+        "inv_grease_proof_paper",
+        "inv_bio-diesel"
+      ]
+    },
+    "object_enum": {
+      "enum": [
+        "obj_picture",
+        "obj_harbour_master",
+        "obj_bartender",
+        "obj_greasy_grease_paper",
+        "obj_generator",
+        "obj_boatman",
+        "obj_taxi",
+        "obj_phone",
+        "obj_picture_frame"
+      ]
+    },
+    "achievement_enum": {
+      "enum": [
+        "a_win",
+        "a_electricity_restored"
+      ]
+    }
+  }
+}
