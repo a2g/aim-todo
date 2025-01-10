@@ -13,7 +13,7 @@
           "$ref": "d_destinations.jsonc#/definitions/destination_enum"
         },
         "access": {
-          "$ref": "../../../puzzle-pieces/puzzle-piece-enums.json#/definitions/access_enum"
+          "$ref": "../../../aim-tree/puzzle-piece-enums.json#/definitions/access_enum"
         }
       }
     }
