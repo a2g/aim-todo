@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs'
-import _ from '../../puzzle-piece-enums.json'
+import _ from '../../aim-tree-enums.json'
 import { Box } from './Box'
 import { Happen } from './Happen'
 import { Happening } from './Happening'

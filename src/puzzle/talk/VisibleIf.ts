@@ -1,6 +1,6 @@
 
 export enum VisibleIf {
-  // from puzzle-piece-enums.json, and must stay in sync with.
+  // from aim-tree-enums.json, and must stay in sync with.
   Met = 'visibleIfMet',
   NotMet = 'visibleIfNotMet',
   Owned = 'visibleIfOwned',

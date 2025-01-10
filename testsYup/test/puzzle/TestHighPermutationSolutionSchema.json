@@ -7,7 +7,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../aim-tree/puzzle-piece-template.jsonc#/definitions/piece_template"
+          "$ref": "../../aim-tree/aim-tree-template.jsonc#/definitions/piece_template"
         }
       ],
       "properties": {

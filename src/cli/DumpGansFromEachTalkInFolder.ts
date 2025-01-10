@@ -13,7 +13,7 @@ export function DumpGainsFromEachDialogInFolder (folder: string): void {
   console.warn('Results of FindAndAddPiecesRecursively')
   const files = fs.readdirSync('.')
   for (const file of files) {
-    if (file.startsWith('c') && file.endsWith('.jsonc') && file !== 'c_dialogs.jsonc') {
+    if (file.startsWith('cut') && file.endsWith('.jsonc') && file !== 'c_cuts.jsonc') {
       const aggregates = new Aggregates()
       const dialogFile = new DialogFile(file, folder, aggregates)
 
