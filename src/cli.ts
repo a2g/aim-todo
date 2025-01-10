@@ -26,7 +26,7 @@ function main (): void {
           const aimTree = aimTrees[index]
           DumpGainsFromEachDialogInFolder(aimTree.folder)
 
-          const solutions = new Solutions(aimTree.folder, aimTree.file)
+          const solutions = new Solutions(aimTree.file, aimTree.folder)
 
           for (; ;) {
             console.warn(`\nSubMenu of ${aimTree.folder}/${aimTree.file}`)
