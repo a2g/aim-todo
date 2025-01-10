@@ -21,9 +21,9 @@ export function getJsonOfAimTrees (): $IAimTree[] {
   process.chdir(join(__dirname, '/../../../..'))
 
   const allFolders = new Array<[string, string, string]>()
-  allFolders.push(['puzzle-pieces', 'practice-world', '01'])
-  allFolders.push(['puzzle-pieces', 'practice-world', '02'])
-  allFolders.push(['puzzle-pieces', 'practice-world', '03'])
+  allFolders.push(['aim-tree', 'practice-world', '01'])
+  allFolders.push(['aim-tree', 'practice-world', '02'])
+  allFolders.push(['aim-tree', 'practice-world', '03'])
 
   // lets try adding more folders from 'private-world'
   // but that folder may not exist, so we try/catch it

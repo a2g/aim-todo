@@ -68,7 +68,7 @@
   },
   "include": [
     "src/**/*",
-    "puzzle-pieces.ts",
+    "aim-tree.ts",
     "FilenameSuffixes.ts",
     "testsYup/**/*"
   ],
