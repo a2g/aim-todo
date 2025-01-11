@@ -50,9 +50,6 @@ export class Solutions {
         // we've got the children, so delete the parent 'oneOf'
         delete thisObject.oneOf
 
-        // also delete the entry from the map
-        this._solutions.delete(solution)
-
         for (const pair of mapOfRawChildren) {
           thisObject[pair[0]] = pair[1]
           const newSolution = solution.Clone()
@@ -62,6 +59,10 @@ export class Solutions {
 
           delete thisObject[pair[0]] 
         }
+
+        // also delete the entry from the set
+        this._solutions.delete(solution)
+
         // now return with true, telling the caller that we have new  objects
         return true
       }
