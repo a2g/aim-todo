@@ -2,6 +2,7 @@ import promptSync from 'prompt-sync'
 import { Solutions } from './puzzle/aim/Solutions'
 import { $IAimTree, getJsonOfAimTrees } from './api/getJsonOfAimTrees'
 import { DumpGainsFromEachDialogInFolder } from './cli/DumpGansFromEachTalkInFolder'
+import { ViewBackwardSolve } from './cli/views/ViewBackwardSolve'
 
 const prompt = promptSync()
 
@@ -49,7 +50,7 @@ function main (): void {
             }
             switch (choice) {
               case '1':
-                // ViewBackwardSolve(solutions)
+                ViewBackwardSolve(solutions)
                 break
               case '2':
 

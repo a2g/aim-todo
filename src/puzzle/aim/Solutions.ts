@@ -1,10 +1,11 @@
 import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
+import { Solution } from './Solution'
 
 export class Solutions {
   filename: string
   fileAddress: string
-  _solutions: Set<any>
+  _solutions: Set<Solution>
 
   constructor (filename: string, fileAddress: string) {
     this.filename = filename
@@ -21,23 +22,24 @@ export class Solutions {
     const parsedJson: any = parse(text)
     const rawJson = parsedJson.root
 
-    this._solutions.add(rawJson)
+
+    this._solutions.add(new Solution(rawJson))
 
     let isNewSolutions = false
     do {
       isNewSolutions = false
-      for (const item of this._solutions) {
-        const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(item, item, this._solutions)
+      for (const solution of this._solutions) {
+        const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.root, solution)
         isNewSolutions = isNewSolutions || wasNewSolutionGenerated
       }
     } while (isNewSolutions)
   }
 
-  private traverseAndCreateSeparateTreesWhenEncounteringOneOf (thisObject: any, rootObject: any, existingRoots: Set<any>): boolean {
+  private traverseAndCreateSeparateTreesWhenEncounteringOneOf (thisObject: any, solution: Solution): boolean {
     for (const key in thisObject) {
       if (key !== 'oneOf') {
         const child = thisObject[key]
-        this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(child, rootObject, existingRoots)
+        this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(child, solution)
       } else {
         const oneOfObject = thisObject[key]
         const mapOfRawChildren = new Map<string, any>()
@@ -49,12 +51,14 @@ export class Solutions {
         delete thisObject.oneOf
 
         // also delete the entry from the map
-        existingRoots.delete(rootObject)
+        this._solutions.delete(solution)
 
         for (const pair of mapOfRawChildren) {
           thisObject[pair[0]] = pair[1]
-          const clone = this.CloneObject(rootObject)
-          existingRoots.add(clone)
+          const newSolution = solution.Clone()
+          // here we add the new name
+          newSolution.names.push(pair[0])
+          this._solutions.add(newSolution)
 
           delete thisObject[pair[0]] 
         }
@@ -63,14 +67,5 @@ export class Solutions {
       }
     }
     return false
-  }
-
-  CloneObject (thisObject: any): any {
-    const toReturn: any = {}
-    for (const key in thisObject) {
-      const newChild = this.CloneObject(thisObject[key])
-      toReturn[key] = newChild
-    }
-    return toReturn
   }
 }
