@@ -5,12 +5,12 @@ import { Solution } from './Solution'
 export class Solutions {
   filename: string
   fileAddress: string
-  _solutions: Set<Solution>
+  _solutions: Map<string, Solution>
 
   constructor (filename: string, fileAddress: string) {
     this.filename = filename
     this.fileAddress = fileAddress
-    this._solutions = new Set<any>()
+    this._solutions = new Map<string, Solution>()
 
     const pathAndFile = fileAddress + filename
     if (!existsSync(pathAndFile)) {
@@ -23,14 +23,18 @@ export class Solutions {
     const rawJson = parsedJson.root
 
 
-    this._solutions.add(new Solution(rawJson))
+    // first map entry is added with blank ''
+    this._solutions.set('', new Solution(rawJson))
 
     let isNewSolutions = false
     do {
       isNewSolutions = false
-      for (const solution of this._solutions) {
+      for (const solution of this._solutions.values()) {
         const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.root, solution)
         isNewSolutions = isNewSolutions || wasNewSolutionGenerated
+        if (wasNewSolutionGenerated) {
+          break
+        }
       }
     } while (isNewSolutions)
   }
@@ -39,7 +43,9 @@ export class Solutions {
     for (const key in thisObject) {
       if (key !== 'oneOf') {
         const child = thisObject[key]
-        this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(child, solution)
+        if(this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(child, solution)){
+          return true
+        }
       } else {
         const oneOfObject = thisObject[key]
         const mapOfRawChildren = new Map<string, any>()
@@ -55,13 +61,13 @@ export class Solutions {
           const newSolution = solution.Clone()
           // here we add the new name
           newSolution.names.push(pair[0])
-          this._solutions.add(newSolution)
+          this._solutions.set(newSolution.GetName(), newSolution)
 
           delete thisObject[pair[0]] 
         }
 
         // also delete the entry from the set
-        this._solutions.delete(solution)
+        this._solutions.delete(solution.GetName())
 
         // now return with true, telling the caller that we have new  objects
         return true
