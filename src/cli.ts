@@ -1,8 +1,9 @@
 import promptSync from 'prompt-sync'
 import { Solutions } from './puzzle/aim/Solutions'
 import { $IAimTree, getJsonOfAimTrees } from './api/getJsonOfAimTrees'
-import { DumpGainsFromEachDialogInFolder } from './cli/DumpGansFromEachTalkInFolder'
+import { LogGainsFromEachDialog } from './cli/LogGainsFromEachDialog'
 import { ViewBackwardSolve } from './cli/views/ViewBackwardSolve'
+import { EnumRecreator } from './cli/EnumRecreator'
 
 const prompt = promptSync()
 
@@ -25,7 +26,7 @@ function main (): void {
       default:
         if (index >= 0 && index < aimTrees.length) {
           const aimTree = aimTrees[index]
-          DumpGainsFromEachDialogInFolder(aimTree.folder)
+          LogGainsFromEachDialog(aimTree.folder)
 
           const solutions = new Solutions(aimTree.file, aimTree.folder)
 
@@ -36,13 +37,9 @@ function main (): void {
             )
             console.warn('---------------------------------------')
             console.warn('1. Solve using aims')
-            console.warn('2. Validate forward a box-at-a-time')
-            console.warn('3. Pieces in Boxes.')
-            console.warn('4. Leaves all boxes at once.')
-            console.warn('5. Leaves a box-at-a-time`')
-            console.warn('6. Order of Commands in solve')
-            console.warn('7. Choose climb into piece-trees (old)')
-            console.warn('8. Play')
+            console.warn('2. Recreate a_all with all keys and values')
+         
+      
 
             const choice = prompt('Choose an option (b)ack: ').toLowerCase()
             if (choice === 'b') {
@@ -53,7 +50,10 @@ function main (): void {
                 ViewBackwardSolve(solutions)
                 break
               case '2':
-
+                {
+                  const enumRecreator = new EnumRecreator(aimTree.folder)
+                  enumRecreator.WriteEnumFiles()
+                }
                 break
               case '3':
 
