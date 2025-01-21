@@ -13,6 +13,5 @@ yarn-error.log*
 .nyc_output
 
 # npmignore
-src/
 testsYup/
 .vscode/
