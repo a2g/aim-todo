@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs"
+import { existsSync, rmdirSync, writeFileSync } from "fs"
  
 
 interface $EnumType {
@@ -20,6 +20,14 @@ export class EnumFileAsArray{
     }
 
     public Write() {
+        const filePath =  this.fileName + '.jsonc'
+        if(this.arrayOfStrings.length == 0){
+            if(existsSync(filePath)){
+                rmdirSync(filePath)
+            }
+            return//do nothing
+        }
+
         const json:any = {}
         json.$schema = 'http://json-schema.org/draft-07/schema'
         json.type = 'object'
@@ -28,7 +36,7 @@ export class EnumFileAsArray{
             "enum": this.arrayOfStrings
         } as $EnumType
 
-        const filePath =  this.fileName + '.jsonc'
+        
         writeFileSync(filePath, JSON.stringify(json))
     }
 }
