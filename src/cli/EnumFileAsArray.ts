@@ -5,7 +5,7 @@ interface $EnumType {
     enum: any
 }
 
-export class EnumFile{
+export class EnumFileAsArray{
     arrayOfStrings: string[] = []
     fileName: string
     enumName:string

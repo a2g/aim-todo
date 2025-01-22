@@ -2,19 +2,21 @@ import { join } from 'path'
 import * as fs from 'fs'
 
 import { _STARTER } from '../_STARTER'
-import { EnumFile } from './EnumFile'
+import { EnumFileAsSet } from './EnumFileAsSet'
 import { parse } from 'jsonc-parser'
+import { EnumFileAsArray } from './EnumFileAsArray'
 
 export class EnumRecreator {
-  a_all = new EnumFile('a_all', 'all_enum')
-  a_aims = new EnumFile('a_aims', 'aim_enum')
-  b_boxes = new EnumFile('b_boxes', 'box_enum')
-  c_cutscenes = new EnumFile('c_cutscenes', 'cutscene_enum')
-  d_dialogs = new EnumFile('d_dialogs', 'dialog_enum')
-  i_inventory = new EnumFile('i_inventory', 'inventory_enum')
-  k_knowledge = new EnumFile('k_knowlege', 'knowledge_enum')
-  o_objects = new EnumFile('o_objects', 'object_enum')
-  u_unrecognized = new EnumFile('u_unrecognized', 'un_enum')
+  a_all = new EnumFileAsArray('a_all', 'all_enum')
+  a_aims = new EnumFileAsSet('a_aims', 'aim_enum')
+  b_boxes = new EnumFileAsSet('b_boxes', 'box_enum')
+  c_cutscenes = new EnumFileAsSet('c_cutscenes', 'cutscene_enum')
+  d_dialogs = new EnumFileAsSet('d_dialogs', 'dialog_enum')
+  i_inventory = new EnumFileAsSet('i_inventory', 'inventory_enum')
+  k_knowledge = new EnumFileAsSet('k_knowledge', 'knowledge_enum')
+  o_objects = new EnumFileAsSet('o_objects', 'object_enum')
+  t_types = new EnumFileAsSet('t_types', 'type_enum')
+  u_unrecognized = new EnumFileAsArray('u_unrecognized', 'un_enum')
   _folder: string
 
   constructor(folder: string) {
@@ -48,15 +50,17 @@ export class EnumRecreator {
     this.d_dialogs.Write()
     this.i_inventory.Write()
     this.k_knowledge.Write()
-    this.k_knowledge.Write()
+    this.o_objects.Write()
+    this.t_types.Write()
     this.u_unrecognized.Write()
-    this.a_all.Write()
+   // this.a_all.Write() don't need this
   }
 
   private CollectAllKeysAndValuesRecursively(json: any, keysAndValues: string[]): void {
     for (const key in json) {
       keysAndValues.push(key)
-      if (key.startsWith('aim')) {
+      if (key.startsWith('oneOf')) {
+      } else if (key.startsWith('aim')) {
         this.a_aims.Add(key)
       } else if (key.startsWith('box')) {
         this.b_boxes.Add(key)
@@ -66,10 +70,12 @@ export class EnumRecreator {
         this.d_dialogs.Add(key)
       } else if (key.startsWith('inv_')) {
         this.i_inventory.Add(key)
-      } else if (key.startsWith('k')) {
+      } else if (key.startsWith('invament_')) {
         this.k_knowledge.Add(key)
       } else if (key.startsWith('obj_')) {
-        this.k_knowledge.Add(key)
+        this.o_objects.Add(key)
+      } else if (key.startsWith('type_')) {
+        this.t_types.Add(key)
       } else {
         this.u_unrecognized.Add(key)
       }
