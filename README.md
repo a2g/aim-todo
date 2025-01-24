@@ -1,5 +1,5 @@
 
-# aim-tree
+# aim-todo
 
 A puzzle solving algorithm, for side quests, and adventure games. Includes a yack-like json schema for when dialog trees are an essential part of the quest.
 

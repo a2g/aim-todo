@@ -6,7 +6,7 @@ import { NonChoiceSection } from './NonChoiceSection'
 import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 
-import _ from '../../../aim-tree-enums.json'
+import _ from '../../../aim-todo-enums.json'
 import { Aggregates } from '../Aggregates'
 import { AddPiece } from '../AddPiece'
 import { Box } from '../Box'

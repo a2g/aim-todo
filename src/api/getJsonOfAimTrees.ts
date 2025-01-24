@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 import { join } from 'path'
-import { AIM_TREE_JSONC } from '../AIM_TREE_JSONC'
+import { AIM_TODO_JSONC } from '../AIM_TODO_JSONC'
 
-export interface $IAimTree {
+export interface $AimTodo {
   // used by CLI
   file: string
   folder: string
@@ -15,15 +15,15 @@ export interface $IAimTree {
   displayName: string
 }
 
-export function getJsonOfAimTrees (): $IAimTree[] {
+export function getJsonOfAimTodo (): $AimTodo[] {
   console.log(process.cwd())
 
   process.chdir(join(__dirname, '/../../../..'))
 
   const allFolders = new Array<[string, string, string]>()
-  allFolders.push(['aim-tree', 'practice-world', '01'])
-  allFolders.push(['aim-tree', 'practice-world', '02'])
-  allFolders.push(['aim-tree', 'practice-world', '03'])
+  allFolders.push(['aim-todo', 'practice-world', '01'])
+  allFolders.push(['aim-todo', 'practice-world', '02'])
+  allFolders.push(['aim-todo', 'practice-world', '03'])
 
   // lets try adding more folders from 'private-world'
   // but that folder may not exist, so we try/catch it
@@ -55,7 +55,7 @@ export function getJsonOfAimTrees (): $IAimTree[] {
   }
   process.chdir('..')
 
-  const toReturn = new Array<$IAimTree>()
+  const toReturn = new Array<$AimTodo>()
   for (const folder of allFolders) {
     const repo = folder[0]
     const world = folder[1]
@@ -63,7 +63,7 @@ export function getJsonOfAimTrees (): $IAimTree[] {
     process.chdir(`./${repo}/${world}/${area}`)
     const files = fs.readdirSync('.')
     for (const file of files) {
-      if (file === AIM_TREE_JSONC) {
+      if (file === AIM_TODO_JSONC) {
         toReturn.push({
           // these are needed for CLI
           file,

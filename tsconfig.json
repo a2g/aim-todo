@@ -68,7 +68,7 @@
   },
   "include": [
     "src/**/*",
-    "aim-tree.ts",
+    "aim-todo.ts",
     "FilenameSuffixes.ts",
     "testsYup/**/*"
   ],

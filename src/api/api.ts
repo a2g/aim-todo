@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { getJsonOfAllSolutions } from './getJsonOfAllSolutions'
-import { getJsonOfAimTrees } from './getJsonOfAimTrees'
+import { getJsonOfAimTodo } from './getJsonOfAimTrees'
 import { getSvg } from './getSvg'
 
 interface RequestParams {
@@ -68,7 +68,7 @@ export function getJsonOfStartersApi (
   _next: NextFunction
 ): void {
   try {
-    const json = getJsonOfAimTrees()
+    const json = getJsonOfAimTodo()
 
     responseSender.json(json)
   } catch (err) {

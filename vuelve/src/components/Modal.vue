@@ -6,7 +6,7 @@ export default {
     displayString: String,
     svgProp:{
       type: String,
-      default: "localhost:8080/puz/aim-tree/practice-world/03/svg?paramA='prop_hurl'&paramB='prop_well'"
+      default: "localhost:8080/puz/aim-todo/practice-world/03/svg?paramA='prop_hurl'&paramB='prop_well'"
     }
   },
   data() {

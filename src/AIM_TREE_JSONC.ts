@@ -1,2 +1,2 @@
 
-export const AIM_TREE_JSONC = 'aim_tree.jsonc'
+export const AIM_TODO_JSONC = 'aim_todo.jsonc'

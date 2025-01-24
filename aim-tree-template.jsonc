@@ -1,5 +1,5 @@
 {
-  "$id": "https:raw.githubusercontent.com/a2g/aim-tree/main/aim-tree-template.jsonc",
+  "$id": "https:raw.githubusercontent.com/a2g/aim-todo/main/aim-todo-template.jsonc",
   "$schema": "http:json-schema.org/draft-07/schema",
   "description": "A puzzle dependency graph via json schema",
   "type": "object",
@@ -7,7 +7,7 @@
     "piece_template": {
       "properties": {
         "piece": {
-          "$ref": "./aim-tree-enums.json#/definitions/piece_enum"
+          "$ref": "./aim-todo-enums.json#/definitions/piece_enum"
         },
         "count": {
           "type": "number",

@@ -33,7 +33,7 @@ export function getPerformanceImprovementOnLastAccessTimeAsString (username, dur
   }
 }
 
-const LOCAL_STORAGE_KEY = 'key-for-local-storage-aim-tree'
+const LOCAL_STORAGE_KEY = 'key-for-local-storage-aim-todo'
 
 const getMapOfGithubAccessTimesFromLocalStorage = () => {
   try {

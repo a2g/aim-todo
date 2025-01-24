@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
 import { Solutions } from './puzzle/aim/Solutions'
-import { $IAimTree, getJsonOfAimTrees } from './api/getJsonOfAimTrees'
+import { $AimTodo, getJsonOfAimTodo } from './api/getJsonOfAimTrees'
 import { LogGainsFromEachDialog } from './cli/LogGainsFromEachDialog'
 import { ViewBackwardSolve } from './cli/views/ViewBackwardSolve'
 import { EnumRecreator } from './cli/EnumRecreator'
@@ -8,7 +8,7 @@ import { EnumRecreator } from './cli/EnumRecreator'
 const prompt = promptSync()
 
 function main (): void {
-  const aimTrees: $IAimTree[] = getJsonOfAimTrees()
+  const aimTrees: $AimTodo[] = getJsonOfAimTodo()
 
   for (; ;) {
     for (let i = 1; i <= aimTrees.length; i++) {
