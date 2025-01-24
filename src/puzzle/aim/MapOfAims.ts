@@ -18,19 +18,17 @@ export class MapOfAims{
         for(const blah of this.map){
             const key = blah[0]
             const value = blah[1]
-            mapToReturn.Set(key, this.CloneRecurseively(value))
+            mapToReturn.Set(key, this._CloneObject(value))
         }
         return mapToReturn
     }
 
-    private CloneRecurseively(blah: any) : any{
-        const objectToReturn: any = {}
-        for(const item of blah){
-            const key = item[0] as string
-            const value = item[1]
-            const clone = this.CloneRecurseively(value)
-            objectToReturn[key] =  clone
+    _CloneObject(thisObject: any): any {
+        const toReturn: any = {}
+        for (const key in thisObject) {
+            const newChild = this._CloneObject(thisObject[key])
+            toReturn[key] = newChild
         }
-        return objectToReturn
+        return toReturn
     }
 }
