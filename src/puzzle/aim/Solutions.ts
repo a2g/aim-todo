@@ -2,11 +2,13 @@ import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import { Solution } from './Solution'
 import { GetMapOfAimFilesInFolder } from '../../cli/GetMapOfAimFilesInFolder'
+import { MapOfAims } from './MapOfAims'
 
 export class Solutions {
   filename: string
   fileAddress: string
   _solutions: Map<string, Solution>
+  mapOfAims: MapOfAims
 
   constructor (filename: string, fileAddress: string) {
     this.filename = filename
@@ -21,18 +23,17 @@ export class Solutions {
     }
     const text = readFileSync(pathAndFile, 'utf-8')
     const parsedJson: any = parse(text)
-    const rawJson = parsedJson.root
-    const mapOfAims = GetMapOfAimFilesInFolder(fileAddress)
-
+    const aimTodoTree = parsedJson.root
+    this.mapOfAims = GetMapOfAimFilesInFolder(fileAddress)
 
     // first map entry is added with blank ''
-    this._solutions.set('', new Solution(rawJson))
+    this._solutions.set('', new Solution(aimTodoTree, this.mapOfAims))
 
     let isNewSolutions = false
     do {
       isNewSolutions = false
       for (const solution of this._solutions.values()) {
-        const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.root, solution)
+        const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.todoTree, solution)
         isNewSolutions = isNewSolutions || wasNewSolutionGenerated
         if (wasNewSolutionGenerated) {
           break

@@ -1,9 +1,5 @@
-import { join } from 'path'
-import * as fs from 'fs'
-
 import { _STARTER } from '../_STARTER'
 import { EnumFileAsSet } from './EnumFileAsSet'
-import { parse } from 'jsonc-parser'
 import { EnumFileAsArray } from './EnumFileAsArray'
 import { GetMapOfAimFilesInFolder } from './GetMapOfAimFilesInFolder'
 
@@ -22,9 +18,9 @@ export class EnumRecreator {
 
   constructor(folder: string) {
     this._folder = folder
-    const files = GetMapOfAimFilesInFolder(folder)
+    const mapOfAnims = GetMapOfAimFilesInFolder(folder)
 
-    for (const root of files.values()) {
+    for (const root of mapOfAnims.map.values()) {
       const list: string[] = []
       this.CollectAllKeysAndValuesRecursively(root, list)
     }

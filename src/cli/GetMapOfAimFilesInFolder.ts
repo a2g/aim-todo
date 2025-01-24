@@ -3,9 +3,10 @@ import * as fs from 'fs'
 
 import { _STARTER } from '../_STARTER'
 import { parse } from 'jsonc-parser'
+import { MapOfAims } from '../puzzle/aim/MapOfAims'
 
-export function GetMapOfAimFilesInFolder(folder: string) {
-    const mapToReturn = new Map<string, any>()
+export function GetMapOfAimFilesInFolder(folder: string) : MapOfAims{
+    const mapToReturn = new MapOfAims()
     const cwd = process.cwd()
     console.log(cwd)
     process.chdir(join(__dirname, '/../../../..'))
@@ -21,7 +22,7 @@ export function GetMapOfAimFilesInFolder(folder: string) {
                 const text = fs.readFileSync(file, 'utf-8')
                 const parsedJson: any = parse(text)
                 const root = parsedJson.root
-                mapToReturn.set(file, root)
+                mapToReturn.Set(file, root)
             }
         }
     }
