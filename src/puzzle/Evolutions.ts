@@ -3,7 +3,7 @@ import { Aggregates } from './Aggregates'
 import { Box } from './Box'
 import { AchievementStubMap } from './AchievementStubMap'
 import { Piece } from './Piece'
-import { Solution } from './Solution'
+import { Evolution } from './Evolution'
 import { DialogFile } from './talk/DialogFile'
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { A_WIN } from '../A_WIN'
@@ -14,8 +14,8 @@ import { A_WIN } from '../A_WIN'
  * 2. Methods that call the same thing on all solutions
  * 3. Generating solution names - which is why it needs mapOfStartingThings...
  */
-export class Solutions {
-  private readonly solutions: Solution[]
+export class Evolutions {
+  private readonly solutions: Evolution[]
   private readonly combinedBox: Box
   private readonly mapOfStartingThingsAndWhoStartsWithThem: Map<string, Set<string>>
   aggregates: Aggregates
@@ -27,7 +27,7 @@ export class Solutions {
     this.solutions = []
 
     // now lets initialize the first solution
-    const solution1 = Solution.createSolution(
+    const solution1 = Evolution.createSolution(
       this.combinedBox.GetPieces(),
       this.combinedBox.GetDialogFiles(),
       this.combinedBox.GetMapOfAllStartingThings(),
@@ -70,7 +70,7 @@ export class Solutions {
     return hasACloneJustBeenCreated
   }
 
-  public GetSolutions (): Solution[] {
+  public GetSolutions (): Evolution[] {
     return this.solutions
   }
 
@@ -80,7 +80,7 @@ export class Solutions {
     }
   }
 
-  public RemoveSolution (solution: Solution): void {
+  public RemoveSolution (solution: Evolution): void {
     for (let i = 0; i < this.solutions.length; i++) {
       if (this.solutions[i] === solution) {
         this.solutions.splice(i, 1)

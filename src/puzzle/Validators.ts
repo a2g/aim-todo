@@ -1,5 +1,5 @@
 import { Validator } from './Validator'
-import { Solutions } from './Solutions'
+import { Evolutions } from './Evolutions'
 
 /**
  * Does only a few things:
@@ -10,7 +10,7 @@ import { Solutions } from './Solutions'
 export class Validators {
   private readonly validators: Validator[]
 
-  constructor (solutions: Solutions) {
+  constructor (solutions: Evolutions) {
     this.validators = []
     for (const solution of solutions.GetSolutions()) {
       const validator = new Validator(

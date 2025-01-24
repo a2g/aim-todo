@@ -5,6 +5,7 @@ import { _STARTER } from '../_STARTER'
 import { EnumFileAsSet } from './EnumFileAsSet'
 import { parse } from 'jsonc-parser'
 import { EnumFileAsArray } from './EnumFileAsArray'
+import { GetMapOfAimFilesInFolder } from './GetMapOfAimFilesInFolder'
 
 export class EnumRecreator {
   a_all = new EnumFileAsArray('a_all', 'all_enum')
@@ -21,26 +22,13 @@ export class EnumRecreator {
 
   constructor(folder: string) {
     this._folder = folder
-    const cwd = process.cwd()
-    console.log(cwd)
-    process.chdir(join(__dirname, '/../../../..'))
-    process.chdir(folder)
+    const files = GetMapOfAimFilesInFolder(folder)
 
-    console.warn('Results of FindAndAddPiecesRecursively')
-    const files = fs.readdirSync('.')
-    if (files.length > 0) {
-
-      for (const file of files) {
-       //  const pathAndFile = folder + file
-        if (file.startsWith('aim') && file.endsWith('.jsonc')) {
-          const text = fs.readFileSync(file, 'utf-8')
-          const parsedJson: any = parse(text)
-          const root = parsedJson.root
-          const list: string[] = []
-          this.CollectAllKeysAndValuesRecursively(root, list)
-        }
-      }
+    for (const root of files.values()) {
+      const list: string[] = []
+      this.CollectAllKeysAndValuesRecursively(root, list)
     }
+
   }
 
   public WriteEnumFiles(): void {
@@ -53,7 +41,7 @@ export class EnumRecreator {
     this.o_objects.Write()
     this.t_types.Write()
     this.u_unrecognized.Write()
-   // this.a_all.Write() don't need this
+    // this.a_all.Write() don't need this
   }
 
   private CollectAllKeysAndValuesRecursively(json: any, keysAndValues: string[]): void {

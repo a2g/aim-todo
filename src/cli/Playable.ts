@@ -1,17 +1,17 @@
 import { Happener } from '../puzzle/Happener'
 import { PlayerAI } from '../puzzle/PlayerAI'
-import { Solution } from '../puzzle/Solution'
+import { Evolution } from '../puzzle/Evolution'
 
 export class Playable {
   private readonly player: PlayerAI
 
-  private readonly solution: Solution
+  private readonly solution: Evolution
 
   private readonly happener: Happener
 
   private isCompleted: boolean
 
-  constructor (player: PlayerAI, happener: Happener, solution: Solution) {
+  constructor (player: PlayerAI, happener: Happener, solution: Evolution) {
     this.player = player
     this.solution = solution
     this.happener = happener
@@ -22,7 +22,7 @@ export class Playable {
     return this.player
   }
 
-  public GetSolution (): Solution {
+  public GetSolution (): Evolution {
     return this.solution
   }
 

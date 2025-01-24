@@ -3,11 +3,11 @@ import { FormatText } from '../../puzzle/FormatText'
 import { PieceView } from './PieceView'
 import { AddBrackets } from '../../puzzle/AddBrackets'
 import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
-import { Solution } from '../../puzzle/Solution'
-import { Solutions } from '../../puzzle/Solutions'
+import { Evolution } from '../../puzzle/Evolution'
+import { Evolutions } from '../../puzzle/Evolutions'
 const prompt = promptSync({})
 
-export function SolutionView (solution: Solution, solutions: Solutions, titlePath: string[]): void {
+export function SolutionView (solution: Evolution, solutions: Evolutions, titlePath: string[]): void {
   titlePath.push('Solution')
   for (; ;) {
     ShowUnderlinedTitle(titlePath)

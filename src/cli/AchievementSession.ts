@@ -1,6 +1,6 @@
 import { Happener } from '../puzzle/Happener'
 import { PlayerAI } from '../puzzle/PlayerAI'
-import { Solution } from '../puzzle/Solution'
+import { Evolution } from '../puzzle/Evolution'
 import { Playable } from './Playable'
 
 export class AchievementSession {
@@ -15,7 +15,7 @@ export class AchievementSession {
   constructor (
     happener: Happener,
     startingThings: Map<string, Set<string>>,
-    solution: Solution
+    solution: Evolution
   ) {
     const numberOfAutopilotTurns = 0
     const player = new PlayerAI(happener, numberOfAutopilotTurns)

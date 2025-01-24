@@ -1,6 +1,6 @@
 import { PieceBase } from './PieceBase'
-import { Solution } from './Solution'
-import { Solutions } from './Solutions'
+import { Evolution } from './Evolution'
+import { Evolutions } from './Evolutions'
 
 /**
  * Tries to find a piece to connect to the kth input of thePiece.
@@ -20,8 +20,8 @@ export function ProcessAndReturnTrueIfCloneOccurs (
   thePiece: PieceBase,
   k: number,
   thePieceId: string,
-  solution: Solution,
-  solutions: Solutions
+  solution: Evolution,
+  solutions: Evolutions
 ): boolean {
   const hintToFind = thePiece.inputHints[k]
   const setOfMatchingPieces = solution.GetPiecesThatOutputString(hintToFind)

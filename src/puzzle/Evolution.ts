@@ -2,7 +2,7 @@ import { FormatText } from './FormatText'
 import { Piece } from './Piece'
 
 import { AchievementStubMap } from './AchievementStubMap'
-import { Solutions } from './Solutions'
+import { Evolutions } from './Evolutions'
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { Box } from './Box'
 import { DialogFile } from './talk/DialogFile'
@@ -14,7 +14,7 @@ let globalSolutionId = 101
 /**
  * Solution needs to be cloned.
  */
-export class Solution {
+export class Evolution {
   // important ones
   private readonly stubs: AchievementStubMap
   private readonly remainingPieces: Map<string, Set<Piece>>
@@ -81,12 +81,12 @@ export class Solution {
     stubs: AchievementStubMap | null,
     prerequisites: Set<string> | null = null,
     nameSegments: string[] | null = null
-  ): Solution {
+  ): Evolution {
     globalSolutionId++
-    return new Solution(globalSolutionId, pieces, dialogs, startingThingsPassedIn, stubs, prerequisites, nameSegments)
+    return new Evolution(globalSolutionId, pieces, dialogs, startingThingsPassedIn, stubs, prerequisites, nameSegments)
   }
 
-  public Clone (): Solution {
+  public Clone (): Evolution {
     // the weird order of this is because Solution constructor is used
     // primarily to construct, so passing in root piece is needed..
     // so we clone the whole tree and pass it in
@@ -96,7 +96,7 @@ export class Solution {
     // When we clone we generally give everything new ids
     // but
 
-    const clonedSolution = Solution.createSolution(
+    const clonedSolution = Evolution.createSolution(
       this.remainingPieces,
       this.dialogs,
       this.startingThings,
@@ -108,7 +108,7 @@ export class Solution {
     return clonedSolution
   }
 
-  public ProcessUntilCloning (solutions: Solutions): boolean {
+  public ProcessUntilCloning (solutions: Evolutions): boolean {
     let isBreakingDueToSolutionCloning = false
     for (const stub of this.stubs.GetValues()) {
       if (/* stub.IsNeeded()&& */ !stub.IsSolved()) {

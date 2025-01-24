@@ -1,10 +1,10 @@
 import promptSync from 'prompt-sync'
 import { FormatText } from '../../puzzle/FormatText'
 import { Piece } from '../../puzzle/Piece'
-import { Solutions } from '../../puzzle/Solutions'
+import { Evolutions } from '../../puzzle/Evolutions'
 const prompt = promptSync({})
 
-export function ViewListOfLeaves (solutions: Solutions): void {
+export function ViewListOfLeaves (solutions: Evolutions): void {
   console.warn(' ')
 
   for (;;) {

@@ -1,10 +1,10 @@
 import { IdPrefixes } from '../../IdPrefixes'
 import { Happener } from './Happener'
-import { Solution } from './Solution'
+import { Evolution } from './Evolution'
 
 export function ProcessAutos (
   happener: Happener,
-  solution: Solution
+  solution: Evolution
 ): void {
   const achievements = happener.GetCurrentlyTrueAchievements()
   const items = happener.GetCurrentVisibleInventory()

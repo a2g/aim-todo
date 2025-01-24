@@ -3,8 +3,8 @@ import { FormatText } from '../puzzle/FormatText'
 import { join } from 'path'
 import { Piece } from '../puzzle/Piece'
 import { RawObjectsAndVerb } from '../puzzle/RawObjectsAndVerb'
-import { Solution } from '../puzzle/Solution'
-import { Solutions } from '../puzzle/Solutions'
+import { Evolution } from '../puzzle/Evolution'
+import { Evolutions } from '../puzzle/Evolutions'
 import { _STARTER_JSONC } from '../_STARTER_JSONC'
 
 interface $INameIsAAchievementChildren {
@@ -26,7 +26,7 @@ export function getJsonOfAllSolutions (
     throw Error(`file doesn't exist ${path}${firstBoxFilename}`)
   }
 
-  const solutions = new Solutions(path, firstBoxFilename)
+  const solutions = new Evolutions(path, firstBoxFilename)
 
   for (let i = 0; i < 200; i++) {
     solutions.SolvePartiallyUntilCloning()
@@ -56,7 +56,7 @@ export function getJsonOfAllSolutions (
 }
 
 function getJsonOfSolutionsFromSolver (
-  solutions: Solutions
+  solutions: Evolutions
 ): Record<string, unknown> {
   return {
     name: 'Solutions',
@@ -65,7 +65,7 @@ function getJsonOfSolutionsFromSolver (
 }
 
 function getJsonArrayOfSolutions (
-  solutions: Solution[]
+  solutions: Evolution[]
 ): $INameIsAAchievementChildren[] {
   const toReturn = new Array<$INameIsAAchievementChildren>()
   let i = 0
@@ -82,7 +82,7 @@ function getJsonArrayOfSolutions (
 }
 
 function getJsonArrayOfRootPieces (
-  solution: Solution
+  solution: Evolution
 ): Array<Record<string, unknown>> {
   const toReturn = new Array<Record<string, unknown>>()
 

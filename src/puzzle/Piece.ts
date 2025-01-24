@@ -2,8 +2,8 @@ import { Command } from './Command'
 import { Happen } from './Happen'
 import { Happenings } from './Happenings'
 import { Box } from './Box'
-import { Solution } from './Solution'
-import { Solutions } from './Solutions'
+import { Evolution } from './Evolution'
+import { Evolutions } from './Evolutions'
 import { SpecialTypes } from './SpecialTypes'
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { PieceBase } from './PieceBase'
@@ -191,8 +191,8 @@ export class Piece extends PieceBase {
   }
 
   public ProcessUntilCloning (
-    solution: Solution,
-    solutions: Solutions,
+    solution: Evolution,
+    solutions: Evolutions,
     path: string
   ): boolean {
     const newPath = `${path}${this.output}/`
@@ -275,8 +275,8 @@ export class Piece extends PieceBase {
   }
 
   private InternalLoopOfProcessUntilCloning (
-    solution: Solution,
-    solutions: Solutions
+    solution: Evolution,
+    solutions: Evolutions
   ): boolean {
     for (let k = 0; k < this.inputs.length; k += 1) {
       // Without this following line, any clones will attempt to re-clone themselves

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import { Solution } from './Solution'
+import { GetMapOfAimFilesInFolder } from '../../cli/GetMapOfAimFilesInFolder'
 
 export class Solutions {
   filename: string
@@ -21,6 +22,7 @@ export class Solutions {
     const text = readFileSync(pathAndFile, 'utf-8')
     const parsedJson: any = parse(text)
     const rawJson = parsedJson.root
+    const mapOfAims = GetMapOfAimFilesInFolder(fileAddress)
 
 
     // first map entry is added with blank ''

@@ -1,9 +1,9 @@
 import promptSync from 'prompt-sync'
 import { FormatText } from '../../puzzle/FormatText'
-import { Solutions } from '../../puzzle/Solutions'
+import { Evolutions } from '../../puzzle/Evolutions'
 const prompt = promptSync({})
 
-export function ViewPiecesInBoxes (solutions: Solutions): void {
+export function ViewPiecesInBoxes (solutions: Evolutions): void {
   console.warn(' ')
 
   for (;;) {

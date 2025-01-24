@@ -2,8 +2,8 @@ import { ProcessAndReturnTrueIfCloneOccurs } from './ProcessAndReturnTrueIfClone
 import { Piece } from './Piece'
 import { PieceBase } from './PieceBase'
 import { RawObjectsAndVerb } from './RawObjectsAndVerb'
-import { Solution } from './Solution'
-import { Solutions } from './Solutions'
+import { Evolution } from './Evolution'
+import { Evolutions } from './Evolutions'
 import { Solved } from './Solved'
 import { Validated } from './Validated'
 
@@ -109,7 +109,7 @@ export class AchievementStub extends PieceBase {
     this.commandsCompletedInOrder.push(rawObjectsAndVerb)
   }
 
-  public ProcessStubUntilCloning (solution: Solution, solutions: Solutions, path: string): boolean {
+  public ProcessStubUntilCloning (solution: Evolution, solutions: Evolutions, path: string): boolean {
     // if the achievement piece is already found, we drill into it
     if (this.inputs[0] != null) {
       return this.inputs[0].ProcessUntilCloning(solution, solutions, path + this.inputHints[0] + '/')
