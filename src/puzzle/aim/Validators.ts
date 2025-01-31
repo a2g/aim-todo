@@ -1,4 +1,4 @@
-import { Validator } from './Validator'
+import { Validator } from '../../vuelve/Validator'
 import { Evolutions } from './Evolutions'
 
 /**

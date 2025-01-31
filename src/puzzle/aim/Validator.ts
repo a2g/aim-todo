@@ -1,17 +1,8 @@
-import { Piece } from './Piece'
-import { Raw } from './Raw'
-import { RawObjectsAndVerb } from './RawObjectsAndVerb'
-import { AchievementStub } from './AchievementStub'
-import { DeconstructDoer } from './DeconstructDoer'
-import { AchievementStubMap } from './AchievementStubMap'
-import { VisibleThingsMap } from './VisibleThingsMap'
-import { Box } from './Box'
-import { createCommandFromAutoPiece } from './createCommandFromAutoPiece'
-import { DialogFile } from './talk/DialogFile'
-import { Validated } from './Validated'
+import { AimTreeMap } from "./AimTreeMap"
+
 
 export class Validator {
-  private readonly achievementStubs: AchievementStubMap
+  private readonly achievementStubs: AimTreeMap
   private readonly rootPieceKeysInSolvingOrder: string[]
   private readonly currentlyVisibleThings: VisibleThingsMap
   private readonly remainingPieces: Map<string, Piece>

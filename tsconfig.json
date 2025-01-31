@@ -71,7 +71,7 @@
     "aim-todo.ts",
     "FilenameSuffixes.ts",
     "testsYup/**/*"
-  ],
+, "src/puzzle/aim/Validator.ts", "src/puzzle/aim/Validators.ts"  ],
   "exclude": [
     "node_modules",
     "**/*-spec.ts"

@@ -1,14 +1,14 @@
-import { MapOfAims } from "./MapOfAims"
+import { AimTreeMap } from "./AimTreeMap"
 
 export class Solution {
   
     public names: string[]
     public todoTree: any
-    public mapOfAims: any
-    constructor(todoTree:any, mapOfAims :MapOfAims){
+    public aimTreeMap: any
+    constructor(todoTree:any, aimTreeMap :AimTreeMap){
         this.names = []
         this.todoTree = todoTree
-       this.mapOfAims = mapOfAims.Clone()
+       this.aimTreeMap = aimTreeMap.Clone()
     }
 
     public GetName() : string {
@@ -24,8 +24,8 @@ export class Solution {
     Clone(): Solution {
         // this deep clones the 'root' member of the solution'
         const clonedTodoTree = this._CloneObject(this.todoTree)
-        const clonedMapOfAims = this.mapOfAims.Clone()
-        const newSolution = new Solution(clonedTodoTree, clonedMapOfAims)
+        const clonedAimTreeMap = this.aimTreeMap.Clone()
+        const newSolution = new Solution(clonedTodoTree, clonedAimTreeMap)
 
         // this clones the names
         newSolution.names.push(...this.names)

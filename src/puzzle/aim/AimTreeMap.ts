@@ -1,6 +1,6 @@
 
 
-export class MapOfAims{
+export class AimTreeMap{
 
     public  map:Map<string, any>
 
@@ -12,9 +12,9 @@ export class MapOfAims{
         this.map.set(file, root)
     }
 
-    Clone() : MapOfAims 
+    Clone() : AimTreeMap 
     {
-        const mapToReturn = new MapOfAims()
+        const mapToReturn = new AimTreeMap()
         for(const blah of this.map){
             const key = blah[0]
             const value = blah[1]
