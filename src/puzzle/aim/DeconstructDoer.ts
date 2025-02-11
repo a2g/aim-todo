@@ -36,6 +36,16 @@ export class DeconstructDoer {
     return this.theAimTree.inputs[0] == null
   }
 
+    /**
+   * #### For the purposes of traversing, a leaf is one with all
+   * inputs are null.
+   * @param piece
+   * @returns true if a leaf
+   */
+    private isALeaf (treeNode: any): boolean {
+      return Object.keys(treeNode).length? true : false
+    }
+
   public GetNextDoableCommandAndDeconstructTree (): RawObjectsAndVerb | null {
     const thePiece = this.theAimTree.GetThePiece()
     if (thePiece != null) {
@@ -45,8 +55,77 @@ export class DeconstructDoer {
     return null
   }
 
-  private GetNextDoableCommandRecursively (treeNode: any): RawObjectsAndVerb | null {
-    if (this.isALeaf(treeNode)) {
+    /**
+   * #### For the purposes of traversing, a leaf is one with all
+   * inputs are null.
+   * @param piece
+   * @returns true if a leaf
+   */
+  private IsALeaf (treeNode: any): boolean {
+    return Object.keys(treeNode).length? true : false
+  }
+
+  private GetNextDoableCommandRecursively (treeNode: any, treeNodeKey:string, treeNodeParent: any): RawObjectsAndVerb | null {
+    let numberOfChildrenLeaves = 0
+    let numberOfChildren= 0
+    for (const key in treeNode) {
+      const obj = treeNode[key]
+      numberOfChildren+=1
+      if(!this.IsALeaf(obj)){
+        numberOfChildrenLeaves+=1
+      }
+    }
+
+    if(numberOfChildren>0 && numberOfChildren == numberOfChildrenLeaves){
+      // then we test for removal
+      let areAllChildrenActive = true
+      for (const key in treeNode) {
+        this.if(!this.currentlyVisibleThings.Has(key)){
+          areAllChildrenActive = false
+        }
+      }
+
+      if(areAllChildrenActive) {
+        // set the achievement as completed in the currently visible things
+        this.currentlyVisibleThings.Set(treeNodeKey, new Set<string>())
+    
+        // construct the new command - whilst we have all the data.
+        let command = new RawObjectsAndVerb()
+        command.output = treeNodeKey
+        
+        // we remove from parent (if non null)
+        if (treeNodeParent != null) {
+          for (const key in treeNodeParent) {
+            const obj = treeNodeParent[key]
+            if (obj === treeNodeParent) {
+              delete treeNodeParent[key]
+            }
+          }
+        }
+
+        return command
+      }
+      // if they were all leaves, then we can't recurse down, so we return null
+      return null
+    } else {
+      // atleats one of the children isn't a leaf
+      // so we can need to recurse down that non-leaf child
+      for (const childKey in treeNode) {
+        const child = treeNode[childKey]
+        numberOfChildren+=1
+        if (!this.IsALeaf(child)) {
+          const toReturn = this.GetNextDoableCommandRecursively(child, childKey, parent)
+          if (toReturn != null) {
+            return toReturn
+          }
+        }
+      }
+    }
+    return null
+  }
+/*
+
+    if (areAllChildrenLeaves) {
       // isAFef - basically means has zero children
 
       let areAllChildrenVisibleOrActive = true
@@ -55,46 +134,9 @@ export class DeconstructDoer {
           areAllChildrenVisibleOrActive = false
         }
       }
-      if (areAllChildrenVisibleOrActivex) {
-        const isSomeOtherAchievementThatHasBeenAchieved = (treeNode.type === SpecialTypes.SomeOtherAchievement) && this.aimTeeMap.IsAchievementPieceNulled(treeNode.output)
-        const isStartingThingsAndTheyHaveBeenOpened = (treeNode.type === SpecialTypes.StartingThings) && this.currentlyVisibleThings.Has(treeNode.output)
-        if (isSomeOtherAchievementThatHasBeenAchieved || isStartingThingsAndTheyHaveBeenOpened) {
-          // if this best way to check whether we have just completed the root piece?
-          const theStubPiece = this.theAimTree.GetThePiece()
-          if (theStubPiece != null && theStubPiece.id === treeNode.id) {
-            this.theAimTree.SetValidated(Validated.YesValidated)
-          }
-
-          // then we remove this key as a leaf piece..
-          // by nulling its  input in the parent.
-          const parent = treeNode.GetParent()
-          if (treeNode.parent != null && parent != null) {
-            for (let i = 0; i < treeNode.parent.inputHints.length; i++) {
-              // nullify only the input of the parent who matches this output
-              if (treeNode.parent.inputHints[i] === treeNode.output) {
-                treeNode.parent.inputs[i] = null
-                // don't blank out the input hint - its used to determine areAllInputHintsInTheVisibleSet
-              }
-            }
-          }
-
-          if (treeNode.boxToMerge != null) {
-            this.MergeBox(treeNode.boxToMerge)
-          }
-
-          // if its from our stash, then decrement it or remove it from stash
-          if (isSamePieceIsInOurStash) {
-            if (treeNode.reuseCount - 1 <= 0) {
-              this.pieces.delete(treeNode.id)
-            } else {
-              treeNode.SetCount(treeNode.reuseCount - 1)
-              console.warn(`trans.count is now ${treeNode.reuseCount}`)
-            }
-          }
-
-          // set the achievement as completed in the currently visible things
-          this.currentlyVisibleThings.Set(this.theAimTree.GetTheAchievementWord(), new Set<string>())
-
+      if (areAllChildrenVisibleOrActive) {
+  
+    
           // Now for the verb/object combo that we need to return
           let toReturn: RawObjectsAndVerb | null = null
 
@@ -247,6 +289,7 @@ export class DeconstructDoer {
 
     return null
   }
+  */
 
   private AddToMapOfVisibleThings (thing: string): void {
     if (!this.currentlyVisibleThings.Has(thing)) {
@@ -254,15 +297,7 @@ export class DeconstructDoer {
     }
   }
 
-  /**
-   * #### For the purposes of traversing, a leaf is one with all
-   * inputs are null.
-   * @param piece
-   * @returns true if a leaf
-   */
-  private isALeaf (treeNode: any): boolean {
-    return Object.keys(treeNode).length? true : false
-  }
+
 
   private MergeBox (boxToMerge: Box): void {
     console.warn(`Merging box ${boxToMerge.GetFilename()}`)

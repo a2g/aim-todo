@@ -21,26 +21,20 @@ export class RawObjectsAndVerb {
   // - the id of the command
 
   constructor (
-    type: Raw,
-    objectA: string,
-    objectB: string,
-    output: string,
-    prerequisites: string[],
-    speechLines: string[][],
-    typeJustForDebugging: string
+  
   ) {
-    this.type = type
-    this.objectA = objectA
-    this.objectB = objectB
-    this.output = output
+    this.type = Raw.Use
+    this.objectA = ''
+    this.objectB = ''
+    this.output = ''
     this.startingCharacterForA = ''
     this.startingCharacterForB = ''
-    this.prerequisites = prerequisites
+    this.prerequisites = []
     this.mainSpiel = ''
     this.achievementSpiel = ''
     this.restrictionSpiel = ''
-    this.typeJustForDebugging = typeJustForDebugging
-    this.speechLines = speechLines
+    this.typeJustForDebugging = ''
+    this.speechLines = []
   }
 
   public PopulateSpielFields (isColor = true): void {
