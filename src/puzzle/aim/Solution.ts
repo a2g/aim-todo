@@ -1,17 +1,18 @@
-import { AimTreeMap } from "./AimTreeMap"
+import { AimStubMap } from "./AimStubMap"
 
 export class Solution {
-  
+
     public names: string[]
     public todoTree: any
     public aimTreeMap: any
-    constructor(todoTree:any, aimTreeMap :AimTreeMap){
+
+    constructor(todoTree: any, aimTreeMap: AimStubMap) {
         this.names = []
         this.todoTree = todoTree
-       this.aimTreeMap = aimTreeMap.Clone()
+        this.aimTreeMap = aimTreeMap.Clone()
     }
 
-    public GetName() : string {
+    public GetSolvingPath (): string {
         let name = ''
         for (let i = 0; i < this.names.length; i++) {
             name += (i != 0) ? '/' : ''
@@ -21,7 +22,7 @@ export class Solution {
     }
 
 
-    Clone(): Solution {
+    Clone (): Solution {
         // this deep clones the 'root' member of the solution'
         const clonedTodoTree = this._CloneObject(this.todoTree)
         const clonedAimTreeMap = this.aimTreeMap.Clone()
@@ -34,7 +35,7 @@ export class Solution {
         return newSolution
     }
 
-    _CloneObject(thisObject: any): any {
+    _CloneObject (thisObject: any): any {
         const toReturn: any = {}
         for (const key in thisObject) {
             const newChild = this._CloneObject(thisObject[key])
@@ -42,4 +43,12 @@ export class Solution {
         }
         return toReturn
     }
+
+
+    public GetAimTreeMap (): AimStubMap {
+        return this.aimTreeMap
+    }
+
+
+
 }

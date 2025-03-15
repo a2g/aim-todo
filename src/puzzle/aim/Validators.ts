@@ -1,5 +1,7 @@
-import { Validator } from '../../vuelve/Validator'
-import { Evolutions } from './Evolutions'
+import { Solutions } from "./Solutions"
+import { Validator } from "./Validator"
+
+
 
 /**
  * Does only a few things:
@@ -10,15 +12,14 @@ import { Evolutions } from './Evolutions'
 export class Validators {
   private readonly validators: Validator[]
 
-  constructor (solutions: Evolutions) {
+  constructor(solutions: Solutions) {
     this.validators = []
     for (const solution of solutions.GetSolutions()) {
       const validator = new Validator(
         solution.GetSolvingPath(),
-        solutions.GetStartingPieces(),
-        solutions.GetStartingDialogFiles(),
-        solution.GetAchievementStubMap(),
-        solutions.GetStartersMapOfAllStartingThings())
+        solution.GetAimTreeMap(),
+        solutions.GetStartingThings())
+
       this.validators.push(validator)
     }
   }

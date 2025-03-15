@@ -28,7 +28,7 @@ export class Evolution {
 
   private readonly id: number
 
-  private constructor (
+  private constructor(
     id: number,
     pieces: Map<string, Set<Piece>>,
     dialogs: Map<string, DialogFile>,
@@ -91,7 +91,7 @@ export class Evolution {
     // primarily to construct, so passing in root piece is needed..
     // so we clone the whole tree and pass it in
     const clonedRootPieceMap =
-      this.stubs.CloneAllRootPiecesAndTheirTrees()
+      this.stubs.Clone()
 
     // When we clone we generally give everything new ids
     // but
@@ -199,7 +199,7 @@ export class Evolution {
     }
 
     if (!thereAreStillSomeUnsolved) {
-    //  this.KeepOnlyVisitedAchievements()
+      //  this.KeepOnlyVisitedAchievements()
     }
   }
 

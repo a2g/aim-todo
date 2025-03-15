@@ -1,15 +1,15 @@
 import promptSync from 'prompt-sync'
 import { Piece } from '../../puzzle/Piece'
 import { VisibleThingsMap } from '../../puzzle/VisibleThingsMap'
-import { Validator } from '../../puzzle/Validator'
-import { AchievementStub } from '../../puzzle/AchievementStub'
+import { AimStub } from '../../puzzle/aim/AimStub'
 import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
+import { Validator } from '../../puzzle/aim/Validator'
 const prompt = promptSync({ sigint: true })
 
 export function PieceDeconstructionView (
   piece: Piece,
   validator: Validator,
-  stub: AchievementStub, visibleThings: VisibleThingsMap, titlePath: string[]
+  stub: AimStub, visibleThings: VisibleThingsMap, titlePath: string[]
 ): void {
   titlePath.push('Piece(Deconstruct)')
   for (; ;) {

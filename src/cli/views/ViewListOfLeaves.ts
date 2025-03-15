@@ -7,7 +7,7 @@ const prompt = promptSync({})
 export function ViewListOfLeaves (solutions: Evolutions): void {
   console.warn(' ')
 
-  for (;;) {
+  for (; ;) {
     solutions.SolvePartiallyUntilCloning()
     solutions.UpdateSolvedStatuses()
     const numberOfSolutions: number = solutions.NumberOfSolutions()
@@ -40,9 +40,9 @@ export function ViewListOfLeaves (solutions: Evolutions): void {
       const letter = String.fromCharCode(solutionNumber++)
       console.warn(
         letter +
-          '. ' +
-          FormatText(solution.GetSolvingPath()) +
-          '<--unique name'
+        '. ' +
+        FormatText(solution.GetSolvingPath()) +
+        '<--unique name'
       )
       const leaves: Map<string, Piece | null> = solution
         .GetAchievementStubMap()

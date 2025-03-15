@@ -39,7 +39,7 @@ export class Box {
   private readonly dialogFiles: Map<string, DialogFile>
   private readonly aggregates: Aggregates
 
-  constructor (path: string, filename: string, aggregates: Aggregates) {
+  constructor(path: string, filename: string, aggregates: Aggregates) {
     this.aggregates = aggregates
     this.path = path
     this.dialogFiles = new Map<string, DialogFile>()
@@ -65,7 +65,7 @@ export class Box {
     if (filename.length !== 0) {
       if (!existsSync(path + filename)) {
         throw new Error(
-          `file doesn't exist ${process.cwd()} ${path}${filename} `
+          `file doesn't exist: ${path}${filename} `
         )
       }
       const text = readFileSync(path + filename, 'utf8')
@@ -78,19 +78,21 @@ export class Box {
       const setAments = new Set<string>()
       const setInvs = new Set<string>()
       const setPlayers = new Set<string>()
-      for (const gate of scenario.pieces) {
-        setInvs.add(Stringify(gate.inv1))
-        setInvs.add(Stringify(gate.inv2))
-        setInvs.add(Stringify(gate.inv3))
-        setAments.add(Stringify(gate.ament1))
-        setAments.add(Stringify(gate.ament2))
-        setObjs.add(Stringify(gate.obj1))
-        setObjs.add(Stringify(gate.obj2))
-        setObjs.add(Stringify(gate.obj3))
-        setObjs.add(Stringify(gate.obj4))
-        setObjs.add(Stringify(gate.obj5))
-        setObjs.add(Stringify(gate.obj6))
-        setObjs.add(Stringify(gate.obj7))
+      if (scenario.pieces != null) {
+        for (const gate of scenario.pieces) {
+          setInvs.add(Stringify(gate.inv1))
+          setInvs.add(Stringify(gate.inv2))
+          setInvs.add(Stringify(gate.inv3))
+          setAments.add(Stringify(gate.ament1))
+          setAments.add(Stringify(gate.ament2))
+          setObjs.add(Stringify(gate.obj1))
+          setObjs.add(Stringify(gate.obj2))
+          setObjs.add(Stringify(gate.obj3))
+          setObjs.add(Stringify(gate.obj4))
+          setObjs.add(Stringify(gate.obj5))
+          setObjs.add(Stringify(gate.obj6))
+          setObjs.add(Stringify(gate.obj7))
+        }
       }
 
       /* starting things is optional in the json */

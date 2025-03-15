@@ -32,7 +32,7 @@ export class Piece extends PieceBase {
 
   public command: Command | null
 
-  constructor (
+  constructor(
     id: string,
     boxToMerge: Box | null,
     output: string,

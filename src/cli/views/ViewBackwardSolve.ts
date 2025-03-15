@@ -17,7 +17,7 @@ export function ViewBackwardSolve (solutions: Solutions): void {
     const solutionArray = Array.from(solutions._solutions.values())
     for (let i = 0; i < solutionArray.length; i++) {
       const solution = solutionArray[i]
-      console.warn(`    ${i + 1}. ${solution.GetName()}`)
+      console.warn(`    ${i + 1}. ${solution.GetSolvingPath()}`)
     }
 
     const firstInput = prompt(

@@ -4,7 +4,8 @@ import { AddBrackets } from '../../puzzle/AddBrackets'
 import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
 import { CommandsView } from './CommandsView'
 import { AchievementStubView } from './AchievementStubView'
-import { Validator } from '../../puzzle/Validator'
+import { Validator } from '../../puzzle/aim/Validator'
+
 
 const prompt = promptSync({})
 
@@ -28,12 +29,12 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
 
     console.warn(`${label}`)
     let listItemNumber = 0
-    for (const rootAchievement of validator.GetRootMap().GetValues()) {
+    for (const rootAchievement of validator.GetAimTreeMap().GetAims()) {
       listItemNumber++
 
       // display list item
-      const output = rootAchievement.GetTheAchievementWord()
-      const theAchievementPiece = rootAchievement.GetThePiece()
+      const output = rootAchievement.GetTheAimWord()
+      const theAchievementPiece = rootAchievement.GetTheAny()
       let inputs = ''
       if (theAchievementPiece != null) {
         for (const inputSpiel of theAchievementPiece.inputSpiels) {
@@ -71,7 +72,7 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
       const theNumber = Number(input)
       if (theNumber > 0 && theNumber <= listItemNumber) {
         let j = 0
-        for (const achievement of validator.GetRootMap().GetValues()) {
+        for (const achievement of validator.GetAimTreeMap().GetAims()) {
           j++
           if (j === theNumber) {
             AchievementStubView(achievement, validator, validator.GetVisibleThingsAtTheMoment(), [...titlePath])

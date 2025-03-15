@@ -1,3 +1,4 @@
+/*
 import promptSync from 'prompt-sync'
 import { AddBrackets } from '../../puzzle/AddBrackets'
 import { FormatText } from '../../puzzle/FormatText'
@@ -31,12 +32,12 @@ export function ViewZzzOldWay (solutions: Evolutions): void {
           ? path + '<-- path'
           : NAME_NOT_DETERMINABLE
       console.warn(`${letter}. ${label}}`)
-      for (const item of solution.GetAchievementStubMap().GetValues()) {
+      for (const item of solution.GetAimTreeMap().GetAims()) {
         listItemNumber++
 
         // display list item
         const output = item.GetTheAchievementWord()
-        const piece = item.GetThePiece()
+        const piece = item.GetTheAny()
         let inputs = ''
         if (piece != null) {
           for (const inputSpiel of piece.inputSpiels) {
@@ -70,11 +71,11 @@ export function ViewZzzOldWay (solutions: Evolutions): void {
       if (theNumber > 0 && theNumber <= listItemNumber) {
         const solutionArray = solutions.GetSolutions()
         for (let i = 0; i < solutionArray.length; i++) {
-          const rootMap = solutionArray[i].GetAchievementStubMap()
-          const achievements = rootMap.GetValues()
+          const rootMap = solutionArray[i].GetAimTreeMap()
+          const achievements = rootMap.GetAims()
           for (const achievement of achievements) {
             i++
-            const theAchievementPiece = achievement.GetThePiece()
+            const theAchievementPiece = achievement.GetTheAny()
             if (i === theNumber && (theAchievementPiece != null)) {
               PieceView(theAchievementPiece, solutionArray[i].GetVisibleThingsAtTheStart(), ['blah'])
             }
@@ -84,3 +85,4 @@ export function ViewZzzOldWay (solutions: Evolutions): void {
     }
   }
 }
+*/

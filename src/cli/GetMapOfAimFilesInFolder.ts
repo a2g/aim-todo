@@ -3,10 +3,10 @@ import * as fs from 'fs'
 
 import { _STARTER } from '../_STARTER'
 import { parse } from 'jsonc-parser'
-import { AimTreeMap } from '../puzzle/aim/AimTreeMap'
+import { AimStubMap } from '../puzzle/aim/AimStubMap'
 
-export function GetMapOfAimFilesInFolder(folder: string) : AimTreeMap{
-    const mapToReturn = new AimTreeMap()
+export function GetMapOfAimFilesInFolder (folder: string): AimStubMap {
+    const mapToReturn = new AimStubMap()
     const cwd = process.cwd()
     console.log(cwd)
     process.chdir(join(__dirname, '/../../../..'))

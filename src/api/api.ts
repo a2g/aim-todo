@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { getJsonOfAllSolutions } from './getJsonOfAllSolutions'
+import { getJsonOfAllEvolutions } from './getJsonOfAllEvolutions'
 import { getJsonOfAimTodo } from './getJsonOfAimTrees'
 import { getSvg } from './getSvg'
 
@@ -53,7 +53,7 @@ export function getJsonOfAllSolutionsApi (
     const world = req.params.world
     const area = req.params.area
 
-    const json = getJsonOfAllSolutions(repo, world, area)
+    const json = getJsonOfAllEvolutions(repo, world, area)
 
     responseSender.json(json)
   } catch (err) {

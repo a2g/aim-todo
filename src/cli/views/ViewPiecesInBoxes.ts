@@ -6,7 +6,7 @@ const prompt = promptSync({})
 export function ViewPiecesInBoxes (solutions: Evolutions): void {
   console.warn(' ')
 
-  for (;;) {
+  for (; ;) {
     console.warn('Pieces of each box')
     console.warn('================')
 
@@ -16,10 +16,10 @@ export function ViewPiecesInBoxes (solutions: Evolutions): void {
       listItemNumber++
 
       console.warn(
-          `    ${listItemNumber}. ${FormatText(box.GetFilename())}`)
+        `    ${listItemNumber}. ${FormatText(box.GetFilename())}`)
 
       console.warn(
-          `                     ${FormatText(box.GetPiecesAsString())}`)
+        `                     ${FormatText(box.GetPiecesAsString())}`)
     }
 
     // allow user to choose item

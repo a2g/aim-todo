@@ -23,12 +23,12 @@ export function SolutionView (solution: Evolution, solutions: Evolutions, titleP
     console.warn(`${label}`)
     let listItemNumber = 0
     let incomplete = 0
-    for (const achievementStub of solution.GetAchievementStubMap().GetValues()) {
+    for (const achievementStub of solution.GetAimTreeMap().GetAims()) {
       listItemNumber++
 
       // display list item
       const output = achievementStub.GetTheAchievementWord()
-      const theAchievementPiece = achievementStub.GetThePiece()
+      const theAchievementPiece = achievementStub.GetTheAny()
       let inputs = ''
       if (theAchievementPiece != null) {
         for (let i = 0; i < theAchievementPiece.inputSpiels.length; i++) {
@@ -68,10 +68,10 @@ export function SolutionView (solution: Evolution, solutions: Evolutions, titleP
       const theNumber = Number(input)
       if (theNumber > 0 && theNumber <= listItemNumber) {
         let j = 0
-        for (const achievement of solution.GetAchievementStubMap().GetValues()) {
+        for (const achievement of solution.GetAimTreeMap().GetAims()) {
           j++
           if (j === theNumber) {
-            const theAchievementPiece = achievement.GetThePiece()
+            const theAchievementPiece = achievement.GetTheAny()
             if (theAchievementPiece != null) {
               PieceView(theAchievementPiece, solution.GetVisibleThingsAtTheStart(), [...titlePath])
             } else {

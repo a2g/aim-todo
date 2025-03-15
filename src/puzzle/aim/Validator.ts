@@ -1,26 +1,32 @@
-import { AimTreeMap } from "./AimTreeMap"
+import { Piece } from "../Piece"
+import { Raw } from "../Raw"
+import { RawObjectsAndVerb } from "../RawObjectsAndVerb"
+import { DialogFile } from "../talk/DialogFile"
+import { Validated } from "../Validated"
+import { VisibleThingsMap } from "../VisibleThingsMap"
+import { AimStub } from "./AimStub"
+import { AimStubMap } from "./AimStubMap"
+import { SingleAimTreeDeConstructor as SingleAimTreeDeConstructor } from "./SingleAimTreeDeConstructor"
 
 
 export class Validator {
-  private readonly achievementStubs: AimTreeMap
-  private readonly rootPieceKeysInSolvingOrder: string[]
+  private readonly aimTreeMap: AimStubMap
+  private readonly aimTreeFileNamesInSolvingOrder: string[]
   private readonly currentlyVisibleThings: VisibleThingsMap
   private readonly remainingPieces: Map<string, Piece>
   private readonly dialogs: Map<string, DialogFile>
   private readonly solutionName
   private readonly essentialIngredients: Set<string> // yup these are added to
 
-  public constructor (name: string, startingPieces: Map<string, Set<Piece>>, startingDialogFiles: Map<string, DialogFile>, stubMap: AchievementStubMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
+  public constructor(name: string, aimTreeMap: AimStubMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
     this.solutionName = name
-    this.achievementStubs = new AchievementStubMap(stubMap)
-    this.achievementStubs.RemoveZeroOrUnneededStubs()
-    this.achievementStubs.CalculateInitialCounts()
-    this.rootPieceKeysInSolvingOrder = []
+    this.aimTreeMap = aimTreeMap
+    this.aimTreeMap.RemoveZeroedOrUnneededAims()
+    //this.achievementStubs.CalculateInitialCounts()
+    this.aimTreeFileNamesInSolvingOrder = []
     this.remainingPieces = new Map<string, Piece>()
     this.dialogs = new Map<string, DialogFile>()
 
-    Box.CopyPiecesFromAtoBViaIds(startingPieces, this.remainingPieces)
-    Box.CopyDialogsFromAtoB(startingDialogFiles, this.dialogs)
 
     this.currentlyVisibleThings = new VisibleThingsMap(null)
     if (startingThingsPassedIn != null) {
@@ -42,8 +48,8 @@ export class Validator {
     return this.solutionName
   }
 
-  public GetRootMap (): AchievementStubMap {
-    return this.achievementStubs
+  public GetAimTreeMap (): AimStubMap {
+    return this.aimTreeMap
   }
 
   public GetVisibleThingsAtTheMoment (): VisibleThingsMap {
@@ -52,7 +58,7 @@ export class Validator {
 
   public DeconstructAllAchievementsAndRecordSteps (): boolean {
     let wasThereAtLeastSomeProgress = false
-    for (const stub of this.achievementStubs.GetValues()) {
+    for (const stub of this.aimTreeMap.GetAims()) {
       if (stub.GetValidated() === Validated.Not) {
         if (this.DeconstructGivenStubAndRecordSteps(stub)) {
           wasThereAtLeastSomeProgress = true
@@ -62,14 +68,14 @@ export class Validator {
     return wasThereAtLeastSomeProgress
   }
 
-  public DeconstructGivenStubAndRecordSteps (stub: AchievementStub): boolean {
+  public DeconstructGivenStubAndRecordSteps (aimStub: AimStub): boolean {
     // push the commands
-    const deconstructDoer = new DeconstructDoer(
-      stub,
+    const deconstructDoer = new SingleAimTreeDeConstructor(
+      aimStub,
       this.remainingPieces,
       this.currentlyVisibleThings,
       this.dialogs,
-      this.achievementStubs
+      this.aimTreeMap
     )
 
     let rawObjectsAndVerb: RawObjectsAndVerb | null = null
@@ -86,7 +92,7 @@ export class Validator {
 
       if (rawObjectsAndVerb.type !== Raw.None) {
         // this is just here for debugging!
-        stub.AddCommand(rawObjectsAndVerb)
+        aimStub.AddCommand(rawObjectsAndVerb)
         console.log(`${rawObjectsAndVerb.type}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
       }
     }
@@ -97,30 +103,32 @@ export class Validator {
     // But if its solved, then we mark it as validated!
     if (deconstructDoer.IsZeroPieces()) {
       // then write the achievement we just achieved
-      stub.AddCommand(
-        new RawObjectsAndVerb(Raw.DeonstructorNoticedZeroPieces,
-          ' in ',
-          '',
-          stub.GetTheAchievementWord(),
-          [],
-          [],
-          ''
-        )
-      )
+
+      const raw = new RawObjectsAndVerb()
+      raw.type = Raw.DeonstructorNoticedZeroPieces
+      raw.objectA = ' in '
+      raw.objectB = ''
+      raw.output = aimStub.GetTheAimWord()
+      raw.prerequisites = []
+      raw.speechLines = []
+      aimStub.AddCommand(raw)
+
 
       // also tell the solution what order the achievement was achieved
-      this.rootPieceKeysInSolvingOrder.push(stub.GetTheAchievementWord())
+      this.aimTreeFileNamesInSolvingOrder.push(aimStub.GetTheAimWord())
 
       // Sse if any autos depend on the newly completed achievement - if so execute them
+      /*
       for (const piece of this.GetAutos()) {
         if (
           piece.inputHints.length === 2 &&
-          piece.inputHints[0] === stub.GetTheAchievementWord()
+          piece.inputHints[0] === singleAimTree.GetTheAchievementWord()
         ) {
           const command = createCommandFromAutoPiece(piece)
-          stub.AddCommand(command)
+          singleAimTree.AddCommand(command)
         }
       }
+        */
     }
     return true
   }
@@ -137,39 +145,35 @@ export class Validator {
 
   public GetOrderOfCommands (): RawObjectsAndVerb[] {
     const toReturn: RawObjectsAndVerb[] = []
-    for (const key of this.rootPieceKeysInSolvingOrder) {
-      const stub = this.GetRootMap().AchievementStubByName(key)
+    for (const filename of this.aimTreeFileNamesInSolvingOrder) {
+      const theAny = this.GetAimTreeMap().GetAimTreeByFilenameNoThrow(filename)
       const at = toReturn.length
       // const n = stub.commandsCompletedInOrder.length
-      toReturn.splice(at, 0, ...stub.GetOrderedCommands())
-      toReturn.push(new RawObjectsAndVerb(Raw.Separator,
-        ` --------------- end of achievement ${key}`,
-        '',
-        '',
-        [],
-        [],
-        ''
-      ))
+      toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
+      const raw = new RawObjectsAndVerb()
+      raw.type = Raw.Separator
+      raw.mainSpiel = ` --------------- end of achievement ${filename}`
+      toReturn.push(raw)
     }
     return toReturn
   }
 
   public GetCountRecursively (): number {
     let count = 0
-    for (const stub of this.achievementStubs.GetValues()) {
+    for (const stub of this.aimTreeMap.GetAims()) {
       count += stub.GetCountRecursively()
     }
     return count
   }
 
   public GetNumberOfAchievements (): number {
-    return this.GetRootMap().Size()
+    return this.GetAimTreeMap().Size()
   }
 
   public GetNumberOfNotYetValidated (): number {
     let numberOfNullAchievements = 0
-    for (const achievement of this.GetRootMap().GetValues()) {
-      numberOfNullAchievements += achievement.GetThePiece() == null ? 0 : 1
+    for (const achievement of this.GetAimTreeMap().GetAims()) {
+      numberOfNullAchievements += achievement.GetTheAny() == null ? 0 : 1
     }
     return numberOfNullAchievements
   }

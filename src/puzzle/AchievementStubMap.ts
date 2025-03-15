@@ -21,7 +21,7 @@ import { A_WIN } from '../A_WIN'
 export class AchievementStubMap {
   private readonly theMap: Map<string, AchievementStub>
 
-  constructor (cloneIncludingLeaves: AchievementStubMap | null) {
+  constructor(cloneIncludingLeaves: AchievementStubMap | null) {
     this.theMap = new Map<string, AchievementStub>()
     if (cloneIncludingLeaves != null) {
       for (const pair of cloneIncludingLeaves.theMap) {
@@ -91,7 +91,7 @@ export class AchievementStubMap {
     return this.theMap.values()
   }
 
-  public CloneAllRootPiecesAndTheirTrees (): AchievementStubMap {
+  public Clone (): AchievementStubMap {
     return new AchievementStubMap(this)
   }
 

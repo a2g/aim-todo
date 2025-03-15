@@ -2,18 +2,24 @@ import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import { Solution } from './Solution'
 import { GetMapOfAimFilesInFolder } from '../../cli/GetMapOfAimFilesInFolder'
-import { AimTreeMap } from './AimTreeMap'
+import { AimStubMap } from './AimStubMap'
+import { VisibleThingsMap } from '../VisibleThingsMap'
+import { _STARTER_JSONC } from '../../_STARTER_JSONC'
+import { Box } from '../Box'
+import { Aggregates } from '../Aggregates'
 
 export class Solutions {
   filename: string
   fileAddress: string
   _solutions: Map<string, Solution>
-  aimTreeMap: AimTreeMap
+  aimTreeMap: AimStubMap
+  startingThingsMap: VisibleThingsMap
 
-  constructor (filename: string, fileAddress: string) {
+  constructor(filename: string, fileAddress: string) {
     this.filename = filename
     this.fileAddress = fileAddress
     this._solutions = new Map<string, Solution>()
+    this.startingThingsMap = new VisibleThingsMap(null)
 
     const pathAndFile = fileAddress + filename
     if (!existsSync(pathAndFile)) {
@@ -25,6 +31,9 @@ export class Solutions {
     const parsedJson: any = parse(text)
     const aimTodoTree = parsedJson.root
     this.aimTreeMap = GetMapOfAimFilesInFolder(fileAddress)
+
+
+    this.InitializeStartingThings()
 
     // first map entry is added with blank ''
     this._solutions.set('', new Solution(aimTodoTree, this.aimTreeMap))
@@ -42,11 +51,25 @@ export class Solutions {
     } while (isNewSolutions)
   }
 
+  InitializeStartingThings () {
+    const aggregates = new Aggregates()
+    const box = new Box("", _STARTER_JSONC, aggregates)
+    box.CopyStartingThingCharsToGivenMap(this.startingThingsMap)
+  }
+
+  GetStartingThings (): VisibleThingsMap {
+    return this.startingThingsMap
+  }
+
+  public GetSolutions (): IterableIterator<Solution> {
+    return this._solutions.values()
+  }
+
   private traverseAndCreateSeparateTreesWhenEncounteringOneOf (thisObject: any, solution: Solution): boolean {
     for (const key in thisObject) {
       if (key !== 'oneOf') {
         const child = thisObject[key]
-        if(this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(child, solution)){
+        if (this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(child, solution)) {
           return true
         }
       } else {
@@ -64,13 +87,13 @@ export class Solutions {
           const newSolution = solution.Clone()
           // here we add the new name
           newSolution.names.push(pair[0])
-          this._solutions.set(newSolution.GetName(), newSolution)
+          this._solutions.set(newSolution.GetSolvingPath(), newSolution)
 
-          delete thisObject[pair[0]] 
+          delete thisObject[pair[0]]
         }
 
         // also delete the entry from the set
-        this._solutions.delete(solution.GetName())
+        this._solutions.delete(solution.GetSolvingPath())
 
         // now return with true, telling the caller that we have new  objects
         return true
