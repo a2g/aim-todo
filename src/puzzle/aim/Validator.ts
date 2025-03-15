@@ -27,7 +27,6 @@ export class Validator {
     this.remainingPieces = new Map<string, Piece>()
     this.dialogs = new Map<string, DialogFile>()
 
-
     this.currentlyVisibleThings = new VisibleThingsMap(null)
     if (startingThingsPassedIn != null) {
       for (const item of startingThingsPassedIn.GetIterableIterator()) {
@@ -105,7 +104,7 @@ export class Validator {
       // then write the achievement we just achieved
 
       const raw = new RawObjectsAndVerb()
-      raw.type = Raw.DeonstructorNoticedZeroPieces
+      raw.type = Raw.DeConstructorNoticedZeroPieces
       raw.objectA = ' in '
       raw.objectB = ''
       raw.output = aimStub.GetTheAimWord()
@@ -170,10 +169,11 @@ export class Validator {
     return this.GetAimTreeMap().Size()
   }
 
+
   public GetNumberOfNotYetValidated (): number {
     let numberOfNullAchievements = 0
-    for (const achievement of this.GetAimTreeMap().GetAims()) {
-      numberOfNullAchievements += achievement.GetTheAny() == null ? 0 : 1
+    for (const aim of this.GetAimTreeMap().GetAims()) {
+      numberOfNullAchievements += aim.GetTheAny() == null ? 0 : 1
     }
     return numberOfNullAchievements
   }

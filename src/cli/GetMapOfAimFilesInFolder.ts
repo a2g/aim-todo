@@ -4,6 +4,7 @@ import * as fs from 'fs'
 import { _STARTER } from '../_STARTER'
 import { parse } from 'jsonc-parser'
 import { AimStubMap } from '../puzzle/aim/AimStubMap'
+import { AimStub } from '../puzzle/aim/AimStub'
 
 export function GetMapOfAimFilesInFolder (folder: string): AimStubMap {
     const mapToReturn = new AimStubMap()
@@ -22,7 +23,7 @@ export function GetMapOfAimFilesInFolder (folder: string): AimStubMap {
                 const text = fs.readFileSync(file, 'utf-8')
                 const parsedJson: any = parse(text)
                 const root = parsedJson.root
-                mapToReturn.Set(file, root)
+                mapToReturn.Set(file, new AimStub(root, []))
             }
         }
     }

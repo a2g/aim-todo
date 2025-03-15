@@ -22,7 +22,7 @@ export class AimStubMap {
         return this.map
     }
 
-    Set (file: string, root: any) {
+    Set (file: string, root: AimStub) {
         this.map.set(file, root)
     }
 
@@ -40,7 +40,7 @@ export class AimStubMap {
         for (const blah of this.map) {
             const key = blah[0]
             const stub: AimStub = blah[1]
-            mapToReturn.Set(key, stub.Clone())
+            mapToReturn.Set(key, stub)// TODO: this should be a CLone!
         }
         return mapToReturn
     }

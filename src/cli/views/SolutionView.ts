@@ -1,13 +1,12 @@
 import promptSync from 'prompt-sync'
 import { FormatText } from '../../puzzle/FormatText'
-import { PieceView } from './PieceView'
 import { AddBrackets } from '../../puzzle/AddBrackets'
 import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
-import { Evolution } from '../../puzzle/Evolution'
-import { Evolutions } from '../../puzzle/Evolutions'
+import { Solution } from '../../puzzle/aim/Solution'
+import { Solutions } from '../../puzzle/aim/Solutions'
 const prompt = promptSync({})
 
-export function SolutionView (solution: Evolution, solutions: Evolutions, titlePath: string[]): void {
+export function SolutionView (solution: Solution, _solutions: Solutions, titlePath: string[]): void {
   titlePath.push('Solution')
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
@@ -27,7 +26,7 @@ export function SolutionView (solution: Evolution, solutions: Evolutions, titleP
       listItemNumber++
 
       // display list item
-      const output = achievementStub.GetTheAchievementWord()
+      const output = achievementStub.GetTheAimWord()
       const theAchievementPiece = achievementStub.GetTheAny()
       let inputs = ''
       if (theAchievementPiece != null) {
@@ -45,8 +44,6 @@ export function SolutionView (solution: Evolution, solutions: Evolutions, titleP
       incomplete += achievementStub.IsSolved() ? 0 : 1
     }
 
-    console.warn(`Remaining Pieces: ${solution.GetNumberOfPiecesRemaining()}`)
-
     console.warn(`Number of achievements incomplete ${incomplete}/${listItemNumber}`)
 
     // allow user to choose item
@@ -60,8 +57,8 @@ export function SolutionView (solution: Evolution, solutions: Evolutions, titleP
       return
     }
     if (input === 'r') {
-      solution.ProcessUntilCloning(solutions)
-      solution.UpdateAchievementSolvedStatuses()
+      //solution.ProcessUntilCloning(solutions)
+      //solution.UpdateAchievementSolvedStatuses()
       continue
     } else {
       // show map entry for chosen item
@@ -73,9 +70,9 @@ export function SolutionView (solution: Evolution, solutions: Evolutions, titleP
           if (j === theNumber) {
             const theAchievementPiece = achievement.GetTheAny()
             if (theAchievementPiece != null) {
-              PieceView(theAchievementPiece, solution.GetVisibleThingsAtTheStart(), [...titlePath])
+              // PieceView(theAchievementPiece, solution.GetVisibleThingsAtTheStart(), [...titlePath])
             } else {
-              prompt(`${achievement.GetTheAchievementWord()} Achievement.piece WAS NULL. Hit any key to continue: `)
+              prompt(`${achievement.GetTheAimWord()} Achievement.piece WAS NULL. Hit any key to continue: `)
             }
           }
         }

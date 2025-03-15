@@ -34,16 +34,16 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
 
       // display list item
       const output = rootAchievement.GetTheAimWord()
-      const theAchievementPiece = rootAchievement.GetTheAny()
+      const theAny = rootAchievement.GetTheAny()
       let inputs = ''
-      if (theAchievementPiece != null) {
+      /*if (theAchievementPiece != null) {
         for (const inputSpiel of theAchievementPiece.inputSpiels) {
           inputs += `${FormatText(inputSpiel)},`
         }
-      }
+      }*/
       const pieceCount = rootAchievement.GetCountRecursively()
       const originalCount = rootAchievement.GetOriginalPieceCount()
-      const id = (theAchievementPiece != null) ? theAchievementPiece.id : ''
+      const id = (theAny != null) ? theAny.id : ''
       const status = rootAchievement.GetValidated() as string
       console.warn(
         `${listItemNumber}. ${status}(${pieceCount}/${originalCount}) ${FormatText(output)} ${id} ${AddBrackets(inputs)}`
