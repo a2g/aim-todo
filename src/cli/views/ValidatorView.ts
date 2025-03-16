@@ -50,7 +50,7 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
       )
     }
 
-    console.warn(`Number of achievements back to zero ${validator.GetNumberOfNotYetValidated()}/${validator.GetNumberOfAchievements()}`)
+    console.warn(`Number of (not-yet-validated/total) ${validator.GetNumberOfNotYetValidated()}/${validator.GetNumberOfAimFiles()}`)
 
     // allow user to choose item
     const input = prompt(

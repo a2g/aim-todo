@@ -22,7 +22,7 @@ export function ViewForwardValidate (validators: Validators): void {
       const name = FormatText(validator.GetName())
       //  "1. XXXXXX"   <- this is the format we list the solutions
       const a = validator.GetNumberOfNotYetValidated()
-      const b = validator.GetNumberOfAchievements()
+      const b = validator.GetNumberOfAimFiles()
       const status = a === 0 ? Solved.Solved : Solved.Not
 
       console.warn(`    ${i + 1}. ${status}(${a}/${b}) ${name} `)

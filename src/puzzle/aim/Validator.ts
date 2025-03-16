@@ -10,8 +10,8 @@ import { SingleAimTreeDeConstructor as SingleAimTreeDeConstructor } from "./Sing
 
 
 export class Validator {
-  private readonly aimTreeMap: AimFileHeaderMap
-  private readonly aimTreeFileNamesInSolvingOrder: string[]
+  private readonly aimFileMap: AimFileHeaderMap
+  private readonly aimFileNamesInSolvingOrder: string[]
   private readonly currentlyVisibleThings: VisibleThingsMap
   private readonly remainingPieces: Map<string, Piece>
   private readonly dialogs: Map<string, DialogFile>
@@ -20,10 +20,10 @@ export class Validator {
 
   public constructor(name: string, aimTreeMap: AimFileHeaderMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
     this.solutionName = name
-    this.aimTreeMap = aimTreeMap
-    this.aimTreeMap.RemoveZeroedOrUnneededAims()
+    this.aimFileMap = aimTreeMap
+    this.aimFileMap.RemoveZeroedOrUnneededAims()
     //this.achievementStubs.CalculateInitialCounts()
-    this.aimTreeFileNamesInSolvingOrder = []
+    this.aimFileNamesInSolvingOrder = []
     this.remainingPieces = new Map<string, Piece>()
     this.dialogs = new Map<string, DialogFile>()
 
@@ -48,7 +48,7 @@ export class Validator {
   }
 
   public GetAimTreeMap (): AimFileHeaderMap {
-    return this.aimTreeMap
+    return this.aimFileMap
   }
 
   public GetVisibleThingsAtTheMoment (): VisibleThingsMap {
@@ -57,7 +57,7 @@ export class Validator {
 
   public DeconstructAllAchievementsAndRecordSteps (): boolean {
     let wasThereAtLeastSomeProgress = false
-    for (const stub of this.aimTreeMap.GetAims()) {
+    for (const stub of this.aimFileMap.GetAims()) {
       if (stub.GetValidated() === Validated.Not) {
         if (this.DeconstructGivenStubAndRecordSteps(stub)) {
           wasThereAtLeastSomeProgress = true
@@ -74,7 +74,7 @@ export class Validator {
       this.remainingPieces,
       this.currentlyVisibleThings,
       this.dialogs,
-      this.aimTreeMap
+      this.aimFileMap
     )
 
     let rawObjectsAndVerb: RawObjectsAndVerb | null = null
@@ -114,7 +114,7 @@ export class Validator {
 
 
       // also tell the solution what order the achievement was achieved
-      this.aimTreeFileNamesInSolvingOrder.push(aimStub.GetTheRootWord())
+      this.aimFileNamesInSolvingOrder.push(aimStub.GetTheRootWord())
 
       // Sse if any autos depend on the newly completed achievement - if so execute them
       /*
@@ -144,7 +144,7 @@ export class Validator {
 
   public GetOrderOfCommands (): RawObjectsAndVerb[] {
     const toReturn: RawObjectsAndVerb[] = []
-    for (const filename of this.aimTreeFileNamesInSolvingOrder) {
+    for (const filename of this.aimFileNamesInSolvingOrder) {
       const theAny = this.GetAimTreeMap().GetAimTreeByFilenameNoThrow(filename)
       const at = toReturn.length
       // const n = stub.commandsCompletedInOrder.length
@@ -159,16 +159,15 @@ export class Validator {
 
   public GetCountRecursively (): number {
     let count = 0
-    for (const stub of this.aimTreeMap.GetAims()) {
+    for (const stub of this.aimFileMap.GetAims()) {
       count += stub.GetCountRecursively()
     }
     return count
   }
 
-  public GetNumberOfAchievements (): number {
-    return this.GetAimTreeMap().Size()
+  public GetNumberOfAimFiles (): number {
+    return this.aimFileMap.Size()
   }
-
 
   public GetNumberOfNotYetValidated (): number {
     let numberOfNullAchievements = 0
