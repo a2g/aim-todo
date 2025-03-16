@@ -50,7 +50,9 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
       )
     }
 
-    console.warn(`Number of (not-yet-validated/total) ${validator.GetNumberOfNotYetValidated()}/${validator.GetNumberOfAimFiles()}`)
+    console.warn(`Numbers above are (pieces-remaining/piece-existing-before-deconstruction)`)
+    console.warn(`---`)
+    console.warn(`${validator.GetNumberOfNotYetValidated()}/${validator.GetNumberOfAimFiles()} are validated/total`)
 
     // allow user to choose item
     const input = prompt(

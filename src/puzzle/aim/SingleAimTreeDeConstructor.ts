@@ -109,7 +109,8 @@ export class SingleAimTreeDeConstructor {
         const child = treeNode[childKey]
         numberOfChildren += 1
         if (!this.IsALeaf(child)) {
-          const toReturn = this.GetNextDoableCommandRecursively(child, childKey, parent)
+          // the treeNode is the child's parent
+          const toReturn = this.GetNextDoableCommandRecursively(child, childKey, treeNode)
           if (toReturn != null) {
             return toReturn
           }
