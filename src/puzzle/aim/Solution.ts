@@ -1,4 +1,4 @@
-import { AimStubMap } from "./AimStubMap"
+import { AimFileHeaderMap } from "./AimFileHeaderMap"
 
 export class Solution {
 
@@ -6,7 +6,7 @@ export class Solution {
     public todoTree: any
     public aimTreeMap: any
 
-    constructor(todoTree: any, aimTreeMap: AimStubMap) {
+    constructor(todoTree: any, aimTreeMap: AimFileHeaderMap) {
         this.names = []
         this.todoTree = todoTree
         this.aimTreeMap = aimTreeMap.Clone()
@@ -45,7 +45,7 @@ export class Solution {
     }
 
 
-    public GetAimTreeMap (): AimStubMap {
+    public GetAimTreeMap (): AimFileHeaderMap {
         return this.aimTreeMap
     }
 

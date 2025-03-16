@@ -3,19 +3,19 @@ import { RawObjectsAndVerb } from '../RawObjectsAndVerb'
 import { DialogFile } from '../talk/DialogFile'
 import { VisibleThingsMap } from '../VisibleThingsMap'
 import { Box } from '../Box'
-import { AimStubMap } from './AimStubMap'
-import { AimStub } from './AimStub'
+import { AimFileHeaderMap } from './AimFileHeaderMap'
+import { AimFileHeader } from './AimFileHeader'
 
 export class SingleAimTreeDeConstructor {
-  private readonly theAimTree: AimStub
+  private readonly theAimTree: AimFileHeader
 
   // the state that needs update
   private readonly currentlyVisibleThings: VisibleThingsMap
   private readonly dialogs: Map<string, DialogFile>
   private readonly pieces: Map<string, Piece>
-  private readonly mapOfAimsTrees: AimStubMap// not used, but useful
+  private readonly mapOfAimsTrees: AimFileHeaderMap// not used, but useful
 
-  public constructor(theAimTree: AimStub, pieces: Map<string, Piece>, visibleThings: VisibleThingsMap, theSolutionsDialogFiles: Map<string, DialogFile>, aimTreeMap: AimStubMap) {
+  public constructor(theAimTree: AimFileHeader, pieces: Map<string, Piece>, visibleThings: VisibleThingsMap, theSolutionsDialogFiles: Map<string, DialogFile>, aimTreeMap: AimFileHeaderMap) {
     this.theAimTree = theAimTree
     this.mapOfAimsTrees = aimTreeMap
     this.currentlyVisibleThings = visibleThings

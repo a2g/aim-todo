@@ -18,7 +18,7 @@ export class DialogFile {
   nonChoices: Map<string, NonChoiceSection>
   aggregates: Aggregates
 
-  constructor (filename: string, fileAddress: string, aggregates: Aggregates) {
+  constructor(filename: string, fileAddress: string, aggregates: Aggregates) {
     this.filename = filename
     this.fileAddress = fileAddress
     this.choices = new Map<string, ChoiceSection>()
@@ -101,7 +101,7 @@ export class DialogFile {
           const inputF = (requisites.length > 5) ? requisites[5] : 'undefined'
           let type = ''
           let isNoFile = true
-          if (output.startsWith(IdPrefixes.Achievement) || output.startsWith(IdPrefixes.InvAchievement)) {
+          if (output.startsWith(IdPrefixes.Aim) || output.startsWith(IdPrefixes.InvAchievement)) {
             type = _.CHAT_GAINS_AMENT1_WITH_VARIOUS_REQUISITES
             if (existsSync(`${this.fileAddress}${output}.jsonc`)) {
               isNoFile = false

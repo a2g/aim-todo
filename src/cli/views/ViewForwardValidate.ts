@@ -30,7 +30,7 @@ export function ViewForwardValidate (validators: Validators): void {
 
     // allow user to choose item
     const firstInput = prompt(
-      '\nChoose an ingredient of one of the solutions or (b)ack, (r)e-run, e(x)it '
+      '\nChoose one of the numbers or (b)ack, (r)e-run, e(x)it '
     ).toLowerCase()
 
     if (firstInput === null || firstInput === 'b') {

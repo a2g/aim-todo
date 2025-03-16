@@ -38,7 +38,7 @@ export function GetDisplayName (
   if (single.startsWith(IdPrefixes.Obj)) {
     return Colors.Cyan + single.slice(5) + Colors.Reset
   }
-  if (single.startsWith(IdPrefixes.Achievement)) {
+  if (single.startsWith(IdPrefixes.Aim)) {
     return Colors.Green + single.slice(1) + Colors.Reset
   }
   if (single.startsWith(IdPrefixes.Player)) {

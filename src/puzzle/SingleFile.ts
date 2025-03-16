@@ -19,7 +19,7 @@ import { _STARTER } from '../_STARTER'
 import { IdPrefixes } from '../../IdPrefixes'
 
 function makeAchievementNameDeterministically (partA: string, partB: string): string {
-  return `${IdPrefixes.Achievement}_gen_${partA}_${partB}_ament`
+  return `${IdPrefixes.Aim}_gen_${partA}_${partB}_ament`
 }
 /**
  * Yup, this is the one location of these

@@ -3,7 +3,7 @@ import { FormatText } from '../../puzzle/FormatText'
 import { AddBrackets } from '../../puzzle/AddBrackets'
 import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
 import { CommandsView } from './CommandsView'
-import { AchievementStubView } from './AchievementStubView'
+import { ViewAimFileHeader } from './ViewAimFileHeader'
 import { Validator } from '../../puzzle/aim/Validator'
 
 
@@ -33,7 +33,7 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
       listItemNumber++
 
       // display list item
-      const output = rootAchievement.GetTheAimWord()
+      const output = rootAchievement.GetTheRootWord()
       const theAny = rootAchievement.GetTheAny()
       let inputs = ''
       /*if (theAchievementPiece != null) {
@@ -75,7 +75,7 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
         for (const achievement of validator.GetAimTreeMap().GetAims()) {
           j++
           if (j === theNumber) {
-            AchievementStubView(achievement, validator, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
+            ViewAimFileHeader(achievement, validator, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
             return
           }
         }

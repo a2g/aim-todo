@@ -5,5 +5,5 @@ export const IdPrefixes = {
   Player: 'player_',
   Dialog: 'dialog_',
   Dialogs: 'dialogs_',
-  Achievement: 'a'
+  Aim: 'aim_'
 }

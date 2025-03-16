@@ -22,7 +22,7 @@ export function ProcessAutos (
         if (items.includes(inputName)) {
           numberSatisfied += 1
         }
-      } else if (inputName.startsWith(IdPrefixes.Achievement)) {
+      } else if (inputName.startsWith(IdPrefixes.Aim)) {
         if (achievements.includes(inputName)) {
           numberSatisfied += 1
         }

@@ -27,7 +27,7 @@ import { Validated } from '../Validated'
  * but its handy to have a predictable deterministic solution - at least as a
  * starting point, before optimizations.
  */
-export class AimStub {
+export class AimFileHeader {
   private readonly commandsCompletedInOrder: RawObjectsAndVerb[]
   private isSolved: Solved = Solved.Not
   private isNeeded: boolean
@@ -41,8 +41,8 @@ export class AimStub {
     this.isSolved = solved
     this.isNeeded = isNeeded
     this.theAny = theAny
-    this.theAimWord = theAny as string
-
+    const keys = Object.keys(theAny)
+    this.theAimWord = keys[0] as string
     // this clones the commandsCompletedInOrder
     this.commandsCompletedInOrder = []
     if (commandsCompletedInOrder != null) {
@@ -58,7 +58,7 @@ export class AimStub {
     return this.theAny
   }
 
-  public GetTheAimWord (): string {
+  public GetTheRootWord (): string {
     return this.theAimWord
   }
 
@@ -125,9 +125,9 @@ export class AimStub {
     return this.originalPieceCount
   }
 
-  public Clone (): AimStub {
+  public Clone (): AimFileHeader {
     const thePiece = this._CloneObject(this.GetTheAny())
-    const clone = new AimStub(thePiece, this.commandsCompletedInOrder)
+    const clone = new AimFileHeader(thePiece, this.commandsCompletedInOrder)
     return clone
   }
 
@@ -135,7 +135,7 @@ export class AimStub {
     const toReturn: any = {}
     for (const key in thisObject) {
       const clonedRoot = this._CloneObject(thisObject[key])
-      toReturn[key] = new AimStub(clonedRoot, this.commandsCompletedInOrder)
+      toReturn[key] = new AimFileHeader(clonedRoot, this.commandsCompletedInOrder)
     }
     return toReturn
   }

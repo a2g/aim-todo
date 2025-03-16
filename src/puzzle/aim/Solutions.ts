@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import { Solution } from './Solution'
 import { GetMapOfAimFilesInFolder } from '../../cli/GetMapOfAimFilesInFolder'
-import { AimStubMap } from './AimStubMap'
+import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { VisibleThingsMap } from '../VisibleThingsMap'
 import { _STARTER_JSONC } from '../../_STARTER_JSONC'
 import { Box } from '../Box'
@@ -12,7 +12,7 @@ export class Solutions {
   filename: string
   fileAddress: string
   _solutions: Map<string, Solution>
-  aimTreeMap: AimStubMap
+  aimTreeMap: AimFileHeaderMap
   startingThingsMap: VisibleThingsMap
 
   constructor(filename: string, fileAddress: string) {

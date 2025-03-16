@@ -4,13 +4,13 @@ import { RawObjectsAndVerb } from "../RawObjectsAndVerb"
 import { DialogFile } from "../talk/DialogFile"
 import { Validated } from "../Validated"
 import { VisibleThingsMap } from "../VisibleThingsMap"
-import { AimStub } from "./AimStub"
-import { AimStubMap } from "./AimStubMap"
+import { AimFileHeader } from "./AimFileHeader"
+import { AimFileHeaderMap } from "./AimFileHeaderMap"
 import { SingleAimTreeDeConstructor as SingleAimTreeDeConstructor } from "./SingleAimTreeDeConstructor"
 
 
 export class Validator {
-  private readonly aimTreeMap: AimStubMap
+  private readonly aimTreeMap: AimFileHeaderMap
   private readonly aimTreeFileNamesInSolvingOrder: string[]
   private readonly currentlyVisibleThings: VisibleThingsMap
   private readonly remainingPieces: Map<string, Piece>
@@ -18,7 +18,7 @@ export class Validator {
   private readonly solutionName
   private readonly essentialIngredients: Set<string> // yup these are added to
 
-  public constructor(name: string, aimTreeMap: AimStubMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
+  public constructor(name: string, aimTreeMap: AimFileHeaderMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
     this.solutionName = name
     this.aimTreeMap = aimTreeMap
     this.aimTreeMap.RemoveZeroedOrUnneededAims()
@@ -47,7 +47,7 @@ export class Validator {
     return this.solutionName
   }
 
-  public GetAimTreeMap (): AimStubMap {
+  public GetAimTreeMap (): AimFileHeaderMap {
     return this.aimTreeMap
   }
 
@@ -67,7 +67,7 @@ export class Validator {
     return wasThereAtLeastSomeProgress
   }
 
-  public DeconstructGivenStubAndRecordSteps (aimStub: AimStub): boolean {
+  public DeconstructGivenStubAndRecordSteps (aimStub: AimFileHeader): boolean {
     // push the commands
     const deconstructDoer = new SingleAimTreeDeConstructor(
       aimStub,
@@ -107,14 +107,14 @@ export class Validator {
       raw.type = Raw.DeConstructorNoticedZeroPieces
       raw.objectA = ' in '
       raw.objectB = ''
-      raw.output = aimStub.GetTheAimWord()
+      raw.output = aimStub.GetTheRootWord()
       raw.prerequisites = []
       raw.speechLines = []
       aimStub.AddCommand(raw)
 
 
       // also tell the solution what order the achievement was achieved
-      this.aimTreeFileNamesInSolvingOrder.push(aimStub.GetTheAimWord())
+      this.aimTreeFileNamesInSolvingOrder.push(aimStub.GetTheRootWord())
 
       // Sse if any autos depend on the newly completed achievement - if so execute them
       /*

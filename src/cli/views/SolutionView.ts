@@ -26,7 +26,7 @@ export function SolutionView (solution: Solution, _solutions: Solutions, titlePa
       listItemNumber++
 
       // display list item
-      const output = achievementStub.GetTheAimWord()
+      const output = achievementStub.GetTheRootWord()
       const theAchievementPiece = achievementStub.GetTheAny()
       let inputs = ''
       if (theAchievementPiece != null) {
@@ -72,7 +72,7 @@ export function SolutionView (solution: Solution, _solutions: Solutions, titlePa
             if (theAchievementPiece != null) {
               // PieceView(theAchievementPiece, solution.GetVisibleThingsAtTheStart(), [...titlePath])
             } else {
-              prompt(`${achievement.GetTheAimWord()} Achievement.piece WAS NULL. Hit any key to continue: `)
+              prompt(`${achievement.GetTheRootWord()} Achievement.piece WAS NULL. Hit any key to continue: `)
             }
           }
         }

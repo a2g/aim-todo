@@ -20,8 +20,8 @@ export class RawObjectsAndVerb {
   // - the box the command came out of
   // - the id of the command
 
-  constructor (
-  
+  constructor(
+
   ) {
     this.type = Raw.Use
     this.objectA = ''
@@ -73,7 +73,7 @@ export class RawObjectsAndVerb {
         } else if (this.objectB.startsWith(IdPrefixes.Dialog)) {
           this.mainSpiel = `You now see a dialogty ${objectB}`
           this.achievementSpiel = `as a result of achievement ${objectA}`
-        } else if (this.objectB.startsWith(IdPrefixes.Achievement)) {
+        } else if (this.objectB.startsWith(IdPrefixes.Aim)) {
           this.type = Raw.Achievement
           this.mainSpiel = `Achievement unlocked ${objectB}`
           this.achievementSpiel = `as a result of achievement ${objectA}`

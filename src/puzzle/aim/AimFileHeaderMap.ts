@@ -1,10 +1,10 @@
-import { AimStub } from "./AimStub"
+import { AimFileHeader } from "./AimFileHeader"
 
 
-export class AimStubMap {
+export class AimFileHeaderMap {
 
 
-    public map: Map<string, AimStub>
+    public map: Map<string, AimFileHeader>
 
     constructor() {
         this.map = new Map<string, any>()
@@ -18,11 +18,11 @@ export class AimStubMap {
         return this.map.size
     }
 
-    GetRawMap (): Map<string, AimStub> {
+    GetRawMap (): Map<string, AimFileHeader> {
         return this.map
     }
 
-    Set (file: string, root: AimStub) {
+    Set (file: string, root: AimFileHeader) {
         this.map.set(file, root)
     }
 
@@ -31,15 +31,15 @@ export class AimStubMap {
         return this.map.get(filename)
     }
 
-    public GetAims (): IterableIterator<AimStub> {
+    public GetAims (): IterableIterator<AimFileHeader> {
         return this.map.values()
     }
 
-    Clone (): AimStubMap {
-        const mapToReturn = new AimStubMap()
+    Clone (): AimFileHeaderMap {
+        const mapToReturn = new AimFileHeaderMap()
         for (const blah of this.map) {
             const key = blah[0]
-            const stub: AimStub = blah[1]
+            const stub: AimFileHeader = blah[1]
             mapToReturn.Set(key, stub)// TODO: this should be a CLone!
         }
         return mapToReturn
