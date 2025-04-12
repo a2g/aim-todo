@@ -7,7 +7,7 @@ import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { AimFileHeader } from './AimFileHeader'
 import { Validated } from '../Validated'
 
-export class SingleAimTreeDeConstructor {
+export class AimFileHeaderDeConstructor {
   private readonly theAimTree: AimFileHeader
 
   // the state that needs update

@@ -6,7 +6,7 @@ import { Validated } from "../Validated"
 import { VisibleThingsMap } from "../VisibleThingsMap"
 import { AimFileHeader } from "./AimFileHeader"
 import { AimFileHeaderMap } from "./AimFileHeaderMap"
-import { SingleAimTreeDeConstructor as SingleAimTreeDeConstructor } from "./SingleAimTreeDeConstructor"
+import { AimFileHeaderDeConstructor as AimFileHeaderDeConstructor } from "./AimFileHeaderDeConstructor"
 
 
 export class Validator {
@@ -69,7 +69,7 @@ export class Validator {
 
   public DeconstructGivenStubAndRecordSteps (aimStub: AimFileHeader): boolean {
     // push the commands
-    const deconstructDoer = new SingleAimTreeDeConstructor(
+    const deconstructDoer = new AimFileHeaderDeConstructor(
       aimStub,
       this.remainingPieces,
       this.currentlyVisibleThings,
@@ -104,7 +104,6 @@ export class Validator {
     const isValidated = deconstructDoer.IsValidated()
     if (isZeroPieces && isValidated == Validated.Not) {
       deconstructDoer.SetValidated(Validated.YesValidated)
-
       const raw = new RawObjectsAndVerb()
       raw.type = Raw.DeConstructorNoticedZeroPieces
       raw.objectA = ' in '
