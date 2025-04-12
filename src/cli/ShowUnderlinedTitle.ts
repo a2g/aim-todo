@@ -2,7 +2,7 @@ export function ShowUnderlinedTitle (pathSegments: string[]): void {
   let thePath = ''
   for (let i = 0; i < pathSegments.length; i++) {
     if (i !== 0) {
-      thePath += '/'
+      thePath += ' / '
     }
     thePath += pathSegments[i]
   }

@@ -15,10 +15,11 @@ export class Validators {
   constructor(solutions: Solutions) {
     this.validators = []
     for (const solution of solutions.GetSolutions()) {
+      const startingThings = solutions.GetStartingThings()
       const validator = new Validator(
         solution.GetSolvingPath(),
         solution.GetAimTreeMap(),
-        solutions.GetStartingThings())
+        startingThings)
 
       this.validators.push(validator)
     }

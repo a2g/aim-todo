@@ -97,10 +97,10 @@ export class Box {
 
       /* starting things is optional in the json */
       if (
-        scenario.startingThings !== undefined &&
-        scenario.startingThings !== null
+        scenario.startingThingsLinkedToPlayers !== undefined &&
+        scenario.startingThingsLinkedToPlayers !== null
       ) {
-        for (const thing of scenario.startingThings) {
+        for (const thing of scenario.startingThingsLinkedToPlayers) {
           if (thing.character !== undefined && thing.character !== null) {
             setPlayers.add(thing.character)
           }
@@ -113,10 +113,10 @@ export class Box {
 
       /* starting things is optional in the json */
       if (
-        scenario.startingThings !== undefined &&
-        scenario.startingThings !== null
+        scenario.startingThingsLinkedToPlayers !== undefined &&
+        scenario.startingThingsLinkedToPlayers !== null
       ) {
-        for (const thing of scenario.startingThings) {
+        for (const thing of scenario.startingThingsLinkedToPlayers) {
           const theThing = Stringify(thing.thing)
           if (theThing.startsWith('inv')) {
             this.startingInvSet.add(theThing)
@@ -128,7 +128,7 @@ export class Box {
             this.startingPropSet.add(theThing)
           }
         }
-        for (const item of scenario.startingThings) {
+        for (const item of scenario.startingThingsLinkedToPlayers) {
           if (!this.mapOfStartingThings.Has(item.thing)) {
             this.mapOfStartingThings.Set(item.thing, new Set<string>())
           }

@@ -100,8 +100,10 @@ export class Validator {
     // bring in more pieces to continue deconstruction in the future
     //
     // But if its solved, then we mark it as validated!
-    if (deconstructDoer.IsZeroPieces()) {
-      // then write the achievement we just achieved
+    const isZeroPieces = deconstructDoer.IsZeroPieces()
+    const isValidated = deconstructDoer.IsValidated()
+    if (isZeroPieces && isValidated == Validated.Not) {
+      deconstructDoer.SetValidated(Validated.YesValidated)
 
       const raw = new RawObjectsAndVerb()
       raw.type = Raw.DeConstructorNoticedZeroPieces
@@ -192,4 +194,5 @@ export class Validator {
   public AddToListOfPrerequisites (essentialIngredients: string[]): void {
     essentialIngredients.forEach(item => this.essentialIngredients.add(item))
   }
+
 }

@@ -50,13 +50,13 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
       )
     }
 
-    console.warn(`Numbers above are (pieces-remaining/piece-existing-before-deconstruction)`)
+    console.warn(`Numbers above are (pieces-remaining/pieces-existing-before-deconstruction)`)
     console.warn(`---`)
     console.warn(`${validator.GetNumberOfNotYetValidated()}/${validator.GetNumberOfAimFiles()} are validated/total`)
 
     // allow user to choose item
     const input = prompt(
-      'Choose achievement to climb down on or (b)ack, (o)rder, (r)e-run: '
+      'Choose achievement to climb down on or (b)ack, (s)tarters, (o)rder, (r)e-run: '
     ).toLowerCase()
     if (input === null || input === 'b') {
       break
@@ -67,6 +67,11 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
     if (input === 'r') {
       validator.DeconstructAllAchievementsAndRecordSteps()
       continue
+    } else if (input === 's') {
+      console.warn(`Number of starters ${validator.GetVisibleThingsAtTheMoment().Size()}`)
+      for (const item of validator.GetVisibleThingsAtTheMoment().GetIterableIterator()) {
+        console.warn(`${item[0]}`)
+      }
     } else if (input === 'o') {
       CommandsView(validator.GetOrderOfCommands(), [...titlePath])
     } else {
@@ -77,7 +82,7 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
         for (const achievement of validator.GetAimTreeMap().GetAims()) {
           j++
           if (j === theNumber) {
-            ViewAimFileHeader(achievement, validator, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
+            ViewAimFileHeader(achievement, validator, [...titlePath])
             return
           }
         }

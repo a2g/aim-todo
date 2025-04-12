@@ -7,7 +7,7 @@ import { Validators } from '../../puzzle/aim/Validators'
 const prompt = promptSync({})
 
 export function ViewForwardValidate (validators: Validators): void {
-  const titlePath = ['Forwards Validate']
+  const titlePath = ['ForwardsValidate']
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
     const numberOfSolutions: number = validators.GetValidators().length
@@ -30,7 +30,7 @@ export function ViewForwardValidate (validators: Validators): void {
 
     // allow user to choose item
     const firstInput = prompt(
-      '\nChoose one of the numbers or (b)ack, (r)e-run, e(x)it '
+      '\nChoose one of the numbers or (b)ack, (r)e-run all, e(x)it '
     ).toLowerCase()
 
     if (firstInput === null || firstInput === 'b') {

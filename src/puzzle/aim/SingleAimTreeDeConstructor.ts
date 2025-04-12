@@ -5,6 +5,7 @@ import { VisibleThingsMap } from '../VisibleThingsMap'
 import { Box } from '../Box'
 import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { AimFileHeader } from './AimFileHeader'
+import { Validated } from '../Validated'
 
 export class SingleAimTreeDeConstructor {
   private readonly theAimTree: AimFileHeader
@@ -14,6 +15,7 @@ export class SingleAimTreeDeConstructor {
   private readonly dialogs: Map<string, DialogFile>
   private readonly pieces: Map<string, Piece>
   private readonly mapOfAimsTrees: AimFileHeaderMap// not used, but useful
+
 
   public constructor(theAimTree: AimFileHeader, pieces: Map<string, Piece>, visibleThings: VisibleThingsMap, theSolutionsDialogFiles: Map<string, DialogFile>, aimTreeMap: AimFileHeaderMap) {
     this.theAimTree = theAimTree
@@ -31,7 +33,8 @@ export class SingleAimTreeDeConstructor {
  * @returns true if a leaf
  */
   public isALeaf (treeNode: any): boolean {
-    return Object.keys(treeNode).length ? true : false
+    const length = Object.keys(treeNode).length
+    return length > 0 ? false : true
   }
 
   // In the constructor above, we see that the root of copied tree is created
@@ -57,7 +60,8 @@ export class SingleAimTreeDeConstructor {
  * @returns true if a leaf
  */
   private IsALeaf (treeNode: any): boolean {
-    return Object.keys(treeNode).length ? true : false
+    const length = Object.keys(treeNode).length
+    return length > 0 ? false : true
   }
 
   private GetNextDoableCommandRecursively (treeNode: any, treeNodeKey: string, treeNodeParent: any): RawObjectsAndVerb | null {
@@ -66,33 +70,43 @@ export class SingleAimTreeDeConstructor {
     for (const key in treeNode) {
       const obj = treeNode[key]
       numberOfChildren += 1
-      if (!this.IsALeaf(obj)) {
+      if (this.IsALeaf(obj)) {
         numberOfChildrenLeaves += 1
       }
     }
 
+    // if all children are leafs
     if (numberOfChildren > 0 && numberOfChildren == numberOfChildrenLeaves) {
       // then we test for removal
-      let areAllChildrenActive = true
+      let areAllChildDependenciesFulfilled = true
       for (const key in treeNode) {
+        // if the dependency is not fulfilled, then we set it to false
         if (!this.currentlyVisibleThings.Has(key)) {
-          areAllChildrenActive = false
+          areAllChildDependenciesFulfilled = false
         }
       }
 
-      if (areAllChildrenActive) {
+      if (areAllChildDependenciesFulfilled) {
         // set the achievement as completed in the currently visible things
         this.currentlyVisibleThings.Set(treeNodeKey, new Set<string>())
+
 
         // construct the new command - whilst we have all the data.
         let command = new RawObjectsAndVerb()
         command.output = treeNodeKey
+        const dependencies = Object.keys(treeNode) as string[]
+        if (dependencies.length > 0) {
+          command.objectA = dependencies[0]
+          if (dependencies.length > 1) {
+            command.objectB = dependencies[1]
+          }
+        }
 
         // we remove from parent (if non null)
         if (treeNodeParent != null) {
           for (const key in treeNodeParent) {
             const obj = treeNodeParent[key]
-            if (obj === treeNodeParent) {
+            if (obj === treeNode) {
               delete treeNodeParent[key]
             }
           }
@@ -103,11 +117,10 @@ export class SingleAimTreeDeConstructor {
       // if they were all leaves, then we can't recurse down, so we return null
       return null
     } else {
-      // atleats one of the children isn't a leaf
+      // at least one of the children isn't a leaf
       // so we can need to recurse down that non-leaf child
       for (const childKey in treeNode) {
         const child = treeNode[childKey]
-        numberOfChildren += 1
         if (!this.IsALeaf(child)) {
           // the treeNode is the child's parent
           const toReturn = this.GetNextDoableCommandRecursively(child, childKey, treeNode)
@@ -306,5 +319,14 @@ export class SingleAimTreeDeConstructor {
     // on, we still should be able to place its leaf nodes early
     // boxToMerge.CopyStubsToGivenStubMap(this.stubs)
     // boxToMerge.CopyStartingThingCharsToGivenMap(this.startingThings)
+  }
+
+
+  public IsValidated (): Validated {
+    return this.theAimTree.GetValidated()
+  }
+
+  public SetValidated (isValidated: Validated) {
+    this.theAimTree.SetValidated(isValidated)
   }
 }
