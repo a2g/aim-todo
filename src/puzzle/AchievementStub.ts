@@ -38,7 +38,7 @@ export class AchievementStub extends PieceBase {
   private validated: Validated = Validated.Not
   private originalPieceCount = 0
 
-  constructor (achievementWord: string, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
+  constructor(achievementWord: string, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
     super(achievementWord)
     this.solved = solved
     this.isNeeded = isNeeded
@@ -116,7 +116,7 @@ export class AchievementStub extends PieceBase {
     }
 
     // else we find the achievement from piece
-    return ProcessAndReturnTrueIfCloneOccurs(this, 0, '', solution, solutions)
+    return ProcessAndReturnTrueIfCloneOccurs()
   }
 
   public GetCountRecursively (): number {

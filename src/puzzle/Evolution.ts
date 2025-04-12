@@ -1,12 +1,11 @@
 import { FormatText } from './FormatText'
-import { Piece } from './Piece'
+
 
 import { AchievementStubMap } from './AchievementStubMap'
-import { Evolutions } from './Evolutions'
+
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { DialogFile } from './talk/DialogFile'
 import { Solved } from './Solved'
-import { GenerateMapOfLeavesTracingAchievementsRecursively } from './GenerateMapOfLeavesTraccingGoalsRecursively'
 import { A_WIN } from '../A_WIN'
 
 let globalSolutionId = 101
@@ -16,7 +15,7 @@ let globalSolutionId = 101
 export class Evolution {
   // important ones
   private readonly stubs: AchievementStubMap
-  private readonly remainingPieces: Map<string, Set<Piece>>
+
   private readonly dialogs: Map<string, DialogFile>
 
   // less important
@@ -37,7 +36,7 @@ export class Evolution {
     this.id = id
     this.stubs = new AchievementStubMap(stubsToCopy)
     this.dialogs = new Map<string, DialogFile>()
-    this.remainingPieces = new Map<string, Set<Piece>>()
+
 
 
     // starting things AND currentlyVisibleThings
@@ -98,36 +97,15 @@ export class Evolution {
     return clonedSolution
   }
 
-  public ProcessUntilCloning (solutions: Evolutions): boolean {
-    let isBreakingDueToSolutionCloning = false
-    for (const stub of this.stubs.GetValues()) {
-      if (/* stub.IsNeeded()&& */ !stub.IsSolved()) {
-        if (stub.ProcessStubUntilCloning(this, solutions, '/')) {
-          isBreakingDueToSolutionCloning = true
-          break
-        }
-      }
-    }
 
-    return isBreakingDueToSolutionCloning
-  }
 
   public KeepOnlyVisitedAchievements (): void {
     const visitedAchievements = new Set<string>()
     visitedAchievements.add(A_WIN)
-    const leaves = new Map<string, Piece>()
+    /*
     const winAchievement = this.stubs.GetAchievementStubIfAny()
-    const piece = winAchievement?.GetThePiece()
-    if (piece != null) {
-      GenerateMapOfLeavesTracingAchievementsRecursively(
-        piece,
-        A_WIN,
-        leaves,
-        visitedAchievements,
-        this.stubs
-      )
-    }
     this.stubs.KeepOnlyGivenAchievementStubs(visitedAchievements)
+    */
   }
 
   public GetSolvingPath (): string {
@@ -151,17 +129,17 @@ export class Evolution {
     this.solvingPathSegments.push(solutionName)
   }
 
-  public FindAnyPieceMatchingIdRecursively (id: string): Piece | null {
+  public FindAnyPieceMatchingIdRecursively (id: string): void | null {
     for (const stub of this.stubs.GetValues()) {
       const piece = stub.GetThePiece()
       if (piece != null) {
         const result = piece.FindAnyPieceMatchingIdRecursively(id)
         if (result != null) {
-          return result
+          return
         }
       }
     }
-    return null
+    return
   }
 
   public GetAchievementStubMap (): AchievementStubMap {
@@ -206,55 +184,10 @@ export class Evolution {
     return this.startingThings
   }
 
-  public GetNumberOfPiecesRemaining (): number {
-    return this.remainingPieces.size
-  }
+
 
   public GetDialogFiles (): Map<string, DialogFile> {
     return this.dialogs
   }
 
-  public GetAutos (): Piece[] {
-    const toReturn: Piece[] = []
-    this.remainingPieces.forEach((setOfPieces: Set<Piece>) => {
-      setOfPieces.forEach((piece: Piece) => {
-        if (piece.type.startsWith('AUTO')) {
-          toReturn.push(piece)
-        }
-      })
-    })
-    return toReturn
-  }
-
-  public GetPiecesThatOutputString (objectToObtain: string): Set<Piece> {
-    // since the remainingPieces are a map index by output piece
-    // then a remainingPieces.Get will retrieve all matching pieces.
-    // BUT...
-    // we want it to return a random empty set if not found
-    // and for now, it seems like it was changed to a slow
-    // iteration through the map to match - possibly for debugging.
-    for (const pair of this.remainingPieces) {
-      if (pair[0] === objectToObtain) {
-        return pair[1]
-      }
-    }
-    return new Set<Piece>()
-  }
-
-  public RemovePiece (piece: Piece): void {
-    if (piece.reuseCount - 1 <= 0) {
-      const key = piece.output
-      if (this.remainingPieces.has(key)) {
-        const oldSet = this.remainingPieces.get(key)
-        if (oldSet != null) {
-          // console.warn(" old size = "+oldSet.size);
-          oldSet.delete(piece)
-          // console.warn(" newSize = "+oldSet.size);
-        }
-      } else {
-        piece.SetCount(piece.reuseCount - 1)
-        console.warn(`trans.count is now ${piece.reuseCount}`)
-      }
-    }
-  }
 }

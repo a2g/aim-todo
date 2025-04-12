@@ -4,6 +4,7 @@ import { Box } from '../Box'
 import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { AimFileHeader } from './AimFileHeader'
 import { Validated } from '../Validated'
+import { IdPrefixes } from '../../../IdPrefixes'
 
 export class AimFileHeaderDeConstructor {
   private readonly theAimTree: AimFileHeader
@@ -86,7 +87,11 @@ export class AimFileHeaderDeConstructor {
         // set the achievement as completed in the currently visible things
         this.currentlyVisibleThings.Set(treeNodeKey, new Set<string>())
 
-        const box = new Box(this.path, treeNodeKey + ".jsonc");
+        // if its a box it MUST exist, and we merge these things
+        if (treeNodeKey.startsWith(IdPrefixes.Box)) {
+          const box = new Box(this.path, treeNodeKey + ".jsonc");
+          box.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
+        }
 
         // construct the new command - whilst we have all the data.
         let command = new RawObjectsAndVerb()

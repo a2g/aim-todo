@@ -53,7 +53,8 @@ export function getJsonOfAllSolutionsApi (
     const world = req.params.world
     const area = req.params.area
 
-    const json = getJsonOfAllEvolutions(repo, world, area)
+    const dirName = __dirname
+    const json = getJsonOfAllEvolutions(dirName, repo, world, area)
 
     responseSender.json(json)
   } catch (err) {

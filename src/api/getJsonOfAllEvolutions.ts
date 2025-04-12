@@ -14,11 +14,12 @@ interface $INameIsAAchievementChildren {
 }
 
 export function getJsonOfAllEvolutions (
+  dirName: string,
   repo: string,
   world: string,
   area: string
 ): Record<string, unknown> {
-  const path = join(__dirname, `../../../../${repo}/${world}/${area}/`)
+  const path = join(dirName, `../../../../${repo}/${world}/${area}/`)
 
   const firstBoxFilename = _STARTER_JSONC
 

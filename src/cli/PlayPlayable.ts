@@ -19,7 +19,7 @@ export function PlayPlayable (playable: Playable): void {
     reporter.ReportScene(objs)
 
     // Process all the autos
-    ProcessAutos(playable.GetHappener(), playable.GetSolution())
+    ProcessAutos()
 
     // check have we won?
     if (playable.GetHappener().GetAchievementValue(A_WIN) > 0) {

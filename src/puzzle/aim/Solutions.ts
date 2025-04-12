@@ -6,7 +6,6 @@ import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { VisibleThingsMap } from '../VisibleThingsMap'
 import { _STARTER_JSONC } from '../../_STARTER_JSONC'
 import { Box } from '../Box'
-import { Aggregates } from '../Aggregates'
 
 export class Solutions {
   filename: string
@@ -52,8 +51,7 @@ export class Solutions {
   }
 
   InitializeStartingThings () {
-    const aggregates = new Aggregates()
-    const box = new Box("", _STARTER_JSONC, aggregates)
+    const box = new Box("", _STARTER_JSONC)
     box.CopyStartingThingCharsToGivenMap(this.startingThingsMap)
   }
 

@@ -200,7 +200,7 @@ export class Piece extends PieceBase {
     // this is the point we used to set it as completed
     // solution.MarkPieceAsCompleted(this)
 
-    if (this.InternalLoopOfProcessUntilCloning(solution, solutions)) {
+    if (this.InternalLoopOfProcessUntilCloning(solution)) {
       return true
     }
 
@@ -275,8 +275,7 @@ export class Piece extends PieceBase {
   }
 
   private InternalLoopOfProcessUntilCloning (
-    solution: Evolution,
-    solutions: Evolutions
+    solution: Evolution
   ): boolean {
     for (let k = 0; k < this.inputs.length; k += 1) {
       // Without this following line, any clones will attempt to re-clone themselves
@@ -316,7 +315,7 @@ export class Piece extends PieceBase {
 
       // 4. Plain old pieces
       // This is where we get all the pieces that fit
-      if (ProcessAndReturnTrueIfCloneOccurs(this, k, this.id, solution, solutions)) {
+      if (ProcessAndReturnTrueIfCloneOccurs()) {
         return true
       }
     }

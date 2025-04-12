@@ -24,7 +24,7 @@ export class Evolutions {
     // now lets initialize the first solution
     const solution1 = Evolution.createSolution(
       box.GetMapOfAllStartingThings(),
-      this.CreateStubMapFromAchievements(box.GetSetOfAchievementWords())
+      this.CreateStubMapFromAchievements(new Set<string>())
       // this.CreateStubMapFromachievementAchievements(this.aggregates.setOfachievementAchievements)
     )
     this.solutions.push(solution1)
@@ -54,10 +54,10 @@ export class Evolutions {
     const solutions = this.solutions
     for (const solution of solutions) {
       if (solution.IsUnsolved()) {
-        if (solution.ProcessUntilCloning(this)) {
-          hasACloneJustBeenCreated = true
-          break// breaking here at a smaller step, allows catching of bugs as soon as they occur
-        }
+        //if (solution.ProcessUntilCloning(this)) {
+        hasACloneJustBeenCreated = true
+        break// breaking here at a smaller step, allows catching of bugs as soon as they occur
+        //}
       }
     }
     return hasACloneJustBeenCreated

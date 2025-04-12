@@ -5,11 +5,12 @@ import { _STARTER_JSONC } from '../_STARTER_JSONC'
 import { Solutions } from '../puzzle/aim/Solutions'
 
 export function getJsonOfAllSolutions (
+  dirName: string,
   repo: string,
   world: string,
   area: string
 ): Record<string, unknown> {
-  const path = join(__dirname, `../../../../${repo}/${world}/${area}/`)
+  const path = join(dirName, `../../../../${repo}/${world}/${area}/`)
 
   const firstBoxFilename = _STARTER_JSONC
 

@@ -1,5 +1,4 @@
 import { existsSync, readFileSync } from 'fs'
-import { Stringify } from './Stringify'
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { parse } from 'jsonc-parser'
 import { DialogFile } from './talk/DialogFile'
@@ -38,7 +37,7 @@ export class Box {
     if (filename.length !== 0) {
       if (!existsSync(this.path + filename)) {
         throw new Error(
-          `file doesn't exist: ${path}${filename} `
+          `file doesn't exist ${process.cwd()} ${path}${filename}`
         )
       }
       const text = readFileSync(path + filename, 'utf8')

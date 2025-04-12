@@ -1,4 +1,4 @@
-import promptSync from 'prompt-sync'
+/*import promptSync from 'prompt-sync'
 import { FormatText } from '../../puzzle/FormatText'
 import { Evolutions } from '../../puzzle/Evolutions'
 const prompt = promptSync({})
@@ -55,3 +55,4 @@ export function ViewPiecesInBoxes (solutions: Evolutions): void {
     }
   }
 }
+*/
