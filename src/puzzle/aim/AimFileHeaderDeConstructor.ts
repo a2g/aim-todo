@@ -40,8 +40,9 @@ export class AimFileHeaderDeConstructor {
   // In the constructor above, we see that the root of copied tree is created
   // and the first actual jigsaw piece that is attached to it is
   // gets pushed into the zero slot of the inputs
-  public IsZeroPieces (): boolean {
-    return this.theAimTree.GetTheAny()[0] == null
+  public GetNumberOfPieces (): number {
+    const count = this.theAimTree.GetCountRecursively()
+    return count
   }
 
   public GetNextDoableCommandAndDeconstructTree (): RawObjectsAndVerb | null {

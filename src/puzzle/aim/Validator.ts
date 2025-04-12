@@ -100,9 +100,10 @@ export class Validator {
     // bring in more pieces to continue deconstruction in the future
     //
     // But if its solved, then we mark it as validated!
-    const isZeroPieces = deconstructDoer.IsZeroPieces()
+    const isZeroPieces = deconstructDoer.GetNumberOfPieces()
     const isValidated = deconstructDoer.IsValidated()
-    if (isZeroPieces && isValidated == Validated.Not) {
+    if (isZeroPieces == 0 && isValidated == Validated.Not) {
+
       deconstructDoer.SetValidated(Validated.YesValidated)
       const raw = new RawObjectsAndVerb()
       raw.type = Raw.DeConstructorNoticedZeroPieces
