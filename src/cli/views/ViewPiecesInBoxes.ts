@@ -18,8 +18,6 @@ export function ViewPiecesInBoxes (solutions: Evolutions): void {
       console.warn(
         `    ${listItemNumber}. ${FormatText(box.GetFilename())}`)
 
-      console.warn(
-        `                     ${FormatText(box.GetPiecesAsString())}`)
     }
 
     // allow user to choose item

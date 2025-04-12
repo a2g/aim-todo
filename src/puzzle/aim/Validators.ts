@@ -12,11 +12,12 @@ import { Validator } from "./Validator"
 export class Validators {
   private readonly validators: Validator[]
 
-  constructor(solutions: Solutions) {
+  constructor(path: string, solutions: Solutions) {
     this.validators = []
     for (const solution of solutions.GetSolutions()) {
       const startingThings = solutions.GetStartingThings()
       const validator = new Validator(
+        path,
         solution.GetSolvingPath(),
         solution.GetAimTreeMap(),
         startingThings)

@@ -1,11 +1,9 @@
 // import { Aggregates } from './Aggregates'
-import { Aggregates } from './Aggregates'
 import { Box } from './Box'
 import { AchievementStubMap } from './AchievementStubMap'
-import { Piece } from './Piece'
+
 import { Evolution } from './Evolution'
-import { DialogFile } from './talk/DialogFile'
-import { VisibleThingsMap } from './VisibleThingsMap'
+
 import { A_WIN } from '../A_WIN'
 
 /**
@@ -16,22 +14,17 @@ import { A_WIN } from '../A_WIN'
  */
 export class Evolutions {
   private readonly solutions: Evolution[]
-  private readonly combinedBox: Box
   private readonly mapOfStartingThingsAndWhoStartsWithThem: Map<string, Set<string>>
-  aggregates: Aggregates
 
-  constructor (startFolder: string, startFile: string) {
-    this.aggregates = new Aggregates()
-    this.combinedBox = new Box(startFolder, startFile, this.aggregates)
-    this.combinedBox.FillStoresWithBoxMapData(this.aggregates.mapOfBoxes)
+  constructor(startFolder: string, startFile: string) {
     this.solutions = []
+    const box = new Box(startFolder, startFile)
+
 
     // now lets initialize the first solution
     const solution1 = Evolution.createSolution(
-      this.combinedBox.GetPieces(),
-      this.combinedBox.GetDialogFiles(),
-      this.combinedBox.GetMapOfAllStartingThings(),
-      this.CreateStubMapFromAchievements(this.combinedBox.GetSetOfAchievementWords())
+      box.GetMapOfAllStartingThings(),
+      this.CreateStubMapFromAchievements(box.GetSetOfAchievementWords())
       // this.CreateStubMapFromachievementAchievements(this.aggregates.setOfachievementAchievements)
     )
     this.solutions.push(solution1)
@@ -187,21 +180,5 @@ export class Evolutions {
         }
       }
     } */
-  }
-
-  public GetStartersMapOfAllStartingThings (): VisibleThingsMap {
-    return this.combinedBox.GetStartersMapOfAllStartingThings()
-  }
-
-  public GetStartingDialogFiles (): Map<string, DialogFile> {
-    return this.combinedBox.GetStartingDialogFiles()
-  }
-
-  public GetStartingPieces (): Map<string, Set<Piece>> {
-    return this.combinedBox.GetStartingPieces()
-  }
-
-  public GetBoxes (): IterableIterator<Box> {
-    return this.aggregates.mapOfBoxes.values()
   }
 }

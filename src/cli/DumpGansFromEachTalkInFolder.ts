@@ -18,13 +18,13 @@ export function DumpGainsFromEachDialogInFolder (folder: string): void {
       const dialogFile = new DialogFile(file, folder, aggregates)
 
       const mapOGainsByPage = new Map<string, string>()
-      const emptyBox = new Box('', '', new Aggregates())
+      const emptyBox = new Box('', '')
       console.warn('')
       console.warn(`Talk file: ${file}`)
       console.warn('===========================')
       dialogFile.FindAndAddPiecesRecursively(_STARTER, '', [], mapOGainsByPage, emptyBox)
 
-      for (const set of emptyBox.GetPieces().values()) {
+      /*for (const set of emptyBox.GetPieces().values()) {
         for (const piece of set) {
           let pieceString = `out: ${piece.output}`
           for (const input of piece.inputHints) {
@@ -32,7 +32,7 @@ export function DumpGainsFromEachDialogInFolder (folder: string): void {
           }
           console.warn(pieceString)
         }
-      }
+      }*/
     }
     process.chdir(cwd)
   }

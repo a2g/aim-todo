@@ -4,7 +4,6 @@ import { Piece } from './Piece'
 import { AchievementStubMap } from './AchievementStubMap'
 import { Evolutions } from './Evolutions'
 import { VisibleThingsMap } from './VisibleThingsMap'
-import { Box } from './Box'
 import { DialogFile } from './talk/DialogFile'
 import { Solved } from './Solved'
 import { GenerateMapOfLeavesTracingAchievementsRecursively } from './GenerateMapOfLeavesTraccingGoalsRecursively'
@@ -30,8 +29,6 @@ export class Evolution {
 
   private constructor(
     id: number,
-    pieces: Map<string, Set<Piece>>,
-    dialogs: Map<string, DialogFile>,
     startingThingsPassedIn: VisibleThingsMap,
     stubsToCopy: AchievementStubMap | null,
     prerequisites: Set<string> | null = null,
@@ -42,9 +39,6 @@ export class Evolution {
     this.dialogs = new Map<string, DialogFile>()
     this.remainingPieces = new Map<string, Set<Piece>>()
 
-    // pieces
-    Box.CopyDialogsFromAtoB(dialogs, this.dialogs)
-    Box.CopyPiecesFromAtoB(pieces, this.remainingPieces)
 
     // starting things AND currentlyVisibleThings
     this.startingThings = new VisibleThingsMap(null)
@@ -75,15 +69,13 @@ export class Evolution {
   }
 
   public static createSolution (
-    pieces: Map<string, Set<Piece>>,
-    dialogs: Map<string, DialogFile>,
     startingThingsPassedIn: VisibleThingsMap,
     stubs: AchievementStubMap | null,
     prerequisites: Set<string> | null = null,
     nameSegments: string[] | null = null
   ): Evolution {
     globalSolutionId++
-    return new Evolution(globalSolutionId, pieces, dialogs, startingThingsPassedIn, stubs, prerequisites, nameSegments)
+    return new Evolution(globalSolutionId, startingThingsPassedIn, stubs, prerequisites, nameSegments)
   }
 
   public Clone (): Evolution {
@@ -97,8 +89,6 @@ export class Evolution {
     // but
 
     const clonedSolution = Evolution.createSolution(
-      this.remainingPieces,
-      this.dialogs,
       this.startingThings,
       clonedRootPieceMap,
       this.essentialIngredients,

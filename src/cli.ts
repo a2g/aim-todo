@@ -31,7 +31,7 @@ function main (): void {
           LogGainsFromEachDialog(aimTree.folder)
 
           const solutions = new Solutions(aimTree.file, aimTree.folder)
-          const validators = new Validators(solutions)
+          const validators = new Validators(aimTree.folder, solutions)
 
           for (; ;) {
             console.warn(`\nSubMenu of ${aimTree.folder}/${aimTree.file}`)

@@ -8,7 +8,6 @@ import { parse } from 'jsonc-parser'
 
 import _ from '../../../aim-todo-enums.json'
 import { Aggregates } from '../Aggregates'
-import { AddPiece } from '../AddPiece'
 import { Box } from '../Box'
 
 export class DialogFile {
@@ -115,7 +114,7 @@ export class DialogFile {
           const id = GetNextId() + 't' + (isNoFile ? '' : 'm')
           const piece = new Piece(id, null, output, type, 1, null, null, null, inputA, inputB, inputC, inputD, inputE, inputF)
           piece.SetDialogPath(`${path}/${name}`)
-          AddPiece(piece, this.fileAddress, isNoFile, box, this.aggregates)
+          // AddPiece(piece, this.fileAddress, isNoFile, box, this.aggregates)
           mapOGainsBySection.set(name, output)
         } else if (nonChoiceSection.goto.length > 0) {
           // nonChoice sections only have one goto

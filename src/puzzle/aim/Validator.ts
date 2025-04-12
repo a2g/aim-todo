@@ -1,7 +1,6 @@
 import { Piece } from "../Piece"
 import { Raw } from "../Raw"
 import { RawObjectsAndVerb } from "../RawObjectsAndVerb"
-import { DialogFile } from "../talk/DialogFile"
 import { Validated } from "../Validated"
 import { VisibleThingsMap } from "../VisibleThingsMap"
 import { AimFileHeader } from "./AimFileHeader"
@@ -14,18 +13,17 @@ export class Validator {
   private readonly aimFileNamesInSolvingOrder: string[]
   private readonly currentlyVisibleThings: VisibleThingsMap
   private readonly remainingPieces: Map<string, Piece>
-  private readonly dialogs: Map<string, DialogFile>
-  private readonly solutionName
+  private readonly solutionName: string
   private readonly essentialIngredients: Set<string> // yup these are added to
+  private readonly path: string
 
-  public constructor(name: string, aimTreeMap: AimFileHeaderMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
+  public constructor(path: string, name: string, aimTreeMap: AimFileHeaderMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
     this.solutionName = name
     this.aimFileMap = aimTreeMap
+    this.path = path
     this.aimFileMap.RemoveZeroedOrUnneededAims()
-    //this.achievementStubs.CalculateInitialCounts()
     this.aimFileNamesInSolvingOrder = []
     this.remainingPieces = new Map<string, Piece>()
-    this.dialogs = new Map<string, DialogFile>()
 
     this.currentlyVisibleThings = new VisibleThingsMap(null)
     if (startingThingsPassedIn != null) {
@@ -70,10 +68,9 @@ export class Validator {
   public DeconstructGivenStubAndRecordSteps (aimStub: AimFileHeader): boolean {
     // push the commands
     const deconstructDoer = new AimFileHeaderDeConstructor(
+      this.path,
       aimStub,
-      this.remainingPieces,
       this.currentlyVisibleThings,
-      this.dialogs,
       this.aimFileMap
     )
 
@@ -100,9 +97,9 @@ export class Validator {
     // bring in more pieces to continue deconstruction in the future
     //
     // But if its solved, then we mark it as validated!
-    const isZeroPieces = deconstructDoer.GetNumberOfPieces()
+    const numberOfPieces = deconstructDoer.GetNumberOfPieces()
     const isValidated = deconstructDoer.IsValidated()
-    if (isZeroPieces == 0 && isValidated == Validated.Not) {
+    if (numberOfPieces <= 1 && isValidated == Validated.Not) {
 
       deconstructDoer.SetValidated(Validated.YesValidated)
       const raw = new RawObjectsAndVerb()

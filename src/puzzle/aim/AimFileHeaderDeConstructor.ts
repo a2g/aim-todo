@@ -1,6 +1,4 @@
-import { Piece } from '../Piece'
 import { RawObjectsAndVerb } from '../RawObjectsAndVerb'
-import { DialogFile } from '../talk/DialogFile'
 import { VisibleThingsMap } from '../VisibleThingsMap'
 import { Box } from '../Box'
 import { AimFileHeaderMap } from './AimFileHeaderMap'
@@ -12,17 +10,14 @@ export class AimFileHeaderDeConstructor {
 
   // the state that needs update
   private readonly currentlyVisibleThings: VisibleThingsMap
-  private readonly dialogs: Map<string, DialogFile>
-  private readonly pieces: Map<string, Piece>
   private readonly mapOfAimsTrees: AimFileHeaderMap// not used, but useful
+  private readonly path: string
 
-
-  public constructor(theAimTree: AimFileHeader, pieces: Map<string, Piece>, visibleThings: VisibleThingsMap, theSolutionsDialogFiles: Map<string, DialogFile>, aimTreeMap: AimFileHeaderMap) {
+  public constructor(path: string, theAimTree: AimFileHeader, visibleThings: VisibleThingsMap, aimTreeMap: AimFileHeaderMap) {
+    this.path = path
     this.theAimTree = theAimTree
     this.mapOfAimsTrees = aimTreeMap
     this.currentlyVisibleThings = visibleThings
-    this.dialogs = theSolutionsDialogFiles
-    this.pieces = pieces
     this.mapOfAimsTrees.Size()
   }
 
@@ -48,7 +43,7 @@ export class AimFileHeaderDeConstructor {
   public GetNextDoableCommandAndDeconstructTree (): RawObjectsAndVerb | null {
     const theAny = this.theAimTree.GetTheAny()
     if (theAny != null) {
-      const command = this.GetNextDoableCommandRecursively(theAny, 'root', null)
+      const command = this.GetNextDoableCommandRecursively(theAny, 'root')
       return command
     }
     return null
@@ -65,7 +60,7 @@ export class AimFileHeaderDeConstructor {
     return length > 0 ? false : true
   }
 
-  private GetNextDoableCommandRecursively (treeNode: any, treeNodeKey: string, treeNodeParent: any): RawObjectsAndVerb | null {
+  private GetNextDoableCommandRecursively (treeNode: any, treeNodeKey: string): RawObjectsAndVerb | null {
     let numberOfChildrenLeaves = 0
     let numberOfChildren = 0
     for (const key in treeNode) {
@@ -91,6 +86,7 @@ export class AimFileHeaderDeConstructor {
         // set the achievement as completed in the currently visible things
         this.currentlyVisibleThings.Set(treeNodeKey, new Set<string>())
 
+        const box = new Box(this.path, treeNodeKey + ".jsonc");
 
         // construct the new command - whilst we have all the data.
         let command = new RawObjectsAndVerb()
@@ -103,14 +99,13 @@ export class AimFileHeaderDeConstructor {
           }
         }
 
-        // we remove from parent (if non null)
-        if (treeNodeParent != null) {
-          for (const key in treeNodeParent) {
-            const obj = treeNodeParent[key]
-            if (obj === treeNode) {
-              delete treeNodeParent[key]
-            }
-          }
+        // we remove all children.
+        // we don't delete this node from its parent - because this
+        // is now a leave, and once the algorithm sees that thie 
+        // key is in the list of visible things (we just added it above)
+        // then it will get deleted next time
+        for (const key in treeNode) {
+          delete treeNode[key]
         }
 
         return command
@@ -124,7 +119,7 @@ export class AimFileHeaderDeConstructor {
         const child = treeNode[childKey]
         if (!this.IsALeaf(child)) {
           // the treeNode is the child's parent
-          const toReturn = this.GetNextDoableCommandRecursively(child, childKey, treeNode)
+          const toReturn = this.GetNextDoableCommandRecursively(child, childKey)
           if (toReturn != null) {
             return toReturn
           }
@@ -312,8 +307,6 @@ export class AimFileHeaderDeConstructor {
   public MergeBox (boxToMerge: Box): void {
     console.warn(`Merging box ${boxToMerge.GetFilename()}`)
 
-    Box.CopyPiecesFromAtoBViaIds(boxToMerge.GetPieces(), this.pieces)
-    Box.CopyDialogsFromAtoB(boxToMerge.GetDialogFiles(), this.dialogs)
     boxToMerge.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
     // I don't think we copy the stubs to the stub map ..do we
     // because even though the stub piece might not be found later

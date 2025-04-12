@@ -41,7 +41,7 @@ export class Happener {
 
   // private _callbacks: IHappenerCallbacks;
 
-  constructor (box: Box) {
+  constructor(box: Box) {
     // yes, all of these need to be initialized to harmless values due to PlayerAI below
     this.arrayOfInvNames = []
     this.arrayOfAchievementNames = []
@@ -57,13 +57,13 @@ export class Happener {
     // passed to it.
     // this._callbacks = new PlayerAI(this, 0);
 
-    this.arrayOfInvNames = box.GetArrayOfInvs()
-    this.arrayOfAchievementNames = box.GetArrayOfAments()
-    this.arrayOfPropNames = box.GetArrayOfObjs()
+    //this.arrayOfInvNames = box.GetArrayOfInvs()
+    // this.arrayOfAchievementNames = box.GetArrayOfAments()
+    // this.arrayOfPropNames = box.GetArrayOfObjs()
     this.arrayOfVerbNames = box.GetArrayOfSingleObjectVerbs()
-    this.arrayOfInventoryVisibilities = box.GetArrayOfInitialStatesOfInvs()
-    this.arrayOfPropVisibilities = box.GetArrayOfInitialStatesOfObjs()
-    this.arrayOfAchievementValues = box.GetArrayOfInitialStatesOfAchievements()
+    // this.arrayOfInventoryVisibilities = box.GetArrayOfInitialStatesOfInvs()
+    // this.arrayOfPropVisibilities = box.GetArrayOfInitialStatesOfObjs()
+    // this.arrayOfAchievementValues = box.GetArrayOfInitialStatesOfAchievements()
   }
 
   public SetAchievementValue (achievement: string, value: number): void {
