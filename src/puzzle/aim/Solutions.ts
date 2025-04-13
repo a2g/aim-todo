@@ -51,7 +51,7 @@ export class Solutions {
   }
 
   InitializeStartingThings () {
-    const box = new Box("", _STARTER_JSONC)
+    const box = new Box(_STARTER_JSONC)
     box.CopyStartingThingCharsToGivenMap(this.startingThingsMap)
   }
 

@@ -27,7 +27,7 @@ export function getJsonOfAllEvolutions (
     throw Error(`file doesn't exist ${path}${firstBoxFilename}`)
   }
 
-  const solutions = new Evolutions(path, firstBoxFilename)
+  const solutions = new Evolutions(firstBoxFilename)
 
   for (let i = 0; i < 200; i++) {
     solutions.SolvePartiallyUntilCloning()

@@ -18,7 +18,7 @@ export function DumpGainsFromEachDialogInFolder (folder: string): void {
       const dialogFile = new DialogFile(file, folder, aggregates)
 
       const mapOGainsByPage = new Map<string, string>()
-      const emptyBox = new Box('', '')
+      const emptyBox = new Box('')
       console.warn('')
       console.warn(`Talk file: ${file}`)
       console.warn('===========================')

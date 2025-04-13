@@ -15,12 +15,10 @@ export class Validator {
   private readonly remainingPieces: Map<string, Piece>
   private readonly solutionName: string
   private readonly essentialIngredients: Set<string> // yup these are added to
-  private readonly path: string
 
-  public constructor(path: string, name: string, aimTreeMap: AimFileHeaderMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
+  public constructor(name: string, aimTreeMap: AimFileHeaderMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
     this.solutionName = name
     this.aimFileMap = aimTreeMap
-    this.path = path
     this.aimFileMap.RemoveZeroedOrUnneededAims()
     this.aimFileNamesInSolvingOrder = []
     this.remainingPieces = new Map<string, Piece>()
@@ -68,7 +66,6 @@ export class Validator {
   public DeconstructGivenStubAndRecordSteps (aimStub: AimFileHeader): boolean {
     // push the commands
     const deconstructDoer = new AimFileHeaderDeConstructor(
-      this.path,
       aimStub,
       this.currentlyVisibleThings,
       this.aimFileMap

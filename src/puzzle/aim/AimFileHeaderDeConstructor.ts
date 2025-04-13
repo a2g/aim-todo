@@ -12,10 +12,8 @@ export class AimFileHeaderDeConstructor {
   // the state that needs update
   private readonly currentlyVisibleThings: VisibleThingsMap
   private readonly mapOfAimsTrees: AimFileHeaderMap// not used, but useful
-  private readonly path: string
 
-  public constructor(path: string, theAimTree: AimFileHeader, visibleThings: VisibleThingsMap, aimTreeMap: AimFileHeaderMap) {
-    this.path = path
+  public constructor(theAimTree: AimFileHeader, visibleThings: VisibleThingsMap, aimTreeMap: AimFileHeaderMap) {
     this.theAimTree = theAimTree
     this.mapOfAimsTrees = aimTreeMap
     this.currentlyVisibleThings = visibleThings
@@ -89,7 +87,7 @@ export class AimFileHeaderDeConstructor {
 
         // if its a box it MUST exist, and we merge these things
         if (treeNodeKey.startsWith(IdPrefixes.Box)) {
-          const box = new Box(this.path, treeNodeKey + ".jsonc");
+          const box = new Box(treeNodeKey + ".jsonc");
           box.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
         }
 

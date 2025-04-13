@@ -24,23 +24,20 @@ export class Box {
   private readonly mapOfStartingThings: VisibleThingsMap
 
   private readonly filename: string
-  private readonly path: string
 
-  constructor(path: string, filename: string) {
-    this.path = path
+  constructor(filename: string) {
     this.filename = filename
 
     this.allPlayers = []
     this.mapOfStartingThings = new VisibleThingsMap(null)
 
-
     if (filename.length !== 0) {
-      if (!existsSync(this.path + filename)) {
+      if (!existsSync(filename)) {
         throw new Error(
-          `file doesn't exist ${process.cwd()} ${path}${filename}`
+          `file doesn't exist ${process.cwd()} ${filename}`
         )
       }
-      const text = readFileSync(path + filename, 'utf8')
+      const text = readFileSync(filename, 'utf8')
       const scenario = parse(text)
 
 

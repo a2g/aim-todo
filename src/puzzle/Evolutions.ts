@@ -16,9 +16,9 @@ export class Evolutions {
   private readonly solutions: Evolution[]
   private readonly mapOfStartingThingsAndWhoStartsWithThem: Map<string, Set<string>>
 
-  constructor(startFolder: string, startFile: string) {
+  constructor(startFile: string) {
     this.solutions = []
-    const box = new Box(startFolder, startFile)
+    const box = new Box(startFile)
 
 
     // now lets initialize the first solution
@@ -129,15 +129,15 @@ export class Evolutions {
           }
         }
       }
-
+  
       // find least popular leaf in solution i
       const currSolution = this.solutions[i]
       let minLeafNodeNameCount = 1000 // something high
       let minLeafNodeName = ''
-
+  
       // get the prerequisites accumulated from all the solution nodes
       const accumulatedPrerequisites = currSolution.GetAccumulatedPrerequisites()
-
+  
       // GenerateMapOfLeaves
       const currLeaves = currSolution
         .GetRootMap()
@@ -153,7 +153,7 @@ export class Evolutions {
             minLeafNodeNameCount = 0
             minLeafNodeName = leafNode.GetOutput()
           }
-
+  
           // now we potentially add startingSet items to prerequisites
           this.mapOfStartingThingsAndWhoCanHaveThem.forEach(
             (characters: Set<string>, key: string) => {
@@ -166,7 +166,7 @@ export class Evolutions {
           )
         }
       }
-
+  
       if (minLeafNodeName !== '') {
         if (!currSolution.GetLastDisplayNameSegment().startsWith('sol_')) {
           currSolution.PushDisplayNameSegment(
