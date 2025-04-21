@@ -3,9 +3,9 @@ import { Solutions } from './puzzle/aim/Solutions'
 import { $AimTodo, getJsonOfAimTodo } from './api/getJsonOfAimTrees'
 import { LogGainsFromEachDialog } from './cli/LogGainsFromEachDialog'
 import { ViewBackwardSolve } from './cli/views/ViewBackwardSolve'
-import { EnumRecreator } from './cli/EnumRecreator'
 import { ViewForwardValidate } from './cli/views/ViewForwardValidate'
 import { Validators } from './puzzle/aim/Validators'
+import { EnumReCreator } from './cli/EnumReCreator'
 
 const prompt = promptSync()
 
@@ -39,9 +39,10 @@ function main (): void {
               `number of solutions = ${solutions._solutions.size}`
             )
             console.warn('---------------------------------------')
-            console.warn('1. Recreate a_all with all keys and values')
-            console.warn('2. Solve using aims')
-            console.warn('3. Validate, starting from _starter.jsonc')
+            console.warn('1. Delete a_aims - t_types ')
+            console.warn('2. Recreate a_aims - t_types ')
+            console.warn('3. Solve using aims')
+            console.warn('4. Validate, starting from _starter.jsonc')
 
             const choice = prompt('Choose an option (b)ack: ').toLowerCase()
             if (choice === 'b') {
@@ -50,14 +51,20 @@ function main (): void {
             switch (choice) {
               case '1':
                 {
-                  const enumRecreator = new EnumRecreator(aimTree.folder)
-                  enumRecreator.WriteEnumFiles()
+                  const enumReCreator = new EnumReCreator(aimTree.folder)
+                  enumReCreator.DeleteFiles()
                 }
                 break
               case '2':
-                ViewBackwardSolve(solutions)
+                {
+                  const enumReCreator = new EnumReCreator(aimTree.folder)
+                  enumReCreator.WriteEnumFiles()
+                }
                 break
               case '3':
+                ViewBackwardSolve(solutions)
+                break
+              case '4':
                 ViewForwardValidate(validators)
                 break
               case '4':

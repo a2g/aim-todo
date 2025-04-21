@@ -18,15 +18,16 @@ export class EnumReCreator {
 
   constructor(folder: string) {
     this._folder = folder
-    const mapOfAims = GetMapOfAimFilesInFolder(folder)
+  }
+
+  public WriteEnumFiles (): void {
+    const mapOfAims = GetMapOfAimFilesInFolder(this._folder)
 
     for (const aimFileHeader of mapOfAims.map.values()) {
       const list: string[] = []
       this.CollectAllKeysAndValuesRecursively(aimFileHeader.GetTheAny(), list)
     }
-  }
 
-  public WriteEnumFiles (): void {
     this.a_aims.Write()
     this.b_boxes.Write()
     this.c_cuts.Write()
@@ -36,6 +37,20 @@ export class EnumReCreator {
     this.o_objects.Write()
     // this.t_types.Write()
     this.u_unrecognized.Write()
+    // this.a_all.Write() don't need this
+  }
+
+  public DeleteFiles (): void {
+
+    this.a_aims.Delete()
+    this.b_boxes.Delete()
+    this.c_cuts.Delete()
+    this.d_dialogs.Delete()
+    this.i_inventory.Delete()
+    this.k_knowledge.Delete()
+    this.o_objects.Delete()
+    // this.t_types.Write()
+    this.u_unrecognized.Delete()
     // this.a_all.Write() don't need this
   }
 
