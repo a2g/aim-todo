@@ -30,6 +30,12 @@ export class EnumFileAsSet {
         }
     }
 
+    public InitFromFiles (mapOfFiles: IterableIterator<string>) {
+        this.setOfStrings.clear()
+        for (const value of mapOfFiles) {
+            this.setOfStrings.add(value)
+        }
+    }
 
     public Write () {
         this.Delete()

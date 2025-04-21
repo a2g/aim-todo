@@ -6,7 +6,7 @@ import { parse } from 'jsonc-parser'
 import { AimFileHeaderMap } from '../puzzle/aim/AimFileHeaderMap'
 import { AimFileHeader } from '../puzzle/aim/AimFileHeader'
 
-export function GetMapOfAimFilesInFolder (folder: string): AimFileHeaderMap {
+export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: string): AimFileHeaderMap {
     const mapToReturn = new AimFileHeaderMap()
     const cwd = process.cwd()
     console.log(cwd)
@@ -16,14 +16,17 @@ export function GetMapOfAimFilesInFolder (folder: string): AimFileHeaderMap {
     console.warn('Results of FindAndAddPiecesRecursively')
     const files = fs.readdirSync('.')
     if (files.length > 0) {
-
         for (const file of files) {
             //  const pathAndFile = folder + file
-            if (file.startsWith('aim') && file.endsWith('.jsonc')) {
+            if (file.startsWith(prefix) && file.endsWith('.jsonc')) {
+                if (file.startsWith('aim_todo')) {
+                    continue
+                }
+                const fileWithoutExtension = file.substring(0, file.length - 6)
                 const text = fs.readFileSync(file, 'utf-8')
                 const parsedJson: any = parse(text)
                 const root = parsedJson.root
-                mapToReturn.Set(file, new AimFileHeader(root, []))
+                mapToReturn.Set(fileWithoutExtension, new AimFileHeader(root, []))
             }
         }
     }

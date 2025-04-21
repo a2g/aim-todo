@@ -35,14 +35,12 @@ export class AimFileHeader {
   private theAny: any
   private originalPieceCount = 0
   private pieceCount = 0
-  private theAimWord: string
 
   constructor(theAny: any, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
     this.isSolved = solved
     this.isNeeded = isNeeded
     this.theAny = theAny
-    const keys = Object.keys(theAny)
-    this.theAimWord = keys[0] as string
+
     // this clones the commandsCompletedInOrder
     this.commandsCompletedInOrder = []
     if (commandsCompletedInOrder != null) {
@@ -59,7 +57,8 @@ export class AimFileHeader {
   }
 
   public GetTheRootWord (): string {
-    return this.theAimWord
+    const keys = Object.keys(this.theAny)
+    return keys[0] as string
   }
 
   public SetValidated (validated: Validated): void {

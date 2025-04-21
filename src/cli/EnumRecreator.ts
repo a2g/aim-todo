@@ -1,7 +1,7 @@
 import { _STARTER } from '../_STARTER'
 import { EnumFileAsSet } from './EnumFileAsSet'
 import { EnumFileAsArray } from './EnumFileAsArray'
-import { GetMapOfAimFilesInFolder } from './GetMapOfAimFilesInFolder'
+import { GetMapOFilesInFolderOfGivenPrefix } from './GetMapOFilesInFolderOfGivenPrefix'
 
 export class EnumReCreator {
   a_all = new EnumFileAsArray('a_all', 'all_enum')
@@ -21,12 +21,21 @@ export class EnumReCreator {
   }
 
   public WriteEnumFiles (): void {
-    const mapOfAims = GetMapOfAimFilesInFolder(this._folder)
+    const mapOfAims = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'aim')
+    const mapOfBoxes = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'box')
+    const mapOfCuts = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'cut')
+    const mapOfDialogs = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'd')
 
     for (const aimFileHeader of mapOfAims.map.values()) {
       const list: string[] = []
       this.CollectAllKeysAndValuesRecursively(aimFileHeader.GetTheAny(), list)
     }
+
+
+    this.a_aims.InitFromFiles(mapOfAims.GetRawMap().keys())
+    this.b_boxes.InitFromFiles(mapOfBoxes.GetRawMap().keys())
+    this.c_cuts.InitFromFiles(mapOfCuts.GetRawMap().keys())
+    this.d_dialogs.InitFromFiles(mapOfDialogs.GetRawMap().keys())
 
     this.a_aims.Write()
     this.b_boxes.Write()

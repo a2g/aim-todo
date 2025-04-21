@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import { Solution } from './Solution'
-import { GetMapOfAimFilesInFolder } from '../../cli/GetMapOfAimFilesInFolder'
+import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/GetMapOFilesInFolderOfGivenPrefix'
 import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { VisibleThingsMap } from '../VisibleThingsMap'
 import { _STARTER_JSONC } from '../../_STARTER_JSONC'
@@ -29,7 +29,7 @@ export class Solutions {
     const text = readFileSync(pathAndFile, 'utf-8')
     const parsedJson: any = parse(text)
     const aimTodoTree = parsedJson.root
-    this.aimTreeMap = GetMapOfAimFilesInFolder(fileAddress)
+    this.aimTreeMap = GetMapOFilesInFolderOfGivenPrefix(fileAddress, 'aim')
 
 
     this.InitializeStartingThings()
