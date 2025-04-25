@@ -6,7 +6,6 @@ import { GetMapOFilesInFolderOfGivenPrefix } from './GetMapOFilesInFolderOfGiven
 export class EnumReCreator {
   a_all = new EnumFileAsArray('a_all', 'all_enum')
   a_aims = new EnumFileAsSet('a_aims', 'aim_enum')
-  b_boxes = new EnumFileAsSet('b_boxes', 'box_enum')
   c_cuts = new EnumFileAsSet('c_cutscenes', 'cutscene_enum')
   d_dialogs = new EnumFileAsSet('d_dialogs', 'dialog_enum')
   i_inventory = new EnumFileAsSet('i_inventory', 'inventory_enum')
@@ -22,7 +21,6 @@ export class EnumReCreator {
 
   public WriteEnumFiles (): void {
     const mapOfAims = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'aim')
-    const mapOfBoxes = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'box')
     const mapOfCuts = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'cut')
     const mapOfDialogs = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'd')
 
@@ -33,12 +31,10 @@ export class EnumReCreator {
 
 
     this.a_aims.InitFromFiles(mapOfAims.GetRawMap().keys())
-    this.b_boxes.InitFromFiles(mapOfBoxes.GetRawMap().keys())
     this.c_cuts.InitFromFiles(mapOfCuts.GetRawMap().keys())
     this.d_dialogs.InitFromFiles(mapOfDialogs.GetRawMap().keys())
 
     this.a_aims.Write()
-    this.b_boxes.Write()
     this.c_cuts.Write()
     this.d_dialogs.Write()
     this.i_inventory.Write()
@@ -52,7 +48,6 @@ export class EnumReCreator {
   public DeleteFiles (): void {
 
     this.a_aims.Delete()
-    this.b_boxes.Delete()
     this.c_cuts.Delete()
     this.d_dialogs.Delete()
     this.i_inventory.Delete()
@@ -69,8 +64,6 @@ export class EnumReCreator {
       if (key.startsWith('oneOf')) {
       } else if (key.startsWith('aim')) {
         this.a_aims.Add(key)
-      } else if (key.startsWith('box')) {
-        this.b_boxes.Add(key)
       } else if (key.startsWith('cut')) {
         this.c_cuts.Add(key)
       } else if (key.startsWith('d')) {
