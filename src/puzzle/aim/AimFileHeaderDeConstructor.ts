@@ -23,7 +23,7 @@ export class AimFileHeaderDeConstructor {
   /**
  * #### For the purposes of traversing, a leaf is one with all
  * inputs are null.
- * @param piece
+ * @param treeNode
  * @returns true if a leaf
  */
   public isALeaf (treeNode: any): boolean {
@@ -51,7 +51,7 @@ export class AimFileHeaderDeConstructor {
   /**
  * #### For the purposes of traversing, a leaf is one with all
  * inputs are null.
- * @param piece
+ * @param treeNode
  * @returns true if a leaf
  */
   private IsALeaf (treeNode: any): boolean {

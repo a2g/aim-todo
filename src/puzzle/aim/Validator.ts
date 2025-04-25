@@ -1,4 +1,3 @@
-import { Piece } from "../Piece"
 import { Raw } from "../Raw"
 import { RawObjectsAndVerb } from "../RawObjectsAndVerb"
 import { Validated } from "../Validated"
@@ -12,7 +11,6 @@ export class Validator {
   private readonly aimFileMap: AimFileHeaderMap
   private readonly aimFileNamesInSolvingOrder: string[]
   private readonly currentlyVisibleThings: VisibleThingsMap
-  private readonly remainingPieces: Map<string, Piece>
   private readonly solutionName: string
   private readonly essentialIngredients: Set<string> // yup these are added to
 
@@ -21,7 +19,6 @@ export class Validator {
     this.aimFileMap = aimTreeMap
     this.aimFileMap.RemoveZeroedOrUnneededAims()
     this.aimFileNamesInSolvingOrder = []
-    this.remainingPieces = new Map<string, Piece>()
 
     this.currentlyVisibleThings = new VisibleThingsMap(null)
     if (startingThingsPassedIn != null) {
@@ -112,7 +109,6 @@ export class Validator {
       // also tell the solution what order the achievement was achieved
       this.aimFileNamesInSolvingOrder.push(aimFileHeader.GetAimName())
 
-
       // then reveal all the goodies 
       for (const blah of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator())
         if (!this.currentlyVisibleThings.Has(blah[0])) {
@@ -137,16 +133,6 @@ export class Validator {
         */
     }
     return true
-  }
-
-  public GetAutos (): Piece[] {
-    const toReturn: Piece[] = []
-    this.remainingPieces.forEach((piece: Piece) => {
-      if (piece.type.startsWith('AUTO')) {
-        toReturn.push(piece)
-      }
-    })
-    return toReturn
   }
 
   public GetOrderOfCommands (): RawObjectsAndVerb[] {
@@ -182,18 +168,6 @@ export class Validator {
       numberOfNullAchievements += aim.GetTheAny() == null ? 0 : 1
     }
     return numberOfNullAchievements
-  }
-
-  public GetNumberOfRemainingPieces (): number {
-    return this.remainingPieces.size
-  }
-
-  GetRemainingPiecesAsString (): string {
-    let stringOfPieceIds = ''
-    for (const piece of this.remainingPieces.values()) {
-      stringOfPieceIds += `${piece.id}-${piece.output}, \n`
-    }
-    return stringOfPieceIds
   }
 
   public AddToListOfPrerequisites (essentialIngredients: string[]): void {

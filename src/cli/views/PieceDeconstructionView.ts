@@ -14,7 +14,6 @@ export function PieceDeconstructionView (
   titlePath.push('Piece(Deconstruct)')
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
-    console.warn(`Pieces remaining ${validator.GetNumberOfRemainingPieces()} (${validator.GetRemainingPiecesAsString()})`)
     // const output: string = (piece.spielOutput.length > piece.output.length) ? piece.spielOutput : piece.output
     const output = (piece.parent == null) ? '(stub)' : piece.output
     console.warn(`id: ${piece.id}`)

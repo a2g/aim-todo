@@ -14,7 +14,6 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
   for (; ;) {
     // I don't like putting this below the list - but I do like having it there
     // each time, for debugging, so I'll put it up here, before tht title.
-    console.warn(`Pieces remaining ${validator.GetNumberOfRemainingPieces()} (${validator.GetRemainingPiecesAsString()})`)
 
     ShowUnderlinedTitle(titlePath)
     // list all leaves, of all solutions in order
