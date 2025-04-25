@@ -34,8 +34,8 @@ export class AimFileHeader {
   private isNeeded: boolean
   private isValidated: Validated = Validated.Not
   private theAny: any
-  private originalPieceCount = 0
-  private pieceCount = 0
+  private originalNodeCount = 0
+  private nodeCount = 0
 
   private readonly mapOfStartingThings: VisibleThingsMap
 
@@ -148,19 +148,6 @@ export class AimFileHeader {
     return ProcessAndReturnTrueIfCloneOccurs(this, 0, '', solution, solutions)
   }*/
 
-  public GetCountRecursively (): number {
-    this.UpdateNodeCount()
-    return this.pieceCount
-  }
-
-  public CalculateOriginalPieceCount (): void {
-    this.originalPieceCount = this.GetCountRecursively()
-  }
-
-  public GetOriginalPieceCount (): number {
-    return this.originalPieceCount
-  }
-
   public Clone (): AimFileHeader {
     const thePiece = this._CloneObject(this.GetTheAny())
     const clone = new AimFileHeader(thePiece, this.commandsCompletedInOrder)
@@ -176,13 +163,26 @@ export class AimFileHeader {
     return toReturn
   }
 
+  public GetOriginalNodeCount (): number {
+    return this.originalNodeCount
+  }
+
+  public CalculateOriginalNodeCount (): void {
+    this.originalNodeCount = this.GetCountAfterUpdating()
+  }
+
+  public GetCountAfterUpdating (): number {
+    this.UpdateNodeCount()
+    return this.nodeCount
+  }
+
   private UpdateNodeCount () {
-    this.pieceCount = 0
+    this.nodeCount = 0
     this.UpdateNodeCountRecursively(this.theAny)
   }
 
   private UpdateNodeCountRecursively (thisObject: any) {
-    this.pieceCount += 1
+    this.nodeCount += 1
     for (const key in thisObject) {
       this.UpdateNodeCountRecursively(thisObject[key])
     }

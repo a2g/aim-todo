@@ -156,7 +156,7 @@ export class Validator {
   public GetCountRecursively (): number {
     let count = 0
     for (const stub of this.aimFileMap.GetAims()) {
-      count += stub.GetCountRecursively()
+      count += stub.GetCountAfterUpdating()
     }
     return count
   }

@@ -41,8 +41,8 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
           inputs += `${FormatText(inputSpiel)},`
         }
       }*/
-      const pieceCount = rootAchievement.GetCountRecursively()
-      const originalCount = rootAchievement.GetOriginalPieceCount()
+      const pieceCount = rootAchievement.GetCountAfterUpdating()
+      const originalCount = rootAchievement.GetOriginalNodeCount()
       const id = (theAny != null) ? theAny.id : ''
       const status = rootAchievement.GetValidated() as string
       console.warn(

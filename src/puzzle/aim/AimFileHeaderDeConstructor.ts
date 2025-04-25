@@ -35,7 +35,7 @@ export class AimFileHeaderDeConstructor {
   // and the first actual jigsaw piece that is attached to it is
   // gets pushed into the zero slot of the inputs
   public GetNumberOfPieces (): number {
-    const count = this.theAimTree.GetCountRecursively()
+    const count = this.theAimTree.GetCountAfterUpdating()
     return count
   }
 
