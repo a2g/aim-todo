@@ -35,7 +35,7 @@ export function getJsonOfAllSolutions (
       listItemNumber++
 
       // display list item
-      const output = item.GetTheRootWord()
+      const output = item.GetAimName()
       console.warn(`    ${listItemNumber}. ${output} )`)
       incomplete += item.IsSolved() ? 0 : 1
     }

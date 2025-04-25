@@ -36,15 +36,14 @@ export class AimFileHeader {
   private theAny: any
   private originalNodeCount = 0
   private nodeCount = 0
-
-  private readonly mapOfStartingThings: VisibleThingsMap
+  private readonly thingsToRevealWhenAimIsMet: VisibleThingsMap
 
   constructor(json: any, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
     this.isSolved = solved
     this.isNeeded = isNeeded
     this.theAny = json.root
-    this.mapOfStartingThings = new VisibleThingsMap(null)
-    this.UpdateNodeCount()
+    this.thingsToRevealWhenAimIsMet = new VisibleThingsMap(null)
+    this.originalNodeCount = this.GetCountAfterUpdating()
 
     // this clones the commandsCompletedInOrder
     this.commandsCompletedInOrder = []
@@ -73,12 +72,12 @@ export class AimFileHeader {
       json.startingThingsLinkedToPlayers !== null
     ) {
       for (const item of json.startingThingsLinkedToPlayers) {
-        if (!this.mapOfStartingThings.Has(item.thing)) {
-          this.mapOfStartingThings.Set(item.thing, new Set<string>())
+        if (!this.thingsToRevealWhenAimIsMet.Has(item.thing)) {
+          this.thingsToRevealWhenAimIsMet.Set(item.thing, new Set<string>())
         }
         if (item.character !== undefined && item.character !== null) {
           const { character } = item
-          const setOfCharacters = this.mapOfStartingThings.Get(item.thing)
+          const setOfCharacters = this.thingsToRevealWhenAimIsMet.Get(item.thing)
           if (character.length > 0 && setOfCharacters != null) {
             setOfCharacters.add(character)
           }
@@ -93,7 +92,7 @@ export class AimFileHeader {
     return this.theAny
   }
 
-  public GetTheRootWord (): string {
+  public GetAimName (): string {
     const keys = Object.keys(this.theAny)
     return keys[0] as string
   }
@@ -167,18 +166,10 @@ export class AimFileHeader {
     return this.originalNodeCount
   }
 
-  public CalculateOriginalNodeCount (): void {
-    this.originalNodeCount = this.GetCountAfterUpdating()
-  }
-
   public GetCountAfterUpdating (): number {
-    this.UpdateNodeCount()
-    return this.nodeCount
-  }
-
-  private UpdateNodeCount () {
     this.nodeCount = 0
     this.UpdateNodeCountRecursively(this.theAny)
+    return this.nodeCount
   }
 
   private UpdateNodeCountRecursively (thisObject: any) {
@@ -186,6 +177,10 @@ export class AimFileHeader {
     for (const key in thisObject) {
       this.UpdateNodeCountRecursively(thisObject[key])
     }
+  }
+
+  GetThingsToRevealWhenAimIsMet (): VisibleThingsMap {
+    return this.thingsToRevealWhenAimIsMet;
   }
 
 }

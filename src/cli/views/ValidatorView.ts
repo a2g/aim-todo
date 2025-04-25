@@ -33,7 +33,7 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
       listItemNumber++
 
       // display list item
-      const output = rootAchievement.GetTheRootWord()
+      const output = rootAchievement.GetAimName()
       const theAny = rootAchievement.GetTheAny()
       let inputs = ''
       /*if (theAchievementPiece != null) {

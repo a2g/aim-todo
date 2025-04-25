@@ -299,24 +299,25 @@ export class AimFileHeaderDeConstructor {
     }
     */
 
-  public AddToMapOfVisibleThings (thing: string): void {
-    if (!this.currentlyVisibleThings.Has(thing)) {
-      this.currentlyVisibleThings.Set(thing, new Set<string>())
-    }
+  /*
+public AddToMapOfVisibleThings (thing: string): void {
+  if (!this.currentlyVisibleThings.Has(thing)) {
+    this.currentlyVisibleThings.Set(thing, new Set<string>())
   }
+}
+*/
 
-
-
-  public MergeBox (boxToMerge: Box): void {
-    console.warn(`Merging box ${boxToMerge.GetFilename()}`)
-
-    boxToMerge.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
-    // I don't think we copy the stubs to the stub map ..do we
-    // because even though the stub piece might not be found later
-    // on, we still should be able to place its leaf nodes early
-    // boxToMerge.CopyStubsToGivenStubMap(this.stubs)
-    // boxToMerge.CopyStartingThingCharsToGivenMap(this.startingThings)
-  }
+  /*
+    public MergeBox (boxToMerge: Box): void {
+      console.warn(`Merging box ${boxToMerge.GetFilename()}`)
+  
+      boxToMerge.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
+      // I don't think we copy the stubs to the stub map ..do we
+      // because even though the stub piece might not be found later
+      // on, we still should be able to place its leaf nodes early
+      // boxToMerge.CopyStubsToGivenStubMap(this.stubs)
+      // boxToMerge.CopyStartingThingCharsToGivenMap(this.startingThings)
+    }*/
 
 
   public IsValidated (): Validated {

@@ -21,7 +21,7 @@ export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
       if (command.type === Raw.Achievement && infoLevel < 3) {
         continue
       }
-      if (command.type === Raw.DeConstructorNoticedZeroPieces && infoLevel < 1) {
+      if (command.type === Raw.DeConstructorNoticedZeroPiecesInAim && infoLevel < 1) {
         continue
       }
       listItemNumber++

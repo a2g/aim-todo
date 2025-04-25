@@ -63,10 +63,10 @@ export class Validator {
     return wasThereAtLeastSomeProgress
   }
 
-  public DeconstructGivenStubAndRecordSteps (aimStub: AimFileHeader): boolean {
+  public DeconstructGivenStubAndRecordSteps (aimFileHeader: AimFileHeader): boolean {
     // push the commands
     const deconstructDoer = new AimFileHeaderDeConstructor(
-      aimStub,
+      aimFileHeader,
       this.currentlyVisibleThings,
       this.aimFileMap
     )
@@ -85,7 +85,7 @@ export class Validator {
 
       if (rawObjectsAndVerb.type !== Raw.None) {
         // this is just here for debugging!
-        aimStub.AddCommand(rawObjectsAndVerb)
+        aimFileHeader.AddCommand(rawObjectsAndVerb)
         console.log(`${rawObjectsAndVerb.type}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
       }
     }
@@ -100,17 +100,28 @@ export class Validator {
 
       deconstructDoer.SetValidated(Validated.YesValidated)
       const raw = new RawObjectsAndVerb()
-      raw.type = Raw.DeConstructorNoticedZeroPieces
+      raw.type = Raw.DeConstructorNoticedZeroPiecesInAim
       raw.objectA = ' in '
       raw.objectB = ''
-      raw.output = aimStub.GetTheRootWord()
+      raw.output = aimFileHeader.GetAimName()
       raw.prerequisites = []
       raw.speechLines = []
-      aimStub.AddCommand(raw)
+      aimFileHeader.AddCommand(raw)
 
 
       // also tell the solution what order the achievement was achieved
-      this.aimFileNamesInSolvingOrder.push(aimStub.GetTheRootWord())
+      this.aimFileNamesInSolvingOrder.push(aimFileHeader.GetAimName())
+
+
+      // then reveal all the goodies 
+      for (const blah of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator())
+        if (!this.currentlyVisibleThings.Has(blah[0])) {
+          const raw = new RawObjectsAndVerb()
+          raw.type = Raw.DeConstructorSetToVisible
+          raw.objectA = blah[0]
+          aimFileHeader.AddCommand(raw)
+          this.currentlyVisibleThings.Set(blah[0], new Set<string>())
+        }
 
       // Sse if any autos depend on the newly completed achievement - if so execute them
       /*

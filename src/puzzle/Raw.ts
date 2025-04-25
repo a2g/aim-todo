@@ -9,5 +9,6 @@ export enum Raw {
   Give = 'Give',
   Achievement = 'Achievement',
   Separator = 'Separator',
-  DeConstructorNoticedZeroPieces = 'DeConstructorNoticedZeroPieces'
+  DeConstructorNoticedZeroPiecesInAim = 'DeConstructorNoticedZeroPiecesInAim',
+  DeConstructorSetToVisible = 'DeConstructorSetToVisible'
 }

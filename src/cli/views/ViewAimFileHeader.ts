@@ -13,7 +13,7 @@ export function ViewAimFileHeader (stub: AimFileHeader, validator: Validator, ti
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
     const input = prompt(
-      `The Root word of the aim file is ${stub.GetTheRootWord()}. ` +
+      `The Root word of the aim file is ${stub.GetAimName()}. ` +
       `\nThe Piece of this stub is ${stub.GetTheAny() !== null ? 'non-null' : 'null'}` +
       '\nWhat to do with aim file header:' +
       '\çn(b)ack, (r)e-run, (s)tarters, (o)rdered-commands, (t)raverse '
@@ -35,7 +35,7 @@ export function ViewAimFileHeader (stub: AimFileHeader, validator: Validator, ti
       if (theAchievementPiece != null) {
         PieceDeconstructionView(theAchievementPiece, validator, stub, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
       } else {
-        prompt(`${stub.GetTheRootWord()} Achievement.piece WAS NULL. Hit any key to continue: `)
+        prompt(`${stub.GetAimName()} Achievement.piece WAS NULL. Hit any key to continue: `)
       }
     }
   }
