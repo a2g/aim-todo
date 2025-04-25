@@ -2,6 +2,7 @@ import { RawObjectsAndVerb } from '../RawObjectsAndVerb'
 
 import { Solved } from '../Solved'
 import { Validated } from '../Validated'
+import { VisibleThingsMap } from '../VisibleThingsMap'
 
 /**
  * #### So this is NOT a piece, its just the thing that pieces attach to.
@@ -36,10 +37,14 @@ export class AimFileHeader {
   private originalPieceCount = 0
   private pieceCount = 0
 
-  constructor(theAny: any, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
+  private readonly mapOfStartingThings: VisibleThingsMap
+
+  constructor(json: any, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
     this.isSolved = solved
     this.isNeeded = isNeeded
-    this.theAny = theAny
+    this.theAny = json.root
+    this.mapOfStartingThings = new VisibleThingsMap(null)
+    this.UpdateNodeCount()
 
     // this clones the commandsCompletedInOrder
     this.commandsCompletedInOrder = []
@@ -49,7 +54,39 @@ export class AimFileHeader {
       }
     }
 
-    this.UpdatePieceCount()
+    const setPlayers = new Set<string>()
+    /* starting things is optional in the json */
+    if (
+      json.startingThingsLinkedToPlayers !== undefined &&
+      json.startingThingsLinkedToPlayers !== null
+    ) {
+      for (const thing of json.startingThingsLinkedToPlayers) {
+        if (thing.character !== undefined && thing.character !== null) {
+          setPlayers.add(thing.character)
+        }
+      }
+    }
+
+    /* starting things is optional in the json */
+    if (
+      json.startingThingsLinkedToPlayers !== undefined &&
+      json.startingThingsLinkedToPlayers !== null
+    ) {
+      for (const item of json.startingThingsLinkedToPlayers) {
+        if (!this.mapOfStartingThings.Has(item.thing)) {
+          this.mapOfStartingThings.Set(item.thing, new Set<string>())
+        }
+        if (item.character !== undefined && item.character !== null) {
+          const { character } = item
+          const setOfCharacters = this.mapOfStartingThings.Get(item.thing)
+          if (character.length > 0 && setOfCharacters != null) {
+            setOfCharacters.add(character)
+          }
+        }
+      }
+    }
+
+    setPlayers.delete('undefined')
   }
 
   public GetTheAny (): any {
@@ -112,7 +149,7 @@ export class AimFileHeader {
   }*/
 
   public GetCountRecursively (): number {
-    this.UpdatePieceCount()
+    this.UpdateNodeCount()
     return this.pieceCount
   }
 
@@ -139,15 +176,15 @@ export class AimFileHeader {
     return toReturn
   }
 
-  private UpdatePieceCount () {
+  private UpdateNodeCount () {
     this.pieceCount = 0
-    this.UpdatePieceCountRecursively(this.theAny)
+    this.UpdateNodeCountRecursively(this.theAny)
   }
 
-  private UpdatePieceCountRecursively (thisObject: any) {
+  private UpdateNodeCountRecursively (thisObject: any) {
     this.pieceCount += 1
     for (const key in thisObject) {
-      this.UpdatePieceCountRecursively(thisObject[key])
+      this.UpdateNodeCountRecursively(thisObject[key])
     }
   }
 

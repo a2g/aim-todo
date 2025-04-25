@@ -24,9 +24,9 @@ export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: strin
                 }
                 const fileWithoutExtension = file.substring(0, file.length - 6)
                 const text = fs.readFileSync(file, 'utf-8')
-                const parsedJson: any = parse(text)
-                const root = parsedJson.root
-                mapToReturn.Set(fileWithoutExtension, new AimFileHeader(root, []))
+                const json: any = parse(text)
+
+                mapToReturn.Set(fileWithoutExtension, new AimFileHeader(json, []))
             }
         }
     }
