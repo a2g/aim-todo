@@ -1,6 +1,6 @@
 {
   "$schema": "./schema_for_achievements.jsonc",
-  "startingThingsLinkedToPlayers": [
+  "thingsToRevealWhenAimIsMet": [
     {
       "thing": "obj_hole_in_wall"
     },

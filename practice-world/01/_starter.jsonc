@@ -1,6 +1,6 @@
 {
   "$schema": "./01 defs.jsonc",
-  "startingThingsLinkedToPlayers": [
+  "thingsToRevealWhenAimIsMet": [
     {
       "thing": "obj_bartender"
     },

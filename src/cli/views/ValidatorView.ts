@@ -5,6 +5,7 @@ import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
 import { CommandsView } from './CommandsView'
 import { ViewAimFileHeader } from './ViewAimFileHeader'
 import { Validator } from '../../puzzle/aim/Validator'
+import { assert } from 'console'
 
 
 const prompt = promptSync({})
@@ -33,6 +34,7 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
 
       // display list item
       const output = rootAchievement.GetAimName()
+      assert(output != undefined)
       const theAny = rootAchievement.GetTheAny()
       let inputs = ''
       /*if (theAchievementPiece != null) {
@@ -44,6 +46,7 @@ export function ValidatorView (validator: Validator, titlePath: string[]): void 
       const originalCount = rootAchievement.GetOriginalNodeCount()
       const id = (theAny != null) ? theAny.id : ''
       const status = rootAchievement.GetValidated() as string
+
       console.warn(
         `${listItemNumber}. ${status}(${pieceCount}/${originalCount}) ${FormatText(output)} ${id} ${AddBrackets(inputs)}`
       )

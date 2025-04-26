@@ -1,6 +1,6 @@
 {
   "$schema": "./02 defs.jsonc",
-  "startingThingsLinkedToPlayers": [
+  "thingsToRevealWhenAimIsMet": [
     {
       "thing": "inv_bottle_top"
     },

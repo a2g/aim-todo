@@ -80,7 +80,7 @@
     }
   },
   "properties": {
-    "startingThingsLinkedToPlayers": {
+    "thingsToRevealWhenAimIsMet": {
       "type": "array",
       "minItems": 0,
       "items": {

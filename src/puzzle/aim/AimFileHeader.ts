@@ -37,13 +37,14 @@ export class AimFileHeader {
   private originalNodeCount = 0
   private nodeCount = 0
   private readonly thingsToRevealWhenAimIsMet: VisibleThingsMap
-
-  constructor(json: any, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
+  private fileWithoutExtension: string
+  constructor(fileWithoutExtension: string, rootProperty: any, visibleThingsMap: VisibleThingsMap, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
     this.isSolved = solved
     this.isNeeded = isNeeded
-    this.theAny = json.root
-    this.thingsToRevealWhenAimIsMet = new VisibleThingsMap(null)
+    this.theAny = rootProperty
+    this.thingsToRevealWhenAimIsMet = visibleThingsMap
     this.originalNodeCount = this.GetCountAfterUpdating()
+    this.fileWithoutExtension = fileWithoutExtension
 
     // this clones the commandsCompletedInOrder
     this.commandsCompletedInOrder = []
@@ -53,39 +54,6 @@ export class AimFileHeader {
       }
     }
 
-    const setPlayers = new Set<string>()
-    /* starting things is optional in the json */
-    if (
-      json.startingThingsLinkedToPlayers !== undefined &&
-      json.startingThingsLinkedToPlayers !== null
-    ) {
-      for (const thing of json.startingThingsLinkedToPlayers) {
-        if (thing.character !== undefined && thing.character !== null) {
-          setPlayers.add(thing.character)
-        }
-      }
-    }
-
-    /* starting things is optional in the json */
-    if (
-      json.startingThingsLinkedToPlayers !== undefined &&
-      json.startingThingsLinkedToPlayers !== null
-    ) {
-      for (const item of json.startingThingsLinkedToPlayers) {
-        if (!this.thingsToRevealWhenAimIsMet.Has(item.thing)) {
-          this.thingsToRevealWhenAimIsMet.Set(item.thing, new Set<string>())
-        }
-        if (item.character !== undefined && item.character !== null) {
-          const { character } = item
-          const setOfCharacters = this.thingsToRevealWhenAimIsMet.Get(item.thing)
-          if (character.length > 0 && setOfCharacters != null) {
-            setOfCharacters.add(character)
-          }
-        }
-      }
-    }
-
-    setPlayers.delete('undefined')
   }
 
   public GetTheAny (): any {
@@ -93,8 +61,7 @@ export class AimFileHeader {
   }
 
   public GetAimName (): string {
-    const keys = Object.keys(this.theAny)
-    return keys[0] as string
+    return this.fileWithoutExtension
   }
 
   public SetValidated (validated: Validated): void {
@@ -148,8 +115,9 @@ export class AimFileHeader {
   }*/
 
   public Clone (): AimFileHeader {
-    const thePiece = this._CloneObject(this.GetTheAny())
-    const clone = new AimFileHeader(thePiece, this.commandsCompletedInOrder)
+    const theAny = this._CloneObject(this.GetTheAny())
+    const thingsMap = new VisibleThingsMap(this.thingsToRevealWhenAimIsMet)
+    const clone = new AimFileHeader(this.fileWithoutExtension, theAny, thingsMap, this.commandsCompletedInOrder)
     return clone
   }
 
@@ -157,7 +125,8 @@ export class AimFileHeader {
     const toReturn: any = {}
     for (const key in thisObject) {
       const clonedRoot = this._CloneObject(thisObject[key])
-      toReturn[key] = new AimFileHeader(clonedRoot, this.commandsCompletedInOrder)
+      const visibleThingsMap = new VisibleThingsMap(this.thingsToRevealWhenAimIsMet)
+      toReturn[key] = new AimFileHeader(this.fileWithoutExtension, clonedRoot, visibleThingsMap, this.commandsCompletedInOrder)
     }
     return toReturn
   }

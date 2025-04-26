@@ -5,6 +5,7 @@ import { _STARTER } from '../_STARTER'
 import { parse } from 'jsonc-parser'
 import { AimFileHeaderMap } from '../puzzle/aim/AimFileHeaderMap'
 import { AimFileHeader } from '../puzzle/aim/AimFileHeader'
+import { GetStartingThingsFromRawJson } from './GetStartingThingsFromRawJson'
 
 export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: string): AimFileHeaderMap {
     const mapToReturn = new AimFileHeaderMap()
@@ -26,7 +27,8 @@ export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: strin
                 const text = fs.readFileSync(file, 'utf-8')
                 const json: any = parse(text)
 
-                mapToReturn.Set(fileWithoutExtension, new AimFileHeader(json, []))
+                const visibleThingsMap = GetStartingThingsFromRawJson(json)
+                mapToReturn.Set(fileWithoutExtension, new AimFileHeader(fileWithoutExtension, json.root, visibleThingsMap, []))
             }
         }
     }

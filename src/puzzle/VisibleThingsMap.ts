@@ -1,12 +1,12 @@
 export class VisibleThingsMap {
   public readonly mapOfVisibleThings: Map<string, Set<string>>
 
-  constructor (startingThingsPassedIn: ReadonlyMap<string, Set<string>> | null) {
+  constructor(mapToClone: VisibleThingsMap | null) {
     // its its passed in we deep copy it
     this.mapOfVisibleThings = new Map<string, Set<string>>()
-    if (startingThingsPassedIn != null) {
-      for (const key of startingThingsPassedIn.keys()) {
-        const characters = startingThingsPassedIn.get(key)
+    if (mapToClone != null) {
+      for (const key of mapToClone.mapOfVisibleThings.keys()) {
+        const characters = mapToClone.mapOfVisibleThings.get(key)
         if (characters != null) {
           const newConstraints = new Set<string>()
           for (const character of characters) {

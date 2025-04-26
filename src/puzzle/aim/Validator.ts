@@ -109,6 +109,8 @@ export class Validator {
       // also tell the solution what order the achievement was achieved
       this.aimFileNamesInSolvingOrder.push(aimFileHeader.GetAimName())
 
+      this.currentlyVisibleThings.Set(aimFileHeader.GetAimName(), new Set<string>())
+
       // then reveal all the goodies 
       for (const blah of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator())
         if (!this.currentlyVisibleThings.Has(blah[0])) {

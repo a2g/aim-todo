@@ -44,10 +44,10 @@ export class Box {
       const setPlayers = new Set<string>()
       /* starting things is optional in the json */
       if (
-        scenario.startingThingsLinkedToPlayers !== undefined &&
-        scenario.startingThingsLinkedToPlayers !== null
+        scenario.thingsToRevealWhenAimIsMet !== undefined &&
+        scenario.thingsToRevealWhenAimIsMet !== null
       ) {
-        for (const thing of scenario.startingThingsLinkedToPlayers) {
+        for (const thing of scenario.thingsToRevealWhenAimIsMet) {
           if (thing.character !== undefined && thing.character !== null) {
             setPlayers.add(thing.character)
           }
@@ -56,10 +56,10 @@ export class Box {
 
       /* starting things is optional in the json */
       if (
-        scenario.startingThingsLinkedToPlayers !== undefined &&
-        scenario.startingThingsLinkedToPlayers !== null
+        scenario.thingsToRevealWhenAimIsMet !== undefined &&
+        scenario.thingsToRevealWhenAimIsMet !== null
       ) {
-        for (const item of scenario.startingThingsLinkedToPlayers) {
+        for (const item of scenario.thingsToRevealWhenAimIsMet) {
           if (!this.mapOfStartingThings.Has(item.thing)) {
             this.mapOfStartingThings.Set(item.thing, new Set<string>())
           }
