@@ -15,3 +15,12 @@ yarn-error.log*
 # npmignore
 testsYup/
 .vscode/
+
+practice-world/03/a_aims.jsonc
+practice-world/03/b_boxes.jsonc
+practice-world/03/c_cutscenes.jsonc
+practice-world/03/d_dialogs.jsonc
+practice-world/03/i_inventory.jsonc
+practice-world/03/k_knowledge.jsonc
+practice-world/03/o_objects.jsonc
+practice-world/03/t_types.jsonc
