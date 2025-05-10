@@ -11,7 +11,7 @@ export class EnumReCreator {
   i_inventory = new EnumFileAsSet('i_inventory', 'inventory_enum')
   k_knowledge = new EnumFileAsSet('k_knowledge', 'knowledge_enum')
   o_objects = new EnumFileAsSet('o_objects', 'object_enum')
-  // t_types = new EnumFileAsSet('t_types', 'type_enum')
+  t_types = new EnumFileAsSet('t_types', 'type_enum')
   u_unrecognized = new EnumFileAsArray('u_unrecognized', 'un_enum')
   _folder: string
 
@@ -40,7 +40,7 @@ export class EnumReCreator {
     this.i_inventory.Write()
     this.k_knowledge.Write()
     this.o_objects.Write()
-    // this.t_types.Write()
+    this.t_types.Write()
     this.u_unrecognized.Write()
     // this.a_all.Write() don't need this
   }
@@ -53,7 +53,7 @@ export class EnumReCreator {
     this.i_inventory.Delete()
     this.k_knowledge.Delete()
     this.o_objects.Delete()
-    // this.t_types.Write()
+    this.t_types.Write()
     this.u_unrecognized.Delete()
     // this.a_all.Write() don't need this
   }
@@ -74,6 +74,8 @@ export class EnumReCreator {
         this.k_knowledge.Add(key)
       } else if (key.startsWith('obj_')) {
         this.o_objects.Add(key)
+      } else if (key.startsWith('type_')) {
+        this.t_types.Add(key)
       } else {
         this.u_unrecognized.Add(key)
       }
