@@ -56,7 +56,7 @@ app.get('/puz/starters', getJsonOfStartersApi)
 app.listen(PORT, () => {
   const a = `Congratulations, the backend server has started. It's listening on ${PORT}`
   const b = 'Some example calls:'
-  const c = `http://localhost:${PORT}/puz/aim-todo/practice-world/03/sols`
+  const c = `http://localhost:${PORT}/puz/todo/practice-world/03/sols`
   const d = `http://localhost:${PORT}/puz/exclusive-worlds/satanic/01/sols`
   const e = `http://localhost:${PORT}/puz/exclusive-worlds/mission/10_final/sols`
   console.log(a)

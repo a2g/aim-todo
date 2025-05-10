@@ -7,10 +7,10 @@
       "type": "object",
       "properties": {
         "col": {
-          "$ref": "../../../aim-todo/aim-todo-enums.json#/definitions/col_enum"
+          "$ref": "../../../todo/todo-enums.json#/definitions/col_enum"
         },
         "row": {
-          "$ref": "../../../aim-todo/aim-todo-enums.json#/definitions/row_enum"
+          "$ref": "../../../todo/todo-enums.json#/definitions/row_enum"
         },
         "destination": {
           "$ref": "d_destinations.jsonc#/definitions/destination_enum"

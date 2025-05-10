@@ -13,7 +13,7 @@
           "$ref": "d_destinations.jsonc#/definitions/destination_enum"
         },
         "access": {
-          "$ref": "../../../aim-todo/aim-todo-enums.json#/definitions/access_enum"
+          "$ref": "../../../todo/todo-enums.json#/definitions/access_enum"
         }
       }
     }

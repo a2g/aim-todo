@@ -21,9 +21,9 @@ export function getJsonOfAimTodo (): $AimTodo[] {
   process.chdir(join(__dirname, '/../../../..'))
 
   const allFolders = new Array<[string, string, string]>()
-  allFolders.push(['aim-todo', 'practice-world', '01'])
-  allFolders.push(['aim-todo', 'practice-world', '02'])
-  allFolders.push(['aim-todo', 'practice-world', '03'])
+  allFolders.push(['todo', 'practice-world', '01'])
+  allFolders.push(['todo', 'practice-world', '02'])
+  allFolders.push(['todo', 'practice-world', '03'])
 
   // lets try adding more folders from 'private-world'
   // but that folder may not exist, so we try/catch it

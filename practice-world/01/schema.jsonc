@@ -7,7 +7,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../aim-todo-template.jsonc#/definitions/piece_template"
+          "$ref": "../todo-template.jsonc#/definitions/piece_template"
         }
       ],
       "properties": {

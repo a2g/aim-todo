@@ -68,7 +68,7 @@
   },
   "include": [
     "src/**/*",
-    "aim-todo.ts",
+    "todo.ts",
     "FilenameSuffixes.ts",
     "testsYup/**/*"
 , "src/puzzle/aim/Validator.ts", "src/puzzle/aim/Validators.ts"  ],
