@@ -1,25 +1,20 @@
 {
-  "$schema": "./schema_for_achievements.jsonc",
+  "$schema": "./schema_for_aims.jsonc",
+  "root": {
+    "inv_burning_herbs": {
+      "inv_herbs": {
+        "obj_herbs": {}
+      },
+      "inv_torch_lit": {}
+    },
+    "obj_vent": {}
+  },
   "thingsToRevealWhenAimIsMet": [
     {
       "thing": "obj_hurl"
     },
     {
       "thing": "obj_windup_key"
-    }
-  ],
-  "pieces": [
-    {
-      "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",
-      "obj1": "obj_hurl",
-      "ament1": "a_hideout",
-      "inv1": "inv_hurl"
-    },
-    {
-      "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",
-      "obj1": "obj_windup_key",
-      "ament1": "a_hideout",
-      "inv1": "inv_windup_key"
     }
   ]
 }

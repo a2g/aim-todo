@@ -1,0 +1,21 @@
+{
+  "$schema": "./schema_for_aims.jsonc",
+  "root": {
+    "inv_cogs": {
+      "inv_windup_key": {},
+      "obj_grandfather_clock": {}
+    },
+    "obj_dumbwaiter": {}
+  },
+  "thingsToRevealWhenAimIsMet": [
+    {
+      "thing": "obj_vinegar" // its on the table immediately after
+    },
+    {
+      "thing": "inv_sunstone" // from woman near table
+    },
+    {
+      "thing": "inv_rolling_pin" // from woman near table
+    }
+  ]
+}

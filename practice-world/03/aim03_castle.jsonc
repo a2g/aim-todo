@@ -1,10 +1,10 @@
 {
   "$schema": "./schema_for_aims.jsonc",
-  "root" : {
-    "inv_three_punctuated_circles" :{
-       "obj_three_punctuated_circles":{}
+  "root": {
+    "inv_three_punctuated_circles": {
+      "obj_three_punctuated_circles": {}
     },
-    "obj_arch_druid" : {}
+    "obj_arch_druid": {}
   },
   "thingsToRevealWhenAimIsMet": [
     {
@@ -60,12 +60,6 @@
       "ament1": "a_dumbwaiter",
       "inv1": "inv_cogs",
       "obj1": "obj_dumbwaiter"
-    },
-    {
-      "piece": "AMENT1_MET_BY_USING_INV1_WITH_OBJ1",
-      "ament1": "a_hideout",
-      "inv1": "inv_burning_herbs",
-      "obj1": "obj_vent"
     },
     {
       "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",

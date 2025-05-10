@@ -4,8 +4,8 @@ import { $AimTodo, getJsonOfAimTodo } from './api/getJsonOfAimTrees'
 import { LogGainsFromEachDialog } from './cli/LogGainsFromEachDialog'
 import { ViewBackwardSolve } from './cli/views/ViewBackwardSolve'
 import { ViewForwardValidate } from './cli/views/ViewForwardValidate'
-import { Validators } from './puzzle/aim/Validators' 
-import { EnumReCreator } from './cli/EnumRecreator'
+import { Validators } from './puzzle/aim/Validators'
+import { EnumReCreator } from './cli/EnumReCreator'
 
 const prompt = promptSync()
 

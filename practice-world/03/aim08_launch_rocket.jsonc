@@ -1,0 +1,17 @@
+{
+  "$schema": "./schema_for_aims.jsonc",
+  "root": {
+    "obj_crank_in_wall": {
+      "obj_hole_in_wall": {},
+      "inv_crank2": {
+        "obj_crank_attached_to_well": {}
+      }
+    },
+    "obj_rocket_gate_buttered": {
+      "inv_cooking_lard": {},
+      "obj_rocket_gate": {}
+    },
+    "type_auto_both_things_present": {}
+  },
+  "thingsToRevealWhenAimIsMet": []
+}

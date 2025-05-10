@@ -1,0 +1,35 @@
+{
+  "$schema": "./schema_for_aims.jsonc",
+  "root": {
+    "inv_bucket_of_water": {
+      "inv_crank": {
+        "inv_handle": {
+          "inv_vinegar": {
+            "obj_vinegar": {}
+          },
+          "obj_painting": {}
+        },
+        "inv_rolling_pin": {}
+      },
+      "obj_well": {}
+    },
+    "obj_fireplace(lit)": {}
+  },
+  "thingsToRevealWhenAimIsMet": [
+    {
+      "thing": "inv_empty_bucket_after_water" // from after the above
+    },
+    {
+      "thing": "obj_crank_attached_to_well"
+    },
+    {
+      "thing": "obj_button(unpressed)"
+    },
+    {
+      "thing": "obj_rocket"
+    },
+    {
+      "thing": "obj_furnace"
+    }
+  ]
+}
