@@ -1,5 +1,5 @@
 {
-  "$schema": "./schema_for_achievements.jsonc",
+  "$schema": "./schema_for_boxes.jsonc",
   "thingsToRevealWhenAimIsMet": [
     {
       "thing": "inv_torch_lit"
