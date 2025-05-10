@@ -1,0 +1,31 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema",
+ "type": "object",
+ "definitions": {
+  "aim_enum": {
+   "enum": [
+    "aim13_find_out_where_parents_are",
+    "aim14_get_item_from_locker",
+    "aim15_complete_both_warm_up_tasks",
+    "aim16_call_the_authorities",
+    "aim17_read_book_about_dogs",
+    "aim18_guard_against_demon_dogs",
+    "aim19_trigger_air_raid",
+    "aim20_get_access_to_library_reference",
+    "aim21_get_the_article_from_library_microfiche",
+    "aim22_let_non_trapped_kid_know_you_are_trapped",
+    "aim30_escape_the_library",
+    "aim50_find_elders_hidden_talent",
+    "aim51_defeat_demon_using_football_challenge",
+    "aim60_find_youngs_hidden_talent",
+    "aim61_defeat_demon_using_cricket_challenge",
+    "aim70_find_goth_girls_hidden_talent",
+    "aim71_defeat_demon_using_goth_powers",
+    "aim80_find_violinists_hidden_talent",
+    "aim81_defeat_demon_using_rock_showdown",
+    "aim90_find_scientists_hidden_talent",
+    "aim91_defeat_demon_using_particle_accelerator"
+   ]
+  }
+ }
+}

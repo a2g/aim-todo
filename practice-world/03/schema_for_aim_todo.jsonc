@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "This is the schema for the aim tree",
+  "definitions": {
+    "aim_todo_hierarchy_def": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "a_aims.jsonc#/definitions/aim_enum"
+      },
+      "patternProperties": {
+         "": {  "$ref": "#/definitions/aim_todo_hierarchy_def" }
+      }
+    }
+  },
+  //   Root object
+  "type": "object",
+  "properties": {
+    "aim_todo": {
+       "$ref": "#/definitions/aim_todo_hierarchy_def"
+    }
+  }
+}

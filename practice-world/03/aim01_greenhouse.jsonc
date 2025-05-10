@@ -1,0 +1,49 @@
+// after we've done both the warm ups, we get to open this.
+// it lets you have a dialog with the demon
+// maybe it should be some other click, like
+// click on forest clearing?
+//
+// anyway, the output is that 'a02_met_demon_first_time'
+// which leads to a goal reveal of 'aim_call_the_authorities'
+{
+  "$schema": "./schema_for_aims.jsonc",
+  "root": {
+    "inv_greenhouse_key": {
+      "inv_apple_slices": {
+        "inv_apple": {
+          "inv_rock" :{
+            "obj_loose_brick" : {}
+          },
+          "obj_apples" : {}
+        },
+        "inv_knife": {
+          "obj_druid_wielding_knife" : {}
+        }
+      },
+      "obj_butler": {}
+    },
+    "obj_greenhouse_door": {
+    }
+  },
+  "thingsToRevealWhenAimIsMet": [
+    {
+      "thing": "obj_soil_thermometer"
+    },
+    {
+      "thing": "obj_herbs"
+    }
+  ],
+  "pieces": [
+    {
+      "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",
+      "obj1": "obj_herbs",
+      "ament1": "a_greenhouse",
+      "inv1": "inv_herbs"
+    },
+    {
+      "piece": "OBJ1_GOES_WHEN_GRAB_INV1",
+      "obj1": "obj_soil_thermometer",
+      "inv1": "inv_soil_thermometer"
+    }
+  ]
+}

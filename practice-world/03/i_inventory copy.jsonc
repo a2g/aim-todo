@@ -1,0 +1,34 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema",
+ "type": "object",
+ "definitions": {
+  "inventory_enum": {
+   "enum": [
+    "inv_locker_key",
+    "inv_coin",
+    "inv_cupboard_key",
+    "inv_matches",
+    "inv_firewood",
+    "inv_big_pot_of_onions_in_water",
+    "inv_pot_of_water",
+    "inv_big_pot",
+    "inv_onions",
+    "inv_oil",
+    "inv_three_holed_brick",
+    "inv_walkman_with_cassette_and_batteries",
+    "inv_batteries",
+    "inv_walkman_with_cassette",
+    "inv_walkman",
+    "inv_cassette",
+    "inv_screwdriver",
+    "inv_self_guided_tour_device",
+    "inv_walkie_talkie_in_library",
+    "inv_walkie_talkie_in_printworks",
+    "inv_elephant_transparency",
+    "inv_book_on_elephants",
+    "inv_ream_of_transparencies",
+    "inv_cassette_of_elephant_calls"
+   ]
+  }
+ }
+}

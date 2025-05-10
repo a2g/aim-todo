@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "This is the schema for the main Scenario file for the game. It basically a skeleton, pulling in other more substantial types from other files. It could be split up, but for now its easier managing three files Scenario, Schema and Objects",
+  "type": "object",
+  "required": [ "dialogs" ],
+  "properties": {
+    "dialogs": {
+      "type": "object",
+      //   Choices
+      // ==========
+      "patternProperties": {
+        "^.+_choices$": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "number" // first array item = index
+              },
+              {
+                "type": "string" // second array item is always speech
+              },
+              {
+                "type": "string" // third item is always goto X
+              },
+              {
+                //  I wanted things like visibility to have
+                // a key value pair, eg visibleIfNot param
+                // so I made the fourth array item an object {}
+                // and all additional properties go inside
+                // it as key value pairs
+                "type": "object",
+                "properties": {
+                  "once": {
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "$ref": "../../../todo/todo-enums.json#/definitions/once_enum"
+                      }
+                    ]
+                  },
+                  "visibleIfMet": {
+                    "type": "string",
+                    "anyOf": [
+                      {
+                        "$ref": "a_aims.jsonc#/definitions/aim_enum"
+                      },
+                      {
+                        "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+                      }
+                    ]
+                  },
+                  "visibleIfNotMet": {
+                    "type": "string",
+                    "anyOf": [
+                      {
+                        "$ref": "a_aims.jsonc#/definitions/aim_enum"
+                      },
+                      {
+                        "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+                      }
+                    ]
+                  },
+                  "youMatchedChoices": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      //  Non-choices
+      // ==============
+      "additionalProperties": { //
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "array",
+          "prefixItems": [
+            {
+              // First array item of a n\Non-choice is either:
+              // - "name of player"
+              // - one of the non-choice enum ie (goto, gains, exit, you, them etc))
+              "type": "string", // speaker or directive
+              "anyOf": [
+                {
+                  "$ref": "p_players.jsonc#/definitions/player_enum"
+                },
+                {
+                  "$ref": "n_non-players.jsonc#/definitions/non-player_enum"
+                },
+                {
+                  "$ref": "../../../todo/todo-enums.json#/definitions/dialog_non_choice_enum"
+                }
+              ]
+            },
+            {
+              // Second array item for non-choice is either
+              // - the thing to gain, if above is gains
+              // - destination, if above is goto
+              // - dialog, if above is a player
+              "type": "string"
+            },
+            { // third array item is
+              "type": "object", // additional properties in a map
+              "properties": {
+                "once": {
+                  "type": "string",
+                  "anyOf": [
+                    {
+                      "$ref": "../../../todo/todo-enums.json#/definitions/once_enum"
+                    }
+                  ]
+                },
+                "visibleIfNotMet": {
+                  "type": "string",
+                  "oneOf": [
+                    {
+                      "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+                    },
+                    {
+                      "$ref": "a_aims.jsonc#/definitions/aim_enum"
+                    }
+                  ]
+                },
+                "gainsCount": {
+                  "type": "number"
+                },
+                "youMatchedPropertyAdditional": {
+                  "type": "boolean"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

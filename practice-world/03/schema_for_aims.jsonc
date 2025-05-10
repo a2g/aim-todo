@@ -1,0 +1,243 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "This is the schema for the main Scenario file for the game. It basically a skeleton, pulling in other more substantial types from other files. It could be split up, but for now its easier managing three files Scenario, Schema and Objects",
+  "type": "object",
+  "definitions": {
+    "level_hierarchy_def": {
+      "type": "object",
+      "propertyNames": {
+        "oneOf": [
+          {
+            "$ref": "a_aims.jsonc#/definitions/aim_enum"
+          },
+          {
+            "$ref": "c_cutscenes.jsonc#/definitions/cutscene_enum"
+          },
+          {
+            "$ref": "d_dialogs.jsonc#/definitions/dialog_enum"
+          },
+          {
+            "$ref": "i_inventory.jsonc#/definitions/inventory_enum"
+          },
+          {
+            "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+          },
+          {
+            "$ref": "o_objects.jsonc#/definitions/object_enum"
+          },
+          {
+            "$ref": "../../../todo/todo-enums.json#/definitions/piece_enum"
+          }
+        ]
+      },
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/level_hierarchy_def"
+        }
+      }
+    },
+    "piece_def": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../todo/todo-template.jsonc#/definitions/piece_template"
+        }
+      ],
+      "properties": {
+        "dialog1": {
+          "$ref": "d_dialogs.jsonc#/definitions/dialog_enum"
+        },
+        "inv1": {
+          "oneOf": [
+            {
+              "$ref": "i_inventory.jsonc#/definitions/inventory_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "inv2": {
+          "oneOf": [
+            {
+              "$ref": "i_inventory.jsonc#/definitions/inventory_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "inv3": {
+          "oneOf": [
+            {
+              "$ref": "i_inventory.jsonc#/definitions/inventory_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "obj1": {
+          "$ref": "o_objects.jsonc#/definitions/object_enum"
+        },
+        "obj2": {
+          "$ref": "o_objects.jsonc#/definitions/object_enum"
+        },
+        "obj3": {
+          "$ref": "o_objects.jsonc#/definitions/object_enum"
+        },
+        "obj4": {
+          "$ref": "o_objects.jsonc#/definitions/object_enum"
+        },
+        "obj5": {
+          "oneOf": [
+            {
+              "$ref": "o_objects.jsonc#/definitions/object_enum"
+            },
+            {
+              "$ref": "d_dialogs.jsonc#/definitions/dialog_enum"
+            }
+          ]
+        },
+        "obj6": {
+          "$ref": "o_objects.jsonc#/definitions/object_enum"
+        },
+        "ament1": {
+          "oneOf": [
+            {
+              "$ref": "a_aims.jsonc#/definitions/aim_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "ament2": {
+          "oneOf": [
+            {
+              "$ref": "a_aims.jsonc#/definitions/aim_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "ament3": {
+          "oneOf": [
+            {
+              "$ref": "a_aims.jsonc#/definitions/aim_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "ament4": {
+          "oneOf": [
+            {
+              "$ref": "a_aims.jsonc#/definitions/aim_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "ament5": {
+          "oneOf": [
+            {
+              "$ref": "a_aims.jsonc#/definitions/aim_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "ament6": {
+          "oneOf": [
+            {
+              "$ref": "a_aims.jsonc#/definitions/aim_enum"
+            },
+            {
+              "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+            }
+          ]
+        },
+        "isNoFile": {
+          "type": "boolean"
+        },
+        "prerequisites": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/definitions/player_wrapper_type"
+          }
+        }
+      }
+    },
+    "player_wrapper_type": {
+      "type": "object",
+      "required": [
+        "player"
+      ],
+      "properties": {
+        "player": {
+          "$ref": "p_players.jsonc#/definitions/player_enum"
+        }
+      }
+    },
+    "obj_wrapper_type": {
+      "type": "object",
+      "required": [
+        "prop"
+      ],
+      "properties": {
+        "prop": {
+          "$ref": "o_objects.jsonc#/definitions/object_enum"
+        }
+      }
+    }
+  },
+  "properties": {
+    "root": {
+      "$ref": "#/definitions/level_hierarchy_def"
+    },
+    "thingsToRevealWhenAimIsMet": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "properties": {
+          "player": {
+            "$ref": "p_players.jsonc#/definitions/player_enum"
+          },
+          "thing": {
+            "oneOf": [
+              {
+                "$ref": "i_inventory.jsonc#/definitions/inventory_enum"
+              },
+              {
+                "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+              },
+              {
+                "$ref": "a_aims.jsonc#/definitions/aim_enum"
+              },
+              {
+                "$ref": "o_objects.jsonc#/definitions/object_enum"
+              },
+              {
+                "$ref": "d_dialogs.jsonc#/definitions/dialog_enum"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "extra_pieces": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/piece_def"
+      }
+    }
+  }
+}

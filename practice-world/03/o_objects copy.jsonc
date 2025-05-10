@@ -1,0 +1,47 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema",
+ "type": "object",
+ "definitions": {
+  "object_enum": {
+   "enum": [
+    "obj_locker",
+    "obj_public_telephone",
+    "obj_coin",
+    "obj_demon_book",
+    "obj_cupboard",
+    "obj_cupboard_key",
+    "obj_firewood_in_well(lit)",
+    "obj_matches",
+    "obj_firewood_in_well",
+    "obj_wishing_well",
+    "obj_firewood",
+    "obj_big_pot",
+    "obj_water",
+    "obj_onions",
+    "obj_old_oiled_lever",
+    "obj_old_rusted_lever",
+    "obj_oil",
+    "obj_three_holed_brick",
+    "obj_library_tour_stop3",
+    "obj_batteries",
+    "obj_walkman",
+    "obj_screwdriver",
+    "obj_self_guided_tour_device",
+    "obj_microfiche_machine",
+    "obj_walkie_talkie_in_library",
+    "obj_pneumatic_tube_terminal_in_printworks",
+    "obj_elephantized_projector",
+    "obj_overhead_projector_in_foyer",
+    "obj_overhead_projector_in_reference_room",
+    "obj_book_on_elephants",
+    "obj_photocopier_loaded_with_transparencies",
+    "obj_photocopier_loaded_with_paper",
+    "obj_ream_of_transparencies",
+    "obj_elephantized_audio_system",
+    "obj_library_audio_system",
+    "obj_cassette_of_elephant_calls",
+    "obj_audio_collection_of_animal_calls"
+   ]
+  }
+ }
+}

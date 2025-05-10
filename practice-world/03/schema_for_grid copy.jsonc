@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "This is the schema for an area in the game. ",
+  "type": "object",
+  "definitions": {
+    "square_type": {
+      "type": "object",
+      "properties": {
+        "col": {
+          "$ref": "../../../todo/todo-enums.json#/definitions/col_enum"
+        },
+        "row": {
+          "$ref": "../../../todo/todo-enums.json#/definitions/row_enum"
+        },
+        "destination": {
+          "$ref": "d_destinations.jsonc#/definitions/destination_enum"
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "minProperties": 3,
+  "properties": {
+    "startingDestination": {
+      "$ref": "d_destinations.jsonc#/definitions/destination_enum"
+    },
+    "grid": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/square_type"
+      }
+    },
+    "objects": {
+      "type": "object",
+      "patternProperties": {
+        "^obj_": {
+          "$ref": "d_destinations.jsonc#/definitions/destination_enum"
+        }
+      }
+    }
+  }
+}

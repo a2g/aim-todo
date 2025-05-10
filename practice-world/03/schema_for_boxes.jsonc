@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "This is the schema for the main Scenario file for the game. It basically a skeleton, pulling in other more substantial types from other files. It could be split up, but for now its easier managing three files Scenario, Schema and Objects",
+  "type": "object",
+  "definitions": {},
+  "properties": {
+    "thingsToRevealWhenAimIsMet": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "properties": {
+          "player": {
+            "$ref": "p_players.jsonc#/definitions/player_enum"
+          },
+          "thing": {
+            "oneOf": [
+              {
+                "$ref": "i_inventory.jsonc#/definitions/inventory_enum"
+              },
+              {
+                "$ref": "k_knowledge.jsonc#/definitions/knowledge_enum"
+              },
+              {
+                "$ref": "a_aims.jsonc#/definitions/aim_enum"
+              },
+              {
+                "$ref": "o_objects.jsonc#/definitions/object_enum"
+              },
+              {
+                "$ref": "d_dialogs.jsonc#/definitions/dialog_enum"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

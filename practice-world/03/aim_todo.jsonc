@@ -1,0 +1,59 @@
+{
+    "$schema": "./schema_for_aim_todo.jsonc",
+    "root": {
+        "aim13_find_out_where_parents_are": {}, // undertaken from beginning
+        "aim14_get_item_from_locker": {},
+        //"aim02_spy_on_the_forest_clearing": {}, // maybe not(undertaken when complete warmup, completed after cut-scene)
+        "aim16_call_the_authorities": {}, // (undertaken when you witness the clearing)
+        "aim18_guard_against_demon_dogs": { // undertaken when hearing the dogs at the other end gives you goal of aim04_defend_against_demon_dogs
+            "aim17_read_book_about_dogs": {}, // afterkid says theres page in book 
+            "aim_dispel_dogs_with_the_smell_of_onions": {} // after reading other page in book
+        },
+        "aim_find_out_how_demon_was_defeated_in_1955": { //  some kid says it happened before in 1955
+            "aim_find_newspaper_article_from_1955": { // another kid says printers always keep a copy of everything they print
+                "oneOf": {
+                    "aim_find_the_article_in_printworks": { // another kid says printers always keep a copy of everything they print
+                        "aim_find_the_article_in_printworks_basement": { // some signs says "archives are in basement"
+                            "aim_unlock_printworks_basement": { //  you find out basement is locked
+                                "aim_trigger_air_raid": {} // you read a sign that says door opens only during air raid
+                            },
+                            "aim09_get_the_article_from_printworks_basement": {}
+                        }
+                    },
+                    "aim_find_the_article_in_library": { // 
+                        "aim07_get_access_to_library_reference": {},
+                        "aim08_get_the_article_from_library_microfiche": {}
+                    }
+                }
+            },
+            "aim_alert_the_adult_in_1955_article": {
+                "aim_make_groundskeeper_come_to_football_ground": { // don't really need this, its more of a hint
+                    "aim_flood_the_pitch": {}
+                }
+            },
+            "aim_get_groundskeeper_to_explain_how_he_defeated_demon": { // appears once =
+                "aim_get_groundskeeper_cup_of_hot_tea": { // once you dialog to him - he mentioned this to you 
+                }
+            }
+        },
+        "aim_defeat_demon": {
+            "oneOf": {
+                "aim50_find_elders_hidden_talent": {
+                    "aim51_defeat_demon_in_football_challenge": {}
+                },
+                "aim60_find_youngs_hidden_talent": {
+                    "aim61_defeat_demon_in_cricket_challenge": {}
+                },
+                "aim70_find_goth_girls_hidden_talent": {
+                    "aim71_defeat_demon_using_goth_powers": {}
+                },
+                "aim80_find_violinists_hidden_talent": {
+                    "aim81_defeat_demon_using_rock_showdown": {}
+                },
+                "aim90_find_scientists_hidden_talent": {
+                    "aim91_defeat_demon_using_particle_accelerator": {}
+                }
+            }
+        }
+    }
+}

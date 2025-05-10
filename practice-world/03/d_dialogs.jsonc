@@ -1,0 +1,23 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema",
+ "type": "object",
+ "definitions": {
+  "dialog_enum": {
+   "enum": [
+    "d01_to_musicians_at_church",
+    "d01_to_rpgers_at_school",
+    "d03_opt_musicians_dont_believe",
+    "d03_opt_rpgers_dont_believe",
+    "d08_isolated_son_of_printer",
+    "d11_cleaners_kid_gives_you_key",
+    "d20_magician_tells_you_about_backorders",
+    "d23_library_kids_lecture_you_on_game_books",
+    "d80_to_groundskeeper",
+    "d91_to_demon_about_soccer",
+    "d92_to_demon_about_electric_guitar",
+    "d93_to_demon_about_cricket",
+    "d_dialogs"
+   ]
+  }
+ }
+}
