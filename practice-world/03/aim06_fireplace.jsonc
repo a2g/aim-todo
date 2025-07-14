@@ -9,7 +9,9 @@
           },
           "obj_painting": {}
         },
-        "inv_rolling_pin": {}
+        "inv_rolling_pin": {
+          "obj_rolling_pin": {}
+        }
       },
       "obj_well": {}
     },

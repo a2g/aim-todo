@@ -34,3 +34,4 @@ TODO: rename commands to Steps. BEauctiful word that implies order, and also cou
 Now aims are decoupled from boxes, we know that if we hit one, it needs to be merged.
 So we can pass file and folder into constructor, and throw exception if not exist.
 But we need to pass path down the chain. 
+

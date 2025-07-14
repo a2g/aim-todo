@@ -40,10 +40,12 @@ export class EnumFileAsSet {
     public Write () {
         this.Delete()
 
-        // if there's nothing to write, we don't create
-        if (this.setOfStrings.size == 0) {
-            return
-        }
+        //// if there's nothing to write, we don't create
+        // Nah, all these set ones still need to be created if there are none
+        // because otherwise the schema will complain that it can't find enum.
+        //if (this.setOfStrings.size == 0) {
+        //    return
+        //}
 
         const json: any = {}
         json.$schema = 'http://json-schema.org/draft-07/schema'

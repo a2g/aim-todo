@@ -1,0 +1,38 @@
+{
+  "$schema": "./schema_for_dialogs.jsonc",
+  "dialogs": {
+    "_starter": [
+      [
+        "you",
+        "Agh, be careful with that knife!"
+      ],
+      [
+        "you",
+        "What are you at anyway?"
+      ],
+      [
+        "them",
+        "Stabbing the darkness to chase it off?"
+      ],
+      [
+        "you",
+        "Right... Can I have your knife so I can do it too?"
+      ],
+      [
+        "them",
+        "I mean. I guess there's no 'i' in knife,"
+      ],
+      [
+        "gains",
+        "inv_knife"
+      ],
+      [
+        "them",
+        "Wait a minute... That's exactly how knife is spelled!"
+      ],
+      [
+        "exit"
+      ]
+    ]
+  }
+}

@@ -57,7 +57,7 @@ export function ViewZzzOldWay (solutions: Evolutions): void {
 
     // allow user to choose item
     const input = prompt(
-      'Choose achievement to climb up into or (b)ack, (r)e-run: '
+      'Choose achievement to digp into or (b)ack, (r)e-run: '
     ).toLowerCase()
     if (input === null || input === 'b') {
       continue

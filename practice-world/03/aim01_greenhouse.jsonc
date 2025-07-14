@@ -8,21 +8,20 @@
 {
   "$schema": "./schema_for_aims.jsonc",
   "root": {
+    "obj_greenhouse_door": {},
     "inv_greenhouse_key": {
       "inv_apple_slices": {
         "inv_apple": {
-          "inv_rock" :{
-            "obj_loose_brick" : {}
+          "inv_rock": {
+            "obj_loose_brick": {}
           },
-          "obj_apples" : {}
+          "obj_apples": {}
         },
         "inv_knife": {
-          "obj_druid_wielding_knife" : {}
+          "d01_druid_wielding_knife": {}
         }
       },
       "obj_butler": {}
-    },
-    "obj_greenhouse_door": {
     }
   },
   "thingsToRevealWhenAimIsMet": [
@@ -33,17 +32,5 @@
       "thing": "obj_herbs"
     }
   ],
-  "pieces": [
-    {
-      "piece": "OBJ1_GOES_WHEN_GRAB_INV1_WITH_AMENT1",
-      "obj1": "obj_herbs",
-      "ament1": "a_greenhouse",
-      "inv1": "inv_herbs"
-    },
-    {
-      "piece": "OBJ1_GOES_WHEN_GRAB_INV1",
-      "obj1": "obj_soil_thermometer",
-      "inv1": "inv_soil_thermometer"
-    }
-  ]
+  "pieces": []
 }

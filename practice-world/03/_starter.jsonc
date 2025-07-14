@@ -30,6 +30,10 @@
     },
     {
       "thing": "obj_arch_druid"
+    },
+    ,
+    {
+      "thing": "d01_druid_wielding_knife"
     }
   ],
   "pieces": [
@@ -38,14 +42,6 @@
       "ament1": "a_icehouse",
       "inv1": "inv_soil_thermometer",
       "obj1": "obj_icehouse"
-    },
-   
-
-    {
-      "piece": "INV1_BECOMES_INV2_BY_KEEPING_INV3",
-      "inv1": "inv_herbs",
-      "inv2": "inv_burning_herbs",
-      "inv3": "inv_torch_lit"
     },
     {
       "piece": "INV1_OBTAINED_BY_COMBINING_INV2_WITH_INV3",

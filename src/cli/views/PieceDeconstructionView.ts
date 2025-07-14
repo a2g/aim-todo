@@ -1,13 +1,13 @@
 import promptSync from 'prompt-sync'
-import { Piece } from '../../puzzle/Piece'
 import { VisibleThingsMap } from '../../puzzle/VisibleThingsMap'
 import { AimFileHeader } from '../../puzzle/aim/AimFileHeader'
 import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
 import { Validator } from '../../puzzle/aim/Validator'
+
 const prompt = promptSync({ sigint: true })
 
 export function PieceDeconstructionView (
-  piece: Piece,
+  piece: any,
   validator: Validator,
   stub: AimFileHeader, visibleThings: VisibleThingsMap, titlePath: string[]
 ): void {
@@ -15,21 +15,18 @@ export function PieceDeconstructionView (
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
     // const output: string = (piece.spielOutput.length > piece.output.length) ? piece.spielOutput : piece.output
-    const output = (piece.parent == null) ? '(stub)' : piece.output
-    console.warn(`id: ${piece.id}`)
-    console.warn(`output: ${output}`)
-    console.warn(`type: ${piece.type}`)
-    const targets = new Array<Piece | null>()
-    for (let i = 0; i < piece.inputs.length; i++) {
-      targets.push(piece.inputs[i])
-      const inputSpiel: string = piece.inputSpiels[i]
-      const type: string = piece.type
-      console.warn(`input: ${i + 1}. ${inputSpiel} ${type}`)
+    const targets = new Array<any | null>()
+
+    let i = 0;
+    for (const [key, value] of Object.entries(piece)) {
+      i++;
+      console.log(`${i} ${key}: ${value}`);
+      targets.push(value)
     }
 
     // allow user to choose item
     const input = prompt(
-      'Choose an input to climb up into or (s)tarting things, (b)ack, (r)e-run: '
+      'Choose an input to dig into or (s)tarting things, (b)ack, (r)e-run: '
     ).toLowerCase()
     if (input === null || input === 'b') {
       return
@@ -43,9 +40,9 @@ export function PieceDeconstructionView (
       // show map entry for chosen item
       const theNumber = Number(input)
       if (theNumber > 0 && theNumber <= targets.length) {
-        const result = targets[theNumber - 1]
-        if (result != null) {
-          PieceDeconstructionView(result, validator, stub, visibleThings, [...titlePath])
+        const piece = targets[theNumber - 1]
+        if (piece != null) {
+          PieceDeconstructionView(piece, validator, stub, visibleThings, [...titlePath])
         } else {
           prompt('THAT WAS NULL. Hit any key to continue: ')
         }
@@ -55,3 +52,4 @@ export function PieceDeconstructionView (
     }
   }
 }
+

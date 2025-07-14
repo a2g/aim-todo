@@ -1,12 +1,14 @@
 {
   "$schema": "./schema_for_aims.jsonc",
   "root": {
-    "type_toggle_obj1_whilst_the_rest_are_present": {},
     "obj_button(unpressed)": {},
     "obj_furnace_lit": {
       "obj_furnace_with_coal": {
         "inv_bucket_of_coal": {
-          "inv_empty_bucket_after_water": {},
+          "inv_empty_bucket_after_water": {
+            "obj_fireplace(lit)": {},
+            "inv_bucket_of_water": {}
+          },
           "obj_coal_bunker": {}
         },
         "obj_furnace": {}
@@ -15,7 +17,9 @@
     },
     "obj_rocket_with_sunstone": {
       "obj_rocket": {},
-      "inv_sunstone": {}
+      "inv_sunstone": {
+        "obj_sunstone": {}
+      }
     }
   },
   "thingsToRevealWhenAimIsMet": [
@@ -24,6 +28,9 @@
     },
     {
       "thing": "obj_rocket_gate"
+    },
+    { // this magically appears after button is pressed
+      "thing": "obj_crank_attached_to_well"
     }
   ]
 }

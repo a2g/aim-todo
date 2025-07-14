@@ -4,14 +4,18 @@
     "obj_crank_in_wall": {
       "obj_hole_in_wall": {},
       "inv_crank2": {
+        "inv_hurl": { // I think you need to smash if off
+          "obj_hurl": {}
+        },
         "obj_crank_attached_to_well": {}
       }
     },
     "obj_rocket_gate_buttered": {
-      "inv_cooking_lard": {},
+      "inv_cooking_lard": {
+        "obj_cooking_lard": {}
+      },
       "obj_rocket_gate": {}
-    },
-    "type_auto_both_things_present": {}
+    }
   },
   "thingsToRevealWhenAimIsMet": []
 }
