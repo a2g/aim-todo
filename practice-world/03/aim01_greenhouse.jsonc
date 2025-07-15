@@ -13,7 +13,11 @@
       "inv_apple_slices": {
         "inv_apple": {
           "inv_rock": {
-            "obj_loose_brick": {}
+            "obj_loose_brick": {},
+            "@": {
+              "type": "grab",
+              "talk": "You now have a rock"
+            }
           },
           "obj_apples": {}
         },

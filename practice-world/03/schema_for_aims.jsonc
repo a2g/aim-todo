@@ -3,10 +3,20 @@
   "description": "This is the schema for the main Scenario file for the game. It basically a skeleton, pulling in other more substantial types from other files. It could be split up, but for now its easier managing three files Scenario, Schema and Objects",
   "type": "object",
   "definitions": {
+    "symbol_enum": {
+      "enum": [
+        "@",
+        "type",
+        "talk"
+      ]
+    },
     "level_hierarchy_def": {
       "type": "object",
       "propertyNames": {
         "oneOf": [
+          {
+            "$ref": "#/definitions/symbol_enum"
+          },
           {
             "$ref": "a_aims.jsonc#/definitions/aim_enum"
           },
