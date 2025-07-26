@@ -112,13 +112,13 @@ export class Validator {
       this.currentlyVisibleThings.Set(aimFileHeader.GetAimName(), new Set<string>())
 
       // then reveal all the goodies 
-      for (const blah of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator())
-        if (!this.currentlyVisibleThings.Has(blah[0])) {
+      for (const goodie of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator())
+        if (!this.currentlyVisibleThings.Has(goodie[0])) {
           const raw = new RawObjectsAndVerb()
           raw.type = Raw.DeConstructorSetToVisible
-          raw.objectA = blah[0]
+          raw.objectA = goodie[0]
           aimFileHeader.AddCommand(raw)
-          this.currentlyVisibleThings.Set(blah[0], new Set<string>())
+          this.currentlyVisibleThings.Set(goodie[0], new Set<string>())
         }
 
       // Sse if any autos depend on the newly completed achievement - if so execute them
