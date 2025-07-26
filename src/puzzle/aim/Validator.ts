@@ -80,10 +80,10 @@ export class Validator {
         break
       }
 
-      if (rawObjectsAndVerb.type !== Raw.None) {
+      if (rawObjectsAndVerb.source !== Raw.None) {
         // this is just here for debugging!
         aimFileHeader.AddCommand(rawObjectsAndVerb)
-        console.log(`${rawObjectsAndVerb.type}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
+        console.log(`${rawObjectsAndVerb.source}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
       }
     }
 
@@ -96,8 +96,7 @@ export class Validator {
     if (numberOfPieces <= 1 && isValidated == Validated.Not) {
 
       deconstructDoer.SetValidated(Validated.YesValidated)
-      const raw = new RawObjectsAndVerb()
-      raw.type = Raw.DeConstructorNoticedZeroPiecesInAim
+      const raw = new RawObjectsAndVerb(Raw.DeConstructorNoticedZeroPiecesInAim)
       raw.objectA = ' in '
       raw.objectB = ''
       raw.output = aimFileHeader.GetAimName()
@@ -114,8 +113,7 @@ export class Validator {
       // then reveal all the goodies 
       for (const goodie of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator())
         if (!this.currentlyVisibleThings.Has(goodie[0])) {
-          const raw = new RawObjectsAndVerb()
-          raw.type = Raw.DeConstructorSetToVisible
+          const raw = new RawObjectsAndVerb(Raw.DeConstructorSetToVisible)
           raw.objectA = goodie[0]
           aimFileHeader.AddCommand(raw)
           this.currentlyVisibleThings.Set(goodie[0], new Set<string>())
@@ -144,8 +142,8 @@ export class Validator {
       const at = toReturn.length
       // const n = stub.commandsCompletedInOrder.length
       toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
-      const raw = new RawObjectsAndVerb()
-      raw.type = Raw.Separator
+      const raw = new RawObjectsAndVerb( Raw.Separator)
+
       raw.mainSpiel = ` --------------- end of achievement ${filename}`
       toReturn.push(raw)
     }

@@ -5,6 +5,7 @@ import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { AimFileHeader } from './AimFileHeader'
 import { Validated } from '../Validated'
 import { IdPrefixes } from '../../../IdPrefixes'
+import { Raw } from '../Raw'
 
 export class AimFileHeaderDeConstructor {
   private readonly theAimTree: AimFileHeader
@@ -100,7 +101,7 @@ export class AimFileHeaderDeConstructor {
         }
 
         // construct the new command - whilst we have all the data.
-        let command = new RawObjectsAndVerb()
+        let command = new RawObjectsAndVerb(Raw.Command)
         command.output = treeNodeKey
         const dependencies = Object.keys(treeNode) as string[]
         if (dependencies.length > 0) {

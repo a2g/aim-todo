@@ -8,8 +8,7 @@ First bug was that we kept getting the header completion Step added over and ove
       // then write the achievement we just achieved
       deconstructDoer.SetValidated(true)
 
-      const raw = new RawObjectsAndVerb()
-      raw.type = Raw.DeConstructorNoticedZeroPieces
+      const raw = new RawObjectsAndVerb(DeConstructorNoticedZeroPieces)
 
 
 2. The next step was making sure isZero pieces worked correctly.. because it didn't
