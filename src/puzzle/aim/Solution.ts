@@ -36,7 +36,11 @@ export class Solution {
     }
 
     _CloneObject (thisObject: any): any {
+        if (typeof thisObject === 'string') {
+            return new String(thisObject)
+        }
         const toReturn: any = {}
+
         for (const key in thisObject) {
             const newChild = this._CloneObject(thisObject[key])
             toReturn[key] = newChild

@@ -60,13 +60,19 @@ export class AimFileHeaderDeConstructor {
   }
 
   private GetNextDoableCommandRecursively (treeNode: any, treeNodeKey: string): RawObjectsAndVerb | null {
+    if (typeof treeNode === 'string') {
+      return null;
+    }
+
     let numberOfChildrenLeaves = 0
     let numberOfChildren = 0
     for (const key in treeNode) {
-      const obj = treeNode[key]
-      numberOfChildren += 1
-      if (this.IsALeaf(obj)) {
-        numberOfChildrenLeaves += 1
+      if (key !== '@') {
+        const obj = treeNode[key]
+        numberOfChildren += 1
+        if (this.IsALeaf(obj)) {
+          numberOfChildrenLeaves += 1
+        }
       }
     }
 
@@ -75,9 +81,11 @@ export class AimFileHeaderDeConstructor {
       // then we test for removal
       let areAllChildDependenciesFulfilled = true
       for (const key in treeNode) {
-        // if the dependency is not fulfilled, then we set it to false
-        if (!this.currentlyVisibleThings.Has(key)) {
-          areAllChildDependenciesFulfilled = false
+        if (key !== '@') {
+          // if the dependency is not fulfilled, then we set it to false
+          if (!this.currentlyVisibleThings.Has(key)) {
+            areAllChildDependenciesFulfilled = false
+          }
         }
       }
 

@@ -122,6 +122,9 @@ export class AimFileHeader {
   }
 
   _CloneObject (thisObject: any): any {
+    if (typeof thisObject === 'string') {
+      return new String(thisObject)
+    }
     const toReturn: any = {}
     for (const key in thisObject) {
       const clonedRoot = this._CloneObject(thisObject[key])
@@ -144,7 +147,9 @@ export class AimFileHeader {
   private UpdateNodeCountRecursively (thisObject: any) {
     this.nodeCount += 1
     for (const key in thisObject) {
-      this.UpdateNodeCountRecursively(thisObject[key])
+      if (key !== "@") {
+        this.UpdateNodeCountRecursively(thisObject[key])
+      }
     }
   }
 

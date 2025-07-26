@@ -64,6 +64,9 @@ export class Solutions {
   }
 
   private traverseAndCreateSeparateTreesWhenEncounteringOneOf (thisObject: any, solution: Solution): boolean {
+    if (typeof thisObject === 'string') {
+      return false;
+    }
     for (const key in thisObject) {
       if (key !== 'oneOf') {
         const child = thisObject[key]
