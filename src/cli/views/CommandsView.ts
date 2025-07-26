@@ -15,19 +15,19 @@ export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
 
     for (const command of commands) {
       // 0 is cleanest, later numbers are more detailed
-      if (command.type === Raw.Achievement && infoLevel < 5) {
+      if (command.source === Raw.Achievement && infoLevel < 5) {
         continue
       }
-      if (command.type === Raw.Achievement && infoLevel < 3) {
+      if (command.source === Raw.Achievement && infoLevel < 3) {
         continue
       }
-      if (command.type === Raw.DeConstructorNoticedZeroPiecesInAim && infoLevel < 1) {
+      if (command.source === Raw.DeConstructorNoticedZeroPiecesInAim && infoLevel < 1) {
         continue
       }
       listItemNumber++
       const formattedCommand = FormatCommand(command, infoLevel)
       console.warn(`${listItemNumber}. ${formattedCommand}`)
-      if (command.type === Raw.Dialog) {
+      if (command.source === Raw.Dialog) {
         for (const speechLine of command.speechLines) {
           console.warn(`   ${speechLine[0]}: ${speechLine[1]}`)
         }

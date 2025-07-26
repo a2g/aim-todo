@@ -80,10 +80,10 @@ export class Validator {
         break
       }
 
-      if (rawObjectsAndVerb.type !== Raw.None) {
+      if (rawObjectsAndVerb.source !== Raw.None) {
         // this is just here for debugging!
         aimFileHeader.AddCommand(rawObjectsAndVerb)
-        console.log(`${rawObjectsAndVerb.type}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
+        console.log(`${rawObjectsAndVerb.source}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
       }
     }
 
@@ -97,7 +97,7 @@ export class Validator {
 
       deconstructDoer.SetValidated(Validated.YesValidated)
       const raw = new RawObjectsAndVerb()
-      raw.type = Raw.DeConstructorNoticedZeroPiecesInAim
+      raw.source = Raw.DeConstructorNoticedZeroPiecesInAim
       raw.objectA = ' in '
       raw.objectB = ''
       raw.output = aimFileHeader.GetAimName()
@@ -115,7 +115,7 @@ export class Validator {
       for (const goodie of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator())
         if (!this.currentlyVisibleThings.Has(goodie[0])) {
           const raw = new RawObjectsAndVerb()
-          raw.type = Raw.DeConstructorSetToVisible
+          raw.source = Raw.DeConstructorSetToVisible
           raw.objectA = goodie[0]
           aimFileHeader.AddCommand(raw)
           this.currentlyVisibleThings.Set(goodie[0], new Set<string>())
@@ -145,7 +145,7 @@ export class Validator {
       // const n = stub.commandsCompletedInOrder.length
       toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
       const raw = new RawObjectsAndVerb()
-      raw.type = Raw.Separator
+      raw.source = Raw.Separator
       raw.mainSpiel = ` --------------- end of achievement ${filename}`
       toReturn.push(raw)
     }

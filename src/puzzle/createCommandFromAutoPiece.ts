@@ -14,7 +14,7 @@ export function createCommandFromAutoPiece (piece: Piece): RawObjectsAndVerb {
   raw.mainSpiel = ""
   raw.objectA = piece.inputHints[0]
   raw.prerequisites = piece.getPrerequisites()
-  raw.type = Raw.Auto
+  raw.source = Raw.Auto
   raw.output = piece.output
   return raw
 }

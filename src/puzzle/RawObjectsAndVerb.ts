@@ -4,7 +4,7 @@ import { FormatText } from './FormatText'
 import { Raw } from './Raw'
 
 export class RawObjectsAndVerb {
-  public type: Raw
+  public source: Raw
   public objectA: string
   public objectB: string
   public output: string
@@ -23,7 +23,7 @@ export class RawObjectsAndVerb {
   constructor(
 
   ) {
-    this.type = Raw.Use
+    this.source = Raw.Use
     this.objectA = ''
     this.objectB = ''
     this.output = ''
@@ -38,7 +38,7 @@ export class RawObjectsAndVerb {
   }
 
   public PopulateSpielFields (isColor = true): void {
-    const verb = FormatText(this.type, isColor)
+    const verb = FormatText(this.source, isColor)
     const output = FormatText(this.output)
     const objectA =
       FormatText(this.objectA, isColor) +
@@ -56,7 +56,7 @@ export class RawObjectsAndVerb {
         : ''
 
     let joiner = ' '
-    switch (this.type) {
+    switch (this.source) {
       case Raw.Use:
         joiner = ' with '
         break
@@ -74,7 +74,7 @@ export class RawObjectsAndVerb {
           this.mainSpiel = `You now see a dialogty ${objectB}`
           this.achievementSpiel = `as a result of achievement ${objectA}`
         } else if (this.objectB.startsWith(IdPrefixes.Aim)) {
-          this.type = Raw.Achievement
+          this.source = Raw.Achievement
           this.mainSpiel = `Achievement unlocked ${objectB}`
           this.achievementSpiel = `as a result of achievement ${objectA}`
         } else {
@@ -103,12 +103,12 @@ export class RawObjectsAndVerb {
 
   public dumpRaw (): void {
     console.warn('Dumping instance of RawObjectsAndVerb')
-    console.warn(Raw[this.type])
+    console.warn(Raw[this.source])
     console.warn(this.objectA)
     console.warn(this.objectB)
   }
 
   public isAAchievementOrAuto (): boolean {
-    return this.type === Raw.Achievement || this.type === Raw.Auto
+    return this.source === Raw.Achievement || this.source === Raw.Auto
   }
 }
