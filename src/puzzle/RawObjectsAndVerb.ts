@@ -4,6 +4,8 @@ import { FormatText } from './FormatText'
 import { Raw } from './Raw'
 
 export class RawObjectsAndVerb {
+  public metaType: meta.Type
+  public metaSpeech: String
   public source: Raw
   public objectA: string
   public objectB: string
@@ -24,6 +26,8 @@ export class RawObjectsAndVerb {
 
   ) {
     this.source = Raw.Use
+    this.metaType = meta.Type.Toggle
+    this.metaSpeech = ""
     this.objectA = ''
     this.objectB = ''
     this.output = ''
