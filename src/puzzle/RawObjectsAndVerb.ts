@@ -25,7 +25,7 @@ export class RawObjectsAndVerb {
   constructor(
 
   ) {
-    this.source = Raw.Use
+    this.source = Raw.Command
     this.metaType = meta.Type.Toggle
     this.metaSpeech = ""
     this.objectA = ''
@@ -61,7 +61,7 @@ export class RawObjectsAndVerb {
 
     let joiner = ' '
     switch (this.source) {
-      case Raw.Use:
+      case Raw.Command:
         joiner = ' with '
         break
       case Raw.Toggle:

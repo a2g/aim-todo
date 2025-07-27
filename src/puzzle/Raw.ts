@@ -5,7 +5,7 @@ export enum Raw {
   Open = 'Open',
   Dialog = 'Dialog',
   Toggle = 'Toggle',
-  Use = 'Use',
+  Command = 'Command',
   Give = 'Give',
   Achievement = 'Achievement',
   Separator = 'Separator',
