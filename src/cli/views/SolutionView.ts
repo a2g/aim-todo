@@ -22,12 +22,12 @@ export function SolutionView (solution: Solution, _solutions: Solutions, titlePa
     console.warn(`${label}`)
     let listItemNumber = 0
     let incomplete = 0
-    for (const achievementStub of solution.GetAimTreeMap().GetAims()) {
+    for (const achievementHeader of solution.GetAimTreeMap().GetAims()) {
       listItemNumber++
 
       // display list item
-      const output = achievementStub.GetAimName()
-      const theAchievementPiece = achievementStub.GetTheAny()
+      const output = achievementHeader.GetAimName()
+      const theAchievementPiece = achievementHeader.GetTheAny()
       let inputs = ''
       if (theAchievementPiece != null) {
         for (let i = 0; i < theAchievementPiece.inputSpiels.length; i++) {
@@ -36,12 +36,12 @@ export function SolutionView (solution: Solution, _solutions: Solutions, titlePa
           inputs += `${FormatText(inputSpiel)}`
         }
       }
-      const status = achievementStub.GetSolved() as string
-      const needed = achievementStub.IsNeeded() ? 'Y' : 'N'
+      const status = achievementHeader.GetSolved() as string
+      const needed = achievementHeader.IsNeeded() ? 'Y' : 'N'
       console.warn(
         `${listItemNumber}. ${status} ${needed} ${FormatText(output)} ${AddBrackets(inputs)} `
       )
-      incomplete += achievementStub.IsSolved() ? 0 : 1
+      incomplete += achievementHeader.IsSolved() ? 0 : 1
     }
 
     console.warn(`Number of achievements incomplete ${incomplete}/${listItemNumber}`)

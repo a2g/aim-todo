@@ -26,8 +26,8 @@ export class AchievementHeaderMap {
     if (cloneIncludingLeaves != null) {
       for (const pair of cloneIncludingLeaves.theMap) {
         const key = pair[0]
-        const achievementStub = pair[1]
-        this.theMap.set(key, achievementStub.CloneIncludingLeaves())
+        const achievementHeader = pair[1]
+        this.theMap.set(key, achievementHeader.CloneIncludingLeaves())
       }
     }
   }
