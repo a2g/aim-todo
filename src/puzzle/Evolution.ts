@@ -1,7 +1,7 @@
 import { FormatText } from './FormatText'
 
 
-import { AchievementStubMap } from './AchievementStubMap'
+import { AchievementHeaderMap } from './AchievementHeaderMap'
 
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { DialogFile } from './talk/DialogFile'
@@ -14,7 +14,7 @@ let globalSolutionId = 101
  */
 export class Evolution {
   // important ones
-  private readonly stubs: AchievementStubMap
+  private readonly stubs: AchievementHeaderMap
 
   private readonly dialogs: Map<string, DialogFile>
 
@@ -29,12 +29,12 @@ export class Evolution {
   private constructor(
     id: number,
     startingThingsPassedIn: VisibleThingsMap,
-    stubsToCopy: AchievementStubMap | null,
+    stubsToCopy: AchievementHeaderMap | null,
     prerequisites: Set<string> | null = null,
     nameSegments: string[] | null = null
   ) {
     this.id = id
-    this.stubs = new AchievementStubMap(stubsToCopy)
+    this.stubs = new AchievementHeaderMap(stubsToCopy)
     this.dialogs = new Map<string, DialogFile>()
 
 
@@ -69,7 +69,7 @@ export class Evolution {
 
   public static createSolution (
     startingThingsPassedIn: VisibleThingsMap,
-    stubs: AchievementStubMap | null,
+    stubs: AchievementHeaderMap | null,
     prerequisites: Set<string> | null = null,
     nameSegments: string[] | null = null
   ): Evolution {
@@ -142,7 +142,7 @@ export class Evolution {
     return
   }
 
-  public GetAchievementStubMap (): AchievementStubMap {
+  public GetAchievementStubMap (): AchievementHeaderMap {
     return this.stubs
   }
 

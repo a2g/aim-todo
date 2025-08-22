@@ -16,16 +16,28 @@
             "obj_loose_brick": {},
             "@": {
               "type": "grab",
-              "talk": "You now have a rock"
+              "talk": "The base of this well is pretty loose. I think I can slide one out..."
             }
           },
-          "obj_apples": {}
+          "obj_apples": {},
+          "@": {
+            "type": "use",
+            "talk": "Let's see if we can knock one loose."
+          }
         },
         "inv_knife": {
           "d01_druid_wielding_knife": {}
+        },
+        "@": {
+          "type": "use",
+          "talk": "Let's chop this apple."
         }
       },
-      "obj_butler": {}
+      "obj_butler": {},
+      "@": {
+        "type": "give",
+        "talk": "Here you go sir."
+      }
     }
   },
   "thingsToRevealWhenAimIsMet": [

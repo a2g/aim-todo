@@ -96,13 +96,11 @@ export class Validator {
     if (numberOfPieces <= 1 && isValidated == Validated.Not) {
 
       deconstructDoer.SetValidated(Validated.YesValidated)
-      const raw = new RawObjectsAndVerb()
-      raw.source = Raw.DeConstructorNoticedZeroPiecesInAim
+      const raw = new RawObjectsAndVerb(Raw.Error_ZeroPiecesInAimNoticedInDeconstructing)
       raw.objectA = ' in '
       raw.objectB = ''
       raw.output = aimFileHeader.GetAimName()
       raw.prerequisites = []
-      raw.speechLines = []
       aimFileHeader.AddCommand(raw)
 
 
@@ -112,14 +110,17 @@ export class Validator {
       this.currentlyVisibleThings.Set(aimFileHeader.GetAimName(), new Set<string>())
 
       // then reveal all the goodies 
-      for (const goodie of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator())
+      const setToVisible = new RawObjectsAndVerb(Raw.Reveal)
+      for (const goodie of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator()) {
         if (!this.currentlyVisibleThings.Has(goodie[0])) {
-          const raw = new RawObjectsAndVerb()
-          raw.source = Raw.DeConstructorSetToVisible
+
           raw.objectA = goodie[0]
-          aimFileHeader.AddCommand(raw)
+          setToVisible.addChildTuple([goodie[0], ""])
+
           this.currentlyVisibleThings.Set(goodie[0], new Set<string>())
         }
+      }
+      aimFileHeader.AddCommand(setToVisible)
 
       // Sse if any autos depend on the newly completed achievement - if so execute them
       /*
@@ -144,8 +145,7 @@ export class Validator {
       const at = toReturn.length
       // const n = stub.commandsCompletedInOrder.length
       toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
-      const raw = new RawObjectsAndVerb()
-      raw.source = Raw.Separator
+      const raw = new RawObjectsAndVerb(Raw.Separator)
       raw.mainSpiel = ` --------------- end of achievement ${filename}`
       toReturn.push(raw)
     }

@@ -7,7 +7,9 @@
       "enum": [
         "@",
         "type",
-        "talk"
+        "talk",
+        "grab'",
+        "use"
       ]
     },
     "level_hierarchy_def": {

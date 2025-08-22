@@ -91,8 +91,9 @@ export function ViewOrderOfCommands (validators: Validators): void {
           const formattedCommand = FormatCommand(command, infoLevel)
           console.warn(`    ${listItemNumber}. ${formattedCommand}`)
           if (command.source === Raw.Dialog) {
-            for (const speechLine of command.speechLines) {
+            for (let i = 0; i < command.getChildTupleLength(); i++) {
               listItemNumber++
+              const speechLine = command.getChildTuple(i)
               console.warn(`    ${listItemNumber}. ${speechLine[0]}: ${speechLine[1]}`)
             }
           }

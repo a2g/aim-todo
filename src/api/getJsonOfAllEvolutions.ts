@@ -161,7 +161,8 @@ export function getJsonArrayOfOrderedSteps (
       paramB: newLocation,
       children: []
     })
-    for (const speechLine of step.speechLines) {
+    for (let i = 0; i < step.getChildTupleLength(); i++) {
+      const speechLine = step.getChildTuple(i);
       toReturn.push({
         name: speechLine,
         isAAchievementOrAuto: true,

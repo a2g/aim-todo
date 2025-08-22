@@ -31,7 +31,7 @@ import { Validated } from './Validated'
  * but its handy to have a predictable deterministic solution - at least as a
  * starting point, before optimizations.
  */
-export class AchievementStub extends PieceBase {
+export class AchievementHeader extends PieceBase {
   private readonly commandsCompletedInOrder: RawObjectsAndVerb[]
   private solved: Solved = Solved.Not
   private isNeeded: boolean
@@ -61,8 +61,8 @@ export class AchievementStub extends PieceBase {
     return this.inputHints[0]
   }
 
-  public CloneIncludingLeaves (): AchievementStub {
-    const newAchievementStub = new AchievementStub(this.inputHints[0], this.commandsCompletedInOrder, this.isNeeded, this.solved)
+  public CloneIncludingLeaves (): AchievementHeader {
+    const newAchievementStub = new AchievementHeader(this.inputHints[0], this.commandsCompletedInOrder, this.isNeeded, this.solved)
     if (this.inputs[0] != null) {
       newAchievementStub.inputs[0] = this.inputs[0].ClonePieceAndEntireTree()
       newAchievementStub.inputs[0].parent = newAchievementStub

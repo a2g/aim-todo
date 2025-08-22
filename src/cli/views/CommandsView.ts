@@ -21,15 +21,21 @@ export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
       if (command.source === Raw.Achievement && infoLevel < 3) {
         continue
       }
-      if (command.source === Raw.DeConstructorNoticedZeroPiecesInAim && infoLevel < 1) {
+      if (command.source === Raw.Error_ZeroPiecesInAimNoticedInDeconstructing && infoLevel < 1) {
         continue
       }
       listItemNumber++
       const formattedCommand = FormatCommand(command, infoLevel)
       console.warn(`${listItemNumber}. ${formattedCommand}`)
       if (command.source === Raw.Dialog) {
-        for (const speechLine of command.speechLines) {
+        for (var i = 0; i < command.getChildTupleLength(); i++) {
+          const speechLine = command.getChildTuple(i)
           console.warn(`   ${speechLine[0]}: ${speechLine[1]}`)
+        }
+      } else if (command.source === Raw.Reveal) {
+        for (var i = 0; i < command.getChildTupleLength(); i++) {
+          const speechLine = command.getChildTuple(i)
+          console.warn(`Reveal   ${speechLine[0]}`)
         }
       }
     }

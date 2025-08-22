@@ -1,7 +1,7 @@
 
-namespace meta {
+export namespace Meta {
   export enum Type {
-    Use = 'Use',
-    Toggle = 'Toggle'
+    Use = 'use',
+    Toggle = 'toggle'
   }
 }

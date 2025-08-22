@@ -1,11 +1,12 @@
 import { IdPrefixes } from '../../IdPrefixes'
 import { AddBrackets } from './AddBrackets'
 import { FormatText } from './FormatText'
+import { Meta } from './Meta'
 import { Raw } from './Raw'
 
 export class RawObjectsAndVerb {
-  public metaType: meta.Type
-  public metaSpeech: String
+  public typeAnnotation: Meta.Type
+  public talkAnnotation: String
   public source: Raw
   public objectA: string
   public objectB: string
@@ -17,17 +18,17 @@ export class RawObjectsAndVerb {
   public achievementSpiel: string
   public mainSpiel: string
   public restrictionSpiel: string
-  public speechLines: string[][]
+  private childTuples: [string, string][]
   // other ideas for debugging fields to add
   // - the box the command came out of
   // - the id of the command
 
   constructor(
-
+    source: Raw
   ) {
-    this.source = Raw.Command
-    this.metaType = meta.Type.Toggle
-    this.metaSpeech = ""
+    this.source = source
+    this.typeAnnotation = Meta.Type.Toggle
+    this.talkAnnotation = ""
     this.objectA = ''
     this.objectB = ''
     this.output = ''
@@ -38,7 +39,7 @@ export class RawObjectsAndVerb {
     this.achievementSpiel = ''
     this.restrictionSpiel = ''
     this.typeJustForDebugging = ''
-    this.speechLines = []
+    this.childTuples = []
   }
 
   public PopulateSpielFields (isColor = true): void {
@@ -115,4 +116,17 @@ export class RawObjectsAndVerb {
   public isAAchievementOrAuto (): boolean {
     return this.source === Raw.Achievement || this.source === Raw.Auto
   }
+
+  public getChildTuple (index: number): [string, string] {
+    return this.childTuples[index]
+  }
+
+  public addChildTuple (child: [string, string]) {
+    this.childTuples.push(child)
+  }
+
+  public getChildTupleLength (): number {
+    return this.childTuples.length
+  }
+
 }

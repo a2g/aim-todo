@@ -1,7 +1,7 @@
 import { GenerateMapOfLeavesRecursively } from './GenerateMapOfLeavesRecursively'
 import { GenerateMapOfLeavesTracingAchievementsRecursively } from './GenerateMapOfLeavesTraccingGoalsRecursively'
 import { Piece } from './Piece'
-import { AchievementStub } from './AchievementStub'
+import { AchievementHeader } from './AchievementHeader'
 import { Solved } from './Solved'
 import { A_WIN } from '../A_WIN'
 
@@ -18,11 +18,11 @@ import { A_WIN } from '../A_WIN'
  * justifiable to have the concept of RootPiece.
  *
  */
-export class AchievementStubMap {
-  private readonly theMap: Map<string, AchievementStub>
+export class AchievementHeaderMap {
+  private readonly theMap: Map<string, AchievementHeader>
 
-  constructor(cloneIncludingLeaves: AchievementStubMap | null) {
-    this.theMap = new Map<string, AchievementStub>()
+  constructor(cloneIncludingLeaves: AchievementHeaderMap | null) {
+    this.theMap = new Map<string, AchievementHeader>()
     if (cloneIncludingLeaves != null) {
       for (const pair of cloneIncludingLeaves.theMap) {
         const key = pair[0]
@@ -67,7 +67,7 @@ export class AchievementStubMap {
     return leaves
   }
 
-  public AchievementStubByName (name: string): AchievementStub {
+  public AchievementStubByName (name: string): AchievementHeader {
     const root = this.theMap.get(name)
     if (typeof root === 'undefined' || root === null) {
       throw new Error(`rootPiece of that name doesn't exist ${name}`)
@@ -87,30 +87,30 @@ export class AchievementStubMap {
     return this.theMap.size
   }
 
-  public GetValues (): IterableIterator<AchievementStub> {
+  public GetValues (): IterableIterator<AchievementHeader> {
     return this.theMap.values()
   }
 
-  public Clone (): AchievementStubMap {
-    return new AchievementStubMap(this)
+  public Clone (): AchievementHeaderMap {
+    return new AchievementHeaderMap(this)
   }
 
   public Has (achievementToObtain: string): boolean {
     return this.theMap.has(achievementToObtain)
   }
 
-  public GetAchievementStubByNameNoThrow (achievement: string): AchievementStub | undefined {
+  public GetAchievementStubByNameNoThrow (achievement: string): AchievementHeader | undefined {
     return this.theMap.get(achievement)
   }
 
-  public GetAchievementStubIfAny (): AchievementStub | undefined {
+  public GetAchievementStubIfAny (): AchievementHeader | undefined {
     return this.theMap.get(A_WIN)
   }
 
   AddAchievementStub (word: string, isNeeded: boolean): void {
     if (!this.theMap.has(word)) {
       console.warn(`Merged achievement word ${word}`)
-      const newStub = new AchievementStub(word, [], isNeeded, Solved.Not)
+      const newStub = new AchievementHeader(word, [], isNeeded, Solved.Not)
       this.theMap.set(word, newStub)
     } else {
       console.warn(`Already exists: Failed to merge achievement ${word}  `)

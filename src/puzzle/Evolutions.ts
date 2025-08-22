@@ -1,6 +1,6 @@
 // import { Aggregates } from './Aggregates'
 import { Box } from './Box'
-import { AchievementStubMap } from './AchievementStubMap'
+import { AchievementHeaderMap } from './AchievementHeaderMap'
 
 import { Evolution } from './Evolution'
 
@@ -81,9 +81,9 @@ export class Evolutions {
     }
   }
 
-  public CreateStubMapFromAchievements (setOfStrings: Set<string>): AchievementStubMap {
+  public CreateStubMapFromAchievements (setOfStrings: Set<string>): AchievementHeaderMap {
     setOfStrings.delete(A_WIN)
-    const rootMapFromStubs = new AchievementStubMap(null)
+    const rootMapFromStubs = new AchievementHeaderMap(null)
     rootMapFromStubs.AddAchievementStub(A_WIN, true)
 
     for (const achievementAchievement of setOfStrings) {

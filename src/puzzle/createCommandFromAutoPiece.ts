@@ -10,11 +10,10 @@ export function createCommandFromAutoPiece (piece: Piece): RawObjectsAndVerb {
   }
   console.warn(text)
 
-  const raw = new RawObjectsAndVerb()
+  const raw = new RawObjectsAndVerb(Raw.Auto)
   raw.mainSpiel = ""
   raw.objectA = piece.inputHints[0]
   raw.prerequisites = piece.getPrerequisites()
-  raw.source = Raw.Auto
   raw.output = piece.output
   return raw
 }

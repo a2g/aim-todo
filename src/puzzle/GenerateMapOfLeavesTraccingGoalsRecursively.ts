@@ -1,5 +1,5 @@
 import { Piece } from './Piece'
-import { AchievementStubMap } from './AchievementStubMap'
+import { AchievementHeaderMap } from './AchievementHeaderMap'
 import { SpecialTypes } from './SpecialTypes'
 /**
  * #### Description
@@ -25,7 +25,7 @@ export function GenerateMapOfLeavesTracingAchievementsRecursively (
   path: string,
   map: Map<string, Piece | null>,
   achievementAchievements: Set<string>,
-  rootPieceMap: AchievementStubMap
+  rootPieceMap: AchievementHeaderMap
 ): void {
   for (let i = 0; i < piece.inputs.length; i += 1) {
     const input = piece.inputs[i]
