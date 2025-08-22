@@ -333,10 +333,10 @@ public AddToMapOfVisibleThings (thing: string): void {
       console.warn(`Merging box ${boxToMerge.GetFilename()}`)
   
       boxToMerge.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
-      // I don't think we copy the stubs to the header map ..do we
+      // I don't think we copy the headers to the header map ..do we
       // because even though the header piece might not be found later
       // on, we still should be able to place its leaf nodes early
-      // boxToMerge.CopyStubsToGivenStubMap(this.stubs)
+      // boxToMerge.CopyStubsToGivenStubMap(this.headers)
       // boxToMerge.CopyStartingThingCharsToGivenMap(this.startingThings)
     }*/
 

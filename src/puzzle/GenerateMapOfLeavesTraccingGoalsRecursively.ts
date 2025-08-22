@@ -35,13 +35,13 @@ export function GenerateMapOfLeavesTracingAchievementsRecursively (
       case SpecialTypes.SomeOtherAchievement: {
         const header = rootPieceMap.AchievementHeaderByName(piece.inputHints[i])
         // Generating name ran may have to multiple with same name');
-        const stubPiece = header.GetThePiece()
+        const headerPiece = header.GetThePiece()
         const achievementAchievement = header.GetTheAchievementWord()
         achievementAchievements.add(achievementAchievement)
-        if (stubPiece != null) {
+        if (headerPiece != null) {
           GenerateMapOfLeavesTracingAchievementsRecursively(
-            stubPiece,
-            stubPiece.GetOutput(),
+            headerPiece,
+            headerPiece.GetOutput(),
             map,
             achievementAchievements,
             rootPieceMap

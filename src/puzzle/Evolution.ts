@@ -14,7 +14,7 @@ let globalSolutionId = 101
  */
 export class Evolution {
   // important ones
-  private readonly stubs: AchievementHeaderMap
+  private readonly headers: AchievementHeaderMap
 
   private readonly dialogs: Map<string, DialogFile>
 
@@ -29,12 +29,12 @@ export class Evolution {
   private constructor(
     id: number,
     startingThingsPassedIn: VisibleThingsMap,
-    stubsToCopy: AchievementHeaderMap | null,
+    headersToCopy: AchievementHeaderMap | null,
     prerequisites: Set<string> | null = null,
     nameSegments: string[] | null = null
   ) {
     this.id = id
-    this.stubs = new AchievementHeaderMap(stubsToCopy)
+    this.headers = new AchievementHeaderMap(headersToCopy)
     this.dialogs = new Map<string, DialogFile>()
 
 
@@ -69,12 +69,12 @@ export class Evolution {
 
   public static createSolution (
     startingThingsPassedIn: VisibleThingsMap,
-    stubs: AchievementHeaderMap | null,
+    headers: AchievementHeaderMap | null,
     prerequisites: Set<string> | null = null,
     nameSegments: string[] | null = null
   ): Evolution {
     globalSolutionId++
-    return new Evolution(globalSolutionId, startingThingsPassedIn, stubs, prerequisites, nameSegments)
+    return new Evolution(globalSolutionId, startingThingsPassedIn, headers, prerequisites, nameSegments)
   }
 
   public Clone (): Evolution {
@@ -82,7 +82,7 @@ export class Evolution {
     // primarily to construct, so passing in root piece is needed..
     // so we clone the whole tree and pass it in
     const clonedRootPieceMap =
-      this.stubs.Clone()
+      this.headers.Clone()
 
     // When we clone we generally give everything new ids
     // but
@@ -103,8 +103,8 @@ export class Evolution {
     const visitedAchievements = new Set<string>()
     visitedAchievements.add(A_WIN)
     /*
-    const winAchievement = this.stubs.GetAchievementHeaderIfAny()
-    this.stubs.KeepOnlyGivenAchievementHeaders(visitedAchievements)
+    const winAchievement = this.headers.GetAchievementHeaderIfAny()
+    this.headers.KeepOnlyGivenAchievementHeaders(visitedAchievements)
     */
   }
 
@@ -130,7 +130,7 @@ export class Evolution {
   }
 
   public FindAnyPieceMatchingIdRecursively (id: string): void | null {
-    for (const header of this.stubs.GetValues()) {
+    for (const header of this.headers.GetValues()) {
       const piece = header.GetThePiece()
       if (piece != null) {
         const result = piece.FindAnyPieceMatchingIdRecursively(id)
@@ -143,7 +143,7 @@ export class Evolution {
   }
 
   public GetAchievementHeaderMap (): AchievementHeaderMap {
-    return this.stubs
+    return this.headers
   }
 
   public GetStartingThings (): VisibleThingsMap {
@@ -153,7 +153,7 @@ export class Evolution {
   public UpdateAchievementSolvedStatuses (): void {
     let thereAreStillSomeUnsolved = false
     // go through all the achievement pieces
-    for (const header of this.stubs.GetValues()) {
+    for (const header of this.headers.GetValues()) {
       // if there are no places to attach pieces it will return null
       const piece = header.GetThePiece()
       const firstMissingPiece = (piece != null) ? piece.ReturnTheFirstNullInputHint() : header.GetTheAchievementWord()
@@ -172,7 +172,7 @@ export class Evolution {
   }
 
   public IsUnsolved (): boolean {
-    for (const achievement of this.stubs.GetValues()) {
+    for (const achievement of this.headers.GetValues()) {
       if (!achievement.IsSolved()) {
         return true
       }
