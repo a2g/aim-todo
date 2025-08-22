@@ -36,7 +36,7 @@ export function ViewPiecesInBoxes (solutions: Evolutions): void {
         let i = 0
         for (const solution of solutions.GetSolutions()) {
           const achievements = solution
-            .GetAchievementStubMap()
+            .GetAchievementHeaderMap()
             .GenerateMapOfLeavesFromAllRoots(isOnlyNulls)
           for (const key of achievements.keys()) {
             i++

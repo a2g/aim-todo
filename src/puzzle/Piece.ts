@@ -298,8 +298,8 @@ export class Piece extends PieceBase {
       // then we just set and forget, allowing that achievement
       // be completed via the natural process
       const matchingRootPiece = solution
-        .GetAchievementStubMap()
-        .GetAchievementStubByNameNoThrow(importHintToFind)
+        .GetAchievementHeaderMap()
+        .GetAchievementHeaderByNameNoThrow(importHintToFind)
       if (matchingRootPiece != null) {
         // set it as needed will enable it to be solved if it isn't already
         matchingRootPiece.SetNeeded()

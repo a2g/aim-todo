@@ -53,7 +53,7 @@ export class AchievementHeaderMap {
   public GenerateMapOfLeavesFromWinAchievement (): Map<string, Piece> {
     const leaves = new Map<string, Piece>()
     const achievementWords = new Set<string>()
-    const winAchievement = this.GetAchievementStubIfAny()
+    const winAchievement = this.GetAchievementHeaderIfAny()
     const piece = winAchievement?.GetThePiece()
     if (piece != null) {
       GenerateMapOfLeavesTracingAchievementsRecursively(
@@ -67,7 +67,7 @@ export class AchievementHeaderMap {
     return leaves
   }
 
-  public AchievementStubByName (name: string): AchievementHeader {
+  public AchievementHeaderByName (name: string): AchievementHeader {
     const root = this.theMap.get(name)
     if (typeof root === 'undefined' || root === null) {
       throw new Error(`rootPiece of that name doesn't exist ${name}`)
@@ -99,15 +99,15 @@ export class AchievementHeaderMap {
     return this.theMap.has(achievementToObtain)
   }
 
-  public GetAchievementStubByNameNoThrow (achievement: string): AchievementHeader | undefined {
+  public GetAchievementHeaderByNameNoThrow (achievement: string): AchievementHeader | undefined {
     return this.theMap.get(achievement)
   }
 
-  public GetAchievementStubIfAny (): AchievementHeader | undefined {
+  public GetAchievementHeaderIfAny (): AchievementHeader | undefined {
     return this.theMap.get(A_WIN)
   }
 
-  AddAchievementStub (word: string, isNeeded: boolean): void {
+  AddAchievementHeader (word: string, isNeeded: boolean): void {
     if (!this.theMap.has(word)) {
       console.warn(`Merged achievement word ${word}`)
       const newStub = new AchievementHeader(word, [], isNeeded, Solved.Not)
@@ -133,7 +133,7 @@ export class AchievementHeaderMap {
     }
   }
 
-  public KeepOnlyGivenAchievementStubs (achievementsToKeep: Set<string>): void {
+  public KeepOnlyGivenAchievementHeaders (achievementsToKeep: Set<string>): void {
     for (const key of this.theMap.keys()) {
       if (!achievementsToKeep.has(key)) {
         this.theMap.delete(key)

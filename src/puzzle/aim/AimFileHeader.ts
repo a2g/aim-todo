@@ -8,10 +8,10 @@ import { VisibleThingsMap } from '../VisibleThingsMap'
  * #### So this is NOT a piece, its just the thing that pieces attach to.
  * BUT it inherits from PieceBase, so it can participate in this hierarchical
  * operation where a piece removes itself from the piece's parent. And since
- * this AchievementStub is a pieces parent, it needs to derive form that class.
+ * this AchievementHeader is a pieces parent, it needs to derive form that class.
  *
  * Some parents have multiple children, so the PieceBAse has provision for this
- * but this AchievementStub can only ever have a single one. So we have these getters
+ * but this AchievementHeader can only ever have a single one. So we have these getters
  * and setters for GetTheAchievementWord, and GetThePiece - that make the code easier to
  * read because they reinforce that this only has one of those.
  *

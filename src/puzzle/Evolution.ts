@@ -103,8 +103,8 @@ export class Evolution {
     const visitedAchievements = new Set<string>()
     visitedAchievements.add(A_WIN)
     /*
-    const winAchievement = this.stubs.GetAchievementStubIfAny()
-    this.stubs.KeepOnlyGivenAchievementStubs(visitedAchievements)
+    const winAchievement = this.stubs.GetAchievementHeaderIfAny()
+    this.stubs.KeepOnlyGivenAchievementHeaders(visitedAchievements)
     */
   }
 
@@ -142,7 +142,7 @@ export class Evolution {
     return
   }
 
-  public GetAchievementStubMap (): AchievementHeaderMap {
+  public GetAchievementHeaderMap (): AchievementHeaderMap {
     return this.stubs
   }
 

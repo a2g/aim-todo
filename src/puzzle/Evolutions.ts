@@ -84,10 +84,10 @@ export class Evolutions {
   public CreateStubMapFromAchievements (setOfStrings: Set<string>): AchievementHeaderMap {
     setOfStrings.delete(A_WIN)
     const rootMapFromStubs = new AchievementHeaderMap(null)
-    rootMapFromStubs.AddAchievementStub(A_WIN, true)
+    rootMapFromStubs.AddAchievementHeader(A_WIN, true)
 
     for (const achievementAchievement of setOfStrings) {
-      rootMapFromStubs.AddAchievementStub(achievementAchievement, false)
+      rootMapFromStubs.AddAchievementHeader(achievementAchievement, false)
     }
     return rootMapFromStubs
   }

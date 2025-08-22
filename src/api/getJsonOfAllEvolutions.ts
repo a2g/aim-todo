@@ -39,7 +39,7 @@ export function getJsonOfAllEvolutions (
   let listItemNumber = 0
   for (const solution of solutions.GetSolutions()) {
     console.warn(FormatText(solution.GetSolvingPath()))
-    for (const item of solution.GetAchievementStubMap().GetValues()) {
+    for (const item of solution.GetAchievementHeaderMap().GetValues()) {
       listItemNumber++
 
       // display list item
@@ -88,7 +88,7 @@ function getJsonArrayOfRootPieces (
 
   // first we push this
 
-  for (const aimRoot of solution.GetAchievementStubMap().GetValues()) {
+  for (const aimRoot of solution.GetAchievementHeaderMap().GetValues()) {
     toReturn.push({
       name: aimRoot.GetTheAchievementWord(),
       isAAchievementOrAuto: false,
