@@ -33,10 +33,10 @@ export function GenerateMapOfLeavesTracingAchievementsRecursively (
     // either set an entry in the leaf map or not...
     switch (inputType) {
       case SpecialTypes.SomeOtherAchievement: {
-        const stub = rootPieceMap.AchievementStubByName(piece.inputHints[i])
+        const header = rootPieceMap.AchievementStubByName(piece.inputHints[i])
         // Generating name ran may have to multiple with same name');
-        const stubPiece = stub.GetThePiece()
-        const achievementAchievement = stub.GetTheAchievementWord()
+        const stubPiece = header.GetThePiece()
+        const achievementAchievement = header.GetTheAchievementWord()
         achievementAchievements.add(achievementAchievement)
         if (stubPiece != null) {
           GenerateMapOfLeavesTracingAchievementsRecursively(

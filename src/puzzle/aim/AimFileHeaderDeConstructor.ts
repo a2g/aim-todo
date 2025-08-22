@@ -193,7 +193,7 @@ export class AimFileHeaderDeConstructor {
             // When we achieve achievements, we sometimes want the happening that result
             // from them to execute straight away. But sometimes there are
             // autos in the unused pieces pile that take the achievement as input
-            // so we want to climb through the tree, find them, and stub their inputs.
+            // so we want to climb through the tree, find them, and header their inputs.
             // But sometimes the inputs are all nulled...Maybe in this case
             // we should not say anything is done, and simply limit our response
             // to what we've already done - ie kill the node
@@ -333,8 +333,8 @@ public AddToMapOfVisibleThings (thing: string): void {
       console.warn(`Merging box ${boxToMerge.GetFilename()}`)
   
       boxToMerge.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
-      // I don't think we copy the stubs to the stub map ..do we
-      // because even though the stub piece might not be found later
+      // I don't think we copy the stubs to the header map ..do we
+      // because even though the header piece might not be found later
       // on, we still should be able to place its leaf nodes early
       // boxToMerge.CopyStubsToGivenStubMap(this.stubs)
       // boxToMerge.CopyStartingThingCharsToGivenMap(this.startingThings)

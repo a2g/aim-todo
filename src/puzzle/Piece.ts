@@ -185,7 +185,7 @@ export class Piece extends PieceBase {
     const objectToObtain = this.inputHints[k]
     //  update the display string - for easier browsing!
     this.inputSpiels[k] = `${objectToObtain} (${type})`
-    const newLeaf = new Piece('stub', null, objectToObtain, type)
+    const newLeaf = new Piece('header', null, objectToObtain, type)
     newLeaf.parent = this
     this.inputs[k] = newLeaf
   }
@@ -304,7 +304,7 @@ export class Piece extends PieceBase {
         // set it as needed will enable it to be solved if it isn't already
         matchingRootPiece.SetNeeded()
 
-        // Only if its already solved do we stub it out
+        // Only if its already solved do we header it out
         const isSolved = matchingRootPiece.IsSolved()
         if (isSolved) {
           this.StubOutInputK(k, SpecialTypes.SomeOtherAchievement)

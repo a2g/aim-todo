@@ -50,9 +50,9 @@ export class Validator {
 
   public DeconstructAllAchievementsAndRecordSteps (): boolean {
     let wasThereAtLeastSomeProgress = false
-    for (const stub of this.aimFileMap.GetAims()) {
-      if (stub.GetValidated() === Validated.Not) {
-        if (this.DeconstructGivenStubAndRecordSteps(stub)) {
+    for (const header of this.aimFileMap.GetAims()) {
+      if (header.GetValidated() === Validated.Not) {
+        if (this.DeconstructGivenStubAndRecordSteps(header)) {
           wasThereAtLeastSomeProgress = true
         }
       }
@@ -143,7 +143,7 @@ export class Validator {
     for (const filename of this.aimFileNamesInSolvingOrder) {
       const theAny = this.GetAimTreeMap().GetAimTreeByFilenameNoThrow(filename)
       const at = toReturn.length
-      // const n = stub.commandsCompletedInOrder.length
+      // const n = header.commandsCompletedInOrder.length
       toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
       const raw = new RawObjectsAndVerb(Raw.Separator)
       raw.mainSpiel = ` --------------- end of achievement ${filename}`
@@ -154,8 +154,8 @@ export class Validator {
 
   public GetCountRecursively (): number {
     let count = 0
-    for (const stub of this.aimFileMap.GetAims()) {
-      count += stub.GetCountAfterUpdating()
+    for (const header of this.aimFileMap.GetAims()) {
+      count += header.GetCountAfterUpdating()
     }
     return count
   }

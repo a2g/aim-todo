@@ -9,13 +9,13 @@ import { Piece } from '../../puzzle/Piece'
 
 const prompt = promptSync({ sigint: true })
 
-export function ViewAimFileHeader (stub: AimFileHeader, validator: Validator, titlePath: string[]): void {
+export function ViewAimFileHeader (header: AimFileHeader, validator: Validator, titlePath: string[]): void {
   titlePath.push('AimFileHeader')
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
     const input = prompt(
-      `The Root word of the aim file is ${stub.GetAimName()}. ` +
-      `\nThe Piece of this stub is ${stub.GetTheAny() !== null ? 'non-null' : 'null'}` +
+      `The Root word of the aim file is ${header.GetAimName()}. ` +
+      `\nThe Piece of this header is ${header.GetTheAny() !== null ? 'non-null' : 'null'}` +
       '\nWhat to do with aim file header:' +
       '\çn(b)ack, (r)e-run, (s)tarters, (o)rdered-commands, (t)raverse '
     ).toLowerCase()
@@ -28,15 +28,15 @@ export function ViewAimFileHeader (stub: AimFileHeader, validator: Validator, ti
       }
     }
     else if (input === 'r') {
-      validator.DeconstructGivenStubAndRecordSteps(stub)
+      validator.DeconstructGivenStubAndRecordSteps(header)
     } else if (input === 'o') {
-      CommandsView(stub.GetOrderedCommands(), [...titlePath])
+      CommandsView(header.GetOrderedCommands(), [...titlePath])
     } else if (input === 't') {
-      const theAchievementPiece = stub.GetTheAny() as Piece
+      const theAchievementPiece = header.GetTheAny() as Piece
       if (theAchievementPiece != null) {
-        PieceDeconstructionView(theAchievementPiece, validator, stub, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
+        PieceDeconstructionView(theAchievementPiece, validator, header, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
       } else {
-        prompt(`${stub.GetAimName()} Achievement.piece WAS NULL. Hit any key to continue: `)
+        prompt(`${header.GetAimName()} Achievement.piece WAS NULL. Hit any key to continue: `)
       }
     }
   }

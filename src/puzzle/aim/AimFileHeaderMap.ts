@@ -39,8 +39,8 @@ export class AimFileHeaderMap {
         const mapToReturn = new AimFileHeaderMap()
         for (const blah of this.map) {
             const key = blah[0]
-            const stub: AimFileHeader = blah[1]
-            mapToReturn.Set(key, stub)// TODO: this should be a CLone!
+            const header: AimFileHeader = blah[1]
+            mapToReturn.Set(key, header)// TODO: this should be a CLone!
         }
         return mapToReturn
     }

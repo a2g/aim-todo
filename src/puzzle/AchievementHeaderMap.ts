@@ -126,9 +126,9 @@ export class AchievementHeaderMap {
   }
 
   public RemoveZeroOrUnneededStubs (): void {
-    for (const stub of this.GetValues()) {
-      if (!stub.IsNeeded()) {
-        this.theMap.delete(stub.output)
+    for (const header of this.GetValues()) {
+      if (!header.IsNeeded()) {
+        this.theMap.delete(header.output)
       }
     }
   }
@@ -142,9 +142,9 @@ export class AchievementHeaderMap {
   }
 
   IsAchievementPieceNulled (output: string): boolean {
-    const stub = this.theMap.get(output)
-    if (stub != null) {
-      return stub.GetThePiece() == null
+    const header = this.theMap.get(output)
+    if (header != null) {
+      return header.GetThePiece() == null
     }
     return false
   }

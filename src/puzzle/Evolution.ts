@@ -130,8 +130,8 @@ export class Evolution {
   }
 
   public FindAnyPieceMatchingIdRecursively (id: string): void | null {
-    for (const stub of this.stubs.GetValues()) {
-      const piece = stub.GetThePiece()
+    for (const header of this.stubs.GetValues()) {
+      const piece = header.GetThePiece()
       if (piece != null) {
         const result = piece.FindAnyPieceMatchingIdRecursively(id)
         if (result != null) {
@@ -153,13 +153,13 @@ export class Evolution {
   public UpdateAchievementSolvedStatuses (): void {
     let thereAreStillSomeUnsolved = false
     // go through all the achievement pieces
-    for (const stub of this.stubs.GetValues()) {
+    for (const header of this.stubs.GetValues()) {
       // if there are no places to attach pieces it will return null
-      const piece = stub.GetThePiece()
-      const firstMissingPiece = (piece != null) ? piece.ReturnTheFirstNullInputHint() : stub.GetTheAchievementWord()
+      const piece = header.GetThePiece()
+      const firstMissingPiece = (piece != null) ? piece.ReturnTheFirstNullInputHint() : header.GetTheAchievementWord()
       if (firstMissingPiece === '') {
-        if (!stub.IsSolved()) {
-          stub.SetSolved(Solved.Solved)
+        if (!header.IsSolved()) {
+          header.SetSolved(Solved.Solved)
         }
       } else {
         thereAreStillSomeUnsolved = true
