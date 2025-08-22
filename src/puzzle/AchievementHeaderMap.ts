@@ -110,8 +110,8 @@ export class AchievementHeaderMap {
   AddAchievementHeader (word: string, isNeeded: boolean): void {
     if (!this.theMap.has(word)) {
       console.warn(`Merged achievement word ${word}`)
-      const newStub = new AchievementHeader(word, [], isNeeded, Solved.Not)
-      this.theMap.set(word, newStub)
+      const newHeader = new AchievementHeader(word, [], isNeeded, Solved.Not)
+      this.theMap.set(word, newHeader)
     } else {
       console.warn(`Already exists: Failed to merge achievement ${word}  `)
     }
@@ -125,7 +125,7 @@ export class AchievementHeaderMap {
     }
   }
 
-  public RemoveZeroOrUnneededStubs (): void {
+  public RemoveZeroOrUnneededHeaders (): void {
     for (const header of this.GetValues()) {
       if (!header.IsNeeded()) {
         this.theMap.delete(header.output)

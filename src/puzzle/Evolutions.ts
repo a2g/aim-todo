@@ -24,8 +24,8 @@ export class Evolutions {
     // now lets initialize the first solution
     const solution1 = Evolution.createSolution(
       box.GetMapOfAllStartingThings(),
-      this.CreateStubMapFromAchievements(new Set<string>())
-      // this.CreateStubMapFromachievementAchievements(this.aggregates.setOfachievementAchievements)
+      this.CreateHeaderMapFromAchievements(new Set<string>())
+      // this.CreateHeaderMapFromachievementAchievements(this.aggregates.setOfachievementAchievements)
     )
     this.solutions.push(solution1)
 
@@ -81,15 +81,15 @@ export class Evolutions {
     }
   }
 
-  public CreateStubMapFromAchievements (setOfStrings: Set<string>): AchievementHeaderMap {
+  public CreateHeaderMapFromAchievements (setOfStrings: Set<string>): AchievementHeaderMap {
     setOfStrings.delete(A_WIN)
-    const rootMapFromStubs = new AchievementHeaderMap(null)
-    rootMapFromStubs.AddAchievementHeader(A_WIN, true)
+    const rootMapFromHeaders = new AchievementHeaderMap(null)
+    rootMapFromHeaders.AddAchievementHeader(A_WIN, true)
 
     for (const achievementAchievement of setOfStrings) {
-      rootMapFromStubs.AddAchievementHeader(achievementAchievement, false)
+      rootMapFromHeaders.AddAchievementHeader(achievementAchievement, false)
     }
-    return rootMapFromStubs
+    return rootMapFromHeaders
   }
 
   public PerformThingsNeededAfterAllSolutionsFound (): void {

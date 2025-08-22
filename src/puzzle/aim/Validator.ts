@@ -52,7 +52,7 @@ export class Validator {
     let wasThereAtLeastSomeProgress = false
     for (const header of this.aimFileMap.GetAims()) {
       if (header.GetValidated() === Validated.Not) {
-        if (this.DeconstructGivenStubAndRecordSteps(header)) {
+        if (this.DeconstructGivenHeaderAndRecordSteps(header)) {
           wasThereAtLeastSomeProgress = true
         }
       }
@@ -60,7 +60,7 @@ export class Validator {
     return wasThereAtLeastSomeProgress
   }
 
-  public DeconstructGivenStubAndRecordSteps (aimFileHeader: AimFileHeader): boolean {
+  public DeconstructGivenHeaderAndRecordSteps (aimFileHeader: AimFileHeader): boolean {
     // push the commands
     const deconstructDoer = new AimFileHeaderDeConstructor(
       aimFileHeader,

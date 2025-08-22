@@ -109,7 +109,7 @@ export class AchievementHeader extends PieceBase {
     this.commandsCompletedInOrder.push(rawObjectsAndVerb)
   }
 
-  public ProcessStubUntilCloning (solution: Evolution, solutions: Evolutions, path: string): boolean {
+  public ProcessHeaderUntilCloning (solution: Evolution, solutions: Evolutions, path: string): boolean {
     // if the achievement piece is already found, we drill into it
     if (this.inputs[0] != null) {
       return this.inputs[0].ProcessUntilCloning(solution, solutions, path + this.inputHints[0] + '/')

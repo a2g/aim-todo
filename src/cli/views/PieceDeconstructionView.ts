@@ -31,7 +31,7 @@ export function PieceDeconstructionView (
     if (input === null || input === 'b') {
       return
     } else if (input === 'r') {
-      validator.DeconstructGivenStubAndRecordSteps(header)
+      validator.DeconstructGivenHeaderAndRecordSteps(header)
     } else if (input === 's') {
       for (const item of visibleThings.GetIterableIterator()) {
         console.warn(`${item[0]}`)

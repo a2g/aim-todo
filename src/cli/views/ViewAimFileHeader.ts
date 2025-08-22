@@ -28,7 +28,7 @@ export function ViewAimFileHeader (header: AimFileHeader, validator: Validator, 
       }
     }
     else if (input === 'r') {
-      validator.DeconstructGivenStubAndRecordSteps(header)
+      validator.DeconstructGivenHeaderAndRecordSteps(header)
     } else if (input === 'o') {
       CommandsView(header.GetOrderedCommands(), [...titlePath])
     } else if (input === 't') {

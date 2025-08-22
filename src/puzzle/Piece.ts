@@ -181,7 +181,7 @@ export class Piece extends PieceBase {
     return ''
   }
 
-  public StubOutInputK (k: number, type: SpecialTypes): void {
+  public HeaderOutInputK (k: number, type: SpecialTypes): void {
     const objectToObtain = this.inputHints[k]
     //  update the display string - for easier browsing!
     this.inputSpiels[k] = `${objectToObtain} (${type})`
@@ -290,7 +290,7 @@ export class Piece extends PieceBase {
       const importHintToFind = this.inputHints[k]
       if (
         solution.GetStartingThings().Has(importHintToFind)) {
-        this.StubOutInputK(k, SpecialTypes.StartingThings)
+        this.HeaderOutInputK(k, SpecialTypes.StartingThings)
         continue
       }
 
@@ -307,7 +307,7 @@ export class Piece extends PieceBase {
         // Only if its already solved do we header it out
         const isSolved = matchingRootPiece.IsSolved()
         if (isSolved) {
-          this.StubOutInputK(k, SpecialTypes.SomeOtherAchievement)
+          this.HeaderOutInputK(k, SpecialTypes.SomeOtherAchievement)
         }
 
         continue
