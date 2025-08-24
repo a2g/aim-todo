@@ -1,10 +1,10 @@
-import { Raw } from "../Raw"
-import { RawObjectsAndVerb } from "../RawObjectsAndVerb"
-import { Validated } from "../Validated"
-import { VisibleThingsMap } from "../VisibleThingsMap"
 import { AimFileHeader } from "./AimFileHeader"
 import { AimFileHeaderMap } from "./AimFileHeaderMap"
 import { AimFileHeaderDeConstructor as AimFileHeaderDeConstructor } from "./AimFileHeaderDeConstructor"
+import { VisibleThingsMap } from "../puzzle/VisibleThingsMap"
+import { Validated } from "../puzzle/Validated"
+import { Raw } from "../puzzle/Raw"
+import { RawObjectsAndVerb } from "../puzzle/RawObjectsAndVerb"
 
 
 export class Validator {

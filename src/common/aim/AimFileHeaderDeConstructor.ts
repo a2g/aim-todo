@@ -1,11 +1,15 @@
-import { RawObjectsAndVerb } from '../RawObjectsAndVerb'
-import { VisibleThingsMap } from '../VisibleThingsMap'
-import { Box } from '../Box'
+
+
 import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { AimFileHeader } from './AimFileHeader'
-import { Validated } from '../Validated'
+
 import { IdPrefixes } from '../../../IdPrefixes'
-import { Raw } from '../Raw'
+import { VisibleThingsMap } from '../puzzle/VisibleThingsMap'
+import { RawObjectsAndVerb } from '../puzzle/RawObjectsAndVerb'
+import { Raw } from '../puzzle/Raw'
+import { Validated } from '../puzzle/Validated'
+import { Box } from '../puzzle/Box'
+
 export class AimFileHeaderDeConstructor {
   private readonly theAimTree: AimFileHeader
 

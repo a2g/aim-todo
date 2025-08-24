@@ -1,4 +1,6 @@
-import { VisibleThingsMap } from "../puzzle/VisibleThingsMap"
+import { VisibleThingsMap } from "../../common/puzzle/VisibleThingsMap"
+
+
 
 
 export function GetStartingThingsFromRawJson (json: any): VisibleThingsMap {

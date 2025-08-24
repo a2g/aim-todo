@@ -1,7 +1,8 @@
-import { A_WIN } from '../A_WIN'
-import { GetAnyErrorsFromObjectAvailability } from '../puzzle/GetAnyErrorsFromObjectAvailability'
-import { ProcessAutos } from '../puzzle/ProcessAutos'
-import { Stringify } from '../puzzle/Stringify'
+
+import { A_WIN } from '../../common/A_WIN'
+import { GetAnyErrorsFromObjectAvailability } from '../../common/puzzle/GetAnyErrorsFromObjectAvailability'
+import { ProcessAutos } from '../../common/puzzle/ProcessAutos'
+import { Stringify } from '../../common/puzzle/Stringify'
 import { GameReporter } from './GameReporter'
 import { ParseTokenizedCommandLineFromFromThreeStrings } from './GetMixedObjectsAndVerbFromThreeStrings'
 import { Playable } from './Playable'

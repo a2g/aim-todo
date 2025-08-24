@@ -1,7 +1,8 @@
+import { IdPrefixes } from '../../../IdPrefixes'
 import { AddBrackets } from './AddBrackets'
 import { Colors } from './Colors'
 
-import { IdPrefixes } from '../../IdPrefixes'
+
 
 export function FormatText (
   input: string | string[],

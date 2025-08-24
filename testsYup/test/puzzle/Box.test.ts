@@ -1,6 +1,6 @@
-// import { Box } from '../../../src/puzzle/Box'
+// import { Box } from '../../../src/common/puzzle/Box'
 //import { expect, test } from '@jest/globals'
-// import { Aggregates } from '../../../src/puzzle/Aggregates'
+// import { Aggregates } from '../../../src/common/puzzle/Aggregates'
 /*
 test('Test GetMapOfAllStartingThings', () => {
   const aggregates = new Aggregates()

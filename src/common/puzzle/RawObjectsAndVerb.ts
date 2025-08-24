@@ -1,4 +1,5 @@
-import { IdPrefixes } from '../../IdPrefixes'
+
+import { IdPrefixes } from '../../../IdPrefixes'
 import { AddBrackets } from './AddBrackets'
 import { FormatText } from './FormatText'
 import { Meta } from './Meta'

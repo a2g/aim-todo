@@ -1,11 +1,12 @@
 import promptSync from 'prompt-sync'
 
-import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
-import { AimFileHeader as AimFileHeader } from '../../puzzle/aim/AimFileHeader'
+import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { AimFileHeader as AimFileHeader } from '../../common/aim/AimFileHeader'
 import { CommandsView } from './CommandsView'
 import { PieceDeconstructionView } from './PieceDeconstructionView'
-import { Validator } from '../../puzzle/aim/Validator'
-import { Piece } from '../../puzzle/Piece'
+import { Validator } from '../../common/aim/Validator'
+import { Piece } from '../../common/puzzle/Piece'
+
 
 const prompt = promptSync({ sigint: true })
 

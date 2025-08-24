@@ -1,9 +1,9 @@
 /*
-import { SingleFile } from '../../../src/puzzle/SingleFile'
+import { SingleFile } from '../../../src/common/puzzle/SingleFile'
 // import { expect, describe, test } from '@jest/globals'
 import { join } from 'path'
-import { Box } from '../../../src/puzzle/Box'
-import { Aggregates } from '../../../src/puzzle/Aggregates'
+import { Box } from '../../../src/common/puzzle/Box'
+import { Aggregates } from '../../../src/common/puzzle/Aggregates'
 
 describe('SingleBigSwitch', () => {
   test('SingleBigSwitch', async () => {

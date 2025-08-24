@@ -4,9 +4,10 @@ import { FormatText } from './FormatText'
 import { AchievementHeaderMap } from './AchievementHeaderMap'
 
 import { VisibleThingsMap } from './VisibleThingsMap'
-import { DialogFile } from './talk/DialogFile'
+
 import { Solved } from './Solved'
 import { A_WIN } from '../A_WIN'
+import { DialogFile } from '../talk/DialogFile'
 
 let globalSolutionId = 101
 /**

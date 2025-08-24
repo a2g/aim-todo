@@ -1,11 +1,13 @@
 import { existsSync } from 'fs'
-import { FormatText } from '../puzzle/FormatText'
+
 import { join } from 'path'
-import { Piece } from '../puzzle/Piece'
-import { RawObjectsAndVerb } from '../puzzle/RawObjectsAndVerb'
-import { Evolution } from '../puzzle/Evolution'
-import { Evolutions } from '../puzzle/Evolutions'
-import { _STARTER_JSONC } from '../_STARTER_JSONC'
+import { Piece } from '../common/puzzle/Piece'
+import { RawObjectsAndVerb } from '../common/puzzle/RawObjectsAndVerb'
+import { FormatText } from '../common/puzzle/FormatText'
+import { _STARTER_JSONC } from '../common/_STARTER_JSONC'
+import { Evolutions } from '../common/puzzle/Evolutions'
+import { Evolution } from '../common/puzzle/Evolution'
+
 
 interface $INameIsAAchievementChildren {
   name: string

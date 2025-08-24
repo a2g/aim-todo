@@ -13,6 +13,9 @@ export class Solution {
     }
 
     public GetSolvingPath (): string {
+        if (this.names.length === 0) {
+            return 'the_only_solution'
+        }
         let name = ''
         for (let i = 0; i < this.names.length; i++) {
             name += (i != 0) ? '/' : ''

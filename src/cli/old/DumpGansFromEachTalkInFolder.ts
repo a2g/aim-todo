@@ -1,11 +1,13 @@
 import { join } from 'path'
 import * as fs from 'fs'
-import { DialogFile } from '../puzzle/talk/DialogFile'
-import { Aggregates } from '../puzzle/Aggregates'
-import { Box } from '../puzzle/Box'
-import { _STARTER } from '../_STARTER'
+import { _STARTER } from '../../common/_STARTER'
+import { Aggregates } from '../../common/puzzle/Aggregates'
+import { DialogFile } from '../../common/talk/DialogFile'
+import { Box } from '../../common/puzzle/Box'
 
-export function LogGainsFromEachDialog (folder: string): void {
+
+
+export function DumpGainsFromEachDialogInFolder (folder: string): void {
   const cwd = process.cwd()
   process.chdir(join(__dirname, '/../../../..'))
   process.chdir(folder)
@@ -23,6 +25,16 @@ export function LogGainsFromEachDialog (folder: string): void {
       console.warn(`Talk file: ${file}`)
       console.warn('===========================')
       dialogFile.FindAndAddPiecesRecursively(_STARTER, '', [], mapOGainsByPage, emptyBox)
+
+      /*for (const set of emptyBox.GetPieces().values()) {
+        for (const piece of set) {
+          let pieceString = `out: ${piece.output}`
+          for (const input of piece.inputHints) {
+            pieceString += ` in: ${input}`
+          }
+          console.warn(pieceString)
+        }
+      }*/
     }
     process.chdir(cwd)
   }

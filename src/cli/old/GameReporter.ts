@@ -1,5 +1,7 @@
-import { Colors } from '../puzzle/Colors'
-import { FormatText } from '../puzzle/FormatText'
+import { Colors } from "../../common/puzzle/Colors"
+import { FormatText } from "../../common/puzzle/FormatText"
+
+
 
 export class GameReporter {
   private static instance: GameReporter | null = null
@@ -12,7 +14,7 @@ export class GameReporter {
   }
 
   private numberOfCommandsExecuted: number
-  constructor () {
+  constructor() {
     this.numberOfCommandsExecuted = 0
   }
 

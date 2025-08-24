@@ -70,8 +70,10 @@
     "src/**/*",
     "todo.ts",
     "FilenameSuffixes.ts",
-    "testsYup/**/*"
-, "src/puzzle/aim/Validator.ts", "src/puzzle/aim/Validators.ts"  ],
+    "testsYup/**/*",
+    "src/common/aim/Validator.ts",
+    "src/common/aim/Validators.ts"
+  ],
   "exclude": [
     "node_modules",
     "**/*-spec.ts"

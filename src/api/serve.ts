@@ -9,7 +9,7 @@ import {
   getJsonOfAllSolutionsApi,
   getJsonOfStartersApi,
   getSvgApi
-} from './api/api'
+} from './api'
 const app = express()
 const PORT = (process.env.PORT != null) ? `${process.env.PORT}` : 5000
 /*

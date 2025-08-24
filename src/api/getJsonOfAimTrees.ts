@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import { join } from 'path'
-import { AIM_TODO_JSONC } from '../AIM_TODO_JSONC'
+import { AIM_TODO_JSONC } from '../common/AIM_TODO_JSONC'
 
 export interface $AimTodo {
   // used by CLI

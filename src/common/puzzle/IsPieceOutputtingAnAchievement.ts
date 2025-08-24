@@ -1,4 +1,5 @@
-import { IdPrefixes } from '../../IdPrefixes'
+
+import { IdPrefixes } from '../../../IdPrefixes'
 import { Piece } from './Piece'
 
 export function IsPieceOutputtingAnAchievement (piece: Piece): boolean {

@@ -1,8 +1,8 @@
 import { existsSync } from 'fs'
-import { FormatText } from '../puzzle/FormatText'
 import { join } from 'path'
-import { _STARTER_JSONC } from '../_STARTER_JSONC'
-import { Solutions } from '../puzzle/aim/Solutions'
+import { _STARTER_JSONC } from '../common/_STARTER_JSONC'
+import { Solutions } from '../common/aim/Solutions'
+import { FormatText } from '../common/puzzle/FormatText'
 
 export function getJsonOfAllSolutions (
   dirName: string,

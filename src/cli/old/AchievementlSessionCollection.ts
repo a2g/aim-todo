@@ -1,9 +1,10 @@
-import definitions from '../../oldCampaignFramework.json'
+import definitions from '../../../oldCampaignFramework.json'
 import { AchievementSession } from './AchievementSession'
+
 
 export class AchievementSessionCollection {
   private readonly achievements: AchievementSession[]
-  constructor () {
+  constructor() {
     this.achievements = new Array<AchievementSession>()
   }
 

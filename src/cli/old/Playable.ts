@@ -1,6 +1,7 @@
-import { Happener } from '../puzzle/Happener'
-import { PlayerAI } from '../puzzle/PlayerAI'
-import { Evolution } from '../puzzle/Evolution'
+import { Evolution } from "../../common/puzzle/Evolution"
+import { Happener } from "../../common/puzzle/Happener"
+import { PlayerAI } from "../../common/puzzle/PlayerAI"
+
 
 export class Playable {
   private readonly player: PlayerAI
@@ -11,7 +12,7 @@ export class Playable {
 
   private isCompleted: boolean
 
-  constructor (player: PlayerAI, happener: Happener, solution: Evolution) {
+  constructor(player: PlayerAI, happener: Happener, solution: Evolution) {
     this.player = player
     this.solution = solution
     this.happener = happener

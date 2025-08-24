@@ -1,7 +1,8 @@
 import promptSync from 'prompt-sync'
-import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
-import { Raw } from '../../puzzle/Raw'
-import { RawObjectsAndVerb } from '../../puzzle/RawObjectsAndVerb'
+import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
+import { Raw } from '../../common/puzzle/Raw'
+
 const prompt = promptSync({ sigint: true })
 
 export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]

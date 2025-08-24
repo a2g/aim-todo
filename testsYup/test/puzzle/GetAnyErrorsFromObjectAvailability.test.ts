@@ -1,8 +1,8 @@
-import { GetAnyErrorsFromObjectAvailability } from '../../../src/puzzle/GetAnyErrorsFromObjectAvailability'
-import { Mix } from '../../../src/puzzle/Mix'
-import { Command } from '../../../src/puzzle/Command'
+import { GetAnyErrorsFromObjectAvailability } from '../../../src/common/puzzle/GetAnyErrorsFromObjectAvailability'
+import { Mix } from '../../../src/common/puzzle/Mix'
+import { Command } from '../../../src/common/puzzle/Command'
 import { describe, it, test, expect } from '@jest/globals'
-import { Verb } from '../../../src/puzzle/Verb'
+import { Verb } from '../../../src/common/puzzle/Verb'
 
 describe('GetAnyErrorsFromObjectAvailability', () => {
   test('SingleVsInv', () => {

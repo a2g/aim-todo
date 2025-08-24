@@ -1,9 +1,10 @@
 import promptSync from 'prompt-sync'
-import { FormatText } from '../../puzzle/FormatText'
-import { AddBrackets } from '../../puzzle/AddBrackets'
-import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
-import { Solution } from '../../puzzle/aim/Solution'
-import { Solutions } from '../../puzzle/aim/Solutions'
+
+import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { Solution } from '../../common/aim/Solution'
+import { Solutions } from '../../common/aim/Solutions'
+import { AddBrackets } from '../../common/puzzle/AddBrackets'
+import { FormatText } from '../../common/puzzle/FormatText'
 const prompt = promptSync({})
 
 export function SolutionView (solution: Solution, _solutions: Solutions, titlePath: string[]): void {

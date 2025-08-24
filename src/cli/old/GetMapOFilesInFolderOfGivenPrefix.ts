@@ -1,10 +1,10 @@
 import { join } from 'path'
 import * as fs from 'fs'
 
-import { _STARTER } from '../_STARTER'
+
 import { parse } from 'jsonc-parser'
-import { AimFileHeaderMap } from '../puzzle/aim/AimFileHeaderMap'
-import { AimFileHeader } from '../puzzle/aim/AimFileHeader'
+import { AimFileHeaderMap } from '../../common/aim/AimFileHeaderMap'
+import { AimFileHeader } from '../../common/aim/AimFileHeader'
 import { GetStartingThingsFromRawJson } from './GetStartingThingsFromRawJson'
 
 export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: string): AimFileHeaderMap {

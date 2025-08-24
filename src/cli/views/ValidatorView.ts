@@ -1,11 +1,12 @@
 import promptSync from 'prompt-sync'
-import { FormatText } from '../../puzzle/FormatText'
-import { AddBrackets } from '../../puzzle/AddBrackets'
-import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
+
+import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
 import { CommandsView } from './CommandsView'
 import { ViewAimFileHeader } from './ViewAimFileHeader'
-import { Validator } from '../../puzzle/aim/Validator'
+import { Validator } from '../../common/aim/Validator'
 import { assert } from 'console'
+import { FormatText } from '../../common/puzzle/FormatText'
+import { AddBrackets } from '../../common/puzzle/AddBrackets'
 
 
 const prompt = promptSync({})

@@ -1,4 +1,4 @@
-import { IdPrefixes } from '../../IdPrefixes'
+import { IdPrefixes } from '../../../IdPrefixes'
 import { AddBrackets } from './AddBrackets'
 import { Colors } from './Colors'
 

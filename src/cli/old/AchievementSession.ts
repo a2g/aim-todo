@@ -1,7 +1,11 @@
-import { Happener } from '../puzzle/Happener'
-import { PlayerAI } from '../puzzle/PlayerAI'
-import { Evolution } from '../puzzle/Evolution'
-import { Playable } from './Playable'
+import { Evolution } from "../../common/puzzle/Evolution"
+import { Happener } from "../../common/puzzle/Happener"
+import { PlayerAI } from "../../common/puzzle/PlayerAI"
+
+
+
+import { Playable } from "./Playable"
+
 
 export class AchievementSession {
   public prerequisiteAchievements: string[]
@@ -12,7 +16,7 @@ export class AchievementSession {
   public achievementName: string
   public startingThings: Map<string, Set<string>>
   public playable: Playable
-  constructor (
+  constructor(
     happener: Happener,
     startingThings: Map<string, Set<string>>,
     solution: Evolution

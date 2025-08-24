@@ -1,5 +1,5 @@
-import { GenerateMapOfLeavesRecursively } from '../../../src/puzzle/GenerateMapOfLeavesRecursively'
-import { Piece } from '../../../src/puzzle/Piece'
+import { GenerateMapOfLeavesRecursively } from '../../../src/common/puzzle/GenerateMapOfLeavesRecursively'
+import { Piece } from '../../../src/common/puzzle/Piece'
 import { expect, test } from '@jest/globals'
 
 test('GenerateMapOfLeavesRecursively', () => {

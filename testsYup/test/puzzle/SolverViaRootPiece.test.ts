@@ -1,5 +1,5 @@
 import { expect, it } from '@jest/globals'
-import { Evolutions } from '../../../src/puzzle/Evolutions'
+import { Evolutions } from '../../../src/common/puzzle/Evolutions'
 
 describe('SolverViaRootPiece', () => {
   it('should convert blank', () => {

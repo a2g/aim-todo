@@ -1,9 +1,11 @@
 import promptSync from 'prompt-sync'
-import { FormatText } from '../../puzzle/FormatText'
-import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
+
+import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
 import { ValidatorView } from './ValidatorView'
-import { Solved } from '../../puzzle/Solved'
-import { Validators } from '../../puzzle/aim/Validators'
+
+import { Validators } from '../../common/aim/Validators'
+import { Solved } from '../../common/puzzle/Solved'
+import { FormatText } from '../../common/puzzle/FormatText'
 const prompt = promptSync({})
 
 export function ViewForwardValidate (validators: Validators): void {

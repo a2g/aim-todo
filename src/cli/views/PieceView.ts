@@ -1,7 +1,8 @@
 import promptSync from 'prompt-sync'
-import { Piece } from '../../puzzle/Piece'
-import { VisibleThingsMap } from '../../puzzle/VisibleThingsMap'
-import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
+
+import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { Piece } from '../../common/puzzle/Piece'
+import { VisibleThingsMap } from '../../common/puzzle/VisibleThingsMap'
 const prompt = promptSync({ sigint: true })
 
 export function PieceView (

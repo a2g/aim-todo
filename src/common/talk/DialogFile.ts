@@ -1,5 +1,5 @@
 import { IdPrefixes } from '../../../IdPrefixes'
-import { Piece } from '../Piece'
+
 import { ChoiceSection } from './ChoiceSection'
 import { GetNextId } from './GetNextId'
 import { NonChoiceSection } from './NonChoiceSection'
@@ -7,8 +7,10 @@ import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 
 import _ from '../../../todo-enums.json'
-import { Aggregates } from '../Aggregates'
-import { Box } from '../Box'
+import { Aggregates } from '../puzzle/Aggregates'
+import { Piece } from '../puzzle/Piece'
+import { Box } from '../puzzle/Box'
+
 
 export class DialogFile {
   filename: string

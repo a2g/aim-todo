@@ -1,8 +1,9 @@
 import promptSync from 'prompt-sync'
-import { VisibleThingsMap } from '../../puzzle/VisibleThingsMap'
-import { AimFileHeader } from '../../puzzle/aim/AimFileHeader'
-import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
-import { Validator } from '../../puzzle/aim/Validator'
+
+import { AimFileHeader } from '../../common/aim/AimFileHeader'
+import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { Validator } from '../../common/aim/Validator'
+import { VisibleThingsMap } from '../../common/puzzle/VisibleThingsMap'
 
 const prompt = promptSync({ sigint: true })
 

@@ -1,9 +1,9 @@
 
-/* import { Piece } from '../../../src/puzzle/Piece'
+/* import { Piece } from '../../../src/common/puzzle/Piece'
 import { expect, describe, test } from '@jest/globals'
-import { Box } from '../../../src/puzzle/Box'
-import { Aggregates } from '../../../src/puzzle/Aggregates'
-import { AddPiece } from '../../../src/puzzle/AddPiece'
+import { Box } from '../../../src/common/puzzle/Box'
+import { Aggregates } from '../../../src/common/puzzle/Aggregates'
+import { AddPiece } from '../../../src/common/puzzle/AddPiece'
 
 describe('ReactionMap', () => {
   test('test AddToMap works', () => {

@@ -1,6 +1,6 @@
 import { expect, test } from '@jest/globals'
-import { Colors } from '../../../src/puzzle/Colors'
-import { FormatText } from '../../../src/puzzle/FormatText'
+import { Colors } from '../../../src/common/puzzle/Colors'
+import { FormatText } from '../../../src/common/puzzle/FormatText'
 
 test('should render inv_ in green', () => {
   expect(FormatText('inv_blah')).toBe(Colors.Green + 'blah' + Colors.Reset)

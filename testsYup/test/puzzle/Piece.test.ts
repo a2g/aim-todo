@@ -1,6 +1,6 @@
 // Typescript Unit test
-import { Piece } from '../../../src/puzzle/Piece'
-import { SpecialTypes } from '../../../src/puzzle/SpecialTypes'
+import { Piece } from '../../../src/common/puzzle/Piece'
+import { SpecialTypes } from '../../../src/common/puzzle/SpecialTypes'
 import { describe, expect, test } from '@jest/globals'
 describe('Solution', () => {
   test('Test of a none clone piece', () => {

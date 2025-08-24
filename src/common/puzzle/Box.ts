@@ -1,9 +1,10 @@
 import { existsSync, readFileSync } from 'fs'
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { parse } from 'jsonc-parser'
-import { DialogFile } from './talk/DialogFile'
+
 import { Piece } from './Piece'
-import { _STARTER_JSONC } from '../_STARTER_JSONC'
+import { DialogFile } from '../talk/DialogFile'
+
 
 /**
  * So the most important part of this class is that the data

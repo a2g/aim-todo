@@ -1,5 +1,5 @@
 /*
-import { Piece } from '../../../src/puzzle/Piece'
+import { Piece } from '../../../src/common/puzzle/Piece'
 import { expect, describe, test } from '@jest/globals'
 describe('ReactionMap', () => {
   test('test AddToMap works', () => {

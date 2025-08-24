@@ -1,5 +1,6 @@
 import { expect, it } from '@jest/globals'
-import { Stringify } from '../../../src/puzzle/Stringify.js'
+import { Stringify } from '../../../src/common/puzzle/Stringify'
+
 
 describe('Stringify', () => {
   it('should convert blank', () => {

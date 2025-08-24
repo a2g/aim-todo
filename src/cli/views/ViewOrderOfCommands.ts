@@ -1,8 +1,8 @@
 import promptSync from 'prompt-sync'
-import { FormatText } from '../../puzzle/FormatText'
-import { RawObjectsAndVerb } from '../../puzzle/RawObjectsAndVerb'
-import { Raw } from '../../puzzle/Raw'
-import { Validators } from '../../puzzle/aim/Validators'
+import { Validators } from '../../common/aim/Validators'
+import { FormatText } from '../../common/puzzle/FormatText'
+import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
+import { Raw } from '../../common/puzzle/Raw'
 const prompt = promptSync({})
 
 export function ViewOrderOfCommands (validators: Validators): void {

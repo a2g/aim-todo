@@ -1,11 +1,12 @@
 import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import { Solution } from './Solution'
-import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/GetMapOFilesInFolderOfGivenPrefix'
+import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/old/GetMapOFilesInFolderOfGivenPrefix'
 import { AimFileHeaderMap } from './AimFileHeaderMap'
-import { VisibleThingsMap } from '../VisibleThingsMap'
-import { _STARTER_JSONC } from '../../_STARTER_JSONC'
-import { Box } from '../Box'
+
+import { Box } from '../puzzle/Box'
+import { VisibleThingsMap } from '../puzzle/VisibleThingsMap'
+import { _STARTER_JSONC } from '../_STARTER_JSONC'
 
 export class Solutions {
   filename: string
@@ -14,16 +15,16 @@ export class Solutions {
   aimTreeMap: AimFileHeaderMap
   startingThingsMap: VisibleThingsMap
 
-  constructor(filename: string, fileAddress: string) {
-    this.filename = filename
+  constructor(animTodoFilename: string, fileAddress: string) {
+    this.filename = animTodoFilename
     this.fileAddress = fileAddress
     this._solutions = new Map<string, Solution>()
     this.startingThingsMap = new VisibleThingsMap(null)
 
-    const pathAndFile = fileAddress + filename
+    const pathAndFile = fileAddress + animTodoFilename
     if (!existsSync(pathAndFile)) {
       throw new Error(
-        `The dialogs_xxxx.jsonc was not found: ${pathAndFile} `
+        `The d##_xxxx.jsonc was not found: ${pathAndFile} `
       )
     }
     const text = readFileSync(pathAndFile, 'utf-8')

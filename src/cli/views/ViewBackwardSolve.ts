@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
-import { Solutions } from '../../puzzle/aim/Solutions'
-import { ShowUnderlinedTitle } from '../ShowUnderlinedTitle'
+import { Solutions } from '../../common/aim/Solutions'
+import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
 const prompt = promptSync({})
 
 export function ViewBackwardSolve (solutions: Solutions): void {

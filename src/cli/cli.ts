@@ -1,11 +1,12 @@
 import promptSync from 'prompt-sync'
-import { Solutions } from './puzzle/aim/Solutions'
-import { $AimTodo, getJsonOfAimTodo } from './api/getJsonOfAimTrees'
-import { LogGainsFromEachDialog } from './cli/LogGainsFromEachDialog'
-import { ViewBackwardSolve } from './cli/views/ViewBackwardSolve'
-import { ViewForwardValidate } from './cli/views/ViewForwardValidate'
-import { Validators } from './puzzle/aim/Validators'
-import { EnumReCreator } from './cli/EnumReCreator'
+import { $AimTodo, getJsonOfAimTodo } from '../api/getJsonOfAimTrees'
+import { Solutions } from '../common/aim/Solutions'
+import { Validators } from '../common/aim/Validators'
+import { LogGainsFromEachDialog } from './old/LogGainsFromEachDialog'
+import { EnumReCreator } from './re-creator/EnumReCreator'
+import { ViewBackwardSolve } from './views/ViewBackwardSolve'
+import { ViewForwardValidate } from './views/ViewForwardValidate'
+
 
 const prompt = promptSync()
 

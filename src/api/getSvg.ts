@@ -1,9 +1,9 @@
 import { existsSync, readFileSync } from 'fs'
 import { create } from 'xmlbuilder2'
 import { FilenameSuffixes } from '../../FilenameSuffixes'
-import { Graph } from '../location/Graph'
-import { Point } from '../location/Point'
-import { _STARTER_JSONC } from '../_STARTER_JSONC'
+import { Graph } from '../common/location/Graph'
+import { Point } from '../common/location/Point'
+import { _STARTER_JSONC } from '../common/_STARTER_JSONC'
 
 declare interface $Square {
   col: string

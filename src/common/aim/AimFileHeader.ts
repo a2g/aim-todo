@@ -1,8 +1,8 @@
-import { RawObjectsAndVerb } from '../RawObjectsAndVerb'
+import { RawObjectsAndVerb } from "../puzzle/RawObjectsAndVerb"
+import { Solved } from "../puzzle/Solved"
+import { Validated } from "../puzzle/Validated"
+import { VisibleThingsMap } from "../puzzle/VisibleThingsMap"
 
-import { Solved } from '../Solved'
-import { Validated } from '../Validated'
-import { VisibleThingsMap } from '../VisibleThingsMap'
 
 /**
  * #### So this is NOT a piece, its just the thing that pieces attach to.

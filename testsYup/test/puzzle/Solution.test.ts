@@ -1,7 +1,7 @@
 // Typescript Unit test
 /*
-import { SolverViaRootPiece } from '../../../src/puzzle/SolverViaRootPiece.js'
-import { Box } from '../../../src/puzzle/Box.js'
+import { SolverViaRootPiece } from '../../../src/common/puzzle/SolverViaRootPiece.js'
+import { Box } from '../../../src/common/puzzle/Box.js'
 
 describe('Solution', () => {
   it('Test of a none clone solution', async () => {

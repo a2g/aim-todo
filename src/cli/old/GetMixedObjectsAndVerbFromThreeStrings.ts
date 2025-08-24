@@ -1,7 +1,9 @@
-import { Happener } from '../puzzle/Happener'
-import { Mix } from '../puzzle/Mix'
-import { Command } from '../puzzle/Command'
-import { Verb } from '../puzzle/Verb'
+import { Command } from "../../common/puzzle/Command"
+import { Happener } from "../../common/puzzle/Happener"
+import { Mix } from "../../common/puzzle/Mix"
+import { Verb } from "../../common/puzzle/Verb"
+
+
 
 export function ParseTokenizedCommandLineFromFromThreeStrings (
   strings: string[],
