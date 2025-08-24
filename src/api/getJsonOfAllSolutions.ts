@@ -3,6 +3,7 @@ import { join } from 'path'
 import { _STARTER_JSONC } from '../common/_STARTER_JSONC'
 import { Solutions } from '../common/aim/Solutions'
 import { FormatText } from '../common/puzzle/FormatText'
+import { Validators } from '../common/aim/Validators'
 
 export function getJsonOfAllSolutions (
   dirName: string,
@@ -18,18 +19,14 @@ export function getJsonOfAllSolutions (
     throw Error(`file doesn't exist ${path}${firstBoxFilename}`)
   }
 
-  const solutions = new Solutions(path, firstBoxFilename)
-
-  // for (let i = 0; i < 200; i++) {
-  //   solutions.SolvePartiallyUntilCloning()
-  //   solutions.UpdateSolvedStatuses()
-  // }
+  const workings = new Solutions(path, firstBoxFilename)
+  const solutions = new Validators(workings)
 
   // display list
   let incomplete = 0
   let listItemNumber = 0
-  for (const solution of solutions.GetSolutions()) {
-    console.warn(FormatText(solution.GetSolvingPath()))
+  for (const solution of solutions.GetValidators()) {
+    console.warn(FormatText(solution.GetName()))
     //console.warn(FormatText(solution.GetAimTreeMap().CalculateListOfKeys()))
     for (const item of solution.GetAimTreeMap().GetAims()) {
       listItemNumber++
@@ -48,7 +45,7 @@ export function getJsonOfAllSolutions (
 }
 
 function getJsonOfSolutionsFromSolver (
-  _solutions: Solutions
+  _solutions: Validators
 ): Record<string, unknown> {
   return {
     name: 'Solutions',

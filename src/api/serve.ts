@@ -7,11 +7,11 @@ import path from 'path'
 import express from 'express'
 import {
   getJsonOfAllSolutionsApi,
-  getJsonOfStartersApi,
+  getJsonOfGameLevels,
   getSvgApi
 } from './api'
 const app = express()
-const PORT = (process.env.PORT != null) ? `${process.env.PORT}` : 5000
+const PORT = (process.env.PORT != null) ? `${process.env.PORT}` : 5011
 /*
 const redisClient: RedisClient = createClient({
   url: process.env.REDIS_ENDPOINT_URI,
@@ -51,7 +51,7 @@ function getSolutionsFromRedis(
 // app.get('/solutions/:firstFile', getSolutionsFromRedis, getSolutionsDirect);
 app.get('/puz/:repo/:world/:area/sols', getJsonOfAllSolutionsApi)
 app.get('/puz/:repo/:world/:area/svg', getSvgApi)
-app.get('/puz/starters', getJsonOfStartersApi)
+app.get('/puz/starters', getJsonOfGameLevels)
 
 app.listen(PORT, () => {
   const a = `Congratulations, the backend server has started. It's listening on ${PORT}`

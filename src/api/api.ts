@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import { getJsonOfAllEvolutions } from './getJsonOfAllEvolutions'
-import { getJsonOfAimTodo } from './getJsonOfAimTrees'
+import { getJsonOfAimTodo } from './getJsonOfAimTodo'
 import { getSvg } from './getSvg'
+import { getJsonOfAllSolutions } from './getJsonOfAllSolutions'
 
 interface RequestParams {
   repo: string
@@ -54,7 +54,7 @@ export function getJsonOfAllSolutionsApi (
     const area = req.params.area
 
     const dirName = __dirname
-    const json = getJsonOfAllEvolutions(dirName, repo, world, area)
+    const json = getJsonOfAllSolutions(dirName, repo, world, area)
 
     responseSender.json(json)
   } catch (err) {
@@ -63,7 +63,7 @@ export function getJsonOfAllSolutionsApi (
   }
 }
 
-export function getJsonOfStartersApi (
+export function getJsonOfGameLevels (
   _req: Request<RequestParams, ResponseBody, RequestBody, RequestQuery>,
   responseSender: Response,
   _next: NextFunction

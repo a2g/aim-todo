@@ -10,8 +10,8 @@ export default {
     theModelAsAProp: Object,
     baseUrl: {
       type: String,
-      default: "http://localhost:5000/puz/exclusive-worlds/Satanic/01/svg?"
-      //  default: "http://localhost:5000/puz/todo/practice-world/03/svg?"
+      default: "http://localhost:5011/puz/exclusive-worlds/Satanic/01/svg?"
+      //  default: "http://localhost:5011/puz/todo/practice-world/03/svg?"
     },
     showModal: {
       type: Boolean,

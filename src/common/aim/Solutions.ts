@@ -24,7 +24,7 @@ export class Solutions {
     const pathAndFile = fileAddress + animTodoFilename
     if (!existsSync(pathAndFile)) {
       throw new Error(
-        `The d##_xxxx.jsonc was not found: ${pathAndFile} `
+        `The aim_todo.jsonc was not found: ${pathAndFile} `
       )
     }
     const text = readFileSync(pathAndFile, 'utf-8')

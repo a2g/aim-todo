@@ -11,7 +11,7 @@ export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: strin
     const mapToReturn = new AimFileHeaderMap()
     const cwd = process.cwd()
     console.log(cwd)
-    process.chdir(join(__dirname, '/../../../..'))
+    process.chdir(join(__dirname, '/../../../../..'))
     process.chdir(folder)
 
     console.warn('Results of FindAndAddPiecesRecursively')

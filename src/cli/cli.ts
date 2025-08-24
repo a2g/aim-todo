@@ -1,8 +1,8 @@
 import promptSync from 'prompt-sync'
-import { $AimTodo, getJsonOfAimTodo } from '../api/getJsonOfAimTrees'
+import { $AimTodo, getJsonOfAimTodo } from '../api/getJsonOfAimTodo'
 import { Solutions } from '../common/aim/Solutions'
 import { Validators } from '../common/aim/Validators'
-import { LogGainsFromEachDialog } from './old/LogGainsFromEachDialog'
+//import { LogGainsFromEachDialog } from './log/LogGainsFromEachDialog'
 import { EnumReCreator } from './re-creator/EnumReCreator'
 import { ViewBackwardSolve } from './views/ViewBackwardSolve'
 import { ViewForwardValidate } from './views/ViewForwardValidate'
@@ -29,7 +29,7 @@ function main (): void {
       default:
         if (index >= 0 && index < aimTrees.length) {
           const aimTree = aimTrees[index]
-          LogGainsFromEachDialog(aimTree.folder)
+          //LogGainsFromEachDialog(aimTree.folder)
 
           const solutions = new Solutions(aimTree.file, aimTree.folder)
           const validators = new Validators(solutions)

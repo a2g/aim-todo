@@ -7,7 +7,7 @@ import path from 'path'
 import axios from 'axios'
 
 const app = express()
-const PORT = process.env.PORT != null ? `${process.env.PORT}` : 5000
+const PORT = process.env.PORT != null ? `${process.env.PORT}` : 5011
 
 const redisClient: RedisClient = createClient({
   url: process.env.REDIS_ENDPOINT_URI,

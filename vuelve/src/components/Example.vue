@@ -7,7 +7,7 @@ import Panel from './example/Panel.vue'
 import { storeGithubAccessTimeForUser } from '@/storage'
 
 const API_BASE = location.hostname === 'localhost'
-  ? 'http://localhost:5000'
+  ? 'http://localhost:5011'
   : location.origin
 
 export default {
