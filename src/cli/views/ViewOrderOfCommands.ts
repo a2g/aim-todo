@@ -3,12 +3,18 @@ import { Validators } from '../../common/aim/Validators'
 import { FormatText } from '../../common/puzzle/FormatText'
 import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
 import { Raw } from '../../common/puzzle/Raw'
+import { FormatCommand } from '../../api/FormatCommand'
+import { GetAchievementSpiel } from '../../api/GetAchievementSpiel'
+import { GetRestrictionSpiel } from '../../api/GetRestrictionSpiel'
+import { GetMainSpiel } from '../../api/GetMainSpiel'
 const prompt = promptSync({})
 
 export function ViewOrderOfCommands (validators: Validators): void {
   console.warn(' ')
 
-  let infoLevel = 1
+  let settings = {
+    infoLevel: 9
+  }
   for (; ;) {
     for (let i = 0; i < 40; i++) {
       validators.DeconstructAllAchievementsOfAllValidatorsAndRecordSteps()
@@ -84,11 +90,15 @@ export function ViewOrderOfCommands (validators: Validators): void {
           solution.GetOrderOfCommands()
         for (const command of commands) {
           // 0 is cleanest, later numbers are more detailed
-          if (command.source === Raw.Achievement && infoLevel < 3) {
+          if (command.source === Raw.Achievement && settings.infoLevel < 3) {
             continue
           }
           listItemNumber++
-          const formattedCommand = FormatCommand(command, infoLevel)
+          const formattedCommand = FormatCommand(
+            GetMainSpiel(command, settings),
+            GetAchievementSpiel(command, settings),
+            GetRestrictionSpiel(command, settings),
+            command.typeJustForDebugging, settings)
           console.warn(`    ${listItemNumber}. ${formattedCommand}`)
           if (command.source === Raw.Dialog) {
             for (let i = 0; i < command.getChildTupleLength(); i++) {
@@ -109,31 +119,8 @@ export function ViewOrderOfCommands (validators: Validators): void {
       // show map entry for chosen item
       const theNumber2 = Number(input2)
       if (theNumber2 >= 1 && theNumber <= 9) {
-        infoLevel = theNumber2
+        settings.infoLevel = theNumber2
       }
     }
   }
-}
-
-function FormatCommand (raw: RawObjectsAndVerb, infoLevel: number): string {
-  raw.PopulateSpielFields()
-  let toReturn = ''
-  switch (infoLevel) {
-    case 1:
-    case 2:
-    case 3:
-      toReturn = `${raw.mainSpiel}`
-      break
-    case 4:
-    case 5:
-    case 6:
-      toReturn = `${raw.mainSpiel}  ${raw.achievementSpiel}`
-      break
-    case 7:
-    case 8:
-    case 9:
-      toReturn = `${raw.mainSpiel}  ${raw.achievementSpiel} ${raw.restrictionSpiel} ${raw.typeJustForDebugging}`
-      break
-  }
-  return toReturn
 }

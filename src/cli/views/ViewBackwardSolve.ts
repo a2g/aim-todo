@@ -1,20 +1,20 @@
 import promptSync from 'prompt-sync'
-import { Solutions } from '../../common/aim/Solutions'
+import { TodoTreeWorkspaces } from '../../common/aim/TodoTreeWorkspaces'
 import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
 const prompt = promptSync({})
 
-export function ViewBackwardSolve (solutions: Solutions): void {
+export function ViewBackwardSolve (solutions: TodoTreeWorkspaces): void {
   const titlePath = ['Backwards Solve']
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
-    const numberOfSolutions: number = solutions._solutions.size
+    const numberOfSolutions: number = solutions.workspaces.size
     // solutions.GenerateSolutionNamesAndPush()
     console.warn(`Number of solutions = ${numberOfSolutions} , Legend: (a, b)= (unsolvedCount, total)`)
-    if (solutions._solutions.size > 1) {
+    if (solutions.workspaces.size > 1) {
       console.warn('    0. All solutions')
     }
 
-    const solutionArray = Array.from(solutions._solutions.values())
+    const solutionArray = Array.from(solutions.workspaces.values())
     for (let i = 0; i < solutionArray.length; i++) {
       const solution = solutionArray[i]
       console.warn(`    ${i + 1}. ${solution.GetSolvingPath()}`)

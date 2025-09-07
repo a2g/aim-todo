@@ -2,13 +2,19 @@ import promptSync from 'prompt-sync'
 import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
 import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
 import { Raw } from '../../common/puzzle/Raw'
+import { GetMainSpiel } from '../../api/GetMainSpiel'
+import { GetAchievementSpiel } from '../../api/GetAchievementSpiel'
+import { GetRestrictionSpiel } from '../../api/GetRestrictionSpiel'
+import { FormatCommand } from '../../api/FormatCommand'
 
 const prompt = promptSync({ sigint: true })
 
 export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
 ): void {
   titlePath.push('Commands')
-  let infoLevel = 9
+  let settings = {
+    infoLevel: 9
+  }
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
 
@@ -16,17 +22,24 @@ export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
 
     for (const command of commands) {
       // 0 is cleanest, later numbers are more detailed
-      if (command.source === Raw.Achievement && infoLevel < 5) {
+      if (command.source === Raw.Achievement && settings.infoLevel < 5) {
         continue
       }
-      if (command.source === Raw.Achievement && infoLevel < 3) {
+      if (command.source === Raw.Achievement && settings.infoLevel < 3) {
         continue
       }
-      if (command.source === Raw.Error_ZeroPiecesInAimNoticedInDeconstructing && infoLevel < 1) {
+      if (command.source === Raw.Error_ZeroPiecesInAimNoticedInDeconstructing && settings.infoLevel < 1) {
         continue
       }
       listItemNumber++
-      const formattedCommand = FormatCommand(command, infoLevel)
+
+      const formattedCommand = FormatCommand(
+        GetMainSpiel(command, settings),
+        GetAchievementSpiel(command, settings),
+        GetRestrictionSpiel(command, settings),
+        command.typeJustForDebugging,
+        settings
+      )
       console.warn(`${listItemNumber}. ${formattedCommand}`)
       if (command.source === Raw.Dialog) {
         for (var i = 0; i < command.getChildTupleLength(); i++) {
@@ -49,31 +62,8 @@ export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
       // show map entry for chosen item
       const theNumber2 = Number(input2)
       if (theNumber2 >= 1 && theNumber2 <= 9) {
-        infoLevel = theNumber2
+        settings.infoLevel = theNumber2
       }
     }
   }
-}
-
-function FormatCommand (raw: RawObjectsAndVerb, infoLevel: number): string {
-  raw.PopulateSpielFields()
-  let toReturn = ''
-  switch (infoLevel) {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-      toReturn = `${raw.mainSpiel}`
-      break
-    case 8:
-      toReturn = `${raw.mainSpiel}  ${raw.achievementSpiel}`
-      break
-    case 9:
-      toReturn = `${raw.mainSpiel}  ${raw.achievementSpiel} ${raw.restrictionSpiel} ${raw.typeJustForDebugging}`
-      break
-  }
-  return toReturn
 }

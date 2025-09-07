@@ -1,6 +1,6 @@
 import { AimFileHeaderMap } from "./AimFileHeaderMap"
 
-export class Solution {
+export class TodoTreeWorkspace {
 
     public names: string[]
     public todoTree: any
@@ -24,12 +24,11 @@ export class Solution {
         return name
     }
 
-
-    Clone (): Solution {
+    Clone (): TodoTreeWorkspace {
         // this deep clones the 'root' member of the solution'
         const clonedTodoTree = this._CloneObject(this.todoTree)
         const clonedAimTreeMap = this.aimTreeMap.Clone()
-        const newSolution = new Solution(clonedTodoTree, clonedAimTreeMap)
+        const newSolution = new TodoTreeWorkspace(clonedTodoTree, clonedAimTreeMap)
 
         // this clones the names
         newSolution.names.push(...this.names)
@@ -51,11 +50,7 @@ export class Solution {
         return toReturn
     }
 
-
     public GetAimTreeMap (): AimFileHeaderMap {
         return this.aimTreeMap
     }
-
-
-
 }

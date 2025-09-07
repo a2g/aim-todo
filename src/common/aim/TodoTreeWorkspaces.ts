@@ -1,47 +1,52 @@
 import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
-import { Solution } from './Solution'
+import { TodoTreeWorkspace } from './TodoTreeWorkspace'
 import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/old/GetMapOFilesInFolderOfGivenPrefix'
 import { AimFileHeaderMap } from './AimFileHeaderMap'
 
 import { Box } from '../puzzle/Box'
 import { VisibleThingsMap } from '../puzzle/VisibleThingsMap'
 import { _STARTER_JSONC } from '../_STARTER_JSONC'
+import { _TODO_TREE_JSONC } from '../_TODO_TREE_JSONC'
 
-export class Solutions {
-  filename: string
+/**
+ * Workspaces are like proto-solutions - they are used to explore possible solutions.
+ * 
+ * We start off with one workspace, then we add more every time
+ * we encounter a branching point, like 'oneOf'
+ */
+export class TodoTreeWorkspaces {
   fileAddress: string
-  _solutions: Map<string, Solution>
+  workspaces: Map<string, TodoTreeWorkspace>
   aimTreeMap: AimFileHeaderMap
   startingThingsMap: VisibleThingsMap
 
-  constructor(animTodoFilename: string, fileAddress: string) {
-    this.filename = animTodoFilename
-    this.fileAddress = fileAddress
-    this._solutions = new Map<string, Solution>()
+  constructor(fullFolderPath: string) {
+    this.fileAddress = fullFolderPath
+    this.workspaces = new Map<string, TodoTreeWorkspace>()
     this.startingThingsMap = new VisibleThingsMap(null)
 
-    const pathAndFile = fileAddress + animTodoFilename
+    const pathAndFile = fullFolderPath + _TODO_TREE_JSONC
     if (!existsSync(pathAndFile)) {
       throw new Error(
-        `The aim_todo.jsonc was not found: ${pathAndFile} `
+        `The '${_TODO_TREE_JSONC} was not found: ${pathAndFile} `
       )
     }
     const text = readFileSync(pathAndFile, 'utf-8')
     const parsedJson: any = parse(text)
     const aimTodoTree = parsedJson.root
-    this.aimTreeMap = GetMapOFilesInFolderOfGivenPrefix(fileAddress, 'aim')
+    this.aimTreeMap = GetMapOFilesInFolderOfGivenPrefix(fullFolderPath, 'aim')
 
 
     this.InitializeStartingThings()
 
-    // first map entry is added with blank ''
-    this._solutions.set('', new Solution(aimTodoTree, this.aimTreeMap))
+    // first workspace is added with blank workspace name
+    this.workspaces.set('', new TodoTreeWorkspace(aimTodoTree, this.aimTreeMap))
 
     let isNewSolutions = false
     do {
       isNewSolutions = false
-      for (const solution of this._solutions.values()) {
+      for (const solution of this.workspaces.values()) {
         const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.todoTree, solution)
         isNewSolutions = isNewSolutions || wasNewSolutionGenerated
         if (wasNewSolutionGenerated) {
@@ -49,6 +54,10 @@ export class Solutions {
         }
       }
     } while (isNewSolutions)
+  }
+
+  GetCount () {
+    return this.workspaces.size
   }
 
   InitializeStartingThings () {
@@ -60,11 +69,11 @@ export class Solutions {
     return this.startingThingsMap
   }
 
-  public GetSolutions (): IterableIterator<Solution> {
-    return this._solutions.values()
+  public GetSolutions (): IterableIterator<TodoTreeWorkspace> {
+    return this.workspaces.values()
   }
 
-  private traverseAndCreateSeparateTreesWhenEncounteringOneOf (thisObject: any, solution: Solution): boolean {
+  private traverseAndCreateSeparateTreesWhenEncounteringOneOf (thisObject: any, solution: TodoTreeWorkspace): boolean {
     if (typeof thisObject === 'string') {
       return false;
     }
@@ -84,18 +93,18 @@ export class Solutions {
         // we've got the children, so delete the parent 'oneOf'
         delete thisObject.oneOf
 
+        // add a new workspace every time we reach a branching point like 'one of'
         for (const pair of mapOfRawChildren) {
           thisObject[pair[0]] = pair[1]
           const newSolution = solution.Clone()
-          // here we add the new name
           newSolution.names.push(pair[0])
-          this._solutions.set(newSolution.GetSolvingPath(), newSolution)
+          this.workspaces.set(newSolution.GetSolvingPath(), newSolution)
 
           delete thisObject[pair[0]]
         }
 
         // also delete the entry from the set
-        this._solutions.delete(solution.GetSolvingPath())
+        this.workspaces.delete(solution.GetSolvingPath())
 
         // now return with true, telling the caller that we have new  objects
         return true

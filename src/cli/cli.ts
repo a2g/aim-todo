@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
-import { $AimTodo, getJsonOfAimTodo } from '../api/getJsonOfAimTodo'
-import { Solutions } from '../common/aim/Solutions'
+import { $AimTodo, getJsonOfAllTodoTrees } from '../api/getJsonOfAllTodoTrees'
+import { TodoTreeWorkspaces } from '../common/aim/TodoTreeWorkspaces'
 import { Validators } from '../common/aim/Validators'
 //import { LogGainsFromEachDialog } from './log/LogGainsFromEachDialog'
 import { EnumReCreator } from './re-creator/EnumReCreator'
@@ -11,7 +11,7 @@ import { ViewForwardValidate } from './views/ViewForwardValidate'
 const prompt = promptSync()
 
 function main (): void {
-  const aimTrees: $AimTodo[] = getJsonOfAimTodo()
+  const aimTrees: $AimTodo[] = getJsonOfAllTodoTrees()
 
   for (; ;) {
     for (let i = 1; i <= aimTrees.length; i++) {
@@ -31,13 +31,13 @@ function main (): void {
           const aimTree = aimTrees[index]
           //LogGainsFromEachDialog(aimTree.folder)
 
-          const solutions = new Solutions(aimTree.file, aimTree.folder)
-          const validators = new Validators(solutions)
+          const workspaces = new TodoTreeWorkspaces(aimTree.folder)
+          const validators = new Validators(workspaces)
 
           for (; ;) {
             console.warn(`\nSubMenu of ${aimTree.folder}/${aimTree.file}`)
             console.warn(
-              `number of solutions = ${solutions._solutions.size}`
+              `number of solutions = ${workspaces.GetCount()}`
             )
             console.warn('---------------------------------------')
             console.warn('1. Delete a_aims - t_types ')
@@ -63,7 +63,7 @@ function main (): void {
                 }
                 break
               case '3':
-                ViewBackwardSolve(solutions)
+                ViewBackwardSolve(workspaces)
                 break
               case '4':
                 ViewForwardValidate(validators)

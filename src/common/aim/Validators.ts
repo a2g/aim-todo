@@ -1,4 +1,4 @@
-import { Solutions } from "./Solutions"
+import { TodoTreeWorkspaces } from "./TodoTreeWorkspaces"
 import { Validator } from "./Validator"
 
 
@@ -12,7 +12,7 @@ import { Validator } from "./Validator"
 export class Validators {
   private readonly validators: Validator[]
 
-  constructor(solutions: Solutions) {
+  constructor(solutions: TodoTreeWorkspaces) {
     this.validators = []
     for (const solution of solutions.GetSolutions()) {
       const startingThings = solutions.GetStartingThings()

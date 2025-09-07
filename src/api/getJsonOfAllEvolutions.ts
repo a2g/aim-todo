@@ -7,6 +7,7 @@ import { FormatText } from '../common/puzzle/FormatText'
 import { _STARTER_JSONC } from '../common/_STARTER_JSONC'
 import { Evolutions } from '../common/puzzle/Evolutions'
 import { Evolution } from '../common/puzzle/Evolution'
+import { GetAchievementSpiel } from './GetAchievementSpiel'
 
 
 interface $INameIsAAchievementChildren {
@@ -139,32 +140,32 @@ function getJsonArrayOfAllSubPieces (piece: Piece | null): unknown[] {
 }
 
 export function getJsonArrayOfOrderedSteps (
-  steps: RawObjectsAndVerb[]
+  commands: RawObjectsAndVerb[]
 ): unknown[] {
   const toReturn = new Array<unknown>()
   let lastLocation = ''
-  for (const step of steps) {
-    step.PopulateSpielFields(false)// false - because we don't want ansi colors
-
+  for (const command of commands) {
     // big writing about why its bad
     //
     //
     //
     let newLocation = lastLocation // default to last
-    if (step.objectA.startsWith('obj_')) {
-      newLocation = step.objectA
-    } else if (step.objectB.startsWith('obj_')) {
-      newLocation = step.objectB
+    if (command.objectA.startsWith('obj_')) {
+      newLocation = command.objectA
+    } else if (command.objectB.startsWith('obj_')) {
+      newLocation = command.objectB
     }
+
+
     toReturn.push({
-      name: step.mainSpiel,
-      isAAchievementOrAuto: step.isAAchievementOrAuto(),
+      name: GetAchievementSpiel(command, {}),
+      isAAchievementOrAuto: command.isAAchievementOrAuto(),
       paramA: lastLocation,
       paramB: newLocation,
       children: []
     })
-    for (let i = 0; i < step.getChildTupleLength(); i++) {
-      const speechLine = step.getChildTuple(i);
+    for (let i = 0; i < command.getChildTupleLength(); i++) {
+      const speechLine = command.getChildTuple(i);
       toReturn.push({
         name: speechLine,
         isAAchievementOrAuto: true,

@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import { join } from 'path'
-import { AIM_TODO_JSONC } from '../common/AIM_TODO_JSONC'
+import { _TODO_TREE_JSONC } from '../common/_TODO_TREE_JSONC'
 
 export interface $AimTodo {
   // used by CLI
@@ -15,7 +15,7 @@ export interface $AimTodo {
   displayName: string
 }
 
-export function getJsonOfAimTodo (): $AimTodo[] {
+export function getJsonOfAllTodoTrees (): $AimTodo[] {
   console.log(process.cwd())
 
   process.chdir(join(__dirname, '/../../../..'))
@@ -63,7 +63,7 @@ export function getJsonOfAimTodo (): $AimTodo[] {
     process.chdir(`./${repo}/${world}/${area}`)
     const files = fs.readdirSync('.')
     for (const file of files) {
-      if (file === AIM_TODO_JSONC) {
+      if (file === _TODO_TREE_JSONC) {
         toReturn.push({
           // these are needed for CLI
           file,

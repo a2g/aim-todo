@@ -1,9 +1,17 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
-import { _STARTER_JSONC } from '../common/_STARTER_JSONC'
-import { Solutions } from '../common/aim/Solutions'
+import { TodoTreeWorkspaces as TodoListWorkspace } from '../common/aim/TodoTreeWorkspaces'
 import { FormatText } from '../common/puzzle/FormatText'
 import { Validators } from '../common/aim/Validators'
+import { _TODO_TREE_JSONC } from '../common/_TODO_TREE_JSONC'
+import { Validator } from '../common/aim/Validator'
+import { GetMainSpiel } from './GetMainSpiel'
+
+interface $INameIsAAchievementChildren {
+  name: string
+  isAAchievementOrAuto: boolean
+  children: Array<Record<string, unknown>>
+}
 
 export function getJsonOfAllSolutions (
   dirName: string,
@@ -13,13 +21,13 @@ export function getJsonOfAllSolutions (
 ): Record<string, unknown> {
   const path = join(dirName, `../../../../${repo}/${world}/${area}/`)
 
-  const firstBoxFilename = _STARTER_JSONC
+  const file = _TODO_TREE_JSONC
 
-  if (!existsSync(path + firstBoxFilename)) {
-    throw Error(`file doesn't exist ${path}${firstBoxFilename}`)
+  if (!existsSync(path + file)) {
+    throw Error(`file doesn't exist ${path}${file}`)
   }
 
-  const workings = new Solutions(path, firstBoxFilename)
+  const workings = new TodoListWorkspace(path)
   const solutions = new Validators(workings)
 
   // display list
@@ -49,6 +57,38 @@ function getJsonOfSolutionsFromSolver (
 ): Record<string, unknown> {
   return {
     name: 'Solutions',
-    children: null
+    children: getJsonArrayOfSolutions(_solutions.GetValidators())
   }
+}
+
+function getJsonArrayOfSolutions (
+  solutions: Validator[]
+): $INameIsAAchievementChildren[] {
+  const toReturn = new Array<$INameIsAAchievementChildren>()
+  let i = 0
+  for (const solution of solutions) {
+    i += 1
+    toReturn.push({
+      name: `Solution ${i}`,
+      isAAchievementOrAuto: false,
+      children: getOrderedCommands(solution, {})
+    })
+  }
+
+  return toReturn
+}
+
+function getOrderedCommands (
+  solution: Validator, settings: Settings
+): any[] {
+  const toReturn = new Array<$INameIsAAchievementChildren>()
+  const commands = solution.GetOrderOfCommands()
+  for (const command of commands) {
+    toReturn.push({
+      name: GetMainSpiel(command, settings),
+      isAAchievementOrAuto: true,
+      children: []
+    })
+  }
+  return toReturn
 }

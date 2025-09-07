@@ -8,6 +8,7 @@ export enum Raw {
   Command = 'Command',
   Give = 'Give',
   Achievement = 'Achievement',
+  EndOfAchievement = 'EndOfAchievement',
   Separator = 'Separator',
   Error_ZeroPiecesInAimNoticedInDeconstructing = 'Error_ZeroPiecesInAimNoticedInDeconstructing',
   Reveal = 'Reveal'

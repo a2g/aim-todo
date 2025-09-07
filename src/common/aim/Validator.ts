@@ -145,8 +145,8 @@ export class Validator {
       const at = toReturn.length
       // const n = header.commandsCompletedInOrder.length
       toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
-      const raw = new RawObjectsAndVerb(Raw.Separator)
-      raw.mainSpiel = ` --------------- end of achievement ${filename}`
+      const raw = new RawObjectsAndVerb(Raw.EndOfAchievement)
+      raw.objectA = filename;
       toReturn.push(raw)
     }
     return toReturn

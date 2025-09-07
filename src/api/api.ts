@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { getJsonOfAimTodo } from './getJsonOfAimTodo'
+import { getJsonOfAllTodoTrees } from './getJsonOfAllTodoTrees'
 import { getSvg } from './getSvg'
 import { getJsonOfAllSolutions } from './getJsonOfAllSolutions'
 
@@ -69,7 +69,7 @@ export function getJsonOfGameLevels (
   _next: NextFunction
 ): void {
   try {
-    const json = getJsonOfAimTodo()
+    const json = getJsonOfAllTodoTrees()
 
     responseSender.json(json)
   } catch (err) {
