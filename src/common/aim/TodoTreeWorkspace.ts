@@ -2,9 +2,10 @@ import { AimFileHeaderMap } from "./AimFileHeaderMap"
 
 export class TodoTreeWorkspace {
 
-    public names: string[]
-    public todoTree: any
-    public aimTreeMap: any
+
+    private names: string[]
+    private todoTree: any
+    private aimTreeMap: AimFileHeaderMap
 
     constructor(todoTree: any, aimTreeMap: AimFileHeaderMap) {
         this.names = []
@@ -52,5 +53,13 @@ export class TodoTreeWorkspace {
 
     public GetAimTreeMap (): AimFileHeaderMap {
         return this.aimTreeMap
+    }
+
+    public GetNames (): string[] {
+        return this.names
+    }
+
+    public GetTodoTree (): any {
+        return this.todoTree
     }
 }

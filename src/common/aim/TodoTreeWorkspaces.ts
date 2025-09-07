@@ -47,7 +47,7 @@ export class TodoTreeWorkspaces {
     do {
       isNewSolutions = false
       for (const solution of this.workspaces.values()) {
-        const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.todoTree, solution)
+        const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.GetTodoTree(), solution)
         isNewSolutions = isNewSolutions || wasNewSolutionGenerated
         if (wasNewSolutionGenerated) {
           break
@@ -97,7 +97,7 @@ export class TodoTreeWorkspaces {
         for (const pair of mapOfRawChildren) {
           thisObject[pair[0]] = pair[1]
           const newSolution = solution.Clone()
-          newSolution.names.push(pair[0])
+          newSolution.GetNames().push(pair[0])
           this.workspaces.set(newSolution.GetSolvingPath(), newSolution)
 
           delete thisObject[pair[0]]
