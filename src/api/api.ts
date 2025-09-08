@@ -5,11 +5,8 @@ import cors from 'cors'
 import path from 'path'
 
 import express from 'express'
-import {
-  getJsonOfAllSolutionsApi,
-  getJsonOfGameLevels,
-  getSvgApi
-} from './api'
+import { getJsonOfAllSolutionsApi, getJsonOfGameLevels, getSvgApi } from './JsonReturners'
+
 const app = express()
 const PORT = (process.env.PORT != null) ? `${process.env.PORT}` : 5011
 /*
@@ -47,11 +44,17 @@ function getSolutionsFromRedis(
     }
   });
 }
+  
 */
 // app.get('/solutions/:firstFile', getSolutionsFromRedis, getSolutionsDirect);
 app.get('/puz/:repo/:world/:area/sols', getJsonOfAllSolutionsApi)
 app.get('/puz/:repo/:world/:area/svg', getSvgApi)
 app.get('/puz/starters', getJsonOfGameLevels)
+
+// serve ht main html from here
+app.get('/', function (req, res) {
+  res.send(`Hello World! ${req.path}`)
+})
 
 app.listen(PORT, () => {
   const a = `Congratulations, the backend server has started. It's listening on ${PORT}`
@@ -59,11 +62,13 @@ app.listen(PORT, () => {
   const c = `http://localhost:${PORT}/puz/todo/practice-world/03/sols`
   const d = `http://localhost:${PORT}/puz/exclusive-worlds/satanic/01/sols`
   const e = `http://localhost:${PORT}/puz/exclusive-worlds/mission/10_final/sols`
+  const f = `http://localhost:${PORT}/starters`
   console.log(a)
   console.log(b)
   console.log(c)
   console.log(d)
   console.log(e)
+  console.log(f)
 })
 
 module.exports = app

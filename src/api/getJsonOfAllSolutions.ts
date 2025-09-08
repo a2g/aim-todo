@@ -55,9 +55,11 @@ export function getJsonOfAllSolutions (
 function getJsonOfSolutionsFromSolver (
   _solutions: Validators
 ): Record<string, unknown> {
+  const jsonOfSolutions = getJsonArrayOfSolutions(_solutions.GetValidators())
+
   return {
     name: 'Solutions',
-    children: getJsonArrayOfSolutions(_solutions.GetValidators())
+    children: jsonOfSolutions,
   }
 }
 
