@@ -3,7 +3,7 @@ import promptSync from 'prompt-sync'
 import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
 import { CommandsView } from './CommandsView'
 import { ViewAimFileHeader } from './ViewAimFileHeader'
-import { Validator } from '../../common/aim/Validator'
+import { Solution } from '../../common/aim/Solution'
 import { assert } from 'console'
 import { FormatText } from '../../common/puzzle/FormatText'
 import { AddBrackets } from '../../common/puzzle/AddBrackets'
@@ -11,7 +11,7 @@ import { AddBrackets } from '../../common/puzzle/AddBrackets'
 
 const prompt = promptSync({})
 
-export function ValidatorView (validator: Validator, titlePath: string[]): void {
+export function ValidatorView (validator: Solution, titlePath: string[]): void {
   titlePath.push('Validator')
   for (; ;) {
     // I don't like putting this below the list - but I do like having it there

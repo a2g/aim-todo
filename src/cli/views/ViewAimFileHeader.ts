@@ -4,13 +4,13 @@ import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
 import { AimFileHeader as AimFileHeader } from '../../common/aim/AimFileHeader'
 import { CommandsView } from './CommandsView'
 import { PieceDeconstructionView } from './PieceDeconstructionView'
-import { Validator } from '../../common/aim/Validator'
+import { Solution } from '../../common/aim/Solution'
 import { Piece } from '../../common/puzzle/Piece'
 
 
 const prompt = promptSync({ sigint: true })
 
-export function ViewAimFileHeader (header: AimFileHeader, validator: Validator, titlePath: string[]): void {
+export function ViewAimFileHeader (header: AimFileHeader, validator: Solution, titlePath: string[]): void {
   titlePath.push('AimFileHeader')
   for (; ;) {
     ShowUnderlinedTitle(titlePath)

@@ -1,7 +1,7 @@
 import promptSync from 'prompt-sync'
 import { $AimTodo, getJsonOfAllTodoTrees } from '../api/getJsonOfAllTodoTrees'
 import { TodoTreeWorkspaces } from '../common/aim/TodoTreeWorkspaces'
-import { Validators } from '../common/aim/Validators'
+import { Solutions } from '../common/aim/Solutions'
 //import { LogGainsFromEachDialog } from './log/LogGainsFromEachDialog'
 import { EnumReCreator } from './re-creator/EnumReCreator'
 import { ViewBackwardSolve } from './views/ViewBackwardSolve'
@@ -32,7 +32,7 @@ function main (): void {
           //LogGainsFromEachDialog(aimTree.folder)
 
           const workspaces = new TodoTreeWorkspaces(aimTree.folder)
-          const validators = new Validators(workspaces)
+          const validators = new Solutions(workspaces)
 
           for (; ;) {
             console.warn(`\nSubMenu of ${aimTree.folder}/${aimTree.file}`)

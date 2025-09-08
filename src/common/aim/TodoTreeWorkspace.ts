@@ -1,8 +1,6 @@
 import { AimFileHeaderMap } from "./AimFileHeaderMap"
 
 export class TodoTreeWorkspace {
-
-
     private names: string[]
     private todoTree: any
     private aimTreeMap: AimFileHeaderMap

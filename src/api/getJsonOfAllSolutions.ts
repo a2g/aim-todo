@@ -2,9 +2,9 @@ import { existsSync } from 'fs'
 import { join } from 'path'
 import { TodoTreeWorkspaces as TodoListWorkspace } from '../common/aim/TodoTreeWorkspaces'
 import { FormatText } from '../common/puzzle/FormatText'
-import { Validators } from '../common/aim/Validators'
+import { Solutions } from '../common/aim/Solutions'
 import { _TODO_TREE_JSONC } from '../common/_TODO_TREE_JSONC'
-import { Validator } from '../common/aim/Validator'
+import { Solution } from '../common/aim/Solution'
 import { GetMainSpiel } from './GetMainSpiel'
 
 interface $INameIsAAchievementChildren {
@@ -28,12 +28,12 @@ export function getJsonOfAllSolutions (
   }
 
   const workings = new TodoListWorkspace(path)
-  const solutions = new Validators(workings)
+  const solutions = new Solutions(workings)
 
   // display list
   let incomplete = 0
   let listItemNumber = 0
-  for (const solution of solutions.GetValidators()) {
+  for (const solution of solutions.GetSolutions()) {
     console.warn(FormatText(solution.GetName()))
     //console.warn(FormatText(solution.GetAimTreeMap().CalculateListOfKeys()))
     for (const item of solution.GetAimTreeMap().GetAims()) {
@@ -53,9 +53,9 @@ export function getJsonOfAllSolutions (
 }
 
 function getJsonOfSolutionsFromSolver (
-  _solutions: Validators
+  _solutions: Solutions
 ): Record<string, unknown> {
-  const jsonOfSolutions = getJsonArrayOfSolutions(_solutions.GetValidators())
+  const jsonOfSolutions = getJsonArrayOfSolutions(_solutions.GetSolutions())
 
   return {
     name: 'Solutions',
@@ -64,7 +64,7 @@ function getJsonOfSolutionsFromSolver (
 }
 
 function getJsonArrayOfSolutions (
-  solutions: Validator[]
+  solutions: Solution[]
 ): $INameIsAAchievementChildren[] {
   const toReturn = new Array<$INameIsAAchievementChildren>()
   let i = 0
@@ -81,7 +81,7 @@ function getJsonArrayOfSolutions (
 }
 
 function getOrderedCommands (
-  solution: Validator, settings: Settings
+  solution: Solution, settings: Settings
 ): any[] {
   const toReturn = new Array<$INameIsAAchievementChildren>()
   const commands = solution.GetOrderOfCommands()

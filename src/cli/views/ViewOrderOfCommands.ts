@@ -1,5 +1,5 @@
 import promptSync from 'prompt-sync'
-import { Validators } from '../../common/aim/Validators'
+import { Solutions } from '../../common/aim/Solutions'
 import { FormatText } from '../../common/puzzle/FormatText'
 import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
 import { Raw } from '../../common/puzzle/Raw'
@@ -9,7 +9,7 @@ import { GetRestrictionSpiel } from '../../api/GetRestrictionSpiel'
 import { GetMainSpiel } from '../../api/GetMainSpiel'
 const prompt = promptSync({})
 
-export function ViewOrderOfCommands (validators: Validators): void {
+export function ViewOrderOfCommands (validators: Solutions): void {
   console.warn(' ')
 
   let settings = {
@@ -17,9 +17,9 @@ export function ViewOrderOfCommands (validators: Validators): void {
   }
   for (; ;) {
     for (let i = 0; i < 40; i++) {
-      validators.DeconstructAllAchievementsOfAllValidatorsAndRecordSteps()
+      validators.DeconstructAllAchievementsOfAllSolutionsAndRecordSteps()
     }
-    const numberOfSolutions: number = validators.GetValidators().length
+    const numberOfSolutions: number = validators.GetSolutions().length
 
     console.warn('If any leaves are not resolved objerly, for example')
     console.warn(' - eg items show up as not found when they should be')
@@ -37,11 +37,11 @@ export function ViewOrderOfCommands (validators: Validators): void {
     console.warn('Pick solution')
     console.warn('================')
     console.warn(`Number of solutions = ${numberOfSolutions}`)
-    if (validators.GetValidators().length > 1) {
+    if (validators.GetSolutions().length > 1) {
       console.warn('    0. All solutions')
     }
-    for (let i = 0; i < validators.GetValidators().length; i++) {
-      const validator = validators.GetValidators()[i]
+    for (let i = 0; i < validators.GetSolutions().length; i++) {
+      const validator = validators.GetSolutions()[i]
       const name = FormatText(validator.GetName())
       //  "1. XXXXXX"   <- this is the format we list the solutions
       console.warn(`    ${i + 1}. ${name}`)
@@ -64,17 +64,17 @@ export function ViewOrderOfCommands (validators: Validators): void {
     const name =
       theNumber === 0
         ? 'all solutions'
-        : validators.GetValidators()[theNumber - 1].GetName()
+        : validators.GetSolutions()[theNumber - 1].GetName()
     console.warn(`List of Commands for ${name}`)
     console.warn('================')
 
     let listItemNumber = 0
     for (
       let solutionNumber = 0;
-      solutionNumber < validators.GetValidators().length;
+      solutionNumber < validators.GetSolutions().length;
       solutionNumber++
     ) {
-      const solution = validators.GetValidators()[solutionNumber]
+      const solution = validators.GetSolutions()[solutionNumber]
       if (theNumber === 0 || theNumber - 1 === solutionNumber) {
         const letter = String.fromCharCode(65 + solutionNumber)
         const text = FormatText(solution.GetName())

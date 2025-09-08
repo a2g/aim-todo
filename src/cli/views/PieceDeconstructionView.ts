@@ -2,14 +2,14 @@ import promptSync from 'prompt-sync'
 
 import { AimFileHeader } from '../../common/aim/AimFileHeader'
 import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
-import { Validator } from '../../common/aim/Validator'
+import { Solution } from '../../common/aim/Solution'
 import { VisibleThingsMap } from '../../common/puzzle/VisibleThingsMap'
 
 const prompt = promptSync({ sigint: true })
 
 export function PieceDeconstructionView (
   piece: any,
-  validator: Validator,
+  validator: Solution,
   header: AimFileHeader, visibleThings: VisibleThingsMap, titlePath: string[]
 ): void {
   titlePath.push('Piece(Deconstruct)')

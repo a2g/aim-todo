@@ -7,7 +7,7 @@ import { Raw } from "../puzzle/Raw"
 import { RawObjectsAndVerb } from "../puzzle/RawObjectsAndVerb"
 
 
-export class Validator {
+export class Solution {
   private readonly aimFileMap: AimFileHeaderMap
   private readonly aimFileNamesInSolvingOrder: string[]
   private readonly currentlyVisibleThings: VisibleThingsMap

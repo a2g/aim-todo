@@ -3,22 +3,22 @@ import promptSync from 'prompt-sync'
 import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
 import { ValidatorView } from './ValidatorView'
 
-import { Validators } from '../../common/aim/Validators'
+import { Solutions } from '../../common/aim/Solutions'
 import { Solved } from '../../common/puzzle/Solved'
 import { FormatText } from '../../common/puzzle/FormatText'
 const prompt = promptSync({})
 
-export function ViewForwardValidate (validators: Validators): void {
+export function ViewForwardValidate (validators: Solutions): void {
   const titlePath = ['ForwardsValidate']
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
-    const numberOfSolutions: number = validators.GetValidators().length
+    const numberOfSolutions: number = validators.GetSolutions().length
 
     console.warn(`Number of solutions = ${numberOfSolutions} , Legend: (a, b)= (not-yet-done, total)`)
-    if (validators.GetValidators().length > 1) {
+    if (validators.GetSolutions().length > 1) {
       console.warn('    0. All solutions')
     }
-    const validatorList = validators.GetValidators()
+    const validatorList = validators.GetSolutions()
     for (let i = 0; i < validatorList.length; i++) {
       const validator = validatorList[i]
       const name = FormatText(validator.GetName())
@@ -43,16 +43,16 @@ export function ViewForwardValidate (validators: Validators): void {
     }
 
     if (firstInput === 'r') {
-      validators.DeconstructAllAchievementsOfAllValidatorsAndRecordSteps()
+      validators.DeconstructAllAchievementsOfAllSolutionsAndRecordSteps()
       continue
     } else {
       const theNumber = Number(firstInput)
-      if (theNumber < 1 || theNumber > validators.GetValidators().length) {
+      if (theNumber < 1 || theNumber > validators.GetSolutions().length) {
         continue
       }
 
       // if they chose a number, go to that number
-      const validator = validators.GetValidators()[theNumber - 1]
+      const validator = validators.GetSolutions()[theNumber - 1]
       ValidatorView(validator, [...titlePath])
     }
   }

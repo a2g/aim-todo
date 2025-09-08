@@ -1,5 +1,5 @@
 import { TodoTreeWorkspaces } from "./TodoTreeWorkspaces"
-import { Validator } from "./Validator"
+import { Solution } from "./Solution"
 
 
 
@@ -9,29 +9,29 @@ import { Validator } from "./Validator"
  * 2. Methods that call the same thing on all solutions
  * 3. Generating solution names - which is why it needs mapOfStartingThings...
  */
-export class Validators {
-  private readonly validators: Validator[]
+export class Solutions {
+  private readonly solutions: Solution[]
 
-  constructor(solutions: TodoTreeWorkspaces) {
-    this.validators = []
-    for (const solution of solutions.GetSolutions()) {
-      const startingThings = solutions.GetStartingThings()
-      const validator = new Validator(
-        solution.GetSolvingPath(),
-        solution.GetAimTreeMap(),
+  constructor(workspaces: TodoTreeWorkspaces) {
+    this.solutions = []
+    for (const workspace of workspaces.GetSolutions()) {
+      const startingThings = workspaces.GetStartingThings()
+      const solution = new Solution(
+        workspace.GetSolvingPath(),
+        workspace.GetAimTreeMap(),
         startingThings)
 
-      this.validators.push(validator)
+      this.solutions.push(solution)
     }
   }
 
-  public GetValidators (): Validator[] {
-    return this.validators
+  public GetSolutions (): Solution[] {
+    return this.solutions
   }
 
-  public DeconstructAllAchievementsOfAllValidatorsAndRecordSteps (): boolean {
+  public DeconstructAllAchievementsOfAllSolutionsAndRecordSteps (): boolean {
     let wasThereAtLeastSomeProgress = false
-    for (const validator of this.validators) {
+    for (const validator of this.solutions) {
       if (validator.DeconstructAllAchievementsAndRecordSteps()) {
         wasThereAtLeastSomeProgress = true
       }
@@ -43,7 +43,7 @@ export class Validators {
     for (const item of startingThingsPerCharacter) {
       const character = item[0]
       const charactersSet = item[1]
-      for (const validator of this.validators) {
+      for (const validator of this.solutions) {
         const arrayOfCommands = validator.GetOrderOfCommands()
         for (const command of arrayOfCommands) {
           const hasObjectA: boolean = charactersSet.has(command.objectA)
