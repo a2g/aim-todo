@@ -37,10 +37,10 @@
     "prepublishOnly": "npm run build",
     "prebuild": "npm run clean && npm run format && npm run lint && echo Using TypeScript && tsc --version",
     "pretty": "tsc --pretty",
-    "serve": "node lib/src/api/serve.js",
+    "api": "node lib/src/api/api.js",
     "serveRepos": "node lib/src/serveRepos.js",
     "test": "jest",
-    "watch": "tsc -w & node lib/src/serve.js",
+    "watch": "tsc -w & node lib/src/api.js",
     "watch:test": "jest --watch"
   },
   "devDependencies": {

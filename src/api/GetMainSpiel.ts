@@ -38,6 +38,9 @@ export function GetMainSpiel (command: RawObjectsAndVerb, settings: Settings): s
       }
       mainSpiel = verb + ' ' + objectA + joiner + objectB + ' results in ' + output + ' '
       break
+    case Raw.Error_ZeroPiecesInAimNoticedInDeconstructing:
+      mainSpiel = `Aim Completed: ${objectA}`
+      break;
     case Raw.EndOfAchievement:
       mainSpiel = ` --------------- end of achievement ${objectA}`
       break;
