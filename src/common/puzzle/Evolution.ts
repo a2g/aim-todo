@@ -16,11 +16,9 @@ let globalSolutionId = 101
 export class Evolution {
   // important ones
   private readonly headers: AchievementHeaderMap
-
   private readonly dialogs: Map<string, DialogFile>
 
   // less important
-
   private readonly startingThings: VisibleThingsMap // once, this was updated dynamically in GetNextDoableCommandAndDesconstructTree
   private readonly essentialIngredients: Set<string> // yup these are added to
   private readonly solvingPathSegments: string[] // these get assigned by SolverViaRootPiece.GenerateNames

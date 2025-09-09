@@ -69,6 +69,9 @@ function getJsonArrayOfSolutions (
   const toReturn = new Array<$INameIsAAchievementChildren>()
   let i = 0
   for (const solution of solutions) {
+    for (let i = 0; i < 200; i++) {
+      solution.DeconstructAllAchievementsAndRecordSteps()
+    }
     i += 1
     toReturn.push({
       name: `Solution ${i}`,
@@ -83,6 +86,7 @@ function getJsonArrayOfSolutions (
 function getOrderedCommands (
   solution: Solution, settings: Settings
 ): any[] {
+
   const toReturn = new Array<$INameIsAAchievementChildren>()
   const commands = solution.GetOrderOfCommands()
   for (const command of commands) {
