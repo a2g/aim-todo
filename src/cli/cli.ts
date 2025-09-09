@@ -40,9 +40,9 @@ function main (): void {
               `number of solutions = ${workspaces.GetCount()}`
             )
             console.warn('---------------------------------------')
-            console.warn('1. Delete a_aims - t_types ')
-            console.warn('2. Recreate a_aims - t_types ')
-            console.warn('3. Solve using aims')
+            console.warn('1. Delete all auto-generated enums')
+            console.warn('2. Recreate auto-generated enums')
+            console.warn('3. Propose solution candidates')
             console.warn('4. Validate, starting from _starter.jsonc')
 
             const choice = prompt('Choose an option (b)ack: ').toLowerCase()

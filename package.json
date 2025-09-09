@@ -21,7 +21,9 @@
   "main": "lib/serve",
   "types": "lib/index",
   "scripts": {
-    "app": "node lib/src/api/app.js",
+    "api": "node lib/src/api/api.js",
+    "api:wa": "node --watch lib/src/api/api.js",
+    "api:watch": "tsc -w & node lib/src/api/api.js",
     "build": "tsc",
     "clean": "rimraf lib && rimraf coverage",
     "compile": "tsc",
@@ -37,10 +39,8 @@
     "prepublishOnly": "npm run build",
     "prebuild": "npm run clean && npm run format && npm run lint && echo Using TypeScript && tsc --version",
     "pretty": "tsc --pretty",
-    "api": "node lib/src/api/api.js",
     "serveRepos": "node lib/src/serveRepos.js",
     "test": "jest",
-    "watch": "tsc -w & node lib/src/api.js",
     "watch:test": "jest --watch"
   },
   "devDependencies": {

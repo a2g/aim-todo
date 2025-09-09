@@ -60,7 +60,7 @@ app.listen(PORT, () => {
   const a = `Congratulations, the backend server has started. It's listening on ${PORT}`
   const b = 'Some example calls:'
   const c = `http://localhost:${PORT}/puz/todo/practice-world/03/sols`
-  const d = `http://localhost:${PORT}/puz/exclusive-worlds/satanic/01/sols`
+  const d = `http://localhost:${PORT}/puz/exclusive-worlds/panic/01/sols`
   const e = `http://localhost:${PORT}/puz/exclusive-worlds/mission/10_final/sols`
   const f = `http://localhost:${PORT}/starters`
   console.log(a)

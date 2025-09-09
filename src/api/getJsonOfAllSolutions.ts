@@ -67,14 +67,12 @@ function getJsonArrayOfSolutions (
   solutions: Solution[]
 ): $INameIsAAchievementChildren[] {
   const toReturn = new Array<$INameIsAAchievementChildren>()
-  let i = 0
   for (const solution of solutions) {
     for (let i = 0; i < 200; i++) {
       solution.DeconstructAllAchievementsAndRecordSteps()
     }
-    i += 1
     toReturn.push({
-      name: `Solution ${i}`,
+      name: `Solution ${solution.GetName()}`,
       isAAchievementOrAuto: false,
       children: getOrderedCommands(solution, {})
     })
