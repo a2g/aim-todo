@@ -46,7 +46,7 @@ export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
           const speechLine = command.getChildTuple(i)
           console.warn(`   ${speechLine[0]}: ${speechLine[1]}`)
         }
-      } else if (command.source === Raw.Reveal) {
+      } else if (command.source === Raw.PriorCommandReveals) {
         for (var i = 0; i < command.getChildTupleLength(); i++) {
           const speechLine = command.getChildTuple(i)
           console.warn(`Reveal   ${speechLine[0]}`)

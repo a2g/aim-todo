@@ -34,40 +34,5 @@
     {
       "thing": "d01_druid_wielding_knife"
     }
-  ],
-  "pieces": [
-    {
-      "piece": "AMENT1_MET_BY_USING_INV1_WITH_OBJ1",
-      "ament1": "a_icehouse",
-      "inv1": "inv_soil_thermometer",
-      "obj1": "obj_icehouse"
-    },
-    {
-      "piece": "INV1_OBTAINED_BY_COMBINING_INV2_WITH_INV3",
-      "inv1": "inv_crank",
-      "inv2": "inv_handle",
-      "inv3": "inv_rolling_pin"
-    },
-    {
-      "piece": "INV1_OBTAINED_BY_LOSING_INV2_KEEPING_OBJ1",
-      "isNoFile": true,
-      "inv1": "inv_bucket_of_coal",
-      "inv2": "inv_empty_bucket_after_water",
-      "obj1": "obj_coal_bunker"
-    },
-    {
-      "piece": "INV1_OBTAINED_BY_LOSING_OBJ1_KEEPING_INV2",
-      "inv1": "inv_crank2",
-      "inv2": "inv_hurl",
-      "obj1": "obj_crank_attached_to_well"
-    },
-    {
-      "piece": "INV1_OBTAINED_WHEN_LOSING_INV2_AND_OBJ1_BECOMES_OBJ2_GEN",
-      "inv1": "inv_bucket_of_water",
-      "inv2": "inv_crank",
-      "obj1": "obj_well",
-      "obj2": "obj_crank_attached_to_well",
-      "isNoFile": true
-    }
   ]
 }

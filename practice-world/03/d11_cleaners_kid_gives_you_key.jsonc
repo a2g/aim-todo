@@ -1,0 +1,73 @@
+{
+  "$schema": "./schema_for_dialogs.jsonc",
+  "slot_of_dialog": {
+    "slot_number": 1,
+    "single_slot_in_main": [
+      [
+        "Where's your parents", "parents", { "type": "selectableOnce" }
+      ],
+      [
+        "Do you know where your parents went?", "where", { "type": "selectableOnce" }
+      ]
+    ],
+    "parents": [
+      [
+        "npc_cleaners_kid", "They are usually cleaning buildings right now..."
+      ],
+      [
+        "npc_cleaners_kid", "but tonight, both of them had a meeting they had to go to."
+      ],
+      [
+        "npc_cleaners_kid", "Either way, I usually stay here and do my homework."
+      ],
+      [
+        "goto", "main_choices"
+      ]
+    ],
+    "where": [
+      [
+        "npc_cleaners_kid", "Well it couldn't have been the normal places we clean..."
+      ],
+      [
+        "npc_cleaners_kid", "Because they've left all their keys with me."
+      ],
+      [
+        "goto", "main_choices"
+      ]
+    ],
+    "buildings": [
+      [
+        "npc_cleaners_kid", "The old newsagent... "
+      ],
+      [
+        "npc_cleaners_kid", "[various places who are run by kids parents, and we don't want to rob!]"
+      ],
+      [
+        "you", "Thanks - that would keep them busy!"
+      ],
+      [
+        "goto", "main_choices"
+      ]
+    ],
+    "newsagent": [
+      [
+        "npc_cleaners_kid", "Yes I do. "
+      ],
+      [
+        "you", "Would I be able to borrow them? We need to access the pneumatic tube system."
+      ],
+      [
+        "npc_cleaners_kid", "Ah yes, I've that name..."
+      ],
+      [
+        "npc_cleaners_kid", "On a door in the basement."
+      ],
+      [
+        "npc_cleaners_kid", "Just don't steal anything - or I'll get in big trouble"
+      ],
+      [
+        "gains", "inv_newsagent_keys"
+      ]
+    ]
+  }
+}

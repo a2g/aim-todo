@@ -34,7 +34,7 @@
                 // it as key value pairs
                 "type": "object",
                 "properties": {
-                  "once": {
+                  "type": {
                     "type": "string",
                     "oneOf": [
                       {
@@ -108,7 +108,7 @@
             { // third array item is
               "type": "object", // additional properties in a map
               "properties": {
-                "once": {
+                "type": {
                   "type": "string",
                   "anyOf": [
                     {

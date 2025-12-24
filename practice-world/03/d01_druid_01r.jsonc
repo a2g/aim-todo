@@ -1,11 +1,13 @@
 {
   "$schema": "./schema_for_dialogs.jsonc",
-  "dialogs": {
-    "_starter": [
+  "slot_of_dialog": {
+    "slot_number": 1,
+    "single_slot_in_main": [
       [
-        "you",
-        "Agh, be careful with that knife!"
-      ],
+        "Agh, be careful with that knife!", "careful", { "type": "selectableOnce" }
+      ]
+    ],
+    "careful": [
       [
         "you",
         "What are you at anyway?"

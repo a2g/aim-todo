@@ -1,6 +1,6 @@
 import { IdPrefixes } from '../../../IdPrefixes'
 import { AddBrackets } from './AddBrackets'
-import { Colors } from './Colors'
+import { Keywords } from './Keywords'
 
 
 
@@ -23,46 +23,52 @@ export function FormatText (
   if (single.startsWith('sol_obj_')) {
     if (!isColor) return AddBrackets(single.slice(9), isParenthesisNeeded)
     return (
-      Colors.Yellow +
+      Keywords.Sol +
       AddBrackets(single.slice(9), isParenthesisNeeded) +
-      Colors.Reset
+      Keywords.SolEnd
     )
   }
   if (single.startsWith(IdPrefixes.InvAchievement)) {
     if (!isColor) return single.slice(8)
-    return Colors.Yellow + single.slice(8) + Colors.Reset
+    return Keywords.Inv + single.slice(8) + Keywords.InvEnd
   }
   if (single.startsWith('sol_a')) {
     if (!isColor) return single.slice(9)
-    return Colors.Yellow + single.slice(9) + Colors.Reset
+    return Keywords.Sol + single.slice(9) + Keywords.SolEnd
   }
   if (single.startsWith('sol_inv_')) {
     if (!isColor) return single.slice(8)
-    return Colors.Yellow + single.slice(8) + Colors.Reset
+    return Keywords.Sol + single.slice(8) + Keywords.SolEnd
   }
   if (single.startsWith(IdPrefixes.Inv)) {
     if (!isColor) return single.slice(4)
-    return Colors.Green + single.slice(4) + Colors.Reset
+    return Keywords.Inv + single.slice(4) + Keywords.InvEnd
   }
   if (single.startsWith(IdPrefixes.Obj)) {
     if (!isColor) return single.slice(4)
-    return Colors.Cyan + single.slice(4) + Colors.Reset
+    return Keywords.Obj + single.slice(4) + Keywords.ObjEnd
   }
   if (single.startsWith(IdPrefixes.Aim)) {
     if (!isColor) return single
-    return Colors.Green + single + Colors.Reset
+    return Keywords.Aim + single + Keywords.AimEnd
   }
+  // aims were green
+  // objs were cyan
+  // invs were green
+  // solutions were yellow
+  // dialogs were red
+  // single object commands were red
 
   if (single.startsWith(IdPrefixes.Dialog) || single.startsWith(IdPrefixes.Dialogs)) {
     if (!isColor) return single.slice(1)
-    return Colors.Red + single.slice(1) + Colors.Reset
+    return Keywords.Dialog + single.slice(1) + Keywords.DialogEnd
   }
   if (single.startsWith(IdPrefixes.Player)) {
     if (!isColor) return AddBrackets(single.slice(7), isParenthesisNeeded)
     return (
-      Colors.Red +
+      Keywords.Dialog +
       AddBrackets(single.slice(5), isParenthesisNeeded) +
-      Colors.Reset
+      Keywords.DialogEnd
     )
   }
   if (
@@ -71,7 +77,7 @@ export function FormatText (
     single.startsWith('grab')
   ) {
     if (!isColor) return single
-    return Colors.Red + single + Colors.Reset
+    return Keywords.Single + single + Keywords.SingleEnd
   }
 
   return single
