@@ -5,4 +5,5 @@ interface Settings {
   makeDialogsCollapsable?: boolean
   hideCompleted?: boolean
   infoLevel?: number
+  compressChildren?: boolean
 }

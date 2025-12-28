@@ -1,10 +1,10 @@
 {
   "$schema": "./schema_for_dialogs.jsonc",
-  "slot_of_dialog": {
-    "slot_number": 1,
-    "single_slot_in_main": [
+  "index_of_slot_in_main": 0,
+  "dialogs": {
+    "main_choices": [
       [
-        "Agh, be careful with that knife!", "careful", { "type": "selectableOnce" }
+        0, "Agh, be careful with that knife!", "careful", { "type": "selectableOnce" }
       ]
     ],
     "careful": [

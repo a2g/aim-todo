@@ -50,7 +50,7 @@ export function GetMainSpiel (command: RawObjectsAndVerb, settings: Settings): s
       } else if (command.objectB.startsWith(IdPrefixes.Obj)) {
         mainSpiel = `You now see a ${objectB}`
       } else if (objectB.startsWith(IdPrefixes.Dialog)) {
-        mainSpiel = `You now see a dialogty ${objectB}`
+        mainSpiel = `You now see a dialog ${objectB}`
       } else if (objectB.startsWith(IdPrefixes.Aim)) {
         // source = Raw.Achievement
         mainSpiel = `Achievement unlocked ${objectB}`

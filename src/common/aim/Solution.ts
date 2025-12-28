@@ -91,7 +91,7 @@ export class Solution {
     // bring in more pieces to continue deconstruction in the future
     //
     // But if its solved, then we mark it as validated!
-    const numberOfPieces = deconstructDoer.GetNumberOfPieces()
+    const numberOfPieces = deconstructDoer.GetNumberOfPiecesRemaining()
     const isValidated = deconstructDoer.IsValidated()
     if (numberOfPieces <= 1 && isValidated == Validated.Not) {
 

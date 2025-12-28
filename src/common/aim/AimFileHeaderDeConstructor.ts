@@ -3,12 +3,14 @@
 import { AimFileHeaderMap } from './AimFileHeaderMap'
 import { AimFileHeader } from './AimFileHeader'
 
+import { FirstLettersOf } from '../../../FirstLettersOf'
 import { IdPrefixes } from '../../../IdPrefixes'
 import { VisibleThingsMap } from '../puzzle/VisibleThingsMap'
 import { RawObjectsAndVerb } from '../puzzle/RawObjectsAndVerb'
 import { Raw } from '../puzzle/Raw'
 import { Validated } from '../puzzle/Validated'
 import { Box } from '../puzzle/Box'
+import { DialogFile } from '../dialog/DialogFile'
 
 export class AimFileHeaderDeConstructor {
   private readonly theAimTree: AimFileHeader
@@ -38,7 +40,7 @@ export class AimFileHeaderDeConstructor {
   // In the constructor above, we see that the root of copied tree is created
   // and the first actual jigsaw piece that is attached to it is
   // gets pushed into the zero slot of the inputs
-  public GetNumberOfPieces (): number {
+  public GetNumberOfPiecesRemaining (): number {
     const count = this.theAimTree.GetCountAfterUpdating()
     return count
   }
@@ -100,43 +102,64 @@ export class AimFileHeaderDeConstructor {
         // if its a box it MUST exist, and we merge these things
         if (treeNodeKey.startsWith(IdPrefixes.Box)) {
           const box = new Box(treeNodeKey + ".jsonc");
-          box.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
-        }
-
-        // construct the new command - whilst we have all the data.
-        let command = new RawObjectsAndVerb(Raw.Command)
-        command.output = treeNodeKey
-        const dependencies = Object.keys(treeNode) as string[]
-        for (var i = 0; i < dependencies.length; i++) {
-          var obj = dependencies[i]
-          if (obj == '@') {
-            const typeAnnotation = treeNode['@'].type
-            if (typeAnnotation != null) {
-              command.typeAnnotation = typeAnnotation
-            }
-            const talkAnnotation = treeNode['@'].talk
-            if (talkAnnotation != null) {
-              command.talkAnnotation = talkAnnotation
-            }
-            continue
-          }
-          if (command.objectA == '') {
-            command.objectA = obj
-          } else if (command.objectB == '') {
-            command.objectB = obj
-          }
+          box.CopyStartingThingsToGivenMap(this.currentlyVisibleThings)
         }
 
         // we remove all children.
         // we don't delete this node from its parent - because this
-        // is now a leave, and once the algorithm sees that thie 
+        // is now a leaf, and once the algorithm sees that the 
         // key is in the list of visible things (we just added it above)
         // then it will get deleted next time
         for (const key in treeNode) {
           delete treeNode[key]
         }
 
-        return command
+        let objectA = ''
+        let objectB = ''
+        let talkAnnotation = null;
+        let typeAnnotation = null;
+        const dependencies = Object.keys(treeNode) as string[]
+        for (var i = 0; i < dependencies.length; i++) {
+          var obj = dependencies[i]
+          if (obj == '@') {
+
+            if (treeNode['@'].type != null) {
+              typeAnnotation = treeNode['@'].type
+            }
+
+            if (treeNode['@'].talk != null) {
+              talkAnnotation = treeNode['@'].talk
+            }
+            continue
+          }
+          if (objectA == '') {
+            objectA = obj
+          } else if (objectB == '') {
+            objectB = obj
+          }
+        }
+
+        treeNode['@'].talk  // add speech from dialog file
+        if (objectA.startsWith(FirstLettersOf.Dialog)) {
+          const command = new RawObjectsAndVerb(Raw.Dialog)
+          command.objectA = objectA
+          command.output = treeNodeKey
+          command.talkAnnotation = talkAnnotation
+          command.typeAnnotation = typeAnnotation
+          const file = new DialogFile(command.objectA + ".jsonc")
+          const dialogLines = file.CollectSpeechLinesForMainChoice()
+          for (const line of dialogLines) {
+            command.addChildTuple(line)
+          }
+          return command
+        } else {
+          let command = new RawObjectsAndVerb(Raw.Command)
+          command.objectA = objectA
+          command.output = treeNodeKey
+          command.talkAnnotation = talkAnnotation
+          command.typeAnnotation = typeAnnotation
+          return command
+        }
       }
       // if they were all leaves, then we can't recurse down, so we return null
       return null
@@ -156,194 +179,6 @@ export class AimFileHeaderDeConstructor {
     }
     return null
   }
-  /*
-  
-      if (areAllChildrenLeaves) {
-        // isAFef - basically means has zero children
-  
-        let areAllChildrenVisibleOrActive = true
-        for (let i = 0; i < treeNode.inputHints.length; i++) {
-          if (!this.currentlyVisibleThings.Has(treeNode.inputHints[i])) {
-            areAllChildrenVisibleOrActive = false
-          }
-        }
-        if (areAllChildrenVisibleOrActive) {
-    
-      
-            // Now for the verb/object combo that we need to return
-            let toReturn: RawObjectsAndVerb | null = null
-  
-            let verb = Raw.None
-            if (treeNode.parent == null) {
-              // I think this means tha the root piece isn't set objerly!
-              // so we need to set breakpoint on this return, and debug.
-              assert(false)
-            } else if (treeNode.type.toLowerCase().includes('grab')) {
-              verb = Raw.Grab
-            } else if (treeNode.type.toLowerCase().includes('dialog')) {
-              verb = Raw.Dialog
-            } else if (treeNode.type.toLowerCase().includes('toggle')) {
-              verb = Raw.Toggle
-            } else if (treeNode.type.toLowerCase().includes('auto')) {
-              verb = Raw.Auto
-            } else if (treeNode.type.toLowerCase().includes('open')) {
-              verb = Raw.Open
-            } else {
-              verb = Raw.Use
-            }
-  
-            this.AddToMapOfVisibleThings(treeNode.output)
-  
-            // When we achieve achievements, we sometimes want the happening that result
-            // from them to execute straight away. But sometimes there are
-            // autos in the unused pieces pile that take the achievement as input
-            // so we want to climb through the tree, find them, and header their inputs.
-            // But sometimes the inputs are all nulled...Maybe in this case
-            // we should not say anything is done, and simply limit our response
-            // to what we've already done - ie kill the node
-  
-            // now lets return the piece
-            if (treeNode.type === SpecialTypes.SomeOtherAchievement) {
-              toReturn = new RawObjectsAndVerb(
-                Raw.None,
-                '',
-                '',
-                treeNode.output,
-                treeNode.getPrerequisites(),
-                [],
-                treeNode.type
-              )
-            } else if (treeNode.type === SpecialTypes.StartingThings) {
-              toReturn = new RawObjectsAndVerb(
-                Raw.None,
-                '',
-                '',
-                treeNode.output,
-                treeNode.getPrerequisites(),
-                [],
-                treeNode.type
-  
-              )
-            } else if (treeNode.type === SpecialTypes.VerifiedLeaf) {
-              toReturn = new RawObjectsAndVerb(
-                Raw.None,
-                '',
-                '',
-                treeNode.output,
-                treeNode.getPrerequisites(),
-                [],
-                treeNode.type
-              )
-            } else if (treeNode.inputs.length === 0) {
-              toReturn = new RawObjectsAndVerb(
-                Raw.None,
-                '',
-                '',
-                treeNode.output,
-                treeNode.getPrerequisites(),
-                [],
-                treeNode.type
-              )
-            } else if (verb === Raw.Grab) {
-              toReturn = new RawObjectsAndVerb(
-                Raw.Grab,
-                treeNode.inputHints[0],
-                '',
-                treeNode.output,
-                treeNode.getPrerequisites(),
-                [],
-                treeNode.type
-              )
-            } else if (verb === Raw.Dialog) {
-              const path = treeNode.GetDialogPath()
-              const dialogPropName = treeNode.inputHints[0]
-              const dialogState = this.dialogs.get(dialogPropName + '.jsonc')
-              if (dialogState != null) {
-                const speechLines = dialogState.CollectSpeechLinesNeededToGetToPath(path)
-  
-                toReturn = new RawObjectsAndVerb(
-                  Raw.Dialog,
-                  treeNode.inputHints[0],
-                  '',
-                  treeNode.output,
-                  treeNode.getPrerequisites(),
-                  speechLines,
-                  treeNode.type
-                )
-              }
-            } else if (verb === Raw.Open) {
-              toReturn = new RawObjectsAndVerb(
-                Raw.Open,
-                treeNode.inputHints[0],
-                '',
-                treeNode.output,
-                treeNode.getPrerequisites(),
-                [],
-                treeNode.type
-              )
-            } else if (verb === Raw.Toggle) {
-              toReturn = new RawObjectsAndVerb(
-                Raw.Toggle,
-                treeNode.inputHints[0],
-                '',
-                treeNode.output,
-                treeNode.getPrerequisites(),
-                [],
-                treeNode.type
-              )
-            } else if (verb === Raw.Auto) {
-              // console.warn(pathOfThis)
-              toReturn = createCommandFromAutoPiece(treeNode)
-            } else if (verb === Raw.Use) {
-              // then its nearly definitely 'use', unless I messed up
-              toReturn = new RawObjectsAndVerb(
-                Raw.Use,
-                treeNode.inputHints[0],
-                treeNode.inputHints[1],
-                treeNode.output,
-                treeNode.getPrerequisites(),
-                [],
-                treeNode.type
-              )
-            }
-            return toReturn
-          }
-        }
-      }
-  
-      // else we recurse in to the children
-      for (const key in treeNode) {// https://www.geeksforgeeks.org/how-to-iterate-over-object-properties-in-typescript/
-        const value = treeNode[key]
-        const toReturn = this.GetNextDoableCommandRecursively(value)
-        if (toReturn != null) {
-            return toReturn
-        }
-      }    
-  
-      return null
-    }
-    */
-
-  /*
-public AddToMapOfVisibleThings (thing: string): void {
-  if (!this.currentlyVisibleThings.Has(thing)) {
-    this.currentlyVisibleThings.Set(thing, new Set<string>())
-  }
-}
-*/
-
-  /*
-    public MergeBox (boxToMerge: Box): void {
-      console.warn(`Merging box ${boxToMerge.GetFilename()}`)
-  
-      boxToMerge.CopyStartingThingCharsToGivenMap(this.currentlyVisibleThings)
-      // I don't think we copy the headers to the header map ..do we
-      // because even though the header piece might not be found later
-      // on, we still should be able to place its leaf nodes early
-      // boxToMerge.CopyHeadersToGivenHeaderMap(this.headers)
-      // boxToMerge.CopyStartingThingCharsToGivenMap(this.startingThings)
-    }*/
-
 
   public IsValidated (): Validated {
     return this.theAimTree.GetValidated()

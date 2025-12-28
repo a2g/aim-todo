@@ -5,7 +5,7 @@ export class ChoiceSection {
   file: string
   mapOfQueues: Map<Number, ChoiceLine[]>
 
-  constructor (file: string, key: string) {
+  constructor(file: string, key: string) {
     this.file = file
     this.key = key
     this.mapOfQueues = new Map<Number, ChoiceLine[]>()
@@ -55,35 +55,5 @@ export class ChoiceSection {
 
   public GetKey (): string {
     return this.key
-  }
-
-  public GetAllDialogingWhilstChoosing (choiceToChoose: string): string[][] {
-    const toReturn = new Array<string[]>()
-    for (let i = 0; i < 20; i++) {
-      const queueForGivenIndex = this.mapOfQueues.get(i)
-      if (queueForGivenIndex != null && queueForGivenIndex.length > 0) {
-        for (const choiceLine of queueForGivenIndex) {
-          if (choiceLine.goto === choiceToChoose) {
-            // we've located it, but it might be covered by
-            // other answers in the same slot.
-            // Sadly we can't really uncover it one by one.
-            // but it might have a long weird path
-            // The long weird path thing should be figured out
-            // beforehand and then passed to
-            // DialogFile.CollectSpeechLinesNeededToGetToPath.
-            toReturn.push(['you', choiceLine.speech])
-
-            // remove head of queue so can't be used again
-            // even if it doesn't have select-once.. we don't
-            // ever want to play the same speech twice
-            queueForGivenIndex.shift()
-
-            // we only want the speech of choosing it the first time
-            return toReturn
-          }
-        }
-      }
-    }
-    return toReturn
   }
 }

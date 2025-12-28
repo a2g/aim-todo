@@ -6,11 +6,12 @@ import { Solutions } from '../common/aim/Solutions'
 import { _TODO_TREE_JSONC } from '../common/_TODO_TREE_JSONC'
 import { Solution } from '../common/aim/Solution'
 import { GetMainSpiel } from './GetMainSpiel'
+import { GetChildrenAsJsonArray } from './GetChildrenAsJsonArray'
 
 interface $INameIsAAchievementChildren {
   name: string
   isAAchievementOrAuto: boolean
-  children: Array<Record<string, unknown>>
+  children: Array<[string, string]>
 }
 
 export function getJsonOfAllSolutions (
@@ -84,15 +85,30 @@ function getJsonArrayOfSolutions (
 function getOrderedCommands (
   solution: Solution, settings: Settings
 ): any[] {
-
   const toReturn = new Array<$INameIsAAchievementChildren>()
   const commands = solution.GetOrderOfCommands()
   for (const command of commands) {
-    toReturn.push({
-      name: GetMainSpiel(command, settings),
-      isAAchievementOrAuto: true,
-      children: []
-    })
+    if (settings.compressChildren) {
+      toReturn.push({
+        name: GetMainSpiel(command, settings),
+        isAAchievementOrAuto: true,
+        children: GetChildrenAsJsonArray(command)
+      })
+    } else {
+      toReturn.push({
+        name: GetMainSpiel(command, settings),
+        isAAchievementOrAuto: true,
+        children: []
+      })
+      for (let i = 0; i < command.getChildTupleLength(); i++) {
+        const speechLine = command.getChildTuple(i)
+        toReturn.push({
+          name: `${speechLine[0]}: ${speechLine[1]}`,
+          isAAchievementOrAuto: true,
+          children: []
+        })
+      }
+    }
   }
   return toReturn
 }

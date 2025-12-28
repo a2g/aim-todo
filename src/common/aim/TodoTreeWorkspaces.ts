@@ -62,7 +62,7 @@ export class TodoTreeWorkspaces {
 
   InitializeStartingThings () {
     const box = new Box(_STARTER_JSONC)
-    box.CopyStartingThingCharsToGivenMap(this.startingThingsMap)
+    box.CopyStartingThingsToGivenMap(this.startingThingsMap)
   }
 
   GetStartingThings (): VisibleThingsMap {

@@ -6,9 +6,16 @@
     "dialogs"
   ],
   "properties": {
+    "index_of_slot_in_main": {
+      "type": "number"
+    },
     "dialogs": {
       "type": "object",
-      //   Choices
+      "single_slot_in_main": {
+        "type": "array"
+      },
+
+      //   Any Choices
       // ==========
       "patternProperties": {
         "^.+_choices$": {

@@ -3,7 +3,8 @@ import { VisibleThingsMap } from './VisibleThingsMap'
 import { parse } from 'jsonc-parser'
 
 import { Piece } from './Piece'
-import { DialogFile } from '../talk/DialogFile'
+import { DialogFile } from '../dialog/DialogFile'
+import { FirstLettersOf } from '../../../FirstLettersOf'
 
 
 /**
@@ -61,6 +62,14 @@ export class Box {
         scenario.thingsToRevealWhenAimIsMet !== null
       ) {
         for (const item of scenario.thingsToRevealWhenAimIsMet) {
+          if (item.thing.startsWith(FirstLettersOf.Dialog)) {
+            const dialogFilename = item.thing + '.jsonc'
+            if (!existsSync(dialogFilename)) {
+              throw new Error(
+                `file doesn't exist ${process.cwd()} ${dialogFilename}`
+              )
+            }
+          }
           if (!this.mapOfStartingThings.Has(item.thing)) {
             this.mapOfStartingThings.Set(item.thing, new Set<string>())
           }
@@ -78,7 +87,7 @@ export class Box {
     }
   }
 
-  public CopyStartingThingCharsToGivenMap (givenMap: VisibleThingsMap): void {
+  public CopyStartingThingsToGivenMap (givenMap: VisibleThingsMap): void {
     for (const item of this.mapOfStartingThings.GetIterableIterator()) {
       givenMap.Set(item[0], item[1])
     }

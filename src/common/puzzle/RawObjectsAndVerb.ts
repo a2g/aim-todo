@@ -75,4 +75,8 @@ export class RawObjectsAndVerb {
     return this.childTuples.length
   }
 
+  public GetChildTuples (): Array<[string, string]> {
+    return this.childTuples
+  }
+
 }

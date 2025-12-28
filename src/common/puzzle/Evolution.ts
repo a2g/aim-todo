@@ -7,7 +7,7 @@ import { VisibleThingsMap } from './VisibleThingsMap'
 
 import { Solved } from './Solved'
 import { A_WIN } from '../A_WIN'
-import { DialogFile } from '../talk/DialogFile'
+import { DialogFile } from '../dialog/DialogFile'
 
 let globalSolutionId = 101
 /**

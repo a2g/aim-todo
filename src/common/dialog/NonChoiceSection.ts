@@ -3,14 +3,14 @@ export class NonChoiceSection {
   file: string
   gains: string
   goto: string
-  arrayOfOtherStuff: string[][]
+  arrayOfOtherStuff: Array<[string, string]>
 
-  constructor (file: string, key: string) {
+  constructor(file: string, key: string) {
     this.file = file
     this.key = key
     this.gains = ''
     this.goto = ''
-    this.arrayOfOtherStuff = new Array<string[]>()
+    this.arrayOfOtherStuff = new Array<[string, string]>()
   }
 
   Clone (): NonChoiceSection { // TODO - this MUST be changed
@@ -40,8 +40,6 @@ export class NonChoiceSection {
           `The entry ${this.key} is a plain happens key, but one of its first cells are numeric : ${this.file} `
         )
       }
-
-      // const thirdToken: object = arrayOfTokens.length > 2 ? arrayOfTokens[2] : {}
       const secondToken: string = arrayOfTokens.length > 1 ? arrayOfTokens[1] : ''
 
       if (firstToken === 'exit') {
@@ -51,7 +49,7 @@ export class NonChoiceSection {
       } else if (firstToken === 'gains') {
         this.gains = secondToken
       } else {
-        this.arrayOfOtherStuff.push(arrayOfTokens)
+        this.arrayOfOtherStuff.push([firstToken, secondToken])
       }
     }
   }
@@ -60,8 +58,8 @@ export class NonChoiceSection {
     return this.key
   }
 
-  public GetAllDialoging (): string[][] {
-    const toReturn = new Array<string[]>()
+  public GetAllSpeechLines (): Array<[string, string]> {
+    const toReturn = new Array<[string, string]>()
     toReturn.push(...this.arrayOfOtherStuff)
     return toReturn
   }
