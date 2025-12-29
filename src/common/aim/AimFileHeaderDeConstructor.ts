@@ -88,7 +88,7 @@ export class AimFileHeaderDeConstructor {
       let areAllChildDependenciesFulfilled = true
       for (const key in treeNode) {
         if (key !== '@') {
-          // if the dependency is not fulfilled, then we set it to false
+          // if the dependency is *NOT* fulfilled, then we set it to false
           if (!this.currentlyVisibleThings.Has(key)) {
             areAllChildDependenciesFulfilled = false
           }
@@ -105,20 +105,11 @@ export class AimFileHeaderDeConstructor {
           box.CopyStartingThingsToGivenMap(this.currentlyVisibleThings)
         }
 
-        // we remove all children.
-        // we don't delete this node from its parent - because this
-        // is now a leaf, and once the algorithm sees that the 
-        // key is in the list of visible things (we just added it above)
-        // then it will get deleted next time
-        for (const key in treeNode) {
-          delete treeNode[key]
-        }
-
         let objectA = ''
         let objectB = ''
         let talkAnnotation = null;
         let typeAnnotation = null;
-        const dependencies = Object.keys(treeNode) as string[]
+        const dependencies = Object.keys(treeNode)
         for (var i = 0; i < dependencies.length; i++) {
           var obj = dependencies[i]
           if (obj == '@') {
@@ -139,7 +130,16 @@ export class AimFileHeaderDeConstructor {
           }
         }
 
-        treeNode['@'].talk  // add speech from dialog file
+        // we remove all children.
+        // we don't delete this node from its parent - because this
+        // is now a leaf, and once the algorithm sees that the 
+        // key is in the list of visible things (we just added it above)
+        // then it will get deleted next time
+        for (const key in treeNode) {
+          delete treeNode[key]
+        }
+
+        // add speech from dialog file
         if (objectA.startsWith(FirstLettersOf.Dialog)) {
           const command = new RawObjectsAndVerb(Raw.Dialog)
           command.objectA = objectA
@@ -147,7 +147,8 @@ export class AimFileHeaderDeConstructor {
           command.talkAnnotation = talkAnnotation
           command.typeAnnotation = typeAnnotation
           const file = new DialogFile(command.objectA + ".jsonc")
-          const dialogLines = file.CollectSpeechLinesForMainChoice()
+          const dialogLines = new Array<[string, string]>()
+          file.CollectSpeechLinesForMainChoice(dialogLines)
           for (const line of dialogLines) {
             command.addChildTuple(line)
           }
@@ -161,7 +162,7 @@ export class AimFileHeaderDeConstructor {
           return command
         }
       }
-      // if they were all leaves, then we can't recurse down, so we return null
+      // if they were all leaf nodes, then we can't recurse down, so we return null
       return null
     } else {
       // at least one of the children isn't a leaf

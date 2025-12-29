@@ -110,7 +110,7 @@ export class Solution {
       this.currentlyVisibleThings.Set(aimFileHeader.GetAimName(), new Set<string>())
 
       // then reveal all the goodies 
-      const setToVisible = new RawObjectsAndVerb(Raw.PriorCommandReveals)
+      const setToVisible = new RawObjectsAndVerb(Raw.RevealedByPriorStep)
       for (const goodie of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator()) {
         if (!this.currentlyVisibleThings.Has(goodie[0])) {
 

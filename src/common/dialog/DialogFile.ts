@@ -55,6 +55,16 @@ export class DialogFile {
     return dialogFile
   }
 
+  Clear (): void {
+    for (const choice of this.choices.values()) {
+      for (const queue of choice.mapOfQueues.values()) {
+        for (const line of queue.values()) {
+          line.isUsed = false
+        }
+      }
+    }
+  }
+
   public AddChoiceSection (choice: ChoiceSection): void {
     this.choices.set(choice.GetKey(), choice)
   }
@@ -67,7 +77,11 @@ export class DialogFile {
     return this.filename
   }
 
-  GetQueueForChoicesAndSlot (choiceKey: string, slot: number): ChoiceLine[] {
+  public CollectSpeechLinesForMainChoice (arrayOfLines: Array<[string, string]>) {
+    this.CollectSpeechLinesForGivenSlotInGivenChoiceSection(this.indexOfSlotInMain, DialogKeywords.MainChoices, arrayOfLines);
+  }
+
+  private GetQueueForChoicesAndSlot (choiceKey: string, slot: number): ChoiceLine[] {
     const choiceSection = this.choices.get(choiceKey)
     if (choiceSection != null) {
       const queue = choiceSection.mapOfQueues.get(slot)
@@ -78,61 +92,50 @@ export class DialogFile {
     return []
   }
 
-  CollectSpeechLinesForNonChoiceSection (nonChoice: NonChoiceSection): Array<[string, string]> {
-    const toReturn = nonChoice.GetAllSpeechLines()
-    return toReturn
+  private CollectSpeechLinesForNonChoiceSection (nonChoice: NonChoiceSection, speechLines: Array<[string, string]>): boolean {
+    return nonChoice.CollectSpeechLinesAndQuitOnExit(speechLines)
   }
 
-  CollectSpeechLinesForGivenGoto (goto: string): Array<[string, string]> {
-    const toReturn = new Array<[string, string]>()
+  private CollectSpeechLinesForGivenGoto (goto: string, arrayOfLines: Array<[string, string]>): boolean {
     const choice = this.choices.get(goto)
     if (choice != null) {
       // assume all main_choices are all with the index given in the json
-      const speechLines = this.CollectSpeechLinesForGivenSlotInGivenChoiceSection(0, goto);
-      toReturn.push(...speechLines)
+      if (this.CollectSpeechLinesForGivenSlotInGivenChoiceSection(0, goto, arrayOfLines)) {
+        return true
+      }
     } else {
       const nonChoiceSection = this.nonChoices.get(goto)
       if (nonChoiceSection != null) {
-        const speechLines = this.CollectSpeechLinesForNonChoiceSection(nonChoiceSection);
-        toReturn.push(...speechLines)
+        if (this.CollectSpeechLinesForNonChoiceSection(nonChoiceSection, arrayOfLines)) {
+          return true
+        }
       } else {
-        toReturn.push(['error', `Given goto not found as either choice or non-choice: ${goto}`])
+        arrayOfLines.push(['error', `Given goto not found as either choice or non-choice: ${goto}`])
+        return true
       }
     }
-    return toReturn
+    return false
   }
 
-  CollectSpeechLinesForGivenSlotInGivenChoiceSection (slot: number, choiceName: string): Array<[string, string]> {
-    const toReturn = new Array<[string, string]>()
+  private CollectSpeechLinesForGivenSlotInGivenChoiceSection (slot: number, choiceName: string, arrayOfLines: Array<[string, string]>): boolean {
     const queue = this.GetQueueForChoicesAndSlot(choiceName, slot)
     if (queue != null) {
       // go through all of these, not returning until extracted all choice.speech and underlings
       for (const choiceLine of queue) {
-        toReturn.push(['you', choiceLine.speech])
-        this.CollectSpeechLinesForGivenGoto(choiceLine.goto)
-
         // remove head of queue so can't be used again
         // even if it doesn't have select-once.. we don't
         // ever want to play the same speech twice
         queue.shift()
-      }
-    } else {
-      toReturn.push(['error', `Given choice name not found: ${choiceName} ${slot}`])
-    }
-    return toReturn
-  }
 
-  public CollectSpeechLinesForMainChoice (): Array<[string, string]> {
-    return this.CollectSpeechLinesForGivenSlotInGivenChoiceSection(this.indexOfSlotInMain, DialogKeywords.MainChoices);
-  }
-
-  Clear (): void {
-    for (const choice of this.choices.values()) {
-      for (const queue of choice.mapOfQueues.values()) {
-        for (const line of queue.values()) {
-          line.isUsed = false
+        arrayOfLines.push(['you', choiceLine.speech])
+        if (this.CollectSpeechLinesForGivenGoto(choiceLine.goto, arrayOfLines)) {
+          return true
         }
       }
+    } else {
+      arrayOfLines.push(['error', `Given choice name not found: ${choiceName} ${slot}`])
+      return true
     }
+    return false
   }
 }

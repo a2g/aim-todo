@@ -1,15 +1,11 @@
 export class NonChoiceSection {
   key: string
   file: string
-  gains: string
-  goto: string
   arrayOfOtherStuff: Array<[string, string]>
 
   constructor(file: string, key: string) {
     this.file = file
     this.key = key
-    this.gains = ''
-    this.goto = ''
     this.arrayOfOtherStuff = new Array<[string, string]>()
   }
 
@@ -43,11 +39,8 @@ export class NonChoiceSection {
       const secondToken: string = arrayOfTokens.length > 1 ? arrayOfTokens[1] : ''
 
       if (firstToken === 'exit') {
-        this.goto = 'exit'
-      } else if (firstToken === 'goto') {
-        this.goto = secondToken
-      } else if (firstToken === 'gains') {
-        this.gains = secondToken
+        // for now, still push it back
+        this.arrayOfOtherStuff.push([firstToken, secondToken])
       } else {
         this.arrayOfOtherStuff.push([firstToken, secondToken])
       }
@@ -58,9 +51,14 @@ export class NonChoiceSection {
     return this.key
   }
 
-  public GetAllSpeechLines (): Array<[string, string]> {
-    const toReturn = new Array<[string, string]>()
-    toReturn.push(...this.arrayOfOtherStuff)
-    return toReturn
+  public CollectSpeechLinesAndQuitOnExit (arrayOfLines: Array<[string, string]>): boolean {
+    for (const pair of this.arrayOfOtherStuff) {
+      if (pair[0] === 'exit') {
+        return true
+      } else {
+        arrayOfLines.push([pair[0], pair[1]])
+      }
+    }
+    return false
   }
 }
