@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import { TodoTreeWorkspace } from './TodoTreeWorkspace'
-import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/old/GetMapOFilesInFolderOfGivenPrefix'
+import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/re-creator/GetMapOFilesInFolderOfGivenPrefix'
 import { AimFileHeaderMap } from './AimFileHeaderMap'
 
 import { Box } from '../puzzle/Box'

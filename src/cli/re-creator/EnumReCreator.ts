@@ -1,4 +1,4 @@
-import { GetMapOFilesInFolderOfGivenPrefix } from "../old/GetMapOFilesInFolderOfGivenPrefix"
+import { GetMapOFilesInFolderOfGivenPrefix } from "./GetMapOFilesInFolderOfGivenPrefix"
 import { EnumFileAsArray } from "./EnumFileAsArray"
 import { EnumFileAsSet } from "./EnumFileAsSet"
 
