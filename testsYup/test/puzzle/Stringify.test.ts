@@ -1,5 +1,5 @@
 import { expect, it } from '@jest/globals'
-import { Stringify } from '../../../src/common/puzzle/Stringify'
+import { Stringify } from '../../../src/common/stuff/Stringify'
 
 
 describe('Stringify', () => {

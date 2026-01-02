@@ -1,4 +1,4 @@
-import { VisibleThingsMap } from "../../common/puzzle/VisibleThingsMap"
+import { VisibleThingsMap } from "../../common/stuff/VisibleThingsMap"
 
 
 

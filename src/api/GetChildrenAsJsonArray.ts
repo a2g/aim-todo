@@ -1,6 +1,6 @@
-import { RawObjectsAndVerb } from "../common/puzzle/RawObjectsAndVerb";
+import { Step } from "../common/stuff/Step";
 
 
-export function GetChildrenAsJsonArray (command: RawObjectsAndVerb): Array<[string, string]> {
+export function GetChildrenAsJsonArray (command: Step): Array<[string, string]> {
   return command.GetChildTuples()
 }

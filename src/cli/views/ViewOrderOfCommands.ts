@@ -1,8 +1,8 @@
 import promptSync from 'prompt-sync'
 import { Solutions } from '../../common/files/Solutions'
-import { FormatText } from '../../common/puzzle/FormatText'
-import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
-import { Raw } from '../../common/puzzle/Raw'
+import { FormatText } from '../../common/stuff/FormatText'
+import { Step } from '../../common/stuff/Step'
+import { StepType } from '../../common/stuff/StepType'
 import { FormatCommand } from '../../api/FormatCommand'
 import { GetAchievementSpiel } from '../../api/GetAchievementSpiel'
 import { GetRestrictionSpiel } from '../../api/GetRestrictionSpiel'
@@ -86,21 +86,20 @@ export function ViewOrderOfCommands (validators: Solutions): void {
             : NAME_NOT_DETERMINABLE
         console.warn(`${letter}. ${label}`)
 
-        const commands: RawObjectsAndVerb[] =
+        const commands: Step[] =
           solution.GetOrderOfCommands()
         for (const command of commands) {
           // 0 is cleanest, later numbers are more detailed
-          if (command.source === Raw.Achievement && settings.infoLevel < 3) {
+          if (command.stepType === StepType.Achievement && settings.infoLevel < 3) {
             continue
           }
           listItemNumber++
           const formattedCommand = FormatCommand(
             GetMainSpiel(command, settings),
             GetAchievementSpiel(command, settings),
-            GetRestrictionSpiel(command, settings),
-            command.typeJustForDebugging, settings)
+            GetRestrictionSpiel(command, settings), settings)
           console.warn(`    ${listItemNumber}. ${formattedCommand}`)
-          if (command.source === Raw.Dialog) {
+          if (command.stepType === StepType.Dialog) {
             for (let i = 0; i < command.getChildTupleLength(); i++) {
               listItemNumber++
               const speechLine = command.getChildTuple(i)

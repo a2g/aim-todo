@@ -1,8 +1,8 @@
-import { AddBrackets } from "../common/puzzle/AddBrackets"
-import { FormatText } from "../common/puzzle/FormatText"
-import { RawObjectsAndVerb } from "../common/puzzle/RawObjectsAndVerb"
+import { AddBrackets } from "../common/stuff/AddBrackets"
+import { FormatText } from "../common/stuff/FormatText"
+import { Step } from "../common/stuff/Step"
 
-export function GetRestrictionSpiel (command: RawObjectsAndVerb, settings: Settings): string {
+export function GetRestrictionSpiel (command: Step, settings: Settings): string {
 
   const restrictionSpiel =
     command.prerequisites.length > 0

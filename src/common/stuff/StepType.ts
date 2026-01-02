@@ -1,4 +1,4 @@
-export enum Raw {
+export enum StepType {
   Auto = 'Auto',
   None = 'None',
   Grab = 'Grab',

@@ -5,8 +5,8 @@ import { CommandsView } from './CommandsView'
 import { ViewAimFileHeader } from './ViewAimFileHeader'
 import { Solution } from '../../common/files/Solution'
 import { assert } from 'console'
-import { FormatText } from '../../common/puzzle/FormatText'
-import { AddBrackets } from '../../common/puzzle/AddBrackets'
+import { FormatText } from '../../common/stuff/FormatText'
+import { AddBrackets } from '../../common/stuff/AddBrackets'
 
 
 const prompt = promptSync({})

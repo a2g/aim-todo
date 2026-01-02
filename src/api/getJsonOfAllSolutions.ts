@@ -1,7 +1,7 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
 import { TodoTreeWorkspaces as TodoListWorkspace } from '../common/files/TodoTreeWorkspaces'
-import { FormatText } from '../common/puzzle/FormatText'
+import { FormatText } from '../common/stuff/FormatText'
 import { Solutions } from '../common/files/Solutions'
 import { _TODO_TREE_JSONC } from '../common/_TODO_TREE_JSONC'
 import { Solution } from '../common/files/Solution'

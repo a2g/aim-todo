@@ -1,13 +1,12 @@
-import { existsSync, readFileSync } from 'fs'
-import { parse } from 'jsonc-parser'
 import { TodoTreeWorkspace } from './TodoTreeWorkspace'
 import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/re-creator/GetMapOFilesInFolderOfGivenPrefix'
 import { AimFiles } from './AimFiles'
 
-import { Box } from '../puzzle/Box'
-import { VisibleThingsMap } from '../puzzle/VisibleThingsMap'
+import { Box } from '../stuff/Box'
+import { VisibleThingsMap } from '../stuff/VisibleThingsMap'
 import { _STARTER_JSONC } from '../_STARTER_JSONC'
 import { _TODO_TREE_JSONC } from '../_TODO_TREE_JSONC'
+import { TodoTreeFile } from './TodoTreeFile'
 
 /**
  * Workspaces are like proto-solutions - they are used to explore possible solutions.
@@ -26,28 +25,18 @@ export class TodoTreeWorkspaces {
     this.workspaces = new Map<string, TodoTreeWorkspace>()
     this.startingThingsMap = new VisibleThingsMap(null)
 
-    const pathAndFile = fullFolderPath + _TODO_TREE_JSONC
-    if (!existsSync(pathAndFile)) {
-      throw new Error(
-        `The '${_TODO_TREE_JSONC} was not found: ${pathAndFile} `
-      )
-    }
-    const text = readFileSync(pathAndFile, 'utf-8')
-    const parsedJson: any = parse(text)
-    const aimTodoTree = parsedJson.root
     this.aimFiles = GetMapOFilesInFolderOfGivenPrefix(fullFolderPath, 'aim')
-
-
     this.InitializeStartingThings()
 
     // first workspace is added with blank workspace name
-    this.workspaces.set('', new TodoTreeWorkspace(aimTodoTree, this.aimFiles))
+    const todoTreeFile = new TodoTreeFile(fullFolderPath)
+    this.workspaces.set('', new TodoTreeWorkspace(todoTreeFile, this.aimFiles))
 
     let isNewSolutions = false
     do {
       isNewSolutions = false
       for (const solution of this.workspaces.values()) {
-        const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.GetTodoTree(), solution)
+        const wasNewSolutionGenerated = this.traverseAndCreateSeparateTreesWhenEncounteringOneOf(solution.GetTodoTreeJson(), solution)
         isNewSolutions = isNewSolutions || wasNewSolutionGenerated
         if (wasNewSolutionGenerated) {
           break

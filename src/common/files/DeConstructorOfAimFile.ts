@@ -5,11 +5,11 @@ import { AimFile } from './AimFile'
 
 import { FirstLettersOf } from '../../../FirstLettersOf'
 import { IdPrefixes } from '../../../IdPrefixes'
-import { VisibleThingsMap } from '../puzzle/VisibleThingsMap'
-import { RawObjectsAndVerb } from '../puzzle/RawObjectsAndVerb'
-import { Raw } from '../puzzle/Raw'
-import { Validated } from '../puzzle/Validated'
-import { Box } from '../puzzle/Box'
+import { VisibleThingsMap } from '../stuff/VisibleThingsMap'
+import { Step } from '../stuff/Step'
+import { StepType } from '../stuff/StepType'
+import { Validated } from '../stuff/Validated'
+import { Box } from '../stuff/Box'
 import { DialogFile } from '../files/DialogFile'
 
 export class DeConstructorOfAimFile {
@@ -45,7 +45,7 @@ export class DeConstructorOfAimFile {
     return count
   }
 
-  public GetNextDoableCommandAndDeconstructTree (): RawObjectsAndVerb | null {
+  public GetNextDoableCommandAndDeconstructTree (): Step | null {
     const theAny = this.theAimFile.GetTheAny()
     if (theAny != null) {
       const command = this.GetNextDoableCommandRecursively(theAny, 'root')
@@ -65,7 +65,7 @@ export class DeConstructorOfAimFile {
     return length > 0 ? false : true
   }
 
-  private GetNextDoableCommandRecursively (treeNode: any, treeNodeKey: string): RawObjectsAndVerb | null {
+  private GetNextDoableCommandRecursively (treeNode: any, treeNodeKey: string): Step | null {
     if (typeof treeNode === 'string') {
       return null;
     }
@@ -141,11 +141,11 @@ export class DeConstructorOfAimFile {
 
         // add speech from dialog file
         if (objectA.startsWith(FirstLettersOf.Dialog)) {
-          const command = new RawObjectsAndVerb(Raw.Dialog)
+          const command = new Step(StepType.Dialog)
           command.objectA = objectA
           command.output = treeNodeKey
-          command.talkAnnotation = talkAnnotation
-          command.typeAnnotation = typeAnnotation
+          command.metaSpeechLine = talkAnnotation
+          command.metaType = typeAnnotation
           const file = new DialogFile(command.objectA + ".jsonc")
           const dialogLines = new Array<[string, string]>()
           file.CollectSpeechLinesForMainChoice(dialogLines)
@@ -154,11 +154,11 @@ export class DeConstructorOfAimFile {
           }
           return command
         } else {
-          let command = new RawObjectsAndVerb(Raw.Command)
+          let command = new Step(StepType.Command)
           command.objectA = objectA
           command.output = treeNodeKey
-          command.talkAnnotation = talkAnnotation
-          command.typeAnnotation = typeAnnotation
+          command.metaSpeechLine = talkAnnotation
+          command.metaType = typeAnnotation
           return command
         }
       }

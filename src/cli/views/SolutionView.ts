@@ -3,8 +3,8 @@ import promptSync from 'prompt-sync'
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { TodoTreeWorkspace } from '../../common/files/TodoTreeWorkspace'
 import { TodoTreeWorkspaces } from '../../common/files/TodoTreeWorkspaces'
-import { AddBrackets } from '../../common/puzzle/AddBrackets'
-import { FormatText } from '../../common/puzzle/FormatText'
+import { AddBrackets } from '../../common/stuff/AddBrackets'
+import { FormatText } from '../../common/stuff/FormatText'
 const prompt = promptSync({})
 
 export function SolutionView (solution: TodoTreeWorkspace, _solutions: TodoTreeWorkspaces, titlePath: string[]): void {

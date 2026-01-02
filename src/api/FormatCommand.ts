@@ -1,5 +1,5 @@
 
-export function FormatCommand (mainSpiel: string, achievementSpiel: string, restrictionSpiel: string, typeJustForDebugging: string, settings: Settings): string {
+export function FormatCommand (mainSpiel: string, achievementSpiel: string, restrictionSpiel: string, settings: Settings): string {
 
   let toReturn = ''
   switch (settings.infoLevel) {
@@ -16,7 +16,7 @@ export function FormatCommand (mainSpiel: string, achievementSpiel: string, rest
       toReturn = `${mainSpiel}  ${achievementSpiel}`
       break
     case 9:
-      toReturn = `${mainSpiel}  ${achievementSpiel} ${restrictionSpiel} ${typeJustForDebugging}`
+      toReturn = `${mainSpiel}  ${achievementSpiel} ${restrictionSpiel}`
       break
   }
   return toReturn

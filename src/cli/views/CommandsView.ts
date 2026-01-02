@@ -1,7 +1,7 @@
 import promptSync from 'prompt-sync'
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
-import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
-import { Raw } from '../../common/puzzle/Raw'
+import { Step } from '../../common/stuff/Step'
+import { StepType } from '../../common/stuff/StepType'
 import { GetMainSpiel } from '../../api/GetMainSpiel'
 import { GetAchievementSpiel } from '../../api/GetAchievementSpiel'
 import { GetRestrictionSpiel } from '../../api/GetRestrictionSpiel'
@@ -9,7 +9,7 @@ import { FormatCommand } from '../../api/FormatCommand'
 
 const prompt = promptSync({ sigint: true })
 
-export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
+export function CommandsView (commands: Step[], titlePath: string[]
 ): void {
   titlePath.push('Commands')
   let settings = {
@@ -22,13 +22,13 @@ export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
 
     for (const command of commands) {
       // 0 is cleanest, later numbers are more detailed
-      if (command.source === Raw.Achievement && settings.infoLevel < 5) {
+      if (command.stepType === StepType.Achievement && settings.infoLevel < 5) {
         continue
       }
-      if (command.source === Raw.Achievement && settings.infoLevel < 3) {
+      if (command.stepType === StepType.Achievement && settings.infoLevel < 3) {
         continue
       }
-      if (command.source === Raw.Error_ZeroPiecesInAimNoticedInDeconstructing && settings.infoLevel < 1) {
+      if (command.stepType === StepType.Error_ZeroPiecesInAimNoticedInDeconstructing && settings.infoLevel < 1) {
         continue
       }
       listItemNumber++
@@ -37,16 +37,15 @@ export function CommandsView (commands: RawObjectsAndVerb[], titlePath: string[]
         GetMainSpiel(command, settings),
         GetAchievementSpiel(command, settings),
         GetRestrictionSpiel(command, settings),
-        command.typeJustForDebugging,
         settings
       )
       console.warn(`${listItemNumber}. ${formattedCommand}`)
-      if (command.source === Raw.Dialog) {
+      if (command.stepType === StepType.Dialog) {
         for (var i = 0; i < command.getChildTupleLength(); i++) {
           const speechLine = command.getChildTuple(i)
           console.warn(`Dialog   ${speechLine[0]}: ${speechLine[1]}`)
         }
-      } else if (command.source === Raw.RevealedByPriorStep) {
+      } else if (command.stepType === StepType.RevealedByPriorStep) {
         for (var i = 0; i < command.getChildTupleLength(); i++) {
           const speechLine = command.getChildTuple(i)
           console.warn(`Reveal   ${speechLine[0]}`)

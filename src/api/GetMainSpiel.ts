@@ -1,23 +1,19 @@
 import { IdPrefixes } from "../../IdPrefixes"
-import { AddBrackets } from "../common/puzzle/AddBrackets"
-import { FormatText } from "../common/puzzle/FormatText"
-import { Raw } from "../common/puzzle/Raw"
-import { RawObjectsAndVerb } from "../common/puzzle/RawObjectsAndVerb"
+import { AddBrackets } from "../common/stuff/AddBrackets"
+import { FormatText } from "../common/stuff/FormatText"
+import { StepType } from "../common/stuff/StepType"
+import { Step } from "../common/stuff/Step"
 
-export function GetMainSpiel (command: RawObjectsAndVerb, settings: Settings): string {
+export function GetMainSpiel (command: Step, settings: Settings): string {
 
   const isColor = settings.isColor != null ? settings.isColor : false
-  const verb = FormatText(command.source, isColor)
+  const verb = FormatText(command.stepType, isColor)
   const output = FormatText(command.output)
-  const objectA =
-    FormatText(command.objectA, isColor) +
-    FormatText(command.startingCharacterForA, isColor, true)
+  const objectA = FormatText(command.objectA, isColor)
   if (command.objectB === undefined) {
     command.dumpRaw()
   }
-  const objectB =
-    FormatText(command.objectB, isColor) +
-    FormatText(command.startingCharacterForB, isColor, true)
+  const objectB = FormatText(command.objectB, isColor)
 
   command.restrictionSpiel =
     command.prerequisites.length > 0
@@ -25,26 +21,26 @@ export function GetMainSpiel (command: RawObjectsAndVerb, settings: Settings): s
       : ''
 
   let mainSpiel = '<not set>'
-  switch (command.source) {
+  switch (command.stepType) {
     default:
       let joiner = ' '
-      switch (command.source) {
-        case Raw.Command:
+      switch (command.stepType) {
+        case StepType.Command:
           joiner = ' with '
           break
-        case Raw.Toggle:
+        case StepType.Toggle:
           joiner = ' to '
           break;
       }
       mainSpiel = verb + ' ' + objectA + joiner + objectB + ' results in ' + output + ' '
       break
-    case Raw.Error_ZeroPiecesInAimNoticedInDeconstructing:
+    case StepType.Error_ZeroPiecesInAimNoticedInDeconstructing:
       mainSpiel = `Aim Completed: ${objectA}`
       break;
-    case Raw.EndOfAchievement:
+    case StepType.EndOfAchievement:
       mainSpiel = ` --------------- end of achievement ${objectA}`
       break;
-    case Raw.Auto:
+    case StepType.Auto:
       if (command.objectB.startsWith(IdPrefixes.Inv)) {
         mainSpiel = `You obtain a ${objectB}`
       } else if (command.objectB.startsWith(IdPrefixes.Obj)) {

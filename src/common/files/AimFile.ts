@@ -1,7 +1,7 @@
-import { RawObjectsAndVerb } from "../puzzle/RawObjectsAndVerb"
-import { Solved } from "../puzzle/Solved"
-import { Validated } from "../puzzle/Validated"
-import { VisibleThingsMap } from "../puzzle/VisibleThingsMap"
+import { Step } from "../stuff/Step"
+import { Solved } from "../stuff/Solved"
+import { Validated } from "../stuff/Validated"
+import { VisibleThingsMap } from "../stuff/VisibleThingsMap"
 
 
 /**
@@ -29,7 +29,7 @@ import { VisibleThingsMap } from "../puzzle/VisibleThingsMap"
  * starting point, before optimizations.
  */
 export class AimFile {
-  private readonly commandsCompletedInOrder: RawObjectsAndVerb[]
+  private readonly commandsCompletedInOrder: Step[]
   private isSolved: Solved = Solved.Not
   private isNeeded: boolean
   private isValidated: Validated = Validated.Not
@@ -38,7 +38,7 @@ export class AimFile {
   private nodeCount = 0
   private readonly thingsToRevealWhenAimIsMet: VisibleThingsMap
   private fileWithoutExtension: string
-  constructor(fileWithoutExtension: string, rootProperty: any, visibleThingsMap: VisibleThingsMap, commandsCompletedInOrder: RawObjectsAndVerb[], isNeeded = false, solved = Solved.Not) {
+  constructor(fileWithoutExtension: string, rootProperty: any, visibleThingsMap: VisibleThingsMap, commandsCompletedInOrder: Step[], isNeeded = false, solved = Solved.Not) {
     this.isSolved = solved
     this.isNeeded = isNeeded
     this.theAny = rootProperty
@@ -92,14 +92,14 @@ export class AimFile {
     return this.isSolved
   }
 
-  public GetOrderedCommands (): RawObjectsAndVerb[] {
+  public GetOrderedCommands (): Step[] {
     // I would like to return a read only array here.
     // I can't do that, so instead, I will clone.
     // The best way to clone in is using 'map'
     return this.commandsCompletedInOrder.map((x) => x)
   }
 
-  public AddCommand (rawObjectsAndVerb: RawObjectsAndVerb): void {
+  public AddCommand (rawObjectsAndVerb: Step): void {
     this.commandsCompletedInOrder.push(rawObjectsAndVerb)
   }
 

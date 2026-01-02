@@ -1,10 +1,10 @@
 import { AimFile } from "./AimFile"
 import { AimFiles } from "./AimFiles"
 import { DeConstructorOfAimFile as DeConstructorOfAimFile } from "./DeConstructorOfAimFile"
-import { VisibleThingsMap } from "../puzzle/VisibleThingsMap"
-import { Validated } from "../puzzle/Validated"
-import { Raw } from "../puzzle/Raw"
-import { RawObjectsAndVerb } from "../puzzle/RawObjectsAndVerb"
+import { VisibleThingsMap } from "../stuff/VisibleThingsMap"
+import { Validated } from "../stuff/Validated"
+import { StepType } from "../stuff/StepType"
+import { Step } from "../stuff/Step"
 
 
 export class Solution {
@@ -67,7 +67,7 @@ export class Solution {
       this.aimFileMap
     )
 
-    let rawObjectsAndVerb: RawObjectsAndVerb | null = null
+    let rawObjectsAndVerb: Step | null = null
     for (let j = 0; j < 200; j += 1) {
       rawObjectsAndVerb =
         deconstructDoer.GetNextDoableCommandAndDeconstructTree()
@@ -79,10 +79,10 @@ export class Solution {
         break
       }
 
-      if (rawObjectsAndVerb.source !== Raw.None) {
+      if (rawObjectsAndVerb.stepType !== StepType.None) {
         // this is just here for debugging!
         aimFileHeader.AddCommand(rawObjectsAndVerb)
-        console.log(`${rawObjectsAndVerb.source}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
+        console.log(`${rawObjectsAndVerb.stepType}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
       }
     }
 
@@ -95,7 +95,7 @@ export class Solution {
     if (numberOfPieces <= 1 && isValidated == Validated.Not) {
 
       deconstructDoer.SetValidated(Validated.YesValidated)
-      const raw = new RawObjectsAndVerb(Raw.Error_ZeroPiecesInAimNoticedInDeconstructing)
+      const raw = new Step(StepType.Error_ZeroPiecesInAimNoticedInDeconstructing)
       raw.objectA = ' in '
       raw.objectB = ''
       raw.output = aimFileHeader.GetAimName()
@@ -109,7 +109,7 @@ export class Solution {
       this.currentlyVisibleThings.Set(aimFileHeader.GetAimName(), new Set<string>())
 
       // then reveal all the goodies 
-      const setToVisible = new RawObjectsAndVerb(Raw.RevealedByPriorStep)
+      const setToVisible = new Step(StepType.RevealedByPriorStep)
       for (const goodie of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator()) {
         if (!this.currentlyVisibleThings.Has(goodie[0])) {
 
@@ -124,18 +124,18 @@ export class Solution {
     return true
   }
 
-  public GetOrderOfCommands (): RawObjectsAndVerb[] {
-    const toReturn: RawObjectsAndVerb[] = []
+  public GetOrderOfCommands (): Step[] {
+    const toReturn: Step[] = []
     for (const filename of this.aimFileNamesInSolvingOrder) {
       const theAny = this.GetAimFiles().GetAimFileByFilenameNoThrow(filename)
       if (theAny != null) {
         const at = toReturn.length
         toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
-        const raw = new RawObjectsAndVerb(Raw.EndOfAchievement)
+        const raw = new Step(StepType.EndOfAchievement)
         raw.objectA = filename;
         toReturn.push(raw)
       } else {
-        toReturn.push(new RawObjectsAndVerb(Raw.Error_NoAimFileOfThatNameExists))
+        toReturn.push(new Step(StepType.Error_NoAimFileOfThatNameExists))
       }
     }
     return toReturn
