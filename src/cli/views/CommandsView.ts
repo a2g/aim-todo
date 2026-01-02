@@ -1,5 +1,5 @@
 import promptSync from 'prompt-sync'
-import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
 import { Raw } from '../../common/puzzle/Raw'
 import { GetMainSpiel } from '../../api/GetMainSpiel'

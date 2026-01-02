@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
 
-import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { ValidatorView } from './ValidatorView'
 
 import { Solutions } from '../../common/aim/Solutions'

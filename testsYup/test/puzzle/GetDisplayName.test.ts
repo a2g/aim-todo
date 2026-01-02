@@ -1,4 +1,4 @@
-import { GetDisplayName } from '../../../src/common/puzzle/GetDisplayName'
+import { GetDisplayName } from '../../../src/cli/formatters/GetDisplayName'
 import { expect, test } from '@jest/globals'
 
 test('TestAllNamesSoFar', () => {

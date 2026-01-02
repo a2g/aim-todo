@@ -5,7 +5,7 @@ import * as fs from 'fs'
 import { parse } from 'jsonc-parser'
 import { AimFileHeaderMap } from '../../common/aim/AimFileHeaderMap'
 import { AimFileHeader } from '../../common/aim/AimFileHeader'
-import { GetStartingThingsFromRawJson } from '../old/GetStartingThingsFromRawJson'
+import { GetStartingThingsFromRawJson } from '../re-creator/GetStartingThingsFromRawJson'
 
 export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: string): AimFileHeaderMap {
     const mapToReturn = new AimFileHeaderMap()

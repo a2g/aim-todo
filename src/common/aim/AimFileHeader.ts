@@ -103,17 +103,6 @@ export class AimFileHeader {
     this.commandsCompletedInOrder.push(rawObjectsAndVerb)
   }
 
-  /*
-  public ProcessHeaderUntilCloning (solution: Evolution, solutions: Evolutions, path: string): boolean {
-    // if the achievement piece is already found, we drill into it
-    if (this.inputs[0] != null) {
-      return this.inputs[0].ProcessUntilCloning(solution, solutions, path + this.inputHints[0] + '/')
-    }
-  
-    // else we find the achievement from piece
-    return ProcessAndReturnTrueIfCloneOccurs(this, 0, '', solution, solutions)
-  }*/
-
   public Clone (): AimFileHeader {
     const theAny = this._CloneObject(this.GetTheAny())
     const thingsMap = new VisibleThingsMap(this.thingsToRevealWhenAimIsMet)

@@ -1,5 +1,5 @@
 import { IdPrefixes } from '../../../IdPrefixes'
-import { AddBrackets } from './AddBrackets'
+import { AddBrackets } from '../../common/puzzle/AddBrackets'
 import { Colors } from './Colors'
 
 export function GetDisplayName (

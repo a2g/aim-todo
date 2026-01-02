@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
 
-import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { AimFileHeader as AimFileHeader } from '../../common/aim/AimFileHeader'
 import { CommandsView } from './CommandsView'
 import { PieceDeconstructionView } from './PieceDeconstructionView'

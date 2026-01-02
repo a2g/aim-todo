@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
 import { TodoTreeWorkspaces } from '../../common/aim/TodoTreeWorkspaces'
-import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 const prompt = promptSync({})
 
 export function ViewBackwardSolve (solutions: TodoTreeWorkspaces): void {

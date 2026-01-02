@@ -1,7 +1,7 @@
 import promptSync from 'prompt-sync'
 
 import { AimFileHeader } from '../../common/aim/AimFileHeader'
-import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { Solution } from '../../common/aim/Solution'
 import { VisibleThingsMap } from '../../common/puzzle/VisibleThingsMap'
 

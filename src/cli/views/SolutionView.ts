@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
 
-import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { TodoTreeWorkspace } from '../../common/aim/TodoTreeWorkspace'
 import { TodoTreeWorkspaces } from '../../common/aim/TodoTreeWorkspaces'
 import { AddBrackets } from '../../common/puzzle/AddBrackets'

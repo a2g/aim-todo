@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
 
-import { ShowUnderlinedTitle } from '../old/ShowUnderlinedTitle'
+import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { Piece } from '../../common/puzzle/Piece'
 import { VisibleThingsMap } from '../../common/puzzle/VisibleThingsMap'
 const prompt = promptSync({ sigint: true })

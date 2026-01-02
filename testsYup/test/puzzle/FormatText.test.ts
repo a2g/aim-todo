@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals'
-import { Colors } from '../../../src/common/puzzle/Colors'
+import { Colors } from '../../../src/cli/formatters/Colors'
 import { FormatText } from '../../../src/common/puzzle/FormatText'
 
 test('should render inv_ in green', () => {
