@@ -1,10 +1,10 @@
 import promptSync from 'prompt-sync'
 
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
-import { AimFile as AimFile } from '../../common/aim/AimFile'
+import { AimFile as AimFile } from '../../common/files/AimFile'
 import { CommandsView } from './CommandsView'
 import { PieceDeconstructionView } from './PieceDeconstructionView'
-import { Solution } from '../../common/aim/Solution'
+import { Solution } from '../../common/files/Solution'
 
 
 

@@ -71,8 +71,8 @@
     "todo.ts",
     "FilenameSuffixes.ts",
     "testsYup/**/*",
-    "src/common/aim/Solution.ts",
-    "src/common/aim/Solutions.ts"
+    "src/common/files/Solution.ts",
+    "src/common/files/Solutions.ts"
   ],
   "exclude": [
     "node_modules",

@@ -1,5 +1,5 @@
 import promptSync from 'prompt-sync'
-import { Solutions } from '../../common/aim/Solutions'
+import { Solutions } from '../../common/files/Solutions'
 import { FormatText } from '../../common/puzzle/FormatText'
 import { RawObjectsAndVerb } from '../../common/puzzle/RawObjectsAndVerb'
 import { Raw } from '../../common/puzzle/Raw'

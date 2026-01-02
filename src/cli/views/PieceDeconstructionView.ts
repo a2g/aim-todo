@@ -1,8 +1,8 @@
 import promptSync from 'prompt-sync'
 
-import { AimFile } from '../../common/aim/AimFile'
+import { AimFile } from '../../common/files/AimFile'
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
-import { Solution } from '../../common/aim/Solution'
+import { Solution } from '../../common/files/Solution'
 import { VisibleThingsMap } from '../../common/puzzle/VisibleThingsMap'
 
 const prompt = promptSync({ sigint: true })

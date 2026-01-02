@@ -3,8 +3,8 @@ import * as fs from 'fs'
 
 
 import { parse } from 'jsonc-parser'
-import { AimFiles } from '../../common/aim/AimFiles'
-import { AimFile } from '../../common/aim/AimFile'
+import { AimFiles } from '../../common/files/AimFiles'
+import { AimFile } from '../../common/files/AimFile'
 import { GetStartingThingsFromRawJson } from '../re-creator/GetStartingThingsFromRawJson'
 
 export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: string): AimFiles {
