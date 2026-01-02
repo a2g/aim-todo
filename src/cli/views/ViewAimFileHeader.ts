@@ -5,7 +5,7 @@ import { AimFileHeader as AimFileHeader } from '../../common/aim/AimFileHeader'
 import { CommandsView } from './CommandsView'
 import { PieceDeconstructionView } from './PieceDeconstructionView'
 import { Solution } from '../../common/aim/Solution'
-import { Piece } from '../../common/puzzle/Piece'
+
 
 
 const prompt = promptSync({ sigint: true })
@@ -33,7 +33,7 @@ export function ViewAimFileHeader (header: AimFileHeader, validator: Solution, t
     } else if (input === 'o') {
       CommandsView(header.GetOrderedCommands(), [...titlePath])
     } else if (input === 't') {
-      const theAchievementPiece = header.GetTheAny() as Piece
+      const theAchievementPiece = header.GetTheAny()
       if (theAchievementPiece != null) {
         PieceDeconstructionView(theAchievementPiece, validator, header, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
       } else {

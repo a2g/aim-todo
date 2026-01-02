@@ -2,7 +2,6 @@ import { existsSync, readFileSync } from 'fs'
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { parse } from 'jsonc-parser'
 
-import { Piece } from './Piece'
 import { DialogFile } from '../dialog/DialogFile'
 import { FirstLettersOf } from '../../../FirstLettersOf'
 
@@ -110,27 +109,6 @@ export class Box {
 
   public GetFilename (): string {
     return this.filename
-  }
-
-  public static CopyPiecesFromAtoBViaIds (a: Map<string, Set<Piece>>, b: Map<string, Piece>): void {
-    a.forEach((setOfPieces: Set<Piece>) => {
-      setOfPieces.forEach((piece: Piece) => {
-        const newPiece = piece.ClonePieceAndEntireTree()
-        b.set(piece.id, newPiece)
-      })
-    })
-  }
-
-  public static CopyPiecesFromAtoB (a: Map<string, Set<Piece>>, b: Map<string, Set<Piece>>): void {
-    a.forEach((setOfPieces: Set<Piece>) => {
-      setOfPieces.forEach((piece: Piece) => {
-        if (!b.has(piece.output)) {
-          b.set(piece.output, new Set<Piece>())
-        }
-        const newPiece = piece.ClonePieceAndEntireTree()
-        b.get(piece.output)?.add(newPiece)
-      })
-    })
   }
 
   public static CopyDialogsFromAtoB (a: Map<string, DialogFile>, b: Map<string, DialogFile>): void {
