@@ -3,9 +3,9 @@ import { parse } from "jsonc-parser"
 import { _TODO_TREE_JSONC } from "../_TODO_TREE_JSONC"
 
 /**
- * This represents the _todo_tree.jsonc file
+ * This represents the _todo_tree.jsonc file.
  * 
- * Its just a plain json file
+ * Its just a plain json file.
  */
 export class TodoTreeFile {
   private jsonOfTodoTree: any

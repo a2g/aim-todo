@@ -1,5 +1,5 @@
 import promptSync from 'prompt-sync'
-import { Solutions } from '../../common/files/Solutions'
+import { Solutions } from '../../common/solving/Solutions'
 import { FormatText } from '../../common/stuff/FormatText'
 import { Step } from '../../common/stuff/Step'
 import { StepType } from '../../common/stuff/StepType'

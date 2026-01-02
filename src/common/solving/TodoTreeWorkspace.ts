@@ -1,5 +1,5 @@
-import { AimFiles } from "./AimFiles"
-import { TodoTreeFile } from "./TodoTreeFile"
+import { AimFiles } from "../files/AimFiles"
+import { TodoTreeFile } from "../files/TodoTreeFile"
 
 export class TodoTreeWorkspace {
     private todoTreeFile: TodoTreeFile

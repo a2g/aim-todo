@@ -7,6 +7,10 @@ import { DialogKeywords } from './dialog/DialogKeywords'
 import { ChoiceLine } from './dialog/ChoiceLine'
 
 
+/** Represents a dialog file
+ * 
+ * These can get tricky, so there are classes representing sub-parts in the dialog folder.
+ */
 export class DialogFile {
   filename: string
   choices: Map<string, ChoiceSection>

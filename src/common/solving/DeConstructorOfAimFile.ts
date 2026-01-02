@@ -1,7 +1,7 @@
 
 
-import { AimFiles } from './AimFiles'
-import { AimFile } from './AimFile'
+import { AimFiles } from '../files/AimFiles'
+import { AimFile } from '../files/AimFile'
 
 import { FirstLettersOf } from '../../../FirstLettersOf'
 import { IdPrefixes } from '../../../IdPrefixes'

@@ -1,10 +1,11 @@
-import { AimFile } from "./AimFile"
-import { AimFiles } from "./AimFiles"
-import { DeConstructorOfAimFile as DeConstructorOfAimFile } from "./DeConstructorOfAimFile"
+
 import { VisibleThingsMap } from "../stuff/VisibleThingsMap"
 import { Validated } from "../stuff/Validated"
 import { StepType } from "../stuff/StepType"
 import { Step } from "../stuff/Step"
+import { AimFiles } from "../files/AimFiles"
+import { AimFile } from "../files/AimFile"
+import { DeConstructorOfAimFile } from "./DeConstructorOfAimFile"
 
 
 export class Solution {

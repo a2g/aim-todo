@@ -72,7 +72,7 @@
     "FilenameSuffixes.ts",
     "testsYup/**/*",
     "src/common/files/Solution.ts",
-    "src/common/files/Solutions.ts"
+    "src/common/solving/Solutions.ts"
   ],
   "exclude": [
     "node_modules",

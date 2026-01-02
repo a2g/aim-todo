@@ -3,7 +3,7 @@ import promptSync from 'prompt-sync'
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { ValidatorView } from './ValidatorView'
 
-import { Solutions } from '../../common/files/Solutions'
+import { Solutions } from '../../common/solving/Solutions'
 import { Solved } from '../../common/stuff/Solved'
 import { FormatText } from '../../common/stuff/FormatText'
 const prompt = promptSync({})

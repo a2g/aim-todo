@@ -4,7 +4,7 @@ import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { AimFile as AimFile } from '../../common/files/AimFile'
 import { CommandsView } from './CommandsView'
 import { PieceDeconstructionView } from './PieceDeconstructionView'
-import { Solution } from '../../common/files/Solution'
+import { Solution } from '../../common/solving/Solution'
 
 
 

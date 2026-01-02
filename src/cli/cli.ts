@@ -1,9 +1,9 @@
 import promptSync from 'prompt-sync'
 import { $AimTodo, getJsonOfAllTodoTrees } from '../api/getJsonOfAllTodoTrees'
-import { TodoTreeWorkspaces } from '../common/files/TodoTreeWorkspaces'
-import { Solutions } from '../common/files/Solutions'
+import { TodoTreeWorkspaces } from '../common/solving/TodoTreeWorkspaces'
+import { Solutions } from '../common/solving/Solutions'
 //import { LogGainsFromEachDialog } from './log/LogGainsFromEachDialog'
-import { EnumReCreator } from './re-creator/EnumReCreator'
+import { EnumReCreator } from '../common/re-creator/EnumReCreator'
 import { ViewBackwardSolve } from './views/ViewBackwardSolve'
 import { ViewForwardValidate } from './views/ViewForwardValidate'
 

@@ -1,10 +1,10 @@
 import { existsSync } from 'fs'
 import { join } from 'path'
-import { TodoTreeWorkspaces as TodoListWorkspace } from '../common/files/TodoTreeWorkspaces'
+import { TodoTreeWorkspaces as TodoListWorkspace } from '../common/solving/TodoTreeWorkspaces'
 import { FormatText } from '../common/stuff/FormatText'
-import { Solutions } from '../common/files/Solutions'
+import { Solutions } from '../common/solving/Solutions'
 import { _TODO_TREE_JSONC } from '../common/_TODO_TREE_JSONC'
-import { Solution } from '../common/files/Solution'
+import { Solution } from '../common/solving/Solution'
 import { GetMainSpiel } from './GetMainSpiel'
 import { GetChildrenAsJsonArray } from './GetChildrenAsJsonArray'
 

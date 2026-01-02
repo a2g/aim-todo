@@ -1,8 +1,8 @@
 import promptSync from 'prompt-sync'
 
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
-import { TodoTreeWorkspace } from '../../common/files/TodoTreeWorkspace'
-import { TodoTreeWorkspaces } from '../../common/files/TodoTreeWorkspaces'
+import { TodoTreeWorkspace } from '../../common/solving/TodoTreeWorkspace'
+import { TodoTreeWorkspaces } from '../../common/solving/TodoTreeWorkspaces'
 import { AddBrackets } from '../../common/stuff/AddBrackets'
 import { FormatText } from '../../common/stuff/FormatText'
 const prompt = promptSync({})

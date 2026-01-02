@@ -1,12 +1,12 @@
 import { TodoTreeWorkspace } from './TodoTreeWorkspace'
-import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/re-creator/GetMapOFilesInFolderOfGivenPrefix'
-import { AimFiles } from './AimFiles'
+import { GetMapOFilesInFolderOfGivenPrefix } from '../re-creator/GetMapOFilesInFolderOfGivenPrefix'
+import { AimFiles } from '../files/AimFiles'
 
 import { Box } from '../stuff/Box'
 import { VisibleThingsMap } from '../stuff/VisibleThingsMap'
 import { _STARTER_JSONC } from '../_STARTER_JSONC'
 import { _TODO_TREE_JSONC } from '../_TODO_TREE_JSONC'
-import { TodoTreeFile } from './TodoTreeFile'
+import { TodoTreeFile } from '../files/TodoTreeFile'
 
 /**
  * Workspaces are like proto-solutions - they are used to explore possible solutions.
