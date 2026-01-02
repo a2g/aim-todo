@@ -58,7 +58,6 @@ export function SolutionView (solution: TodoTreeWorkspace, _solutions: TodoTreeW
       return
     }
     if (input === 'r') {
-      //solution.ProcessUntilCloning(solutions)
       //solution.UpdateAchievementSolvedStatuses()
       continue
     } else {

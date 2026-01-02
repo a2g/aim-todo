@@ -44,9 +44,4 @@ export class AimFileHeaderMap {
         }
         return mapToReturn
     }
-
-    GenerateMapOfLeavesFromAllAimTrees (isOnlyNulls: boolean): Map<string, any | null> {
-        const map = isOnlyNulls ? new Map<string, any | null>() : new Map<string, any | null>()
-        return map
-    }
 }

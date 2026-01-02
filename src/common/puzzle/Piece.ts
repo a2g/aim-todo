@@ -2,12 +2,9 @@ import { Command } from './Command'
 import { Happen } from './Happen'
 import { Happenings } from './Happenings'
 import { Box } from './Box'
-import { Evolution } from './Evolution'
-import { Evolutions } from './Evolutions'
 import { SpecialTypes } from './SpecialTypes'
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { PieceBase } from './PieceBase'
-import { ProcessAndReturnTrueIfCloneOccurs } from './ProcessAndReturnTrueIfCloneOccurs'
 
 export class Piece extends PieceBase {
   public id: string
@@ -190,55 +187,6 @@ export class Piece extends PieceBase {
     this.inputs[k] = newLeaf
   }
 
-  public ProcessUntilCloning (
-    solution: Evolution,
-    solutions: Evolutions,
-    path: string
-  ): boolean {
-    const newPath = `${path}${this.output}/`
-
-    // this is the point we used to set it as completed
-    // solution.MarkPieceAsCompleted(this)
-
-    if (this.InternalLoopOfProcessUntilCloning(solution)) {
-      return true
-    }
-
-    // now to process each of those pieces that have been filled out
-    for (const inputPiece of this.inputs) {
-      if (inputPiece != null) {
-        if (inputPiece.type === SpecialTypes.VerifiedLeaf) {
-          continue
-        } // this means its already been searched for in the map, without success.
-        const hasACloneJustBeenCreated = inputPiece.ProcessUntilCloning(
-          solution,
-          solutions,
-          newPath
-        )
-        if (hasACloneJustBeenCreated) {
-          return true
-        }
-      } else {
-        // this case used to indicate something wrong with InternalLoopOfProcessUntilCloning
-        // because in the old days a solution just had one tree in it that was traversed in order
-        // With the multi-tree setup, the order can jump from one tree to another
-        // to another, so the order isn't clear. So instead we iterate multiple times
-        // to solve it.
-        //
-        // In the old days it said process until cloning. But it really meant
-        // process until cloning or finished - and we used some metric to determine
-        // whether the traversing was complete - if it wasn't, then we knew it was
-        // cloned.
-        //
-        // With this way, I think we need to choose something else....
-        // assert(inputPiece && 'Input piece=' + inputPiece + ' <-If this fails there is something wrong with InternalLoopOfProcessUntilCloning')
-        // console.warn('Input piece= null <-If this fails there is something wrong with InternalLoopOfProcessUntilCloning')
-      }
-    }
-
-    return false
-  }
-
   public SetParent (parent: PieceBase | null): void {
     this.parent = parent
   }
@@ -274,53 +222,6 @@ export class Piece extends PieceBase {
     }
   }
 
-  private InternalLoopOfProcessUntilCloning (
-    solution: Evolution
-  ): boolean {
-    for (let k = 0; k < this.inputs.length; k += 1) {
-      // Without this following line, any clones will attempt to re-clone themselves
-      // and Solution.ProcessUntilCompletion will continue forever
-      if (this.inputs[k] != null) {
-        continue
-      }
-
-      // we check our starting set first!
-      // 1. Starting set - we check our starting set first!
-      // otherwise Toggle pieces will toggle until the count is zero.
-      const importHintToFind = this.inputHints[k]
-      if (
-        solution.GetStartingThings().Has(importHintToFind)) {
-        this.HeaderOutInputK(k, SpecialTypes.StartingThings)
-        continue
-      }
-
-      // 2. Achievement - matches a single achievement in the achievement root map
-      // then we just set and forget, allowing that achievement
-      // be completed via the natural process
-      const matchingRootPiece = solution
-        .GetAchievementHeaderMap()
-        .GetAchievementHeaderByNameNoThrow(importHintToFind)
-      if (matchingRootPiece != null) {
-        // set it as needed will enable it to be solved if it isn't already
-        matchingRootPiece.SetNeeded()
-
-        // Only if its already solved do we header it out
-        const isSolved = matchingRootPiece.IsSolved()
-        if (isSolved) {
-          this.HeaderOutInputK(k, SpecialTypes.SomeOtherAchievement)
-        }
-
-        continue
-      }
-
-      // 4. Plain old pieces
-      // This is where we get all the pieces that fit
-      if (ProcessAndReturnTrueIfCloneOccurs()) {
-        return true
-      }
-    }
-    return false
-  }
 
   SetDialogPath (dialogPath: string): void {
     this.dialogPath = dialogPath
