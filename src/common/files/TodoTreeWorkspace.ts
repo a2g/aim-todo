@@ -1,5 +1,11 @@
 import { AimFiles } from "./AimFiles"
 
+/**
+ * Workspaces are like proto-solutions - they are used to explore possible solutions.
+ * 
+ * We start off with one workspace, then we add more every time we encounter a 
+ * branching point, like 'oneOf'
+ */
 export class TodoTreeWorkspace {
     private todoTree: any
     private aimFiles: AimFiles

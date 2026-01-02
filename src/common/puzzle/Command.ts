@@ -4,14 +4,11 @@ import { Verb } from './Verb'
 export class Command {
   public verb: Verb
   public type: Mix
-
   public object1: string
-
   public object2: string
-
   public error: string
 
-  constructor (
+  constructor(
     verb: Verb,
     type: Mix,
     object1: string,

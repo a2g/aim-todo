@@ -1,10 +1,10 @@
-import { ChoiceSection } from './ChoiceSection'
-import { NonChoiceSection } from './NonChoiceSection'
+import { ChoiceSection } from './dialog/ChoiceSection'
+import { NonChoiceSection } from './dialog/NonChoiceSection'
 import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import _ from '../../../todo-enums.json'
-import { DialogKeywords } from './DialogKeywords'
-import { ChoiceLine } from './ChoiceLine'
+import { DialogKeywords } from './dialog/DialogKeywords'
+import { ChoiceLine } from './dialog/ChoiceLine'
 
 
 export class DialogFile {

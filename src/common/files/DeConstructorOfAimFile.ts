@@ -10,7 +10,7 @@ import { RawObjectsAndVerb } from '../puzzle/RawObjectsAndVerb'
 import { Raw } from '../puzzle/Raw'
 import { Validated } from '../puzzle/Validated'
 import { Box } from '../puzzle/Box'
-import { DialogFile } from '../dialog/DialogFile'
+import { DialogFile } from '../files/DialogFile'
 
 export class DeConstructorOfAimFile {
   private readonly theAimFile: AimFile

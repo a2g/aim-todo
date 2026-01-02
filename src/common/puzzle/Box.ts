@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'fs'
 import { VisibleThingsMap } from './VisibleThingsMap'
 import { parse } from 'jsonc-parser'
 
-import { DialogFile } from '../dialog/DialogFile'
+import { DialogFile } from '../files/DialogFile'
 import { FirstLettersOf } from '../../../FirstLettersOf'
 
 
