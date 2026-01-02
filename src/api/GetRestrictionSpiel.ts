@@ -1,5 +1,5 @@
 import { AddBrackets } from "../common/stuff/AddBrackets"
-import { FormatText } from "../common/stuff/FormatText"
+import { FormatText } from "../cli/formatters/FormatText"
 import { Step } from "../common/stuff/Step"
 
 export function GetRestrictionSpiel (command: Step, settings: Settings): string {

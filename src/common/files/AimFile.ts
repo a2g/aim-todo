@@ -1,6 +1,6 @@
 import { Step } from "../stuff/Step"
-import { Solved } from "../stuff/Solved"
-import { Validated } from "../stuff/Validated"
+import { Solved } from "../solving/Solved"
+import { Validated } from "../solving/Validated"
 import { VisibleThingsMap } from "../stuff/VisibleThingsMap"
 
 

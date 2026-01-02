@@ -4,8 +4,8 @@ import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { ValidatorView } from './ValidatorView'
 
 import { Solutions } from '../../common/solving/Solutions'
-import { Solved } from '../../common/stuff/Solved'
-import { FormatText } from '../../common/stuff/FormatText'
+import { Solved } from '../../common/solving/Solved'
+import { FormatText } from '../formatters/FormatText'
 const prompt = promptSync({})
 
 export function ViewForwardValidate (validators: Solutions): void {

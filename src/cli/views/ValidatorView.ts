@@ -5,7 +5,7 @@ import { CommandsView } from './CommandsView'
 import { ViewAimFileHeader } from './ViewAimFileHeader'
 import { Solution } from '../../common/solving/Solution'
 import { assert } from 'console'
-import { FormatText } from '../../common/stuff/FormatText'
+import { FormatText } from '../formatters/FormatText'
 import { AddBrackets } from '../../common/stuff/AddBrackets'
 
 

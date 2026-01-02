@@ -1,6 +1,6 @@
 
 import { VisibleThingsMap } from "../stuff/VisibleThingsMap"
-import { Validated } from "../stuff/Validated"
+import { Validated } from "./Validated"
 import { StepType } from "../stuff/StepType"
 import { Step } from "../stuff/Step"
 import { AimFiles } from "../files/AimFiles"

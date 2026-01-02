@@ -1,6 +1,6 @@
 import { IdPrefixes } from "../../IdPrefixes"
 import { AddBrackets } from "../common/stuff/AddBrackets"
-import { FormatText } from "../common/stuff/FormatText"
+import { FormatText } from "../cli/formatters/FormatText"
 import { StepType } from "../common/stuff/StepType"
 import { Step } from "../common/stuff/Step"
 

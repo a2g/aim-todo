@@ -1,4 +1,4 @@
-import { LogicGrid } from '../../../src/common/stuff/LogicGrid'
+import { LogicGrid } from '../../../src/common/solving/LogicGrid'
 import { expect, test } from '@jest/globals'
 
 test('FindMostNearlyCompleteRowOrColumnCombined', () => {

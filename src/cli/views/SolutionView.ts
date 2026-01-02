@@ -4,7 +4,7 @@ import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { TodoTreeWorkspace } from '../../common/solving/TodoTreeWorkspace'
 import { TodoTreeWorkspaces } from '../../common/solving/TodoTreeWorkspaces'
 import { AddBrackets } from '../../common/stuff/AddBrackets'
-import { FormatText } from '../../common/stuff/FormatText'
+import { FormatText } from '../formatters/FormatText'
 const prompt = promptSync({})
 
 export function SolutionView (solution: TodoTreeWorkspace, _solutions: TodoTreeWorkspaces, titlePath: string[]): void {

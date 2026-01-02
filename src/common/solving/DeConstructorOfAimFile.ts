@@ -8,7 +8,7 @@ import { IdPrefixes } from '../../../IdPrefixes'
 import { VisibleThingsMap } from '../stuff/VisibleThingsMap'
 import { Step } from '../stuff/Step'
 import { StepType } from '../stuff/StepType'
-import { Validated } from '../stuff/Validated'
+import { Validated } from './Validated'
 import { Box } from '../stuff/Box'
 import { DialogFile } from '../files/DialogFile'
 

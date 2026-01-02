@@ -1,6 +1,6 @@
 import promptSync from 'prompt-sync'
 import { Solutions } from '../../common/solving/Solutions'
-import { FormatText } from '../../common/stuff/FormatText'
+import { FormatText } from '../formatters/FormatText'
 import { Step } from '../../common/stuff/Step'
 import { StepType } from '../../common/stuff/StepType'
 import { FormatCommand } from '../../api/FormatCommand'

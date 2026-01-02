@@ -1,6 +1,6 @@
 import { expect, test } from '@jest/globals'
 import { Colors } from '../../../src/cli/formatters/Colors'
-import { FormatText } from '../../../src/common/stuff/FormatText'
+import { FormatText } from '../../../src/cli/formatters/FormatText'
 
 test('should render inv_ in green', () => {
   expect(FormatText('inv_blah')).toBe(Colors.Green + 'blah' + Colors.Reset)

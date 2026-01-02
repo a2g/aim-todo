@@ -24,12 +24,12 @@ export class TodoTreeWorkspaces {
     this.fileAddress = fullFolderPath
     this.workspaces = new Map<string, TodoTreeWorkspace>()
     this.startingThingsMap = new VisibleThingsMap(null)
-
+    const todoTreeFile = new TodoTreeFile(fullFolderPath)
     this.aimFiles = GetMapOFilesInFolderOfGivenPrefix(fullFolderPath, 'aim')
     this.InitializeStartingThings()
 
     // first workspace is added with blank workspace name
-    const todoTreeFile = new TodoTreeFile(fullFolderPath)
+
     this.workspaces.set('', new TodoTreeWorkspace(todoTreeFile, this.aimFiles))
 
     let isNewSolutions = false

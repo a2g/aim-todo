@@ -1,6 +1,6 @@
 import { IdPrefixes } from '../../../IdPrefixes'
-import { AddBrackets } from './AddBrackets'
-import { Keywords } from './Keywords'
+import { AddBrackets } from '../../common/stuff/AddBrackets'
+import { Keywords } from '../../common/stuff/Keywords'
 
 
 

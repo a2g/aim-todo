@@ -1,4 +1,3 @@
-import { SingleFileData } from './SingleFileData'
 
 /**
  * Logic grid (aka Elimination Grid)
@@ -32,7 +31,7 @@ export class LogicGrid {
 
   private lastDebugString: string
 
-  constructor (
+  constructor(
     colNamesAndInitialVisibilities: Array<[string, boolean]>,
     rowNamesAndInitialVisibilities: Array<[string, boolean]>
   ) {
@@ -341,5 +340,22 @@ export class LogicGrid {
         this.numberOfVisibleRows += isVisible ? 1 : -1
       }
     }
+  }
+}
+
+
+/*
+ * This is only used in LogicGrid
+ * should it be moved there?
+ */
+class SingleFileData {
+  public name: string
+  public tickCount: number
+  public isVisible: boolean
+
+  constructor(name: string, isVisible: boolean) {
+    this.name = name
+    this.isVisible = isVisible
+    this.tickCount = 0
   }
 }
