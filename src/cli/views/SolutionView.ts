@@ -23,7 +23,7 @@ export function SolutionView (solution: TodoTreeWorkspace, _solutions: TodoTreeW
     console.warn(`${label}`)
     let listItemNumber = 0
     let incomplete = 0
-    for (const achievementHeader of solution.GetAimTreeMap().GetAims()) {
+    for (const achievementHeader of solution.GetAimFiles().GetAimFiles()) {
       listItemNumber++
 
       // display list item
@@ -65,7 +65,7 @@ export function SolutionView (solution: TodoTreeWorkspace, _solutions: TodoTreeW
       const theNumber = Number(input)
       if (theNumber > 0 && theNumber <= listItemNumber) {
         let j = 0
-        for (const achievement of solution.GetAimTreeMap().GetAims()) {
+        for (const achievement of solution.GetAimFiles().GetAimFiles()) {
           j++
           if (j === theNumber) {
             const theAchievementPiece = achievement.GetTheAny()

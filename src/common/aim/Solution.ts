@@ -1,6 +1,6 @@
-import { AimFileHeader } from "./AimFileHeader"
-import { AimFileHeaderMap } from "./AimFileHeaderMap"
-import { AimFileHeaderDeConstructor as AimFileHeaderDeConstructor } from "./AimFileHeaderDeConstructor"
+import { AimFile } from "./AimFile"
+import { AimFiles } from "./AimFiles"
+import { DeConstructorOfAimFile as DeConstructorOfAimFile } from "./DeConstructorOfAimFile"
 import { VisibleThingsMap } from "../puzzle/VisibleThingsMap"
 import { Validated } from "../puzzle/Validated"
 import { Raw } from "../puzzle/Raw"
@@ -8,16 +8,15 @@ import { RawObjectsAndVerb } from "../puzzle/RawObjectsAndVerb"
 
 
 export class Solution {
-  private readonly aimFileMap: AimFileHeaderMap
+  private readonly aimFileMap: AimFiles
   private readonly aimFileNamesInSolvingOrder: string[]
   private readonly currentlyVisibleThings: VisibleThingsMap
   private readonly solutionName: string
   private readonly essentialIngredients: Set<string> // yup these are added to
 
-  public constructor(name: string, aimTreeMap: AimFileHeaderMap, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
+  public constructor(name: string, aimFiles: AimFiles, startingThingsPassedIn: VisibleThingsMap, prerequisites: Set<string> | null = null) {
     this.solutionName = name
-    this.aimFileMap = aimTreeMap
-    this.aimFileMap.RemoveZeroedOrUnneededAims()
+    this.aimFileMap = aimFiles
     this.aimFileNamesInSolvingOrder = []
 
     this.currentlyVisibleThings = new VisibleThingsMap(null)
@@ -40,7 +39,7 @@ export class Solution {
     return this.solutionName
   }
 
-  public GetAimTreeMap (): AimFileHeaderMap {
+  public GetAimFiles (): AimFiles {
     return this.aimFileMap
   }
 
@@ -50,7 +49,7 @@ export class Solution {
 
   public DeconstructAllAchievementsAndRecordSteps (): boolean {
     let wasThereAtLeastSomeProgress = false
-    for (const header of this.aimFileMap.GetAims()) {
+    for (const header of this.aimFileMap.GetAimFiles()) {
       if (header.GetValidated() === Validated.Not) {
         if (this.DeconstructGivenHeaderAndRecordSteps(header)) {
           wasThereAtLeastSomeProgress = true
@@ -60,9 +59,9 @@ export class Solution {
     return wasThereAtLeastSomeProgress
   }
 
-  public DeconstructGivenHeaderAndRecordSteps (aimFileHeader: AimFileHeader): boolean {
+  public DeconstructGivenHeaderAndRecordSteps (aimFileHeader: AimFile): boolean {
     // push the commands
-    const deconstructDoer = new AimFileHeaderDeConstructor(
+    const deconstructDoer = new DeConstructorOfAimFile(
       aimFileHeader,
       this.currentlyVisibleThings,
       this.aimFileMap
@@ -121,19 +120,6 @@ export class Solution {
         }
       }
       aimFileHeader.AddCommand(setToVisible)
-
-      // Sse if any autos depend on the newly completed achievement - if so execute them
-      /*
-      for (const piece of this.GetAutos()) {
-        if (
-          piece.inputHints.length === 2 &&
-          piece.inputHints[0] === singleAimTree.GetTheAchievementWord()
-        ) {
-          const command = createCommandFromAutoPiece(piece)
-          singleAimTree.AddCommand(command)
-        }
-      }
-        */
     }
     return true
   }
@@ -141,20 +127,23 @@ export class Solution {
   public GetOrderOfCommands (): RawObjectsAndVerb[] {
     const toReturn: RawObjectsAndVerb[] = []
     for (const filename of this.aimFileNamesInSolvingOrder) {
-      const theAny = this.GetAimTreeMap().GetAimTreeByFilenameNoThrow(filename)
-      const at = toReturn.length
-      // const n = header.commandsCompletedInOrder.length
-      toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
-      const raw = new RawObjectsAndVerb(Raw.EndOfAchievement)
-      raw.objectA = filename;
-      toReturn.push(raw)
+      const theAny = this.GetAimFiles().GetAimFileByFilenameNoThrow(filename)
+      if (theAny != null) {
+        const at = toReturn.length
+        toReturn.splice(at, 0, ...theAny.GetOrderedCommands())
+        const raw = new RawObjectsAndVerb(Raw.EndOfAchievement)
+        raw.objectA = filename;
+        toReturn.push(raw)
+      } else {
+        toReturn.push(new RawObjectsAndVerb(Raw.Error_NoAimFileOfThatNameExists))
+      }
     }
     return toReturn
   }
 
   public GetCountRecursively (): number {
     let count = 0
-    for (const header of this.aimFileMap.GetAims()) {
+    for (const header of this.aimFileMap.GetAimFiles()) {
       count += header.GetCountAfterUpdating()
     }
     return count
@@ -166,7 +155,7 @@ export class Solution {
 
   public GetNumberOfNotYetValidated (): number {
     let numberOfNullAchievements = 0
-    for (const aim of this.GetAimTreeMap().GetAims()) {
+    for (const aim of this.GetAimFiles().GetAimFiles()) {
       numberOfNullAchievements += aim.GetTheAny() == null ? 0 : 1
     }
     return numberOfNullAchievements

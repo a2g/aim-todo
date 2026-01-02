@@ -18,7 +18,7 @@ export class Solutions {
       const startingThings = workspaces.GetStartingThings()
       const solution = new Solution(
         workspace.GetSolvingPath(),
-        workspace.GetAimTreeMap(),
+        workspace.GetAimFiles(),
         startingThings)
 
       this.solutions.push(solution)

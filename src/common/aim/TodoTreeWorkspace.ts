@@ -1,14 +1,14 @@
-import { AimFileHeaderMap } from "./AimFileHeaderMap"
+import { AimFiles } from "./AimFiles"
 
 export class TodoTreeWorkspace {
-    private names: string[]
     private todoTree: any
-    private aimTreeMap: AimFileHeaderMap
+    private aimFiles: AimFiles
+    private names: string[]
 
-    constructor(todoTree: any, aimTreeMap: AimFileHeaderMap) {
+    constructor(todoTree: any, aimFiles: AimFiles) {
         this.names = []
         this.todoTree = todoTree
-        this.aimTreeMap = aimTreeMap.Clone()
+        this.aimFiles = aimFiles.Clone()
     }
 
     public GetSolvingPath (): string {
@@ -26,8 +26,8 @@ export class TodoTreeWorkspace {
     Clone (): TodoTreeWorkspace {
         // this deep clones the 'root' member of the solution'
         const clonedTodoTree = this._CloneObject(this.todoTree)
-        const clonedAimTreeMap = this.aimTreeMap.Clone()
-        const newSolution = new TodoTreeWorkspace(clonedTodoTree, clonedAimTreeMap)
+        const clonedAimFiles = this.aimFiles.Clone()
+        const newSolution = new TodoTreeWorkspace(clonedTodoTree, clonedAimFiles)
 
         // this clones the names
         newSolution.names.push(...this.names)
@@ -49,8 +49,8 @@ export class TodoTreeWorkspace {
         return toReturn
     }
 
-    public GetAimTreeMap (): AimFileHeaderMap {
-        return this.aimTreeMap
+    public GetAimFiles (): AimFiles {
+        return this.aimFiles
     }
 
     public GetNames (): string[] {

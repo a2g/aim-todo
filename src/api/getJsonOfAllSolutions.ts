@@ -36,8 +36,8 @@ export function getJsonOfAllSolutions (
   let listItemNumber = 0
   for (const solution of solutions.GetSolutions()) {
     console.warn(FormatText(solution.GetName()))
-    //console.warn(FormatText(solution.GetAimTreeMap().CalculateListOfKeys()))
-    for (const item of solution.GetAimTreeMap().GetAims()) {
+    //console.warn(FormatText(solution.GetAimFiles().CalculateListOfKeys()))
+    for (const item of solution.GetAimFiles().GetAimFiles()) {
       listItemNumber++
 
       // display list item

@@ -1,7 +1,7 @@
 
 
-import { AimFileHeaderMap } from './AimFileHeaderMap'
-import { AimFileHeader } from './AimFileHeader'
+import { AimFiles } from './AimFiles'
+import { AimFile } from './AimFile'
 
 import { FirstLettersOf } from '../../../FirstLettersOf'
 import { IdPrefixes } from '../../../IdPrefixes'
@@ -12,18 +12,18 @@ import { Validated } from '../puzzle/Validated'
 import { Box } from '../puzzle/Box'
 import { DialogFile } from '../dialog/DialogFile'
 
-export class AimFileHeaderDeConstructor {
-  private readonly theAimTree: AimFileHeader
+export class DeConstructorOfAimFile {
+  private readonly theAimFile: AimFile
 
   // the state that needs update
   private readonly currentlyVisibleThings: VisibleThingsMap
-  private readonly mapOfAimsTrees: AimFileHeaderMap// not used, but useful
+  private readonly allAimFiles: AimFiles// not used, but useful
 
-  public constructor(theAimTree: AimFileHeader, visibleThings: VisibleThingsMap, aimTreeMap: AimFileHeaderMap) {
-    this.theAimTree = theAimTree
-    this.mapOfAimsTrees = aimTreeMap
+  public constructor(theAimFile: AimFile, visibleThings: VisibleThingsMap, aimFiles: AimFiles) {
+    this.theAimFile = theAimFile
+    this.allAimFiles = aimFiles
     this.currentlyVisibleThings = visibleThings
-    this.mapOfAimsTrees.Size()
+    this.allAimFiles.Size()
   }
 
   /**
@@ -41,12 +41,12 @@ export class AimFileHeaderDeConstructor {
   // and the first actual jigsaw piece that is attached to it is
   // gets pushed into the zero slot of the inputs
   public GetNumberOfPiecesRemaining (): number {
-    const count = this.theAimTree.GetCountAfterUpdating()
+    const count = this.theAimFile.GetCountAfterUpdating()
     return count
   }
 
   public GetNextDoableCommandAndDeconstructTree (): RawObjectsAndVerb | null {
-    const theAny = this.theAimTree.GetTheAny()
+    const theAny = this.theAimFile.GetTheAny()
     if (theAny != null) {
       const command = this.GetNextDoableCommandRecursively(theAny, 'root')
       return command
@@ -182,10 +182,10 @@ export class AimFileHeaderDeConstructor {
   }
 
   public IsValidated (): Validated {
-    return this.theAimTree.GetValidated()
+    return this.theAimFile.GetValidated()
   }
 
   public SetValidated (isValidated: Validated) {
-    this.theAimTree.SetValidated(isValidated)
+    this.theAimFile.SetValidated(isValidated)
   }
 }

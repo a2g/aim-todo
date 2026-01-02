@@ -1,7 +1,7 @@
 import promptSync from 'prompt-sync'
 
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
-import { AimFileHeader as AimFileHeader } from '../../common/aim/AimFileHeader'
+import { AimFile as AimFile } from '../../common/aim/AimFile'
 import { CommandsView } from './CommandsView'
 import { PieceDeconstructionView } from './PieceDeconstructionView'
 import { Solution } from '../../common/aim/Solution'
@@ -10,7 +10,7 @@ import { Solution } from '../../common/aim/Solution'
 
 const prompt = promptSync({ sigint: true })
 
-export function ViewAimFileHeader (header: AimFileHeader, validator: Solution, titlePath: string[]): void {
+export function ViewAimFileHeader (header: AimFile, validator: Solution, titlePath: string[]): void {
   titlePath.push('AimFileHeader')
   for (; ;) {
     ShowUnderlinedTitle(titlePath)

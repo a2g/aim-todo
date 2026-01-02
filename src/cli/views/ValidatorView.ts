@@ -30,7 +30,7 @@ export function ValidatorView (validator: Solution, titlePath: string[]): void {
 
     console.warn(`${label}`)
     let listItemNumber = 0
-    for (const rootAchievement of validator.GetAimTreeMap().GetAims()) {
+    for (const rootAchievement of validator.GetAimFiles().GetAimFiles()) {
       listItemNumber++
 
       // display list item
@@ -82,7 +82,7 @@ export function ValidatorView (validator: Solution, titlePath: string[]): void {
       const theNumber = Number(input)
       if (theNumber > 0 && theNumber <= listItemNumber) {
         let j = 0
-        for (const achievement of validator.GetAimTreeMap().GetAims()) {
+        for (const achievement of validator.GetAimFiles().GetAimFiles()) {
           j++
           if (j === theNumber) {
             ViewAimFileHeader(achievement, validator, [...titlePath])

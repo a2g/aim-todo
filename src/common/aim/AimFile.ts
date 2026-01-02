@@ -28,7 +28,7 @@ import { VisibleThingsMap } from "../puzzle/VisibleThingsMap"
  * but its handy to have a predictable deterministic solution - at least as a
  * starting point, before optimizations.
  */
-export class AimFileHeader {
+export class AimFile {
   private readonly commandsCompletedInOrder: RawObjectsAndVerb[]
   private isSolved: Solved = Solved.Not
   private isNeeded: boolean
@@ -103,10 +103,10 @@ export class AimFileHeader {
     this.commandsCompletedInOrder.push(rawObjectsAndVerb)
   }
 
-  public Clone (): AimFileHeader {
+  public Clone (): AimFile {
     const theAny = this._CloneObject(this.GetTheAny())
     const thingsMap = new VisibleThingsMap(this.thingsToRevealWhenAimIsMet)
-    const clone = new AimFileHeader(this.fileWithoutExtension, theAny, thingsMap, this.commandsCompletedInOrder)
+    const clone = new AimFile(this.fileWithoutExtension, theAny, thingsMap, this.commandsCompletedInOrder)
     return clone
   }
 
@@ -118,7 +118,7 @@ export class AimFileHeader {
     for (const key in thisObject) {
       const clonedRoot = this._CloneObject(thisObject[key])
       const visibleThingsMap = new VisibleThingsMap(this.thingsToRevealWhenAimIsMet)
-      toReturn[key] = new AimFileHeader(this.fileWithoutExtension, clonedRoot, visibleThingsMap, this.commandsCompletedInOrder)
+      toReturn[key] = new AimFile(this.fileWithoutExtension, clonedRoot, visibleThingsMap, this.commandsCompletedInOrder)
     }
     return toReturn
   }

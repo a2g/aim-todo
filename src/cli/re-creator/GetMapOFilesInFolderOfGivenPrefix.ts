@@ -3,12 +3,12 @@ import * as fs from 'fs'
 
 
 import { parse } from 'jsonc-parser'
-import { AimFileHeaderMap } from '../../common/aim/AimFileHeaderMap'
-import { AimFileHeader } from '../../common/aim/AimFileHeader'
+import { AimFiles } from '../../common/aim/AimFiles'
+import { AimFile } from '../../common/aim/AimFile'
 import { GetStartingThingsFromRawJson } from '../re-creator/GetStartingThingsFromRawJson'
 
-export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: string): AimFileHeaderMap {
-    const mapToReturn = new AimFileHeaderMap()
+export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: string): AimFiles {
+    const mapToReturn = new AimFiles()
     const cwd = process.cwd()
     console.log(cwd)
     process.chdir(join(__dirname, '/../../../../..'))
@@ -28,7 +28,7 @@ export function GetMapOFilesInFolderOfGivenPrefix (folder: string, prefix: strin
                 const json: any = parse(text)
 
                 const visibleThingsMap = GetStartingThingsFromRawJson(json)
-                mapToReturn.Set(fileWithoutExtension, new AimFileHeader(fileWithoutExtension, json.root, visibleThingsMap, []))
+                mapToReturn.Set(fileWithoutExtension, new AimFile(fileWithoutExtension, json.root, visibleThingsMap, []))
             }
         }
     }

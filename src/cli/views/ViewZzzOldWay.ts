@@ -32,7 +32,7 @@ export function ViewZzzOldWay (solutions: Evolutions): void {
           ? path + '<-- path'
           : NAME_NOT_DETERMINABLE
       console.warn(`${letter}. ${label}}`)
-      for (const item of solution.GetAimTreeMap().GetAims()) {
+      for (const item of solution.GetAimFiles().GetAims()) {
         listItemNumber++
 
         // display list item
@@ -71,7 +71,7 @@ export function ViewZzzOldWay (solutions: Evolutions): void {
       if (theNumber > 0 && theNumber <= listItemNumber) {
         const solutionArray = solutions.GetSolutions()
         for (let i = 0; i < solutionArray.length; i++) {
-          const rootMap = solutionArray[i].GetAimTreeMap()
+          const rootMap = solutionArray[i].GetAimFiles()
           const achievements = rootMap.GetAims()
           for (const achievement of achievements) {
             i++

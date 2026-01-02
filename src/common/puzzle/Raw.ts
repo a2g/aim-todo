@@ -11,5 +11,6 @@ export enum Raw {
   EndOfAchievement = 'EndOfAchievement',
   Separator = 'Separator',
   Error_ZeroPiecesInAimNoticedInDeconstructing = 'Error_ZeroPiecesInAimNoticedInDeconstructing',
-  RevealedByPriorStep = 'RevealedByPriorStep'
+  RevealedByPriorStep = 'RevealedByPriorStep',
+  Error_NoAimFileOfThatNameExists = 'Error_NoAimFileOfThatNameExists'
 }

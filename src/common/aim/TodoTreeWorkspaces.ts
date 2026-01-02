@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'fs'
 import { parse } from 'jsonc-parser'
 import { TodoTreeWorkspace } from './TodoTreeWorkspace'
 import { GetMapOFilesInFolderOfGivenPrefix } from '../../cli/re-creator/GetMapOFilesInFolderOfGivenPrefix'
-import { AimFileHeaderMap } from './AimFileHeaderMap'
+import { AimFiles } from './AimFiles'
 
 import { Box } from '../puzzle/Box'
 import { VisibleThingsMap } from '../puzzle/VisibleThingsMap'
@@ -18,7 +18,7 @@ import { _TODO_TREE_JSONC } from '../_TODO_TREE_JSONC'
 export class TodoTreeWorkspaces {
   fileAddress: string
   workspaces: Map<string, TodoTreeWorkspace>
-  aimTreeMap: AimFileHeaderMap
+  aimFiles: AimFiles
   startingThingsMap: VisibleThingsMap
 
   constructor(fullFolderPath: string) {
@@ -35,13 +35,13 @@ export class TodoTreeWorkspaces {
     const text = readFileSync(pathAndFile, 'utf-8')
     const parsedJson: any = parse(text)
     const aimTodoTree = parsedJson.root
-    this.aimTreeMap = GetMapOFilesInFolderOfGivenPrefix(fullFolderPath, 'aim')
+    this.aimFiles = GetMapOFilesInFolderOfGivenPrefix(fullFolderPath, 'aim')
 
 
     this.InitializeStartingThings()
 
     // first workspace is added with blank workspace name
-    this.workspaces.set('', new TodoTreeWorkspace(aimTodoTree, this.aimTreeMap))
+    this.workspaces.set('', new TodoTreeWorkspace(aimTodoTree, this.aimFiles))
 
     let isNewSolutions = false
     do {
