@@ -6,7 +6,6 @@ import { ViewAimFileHeader } from './ViewAimFileHeader'
 import { Solution } from '../../common/solving/Solution'
 import { assert } from 'console'
 import { FormatText } from '../formatters/FormatText'
-import { AddBrackets } from '../../common/stuff/AddBrackets'
 
 
 const prompt = promptSync({})
@@ -30,26 +29,18 @@ export function ValidatorView (validator: Solution, titlePath: string[]): void {
 
     console.warn(`${label}`)
     let listItemNumber = 0
-    for (const rootAchievement of validator.GetAimFiles().GetAimFiles()) {
+    for (const aimFile of validator.GetAimFiles().GetAimFiles()) {
       listItemNumber++
 
       // display list item
-      const output = rootAchievement.GetAimName()
+      const output = aimFile.GetAimName()
       assert(output != undefined)
-      const theAny = rootAchievement.GetTheAny()
-      let inputs = ''
-      /*if (theAchievementPiece != null) {
-        for (const inputSpiel of theAchievementPiece.inputSpiels) {
-          inputs += `${FormatText(inputSpiel)},`
-        }
-      }*/
-      const pieceCount = rootAchievement.GetCountAfterUpdating()
-      const originalCount = rootAchievement.GetOriginalNodeCount()
-      const id = (theAny != null) ? theAny.id : ''
-      const status = rootAchievement.GetValidated() as string
+      const pieceCount = aimFile.GetCountAfterUpdating()
+      const originalCount = aimFile.GetOriginalNodeCount()
+      const status = aimFile.GetValidated() as string
 
       console.warn(
-        `${listItemNumber}. ${status}(${pieceCount}/${originalCount}) ${FormatText(output)} ${id} ${AddBrackets(inputs)}`
+        `${listItemNumber}. ${status}(${pieceCount - 1}/${originalCount - 1}) ${FormatText(output)}`
       )
     }
 

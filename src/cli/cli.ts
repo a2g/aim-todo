@@ -47,6 +47,7 @@ function main (): void {
 
             const choice = prompt('Choose an option (b)ack: ').toLowerCase()
             if (choice === 'b') {
+              process.chdir('../../..')
               break
             }
             switch (choice) {
