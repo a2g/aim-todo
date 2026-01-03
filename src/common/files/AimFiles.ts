@@ -37,8 +37,8 @@ export class AimFiles {
         const mapToReturn = new AimFiles()
         for (const blah of this.map) {
             const key = blah[0]
-            const header: AimFile = blah[1]
-            mapToReturn.Set(key, header)// TODO: this should be a CLone!
+            const aimFile: AimFile = blah[1]
+            mapToReturn.Set(key, aimFile)// TODO: this should be a CLone!
         }
         return mapToReturn
     }

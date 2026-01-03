@@ -3,9 +3,9 @@ import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 
 const prompt = promptSync({ sigint: true })
 
-export function ViewLeavesOfHeader (leaves: string[], titlePath: string[]
+export function ViewLeavesOfAimFile (leaves: string[], titlePath: string[]
 ): void {
-  titlePath.push('Leaves-of-Header')
+  titlePath.push('Leaves-of-AimFile')
 
   for (; ;) {
     ShowUnderlinedTitle(titlePath)

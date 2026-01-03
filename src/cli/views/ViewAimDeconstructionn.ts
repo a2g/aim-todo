@@ -10,7 +10,7 @@ const prompt = promptSync({ sigint: true })
 export function ViewAimDeconstruction (
   piece: any,
   validator: Solution,
-  header: AimFile, visibleThings: VisibleThingsMap, titlePath: string[]
+  aimFile: AimFile, visibleThings: VisibleThingsMap, titlePath: string[]
 ): void {
   titlePath.push('Piece(Deconstruct)')
   for (; ;) {
@@ -32,7 +32,7 @@ export function ViewAimDeconstruction (
     if (input === null || input === 'b') {
       return
     } else if (input === 'r') {
-      validator.DeconstructGivenHeaderAndRecordSteps(header)
+      validator.DeconstructAimFileAndRecordSteps(aimFile)
     } else if (input === 's') {
       for (const item of visibleThings.GetIterableIterator()) {
         console.warn(`${item[0]}`)
@@ -43,7 +43,7 @@ export function ViewAimDeconstruction (
       if (theNumber > 0 && theNumber <= targets.length) {
         const piece = targets[theNumber - 1]
         if (piece != null) {
-          ViewAimDeconstruction(piece, validator, header, visibleThings, [...titlePath])
+          ViewAimDeconstruction(piece, validator, aimFile, visibleThings, [...titlePath])
         } else {
           prompt('THAT WAS NULL. Hit any key to continue: ')
         }

@@ -50,9 +50,9 @@ export class Solution {
 
   public DeconstructAllAchievementsAndRecordSteps (): boolean {
     let wasThereAtLeastSomeProgress = false
-    for (const header of this.aimFileMap.GetAimFiles()) {
-      if (header.GetValidated() === Validated.Not) {
-        if (this.DeconstructGivenHeaderAndRecordSteps(header)) {
+    for (const aimFile of this.aimFileMap.GetAimFiles()) {
+      if (aimFile.GetValidated() === Validated.Not) {
+        if (this.DeconstructAimFileAndRecordSteps(aimFile)) {
           wasThereAtLeastSomeProgress = true
         }
       }
@@ -60,10 +60,10 @@ export class Solution {
     return wasThereAtLeastSomeProgress
   }
 
-  public DeconstructGivenHeaderAndRecordSteps (aimFileHeader: AimFile): boolean {
+  public DeconstructAimFileAndRecordSteps (aimFile: AimFile): boolean {
     // push the commands
     const deconstructDoer = new DeConstructorOfAimFile(
-      aimFileHeader,
+      aimFile,
       this.currentlyVisibleThings,
       this.aimFileMap
     )
@@ -82,7 +82,7 @@ export class Solution {
 
       if (rawObjectsAndVerb.stepType !== StepType.None) {
         // this is just here for debugging!
-        aimFileHeader.AddCommand(rawObjectsAndVerb)
+        aimFile.AddCommand(rawObjectsAndVerb)
         console.log(`${rawObjectsAndVerb.stepType}  ${rawObjectsAndVerb.objectA} ${rawObjectsAndVerb.objectB}`)
       }
     }
@@ -99,19 +99,19 @@ export class Solution {
       const raw = new Step(StepType.Error_ZeroPiecesInAimNoticedInDeconstructing)
       raw.objectA = ' in '
       raw.objectB = ''
-      raw.output = aimFileHeader.GetAimName()
+      raw.output = aimFile.GetAimName()
       raw.prerequisites = []
-      aimFileHeader.AddCommand(raw)
+      aimFile.AddCommand(raw)
 
 
       // also tell the solution what order the achievement was achieved
-      this.aimFileNamesInSolvingOrder.push(aimFileHeader.GetAimName())
+      this.aimFileNamesInSolvingOrder.push(aimFile.GetAimName())
 
-      this.currentlyVisibleThings.Set(aimFileHeader.GetAimName(), new Set<string>())
+      this.currentlyVisibleThings.Set(aimFile.GetAimName(), new Set<string>())
 
       // then reveal all the goodies 
       const setToVisible = new Step(StepType.RevealedByPriorStep)
-      for (const goodie of aimFileHeader.GetThingsToRevealWhenAimIsMet().GetIterableIterator()) {
+      for (const goodie of aimFile.GetThingsToRevealWhenAimIsMet().GetIterableIterator()) {
         if (!this.currentlyVisibleThings.Has(goodie[0])) {
 
           raw.objectA = goodie[0]
@@ -120,7 +120,7 @@ export class Solution {
           this.currentlyVisibleThings.Set(goodie[0], new Set<string>())
         }
       }
-      aimFileHeader.AddCommand(setToVisible)
+      aimFile.AddCommand(setToVisible)
     }
     return true
   }
@@ -144,8 +144,8 @@ export class Solution {
 
   public GetCountRecursively (): number {
     let count = 0
-    for (const header of this.aimFileMap.GetAimFiles()) {
-      count += header.GetCountAfterUpdating()
+    for (const aimFile of this.aimFileMap.GetAimFiles()) {
+      count += aimFile.GetCountAfterUpdating()
     }
     return count
   }

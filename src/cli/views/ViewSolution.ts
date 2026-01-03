@@ -7,7 +7,7 @@ import { AddBrackets } from '../../common/stuff/AddBrackets'
 import { FormatText } from '../formatters/FormatText'
 const prompt = promptSync({})
 
-export function SolutionView (solution: TodoTreeWorkspace, _solutions: TodoTreeWorkspaces, titlePath: string[]): void {
+export function ViewSolution (solution: TodoTreeWorkspace, _solutions: TodoTreeWorkspaces, titlePath: string[]): void {
   titlePath.push('Solution')
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
@@ -23,12 +23,12 @@ export function SolutionView (solution: TodoTreeWorkspace, _solutions: TodoTreeW
     console.warn(`${label}`)
     let listItemNumber = 0
     let incomplete = 0
-    for (const achievementHeader of solution.GetAimFiles().GetAimFiles()) {
+    for (const aimFile of solution.GetAimFiles().GetAimFiles()) {
       listItemNumber++
 
       // display list item
-      const output = achievementHeader.GetAimName()
-      const theAchievementPiece = achievementHeader.GetTheAny()
+      const output = aimFile.GetAimName()
+      const theAchievementPiece = aimFile.GetTheAny()
       let inputs = ''
       if (theAchievementPiece != null) {
         for (let i = 0; i < theAchievementPiece.inputSpiels.length; i++) {
@@ -37,12 +37,12 @@ export function SolutionView (solution: TodoTreeWorkspace, _solutions: TodoTreeW
           inputs += `${FormatText(inputSpiel)}`
         }
       }
-      const status = achievementHeader.GetSolved() as string
-      const needed = achievementHeader.IsNeeded() ? 'Y' : 'N'
+      const status = aimFile.GetSolved() as string
+      const needed = aimFile.IsNeeded() ? 'Y' : 'N'
       console.warn(
         `${listItemNumber}. ${status} ${needed} ${FormatText(output)} ${AddBrackets(inputs)} `
       )
-      incomplete += achievementHeader.IsSolved() ? 0 : 1
+      incomplete += aimFile.IsSolved() ? 0 : 1
     }
 
     console.warn(`Number of achievements incomplete ${incomplete}/${listItemNumber}`)

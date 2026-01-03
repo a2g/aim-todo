@@ -25,9 +25,9 @@ export class EnumReCreator {
     const mapOfCuts = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'cut')
     const mapOfDialogs = GetMapOFilesInFolderOfGivenPrefix(this._folder, 'd')
 
-    for (const aimFileHeader of mapOfAims.map.values()) {
+    for (const aimFile of mapOfAims.map.values()) {
       const list: string[] = []
-      this.CollectAllKeysAndValuesRecursively(aimFileHeader.GetTheAny(), list)
+      this.CollectAllKeysAndValuesRecursively(aimFile.GetTheAny(), list)
     }
 
     // So two types of Enum Files:
