@@ -11,9 +11,6 @@ export class Step {
   public prerequisites: string[]
   public restrictionSpiel: string
   private childTuples: [string, string][]
-  // other ideas for debugging fields to add
-  // - the box the command came out of
-  // - the id of the command
 
   constructor(
     source: StepType
