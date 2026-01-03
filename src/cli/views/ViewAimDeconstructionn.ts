@@ -7,7 +7,7 @@ import { VisibleThingsMap } from '../../common/stuff/VisibleThingsMap'
 
 const prompt = promptSync({ sigint: true })
 
-export function PieceDeconstructionView (
+export function ViewAimDeconstruction (
   piece: any,
   validator: Solution,
   header: AimFile, visibleThings: VisibleThingsMap, titlePath: string[]
@@ -43,7 +43,7 @@ export function PieceDeconstructionView (
       if (theNumber > 0 && theNumber <= targets.length) {
         const piece = targets[theNumber - 1]
         if (piece != null) {
-          PieceDeconstructionView(piece, validator, header, visibleThings, [...titlePath])
+          ViewAimDeconstruction(piece, validator, header, visibleThings, [...titlePath])
         } else {
           prompt('THAT WAS NULL. Hit any key to continue: ')
         }

@@ -1,8 +1,8 @@
 import promptSync from 'prompt-sync'
 
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
-import { CommandsView } from './CommandsView'
-import { ViewAimFileHeader } from './ViewAimFileHeader'
+import { ViewCommands } from './ViewCommands'
+import { ViewAimFile } from './ViewAimFile'
 import { Solution } from '../../common/solving/Solution'
 import { assert } from 'console'
 import { FormatText } from '../formatters/FormatText'
@@ -10,7 +10,7 @@ import { FormatText } from '../formatters/FormatText'
 
 const prompt = promptSync({})
 
-export function ValidatorView (validator: Solution, titlePath: string[]): void {
+export function ViewValidator (validator: Solution, titlePath: string[]): void {
   titlePath.push('Validator')
   for (; ;) {
     // I don't like putting this below the list - but I do like having it there
@@ -67,7 +67,7 @@ export function ValidatorView (validator: Solution, titlePath: string[]): void {
         console.warn(`${item[0]}`)
       }
     } else if (input === 'o') {
-      CommandsView(validator.GetOrderOfCommands(), [...titlePath])
+      ViewCommands(validator.GetOrderOfCommands(), [...titlePath])
     } else {
       // show map entry for chosen item
       const theNumber = Number(input)
@@ -76,7 +76,7 @@ export function ValidatorView (validator: Solution, titlePath: string[]): void {
         for (const achievement of validator.GetAimFiles().GetAimFiles()) {
           j++
           if (j === theNumber) {
-            ViewAimFileHeader(achievement, validator, [...titlePath])
+            ViewAimFile(achievement, validator, [...titlePath])
             return
           }
         }

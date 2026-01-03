@@ -2,8 +2,8 @@ import promptSync from 'prompt-sync'
 
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
 import { AimFile as AimFile } from '../../common/files/AimFile'
-import { CommandsView } from './CommandsView'
-import { PieceDeconstructionView } from './PieceDeconstructionView'
+import { ViewCommands } from './ViewCommands'
+import { ViewAimDeconstruction } from './ViewAimDeconstructionn'
 import { Solution } from '../../common/solving/Solution'
 import { ViewLeavesOfHeader } from './ViewLeavesOfHeader'
 
@@ -11,7 +11,7 @@ import { ViewLeavesOfHeader } from './ViewLeavesOfHeader'
 
 const prompt = promptSync({ sigint: true })
 
-export function ViewAimFileHeader (header: AimFile, validator: Solution, titlePath: string[]): void {
+export function ViewAimFile (header: AimFile, validator: Solution, titlePath: string[]): void {
   titlePath.push('AimFileHeader')
   for (; ;) {
     ShowUnderlinedTitle(titlePath)
@@ -33,11 +33,11 @@ export function ViewAimFileHeader (header: AimFile, validator: Solution, titlePa
     } else if (input === 'r') {
       validator.DeconstructGivenHeaderAndRecordSteps(header)
     } else if (input === 'o') {
-      CommandsView(header.GetOrderedCommands(), [...titlePath])
+      ViewCommands(header.GetOrderedCommands(), [...titlePath])
     } else if (input === 't') {
       const theAchievementPiece = header.GetTheAny()
       if (theAchievementPiece != null) {
-        PieceDeconstructionView(theAchievementPiece, validator, header, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
+        ViewAimDeconstruction(theAchievementPiece, validator, header, validator.GetVisibleThingsAtTheMoment(), [...titlePath])
       } else {
         prompt(`${header.GetAimName()} Achievement.piece WAS NULL. Hit any key to continue: `)
       }

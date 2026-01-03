@@ -1,7 +1,7 @@
 import promptSync from 'prompt-sync'
 
 import { ShowUnderlinedTitle } from '../formatters/ShowUnderlinedTitle'
-import { ValidatorView } from './ValidatorView'
+import { ViewValidator } from './ViewValidator'
 
 import { Solutions } from '../../common/solving/Solutions'
 import { Solved } from '../../common/solving/Solved'
@@ -53,7 +53,7 @@ export function ViewForwardValidate (validators: Solutions): void {
 
       // if they chose a number, go to that number
       const validator = validators.GetSolutions()[theNumber - 1]
-      ValidatorView(validator, [...titlePath])
+      ViewValidator(validator, [...titlePath])
     }
   }
 }

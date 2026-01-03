@@ -9,7 +9,7 @@ import { FormatCommand } from '../../api/FormatCommand'
 
 const prompt = promptSync({ sigint: true })
 
-export function CommandsView (commands: Step[], titlePath: string[]
+export function ViewCommands (commands: Step[], titlePath: string[]
 ): void {
   titlePath.push('Commands')
   let settings = {
