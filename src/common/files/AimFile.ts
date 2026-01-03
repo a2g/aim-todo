@@ -2,6 +2,7 @@ import { Step } from "../stuff/Step"
 import { Solved } from "../solving/Solved"
 import { Validated } from "../solving/Validated"
 import { VisibleThingsMap } from "../stuff/VisibleThingsMap"
+import { IsALeaf } from "../solving/IsALeaf"
 
 
 /**
@@ -124,6 +125,34 @@ export class AimFile {
 
   GetThingsToRevealWhenAimIsMet (): VisibleThingsMap {
     return this.thingsToRevealWhenAimIsMet;
+  }
+
+  public GetLeaves (): string[] {
+    const theAny = this.GetTheAny()
+    if (theAny != null) {
+      return this.CollectLeavesRecursively(theAny)
+    }
+    return []
+  }
+
+  private CollectLeavesRecursively (treeNode: any): string[] {
+    if (typeof treeNode === 'string') {
+      return [];
+    }
+
+    const toReturn = []
+
+    for (const key in treeNode) {
+      if (key !== '@') {
+        const obj = treeNode[key]
+        if (IsALeaf(obj)) {
+          toReturn.push(key)
+        } else {
+          toReturn.push(...this.CollectLeavesRecursively(obj))
+        }
+      }
+    }
+    return toReturn
   }
 
 }

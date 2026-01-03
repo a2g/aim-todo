@@ -5,6 +5,7 @@ import { AimFile as AimFile } from '../../common/files/AimFile'
 import { CommandsView } from './CommandsView'
 import { PieceDeconstructionView } from './PieceDeconstructionView'
 import { Solution } from '../../common/solving/Solution'
+import { ViewLeavesOfHeader } from './ViewLeavesOfHeader'
 
 
 
@@ -18,7 +19,7 @@ export function ViewAimFileHeader (header: AimFile, validator: Solution, titlePa
       `The Root word of the aim file is ${header.GetAimName()}. ` +
       `\nThe Piece of this header is ${header.GetTheAny() !== null ? 'non-null' : 'null'}` +
       '\nWhat to do with aim file header:' +
-      '\çn(b)ack, (r)e-run, (s)tarters, (o)rdered-commands, (t)raverse '
+      '\çn(b)ack, (r)e-run, (s)tarters, (o)rdered-commands, (t)raverse, (l)eaves '
     ).toLowerCase()
     if (input === null || input === 'b') {
       return
@@ -27,8 +28,9 @@ export function ViewAimFileHeader (header: AimFile, validator: Solution, titlePa
       for (const item of validator.GetVisibleThingsAtTheMoment().GetIterableIterator()) {
         console.warn(`${item[0]}`)
       }
-    }
-    else if (input === 'r') {
+    } else if (input === 'l') {
+      ViewLeavesOfHeader(header.GetLeaves(), titlePath)
+    } else if (input === 'r') {
       validator.DeconstructGivenHeaderAndRecordSteps(header)
     } else if (input === 'o') {
       CommandsView(header.GetOrderedCommands(), [...titlePath])

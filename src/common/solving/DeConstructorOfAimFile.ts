@@ -11,6 +11,7 @@ import { StepType } from '../stuff/StepType'
 import { Validated } from './Validated'
 import { Box } from '../stuff/Box'
 import { DialogFile } from '../files/DialogFile'
+import { IsALeaf } from './IsALeaf'
 
 export class DeConstructorOfAimFile {
   private readonly theAimFile: AimFile
@@ -26,16 +27,7 @@ export class DeConstructorOfAimFile {
     this.allAimFiles.Size()
   }
 
-  /**
- * #### For the purposes of traversing, a leaf is one with all
- * inputs are null.
- * @param treeNode
- * @returns true if a leaf
- */
-  public isALeaf (treeNode: any): boolean {
-    const length = Object.keys(treeNode).length
-    return length > 0 ? false : true
-  }
+
 
   // In the constructor above, we see that the root of copied tree is created
   // and the first actual jigsaw piece that is attached to it is
@@ -54,16 +46,6 @@ export class DeConstructorOfAimFile {
     return null
   }
 
-  /**
- * #### For the purposes of traversing, a leaf is one with all
- * inputs are null.
- * @param treeNode
- * @returns true if a leaf
- */
-  private IsALeaf (treeNode: any): boolean {
-    const length = Object.keys(treeNode).length
-    return length > 0 ? false : true
-  }
 
   private GetNextDoableCommandRecursively (treeNode: any, treeNodeKey: string): Step | null {
     if (typeof treeNode === 'string') {
@@ -76,7 +58,7 @@ export class DeConstructorOfAimFile {
       if (key !== '@') {
         const obj = treeNode[key]
         numberOfChildren += 1
-        if (this.IsALeaf(obj)) {
+        if (IsALeaf(obj)) {
           numberOfChildrenLeaves += 1
         }
       }
@@ -169,7 +151,7 @@ export class DeConstructorOfAimFile {
       // so we can need to recurse down that non-leaf child
       for (const childKey in treeNode) {
         const child = treeNode[childKey]
-        if (!this.IsALeaf(child)) {
+        if (!IsALeaf(child)) {
           // the treeNode is the child's parent
           const toReturn = this.GetNextDoableCommandRecursively(child, childKey)
           if (toReturn != null) {
